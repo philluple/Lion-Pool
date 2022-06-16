@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
+		75109A50285BB7CE00CAC400 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4F285BB7CE00CAC400 /* ContentView.swift */; };
+		75109A52285BB7D100CAC400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75109A51285BB7D100CAC400 /* Assets.xcassets */; };
+		75109A55285BB7D100CAC400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75109A54285BB7D100CAC400 /* Preview Assets.xcassets */; };
+		75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */; };
+		75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */; };
+		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		75109A5B285BB7D100CAC400 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75109A42285BB7CE00CAC400 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75109A49285BB7CE00CAC400;
+			remoteInfo = "Lion Pool";
+		};
+		75109A65285BB7D100CAC400 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75109A42285BB7CE00CAC400 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75109A49285BB7CE00CAC400;
+			remoteInfo = "Lion Pool";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		75109A4A285BB7CE00CAC400 /* Lion Pool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lion Pool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolApp.swift; sourceTree = "<group>"; };
+		75109A4F285BB7CE00CAC400 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		75109A51285BB7D100CAC400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		75109A54285BB7D100CAC400 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		75109A5A285BB7D100CAC400 /* Lion PoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lion PoolTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolTests.swift; sourceTree = "<group>"; };
+		75109A64285BB7D100CAC400 /* Lion PoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lion PoolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITests.swift; sourceTree = "<group>"; };
+		75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		75109A47285BB7CE00CAC400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A57285BB7D100CAC400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A61285BB7D100CAC400 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		75109A41285BB7CE00CAC400 = {
+			isa = PBXGroup;
+			children = (
+				75109A4C285BB7CE00CAC400 /* Lion Pool */,
+				75109A5D285BB7D100CAC400 /* Lion PoolTests */,
+				75109A67285BB7D100CAC400 /* Lion PoolUITests */,
+				75109A4B285BB7CE00CAC400 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		75109A4B285BB7CE00CAC400 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				75109A4A285BB7CE00CAC400 /* Lion Pool.app */,
+				75109A5A285BB7D100CAC400 /* Lion PoolTests.xctest */,
+				75109A64285BB7D100CAC400 /* Lion PoolUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75109A4C285BB7CE00CAC400 /* Lion Pool */ = {
+			isa = PBXGroup;
+			children = (
+				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
+				75109A4F285BB7CE00CAC400 /* ContentView.swift */,
+				75109A51285BB7D100CAC400 /* Assets.xcassets */,
+				75109A53285BB7D100CAC400 /* Preview Content */,
+			);
+			path = "Lion Pool";
+			sourceTree = "<group>";
+		};
+		75109A53285BB7D100CAC400 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				75109A54285BB7D100CAC400 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		75109A5D285BB7D100CAC400 /* Lion PoolTests */ = {
+			isa = PBXGroup;
+			children = (
+				75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */,
+			);
+			path = "Lion PoolTests";
+			sourceTree = "<group>";
+		};
+		75109A67285BB7D100CAC400 /* Lion PoolUITests */ = {
+			isa = PBXGroup;
+			children = (
+				75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */,
+				75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */,
+			);
+			path = "Lion PoolUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		75109A49285BB7CE00CAC400 /* Lion Pool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75109A6E285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion Pool" */;
+			buildPhases = (
+				75109A46285BB7CE00CAC400 /* Sources */,
+				75109A47285BB7CE00CAC400 /* Frameworks */,
+				75109A48285BB7CE00CAC400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Lion Pool";
+			productName = "Lion Pool";
+			productReference = 75109A4A285BB7CE00CAC400 /* Lion Pool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		75109A59285BB7D100CAC400 /* Lion PoolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75109A71285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion PoolTests" */;
+			buildPhases = (
+				75109A56285BB7D100CAC400 /* Sources */,
+				75109A57285BB7D100CAC400 /* Frameworks */,
+				75109A58285BB7D100CAC400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75109A5C285BB7D100CAC400 /* PBXTargetDependency */,
+			);
+			name = "Lion PoolTests";
+			productName = "Lion PoolTests";
+			productReference = 75109A5A285BB7D100CAC400 /* Lion PoolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		75109A63285BB7D100CAC400 /* Lion PoolUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 75109A74285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion PoolUITests" */;
+			buildPhases = (
+				75109A60285BB7D100CAC400 /* Sources */,
+				75109A61285BB7D100CAC400 /* Frameworks */,
+				75109A62285BB7D100CAC400 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				75109A66285BB7D100CAC400 /* PBXTargetDependency */,
+			);
+			name = "Lion PoolUITests";
+			productName = "Lion PoolUITests";
+			productReference = 75109A64285BB7D100CAC400 /* Lion PoolUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		75109A42285BB7CE00CAC400 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					75109A49285BB7CE00CAC400 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					75109A59285BB7D100CAC400 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 75109A49285BB7CE00CAC400;
+					};
+					75109A63285BB7D100CAC400 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 75109A49285BB7CE00CAC400;
+					};
+				};
+			};
+			buildConfigurationList = 75109A45285BB7CE00CAC400 /* Build configuration list for PBXProject "Lion Pool" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 75109A41285BB7CE00CAC400;
+			productRefGroup = 75109A4B285BB7CE00CAC400 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				75109A49285BB7CE00CAC400 /* Lion Pool */,
+				75109A59285BB7D100CAC400 /* Lion PoolTests */,
+				75109A63285BB7D100CAC400 /* Lion PoolUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		75109A48285BB7CE00CAC400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75109A55285BB7D100CAC400 /* Preview Assets.xcassets in Resources */,
+				75109A52285BB7D100CAC400 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A58285BB7D100CAC400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A62285BB7D100CAC400 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		75109A46285BB7CE00CAC400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75109A50285BB7CE00CAC400 /* ContentView.swift in Sources */,
+				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A56285BB7D100CAC400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75109A60285BB7D100CAC400 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */,
+				75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		75109A5C285BB7D100CAC400 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75109A49285BB7CE00CAC400 /* Lion Pool */;
+			targetProxy = 75109A5B285BB7D100CAC400 /* PBXContainerItemProxy */;
+		};
+		75109A66285BB7D100CAC400 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 75109A49285BB7CE00CAC400 /* Lion Pool */;
+			targetProxy = 75109A65285BB7D100CAC400 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		75109A6C285BB7D100CAC400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		75109A6D285BB7D100CAC400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		75109A6F285BB7D100CAC400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-Pool";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		75109A70285BB7D100CAC400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-Pool";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		75109A72285BB7D100CAC400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-PoolTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lion Pool.app/Lion Pool";
+			};
+			name = Debug;
+		};
+		75109A73285BB7D100CAC400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-PoolTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lion Pool.app/Lion Pool";
+			};
+			name = Release;
+		};
+		75109A75285BB7D100CAC400 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-PoolUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Lion Pool";
+			};
+			name = Debug;
+		};
+		75109A76285BB7D100CAC400 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-PoolUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Lion Pool";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		75109A45285BB7CE00CAC400 /* Build configuration list for PBXProject "Lion Pool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75109A6C285BB7D100CAC400 /* Debug */,
+				75109A6D285BB7D100CAC400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75109A6E285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion Pool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75109A6F285BB7D100CAC400 /* Debug */,
+				75109A70285BB7D100CAC400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75109A71285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion PoolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75109A72285BB7D100CAC400 /* Debug */,
+				75109A73285BB7D100CAC400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		75109A74285BB7D100CAC400 /* Build configuration list for PBXNativeTarget "Lion PoolUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75109A75285BB7D100CAC400 /* Debug */,
+				75109A76285BB7D100CAC400 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 75109A42285BB7CE00CAC400 /* Project object */;
+}
