@@ -11,7 +11,7 @@ import SwiftUI
 struct Lion_PoolApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartScreenView()
         }
     }
 }
