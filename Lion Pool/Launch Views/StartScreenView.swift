@@ -23,15 +23,15 @@ struct StartScreenView: View {
                 Spacer()
                     .frame(height:24)
             
-                //Create Account Button
-                CustomNavLink(destination: signupView()) {
+            //Create Account Button
+            NavigationLink(destination: RegistrationView()) {
                     Text("Create Account")
                         .font(.system(size:17,weight: .medium))
                         .foregroundColor(Color.white)
                         .frame(width:275, height:52)
                         .background(Color("Gray Blue "))
                         .cornerRadius(10)
-                }
+                }.navigationBarBackButtonHidden()
             
             //Create Account Button
                 NavigationLink(destination: LoginView()) {
@@ -39,7 +39,7 @@ struct StartScreenView: View {
                     .font(.system(size:17,weight: .medium))
                     .foregroundColor(Color.black)
                     .cornerRadius(10)
-                }
+                }.navigationBarBackButtonHidden()
             
             }
         }

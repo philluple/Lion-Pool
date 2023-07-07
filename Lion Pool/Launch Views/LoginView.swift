@@ -1,68 +1,68 @@
 //
-//  SwiftUIView.swift
-//  LionPool
+//  NewLogin.swift
+//  Lion Pool
 //
-//  Created by Phillip Le on 6/10/22.
+//  Created by Phillip Le on 7/6/23.
 //
 
 import SwiftUI
+import Swift
 
-struct LoginView : View{
-    @State private var userName: String = ""
-    @State private var pw: String = ""
-    let tfHeight = (CGFloat)(50)
-
-    var body : some View {
-        VStack(spacing: 24){
-            mainLogo
-            signin
-            rideButton
-        }
-    }
-}
-
-extension LoginView{
-    private var mainLogo : some View {
-        VStack(alignment: .center, spacing: -24){
-            Text("Lion Pool")
-                .font(.system(size:75,weight: .bold))
-                .foregroundColor(Color("Dark Blue "))
-            Text("safer together")
-                .font(.system(size:35,weight: .bold))
-                .foregroundColor(Color("Dark Blue "))
-        }
-    }
+struct LoginView: View {
+    @State private var email = ""
+    @State private var password = ""
+    @EnvironmentObject var viewModel : AuthViewModel
     
-    private var signin : some View {
-        Group{
-            TextField("Username", text: $userName)
-                .padding(.all)
-                .font(.system(size:18,weight: .regular))
-                .frame(width: UIScreen.screenWidth-40, height:tfHeight)
-                .background(RoundedRectangle(cornerRadius:10).fill(Color("Text Box")))
-                .disableAutocorrection(true)
+    var body: some View {
+        NavigationView{
+
+            VStack (){
+                //image
+                Logo().padding(.vertical,32)
                 
-            TextField("Password", text: $pw)
-                .padding(.all)
-                .font(.system(size:18,weight: .regular))
-                .frame(width: UIScreen.screenWidth-40, height:tfHeight)
-                .background(RoundedRectangle(cornerRadius:10).fill(Color("Text Box")))
-                .disableAutocorrection(true)
-        }
-    }
-    
-    private var rideButton : some View{
-        NavigationLink(destination: ContentView()){
-            Text("Let's Ride")
-                .font(.system(size:18,weight: .bold))
-                .foregroundColor(Color.white)
-                .frame(width:UIScreen.screenWidth-40, height:52)
-                .background(Color("Gold "))
+                VStack(spacing: 24){
+                    InputView(text: $email,
+                              title: "Email Address",
+                              placeholder: "UNI@columbia.edu").autocapitalization(.none)
+                    
+                    InputView(text: $password,
+                              title: "Password",
+                              placeholder: "Enter your password",
+                              isSecureField: true).autocapitalization(.none)
+                }
+                Button {
+                    Task{
+                        try await viewModel.signIn(withEmail: email, password: password)
+                    }
+                } label : {
+                    HStack{
+                        Text("LET'S RIDE")
+                            .font(.system(size:18,weight: .bold))
+                            .frame(width:UIScreen.main.bounds.width-40, height:52)
+                    }
+                }
+                .background(Color("Gold"))
                 .cornerRadius(10)
-        }.navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
+                .padding(.top, 24)
+                
+                Spacer()
+                
+                NavigationLink {
+                    RegistrationView()
+                        .navigationBarBackButtonHidden()
+                }label: {
+                    HStack(spacing: 3){
+                        Text("Don't have an account?")
+                        Text("Sign up")
+                            .fontWeight(.bold)
+                    }
+                    .font(.system(size:16,weight: .bold))
+                }
+            }
+           
+        }
+        }
         
-    }
 }
 
 struct LoginView_Previews: PreviewProvider {
@@ -70,4 +70,3 @@ struct LoginView_Previews: PreviewProvider {
         LoginView()
     }
 }
-
