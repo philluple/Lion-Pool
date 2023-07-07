@@ -13,7 +13,7 @@ struct UpcomingFlightView: View {
             HStack(spacing: -30){
                 Text("Upcoming flights")
                     .font(.system(size:22,weight: .medium))
-                    .frame(width: UIScreen.main.nativeBounds.width-50, alignment:.leading)
+                    .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
                 
                 NavigationLink(destination: RegistrationView()) {
                     Image(systemName:"plus.circle.fill")
@@ -25,7 +25,7 @@ struct UpcomingFlightView: View {
             
             LazyVStack{
                 Rectangle()
-                    .frame(width: UIScreen.main.nativeBounds.width-50, height: 200)
+                    .frame(width: UIScreen.main.bounds.width-50, height: 200)
                     .foregroundColor(Color("TextBox"))
                     .cornerRadius(8)
                     .overlay(

@@ -22,7 +22,7 @@ struct RegistrationView: View {
             VStack(spacing: 24){
                 InputView(text: $fullname,
                           title: "Full Name",
-                          placeholder: "Roaree The Cunt")
+                          placeholder: "Roaree Minouche")
                 InputView(text: $email,
                           title: "Email Address",
                           placeholder: "UNI@columbia.edu").autocapitalization(.none)

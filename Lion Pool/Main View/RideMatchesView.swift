@@ -13,12 +13,12 @@ struct RideMatchesView: View {
             
                 Text("Matches")
                 .font(.system(size:22,weight: .medium))
-                .frame(width: UIScreen.main.nativeBounds.width-50, alignment:.leading)
+                .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
                 
             
             LazyVStack{
                 Rectangle()
-                    .frame(width: UIScreen.main.nativeBounds.width-50, height: 225)
+                    .frame(width: UIScreen.main.bounds.width-50, height: 225)
                     .foregroundColor(Color("TextBox"))
                     .cornerRadius(8)
                     .overlay(
