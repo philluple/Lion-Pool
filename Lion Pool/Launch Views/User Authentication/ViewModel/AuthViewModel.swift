@@ -19,7 +19,6 @@ class AuthViewModel: ObservableObject {
     
     init(){
         self.userSession = Auth.auth().currentUser
-        
         Task {
             await fetchUser()
         }
@@ -39,7 +38,7 @@ class AuthViewModel: ObservableObject {
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
         } catch {
-            print("debug")
+            print("DEBUG: could not create account")
         }
     }
     
@@ -59,8 +58,7 @@ class AuthViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
-        
-        print("DEBUG: Current user is logged in")
+        print("DEBUG: Current user is logged in \(self.currentUser)")
         
     }
 }

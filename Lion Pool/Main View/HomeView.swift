@@ -35,10 +35,12 @@ struct HomeView: View {
                             .padding([.leading],UIScreen.main.bounds.width/25)
                         
                         NavigationLink(destination: ProfileView()){
-                            Image("Profile Icon")
+                            Image(systemName:"person.circle")
                                 .resizable()
-                                .frame(width:40,height:40)
+                                .frame(width:30, height:30)
+                                .foregroundColor(Color("Gray Blue "))
                                 .padding([.trailing],UIScreen.main.bounds.width/25)
+                            
                         }
                         
                     }
@@ -48,7 +50,7 @@ struct HomeView: View {
                     .frame(height: 30)
                     .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
             )
-        }
+        }.navigationBarBackButtonHidden()
     }
 }
 

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>143742054571-j625pps20c076b210lor84a99jndh8q1.apps.googleusercontent.com</string>
+	<string>574827672222-dn5bifs2fj3a4o9jiccn59dta69jlshb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.143742054571-j625pps20c076b210lor84a99jndh8q1</string>
+	<string>com.googleusercontent.apps.574827672222-dn5bifs2fj3a4o9jiccn59dta69jlshb</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCWUbzev2E0W1zJ-CXex_h75LcV63LayTU</string>
+	<string>AIzaSyC6wpFanRJ0JMADdUQ3k7ReVvDPVU24sdo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>143742054571</string>
+	<string>574827672222</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.Lion-Pool</string>
 	<key>PROJECT_ID</key>
-	<string>lion-75542</string>
+	<string>lion-pool-f5755</string>
 	<key>STORAGE_BUCKET</key>
-	<string>lion-75542.appspot.com</string>
+	<string>lion-pool-f5755.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:143742054571:ios:8869eaaca75e3b349487ee</string>
+	<string>1:574827672222:ios:29e5651ae05fdaca37c18f</string>
 </dict>
 </plist>
