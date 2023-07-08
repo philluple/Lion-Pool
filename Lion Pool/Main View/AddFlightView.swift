@@ -6,86 +6,147 @@
 //
 
 import SwiftUI
+import Swift
+
 
 struct AddFlightView: View {
-    @State private var bags = 0
     @State private var departAirport = ""
+    @State private var date = Date()
+    @State private var confirmDetailsBool: Bool = false
+    @EnvironmentObject var viewModel: AuthViewModel
+
+
     
+    var airports = ["Newark Liberty Internaional (EWR)", "John F. Kennedy Aiport (JFK)", "La Guardia Airport (LGA)"]
     var body: some View {
-        
-        VStack{
-            AddFlightHeader
-            //Spacer()
+        //Overall stack to maintain header
+        VStack(spacing: 0){
+            // Screen header
             HStack{
+                Text("Flight Departure")
+                    .font(.system(size:45,weight: .bold))
+                    .foregroundColor(Color("Dark Blue "))
+            }.frame(width: UIScreen.main.bounds.width, height:UIScreen.main.bounds.height/12 )
+                .background(Color("Gray Blue "))
+            List{
+                // Departure Details + image
+                Section{
+                    HStack{
+                        Text("Date of departure")
+                            .font(.system(size:22,weight: .semibold))
+                            .padding([.top, .leading])
+                    }
             
-                Text("Departure Details")
-                    .font(.system(size:22,weight: .semibold))
-                    .padding([.top, .leading])
-                
-                Image(systemName: "airplane")
-                    .padding(.top)
-                
-            }
-            
-            HStack(spacing: 10){
-                Spacer()
-                DatePicker(selection: .constant(Date())/*@END_MENU_TOKEN@*/, label: { /*@START_MENU_TOKEN@*/Text("Date and time:").font(.system(size:18,weight: .semibold)) })
-                    .padding(.horizontal)
-                    .datePickerStyle(.graphical)
-                Spacer()
-            }
-            Divider()
-                .padding(.horizontal)
-            ZStack{
-                TextField("", text: $departAirport)
-                    .padding(.all)
-                    .frame(width: UIScreen.main.nativeBounds.width-50, height:50)
-                    .background(RoundedRectangle(cornerRadius:10).fill(Color("TextBox")))
-                    .multilineTextAlignment(.trailing)
-                HStack{
-                    Spacer()
-                        .frame(width:40)
-                    Text("Airport")
-                        .font(.system(size:18,weight: .semibold))
-                        .multilineTextAlignment(.leading)
-                    
-                    Spacer()
+                    HStack(){
+                        DatePicker(selection: $date, label: { /*@START_MENU_TOKEN@*/Text("Date and time:").font(.system(size:18,weight: .semibold)) })
+                            .padding(.horizontal)
+                            .datePickerStyle(.graphical)
+                    }
+                }
+               
+                Section{
+                    Picker(selection: $departAirport, label:
+                            Text("Airport")
+                        .font(.system(size:22, weight: .semibold))
+                    ){
+                        Text("").tag("")
+                        ForEach(airports, id: \.self) {
+                            Text($0)
+                                .foregroundColor(.red)
+                        }
+                    }.frame(height:50)
                 }
                 
+                //Confirmation Button
+                Section {
+                    HStack{
+                        Spacer()
+                        Spacer()
+                    Button(action: {
+                        confirmDetailsBool.toggle()
+                    }) {
+                        Image(systemName: "arrow.forward.circle.fill")
+                            .resizable()
+                            .frame(width: 70, height: 70)
+                            .foregroundColor(Color("Gold")) // Customize the button's color
+                        }
+                    }.listRowBackground(Color.clear) // Set the button's background to clear
+                }
+                
+            }
+            .sheet(isPresented: $confirmDetailsBool){
+                confirmationScreen(dateToConfirm: $date, airportToConfirm: $departAirport)
+            }
+        }
+                
+    }
+}
 
+struct confirmationScreen: View {
+    @Binding var dateToConfirm: Date
+    @Binding var airportToConfirm: String
+    @Environment(\.presentationMode) var presentationMode
+
+    
+    var body: some View {
+        VStack {
+            Text("Let's confirm!")
+                .font(.system(size: 45, weight: .bold))
+                .foregroundColor(SwiftUI.Color("Dark Blue "))
+                .padding([.top, .bottom])
+                .frame(width:UIScreen.main.bounds.width, height: 70)
+                .background(SwiftUI.Color("Gray Blue "))
+            
+            Spacer()
+            // Dismiss the button
+            Button {
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                VStack{
+                    Text(dateToConfirm, style:.date)
+                        .font(.system(size: 35, weight: .semibold))
+                        .foregroundColor(SwiftUI.Color("Dark Blue "))
+                    Text("out of")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(SwiftUI.Color("Dark Blue "))
+                    Text(airportToConfirm)
+                        .font(.system(size: 30, weight: .semibold))
+                        .foregroundColor(SwiftUI.Color("Dark Blue "))
+                        .multilineTextAlignment(.center)
+                    Text("at")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(SwiftUI.Color("Dark Blue "))
+                    Text(dateToConfirm, style:.time)
+                        .font(.system(size: 35, weight: .semibold))
+                        .foregroundColor(SwiftUI.Color("Dark Blue "))
+                }.frame(width: UIScreen.main.bounds.width-10, height: 250)
+                    .background(Color("Text Box"))
+                    .cornerRadius(30)
+            }
+
+            Text("click to edit")
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundColor(Color("Gold"))
+                    
+            Spacer()
+            // Apply the logic
+            Button  {
+                print("confirm the shit")
+            } label: {
+                Text("Yas")
+            }
+            Spacer()
             }
             
-          
 
-                    
-            
-            
-            
-            
         }
-        
-    }
 }
 
-extension AddFlightView{
-    private var AddFlightHeader: some View{
-        HStack{
-            Spacer()
-            Text("Add a flight")
-                .font(.system(size:45,weight: .bold))
-                .foregroundColor(Color("Dark Blue "))
-            Spacer()
-        }.padding()
-            .accentColor(Color.white)
-            .foregroundColor(Color("Dark Blue "))
-            .background(Color("Gray Blue ").ignoresSafeArea(edges:.top))
-    }
-    
-}
 
 struct AddFlightView_Previews: PreviewProvider {
     static var previews: some View {
+        
         AddFlightView()
-            .accentColor(Color.red)
+            .accentColor(Color("Gold"))
     }
 }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct Logo: View {
     var body: some View {
-        VStack(alignment: .center, spacing: -24){
+        VStack(alignment: .center, spacing: -22){
             Text("Lion Pool")
-                .font(.system(size:75,weight: .bold))
+                .font(.system(size:70,weight: .bold))
                 .foregroundColor(Color("Dark Blue "))
             Text("safer together")
                 .font(.system(size:35,weight: .bold))

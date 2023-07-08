@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseAuth
 
 // Publishes UI changes on the main thread
 @MainActor
@@ -25,20 +26,30 @@ class AuthViewModel: ObservableObject {
     }
     
     func signIn(withEmail email: String, password: String) async throws{
-        print("signIN")
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            await fetchUser()
+            print("User has signed in")
+        } catch {
+            print("DEBUG: failed to login")
+        }
     }
     
-    func createUser(withEmail email: String, password: String, fullname: String) async throws {
+    func createUser(withEmail email: String, password: String, firstname: String, lastname: String, UNI: String, phone: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, fullname: fullname, email: email)
+            let user = User(id: result.user.uid, firstname: firstname, lastname: lastname, email: email, UNI: UNI, phone: phone)
             let encodedUser = try Firestore.Encoder().encode(user)
             // Storing the data
+            print("DEBUG: before")
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+            print("DEBUG: after")
+
             await fetchUser()
         } catch {
-            print("DEBUG: could not create account")
+            print("DEBUG: could not create account", error.localizedDescription)
         }
     }
     
@@ -58,7 +69,7 @@ class AuthViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
-        print("DEBUG: Current user is logged in \(self.currentUser)")
+        print("DEBUG: Current user is logged in")
         
     }
 }

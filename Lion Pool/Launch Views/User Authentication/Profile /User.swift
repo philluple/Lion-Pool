@@ -9,10 +9,13 @@ import Foundation
 
 struct User: Identifiable, Codable{
     let id: String
-    let fullname: String
+    let firstname: String
+    let lastname: String
     let email: String
+    let UNI: String
+    let phone: String
 }
 
 extension User {
-    static var MOCK_USER = (id: NSUUID().uuidString, fullname: "Phillip Le", email: "pnl2111@columbia.edu")
+    static var MOCK_USER = (id: NSUUID().uuidString, firstname: "Phillip", lastname: "Le", email: "pnl2111@columbia.edu", UNI: "pnl2111")
 }

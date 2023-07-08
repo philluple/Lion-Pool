@@ -10,7 +10,8 @@ import iPhoneNumberField
 
 struct RegistrationView: View {
     @State private var email = ""
-    @State private var fullname = ""
+    @State private var firstname = ""
+    @State private var lastname = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var UNI = ""
@@ -19,19 +20,26 @@ struct RegistrationView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
-        VStack(spacing: 15){
-            Logo().padding([.bottom],2)
+        VStack(){
+            Logo()
                 .frame(width: UIScreen.main.bounds.width)
                 .background(Color("Gray Blue "))
+                .padding([.bottom],2)
             
             
             ScrollView{
-                InputView(text: $fullname,
-                          title: "Full Name",
-                          placeholder: "Roaree Minouche")
+                InputView(text: $firstname,
+                          title: "First Name",
+                          placeholder: "Roaree")
+                
+                InputView(text: $lastname,
+                          title: "Last Name",
+                          placeholder: "Minouche")
+               
                 InputView(text: $email,
                           title: "Email Address",
                           placeholder: "UNI@columbia.edu").autocapitalization(.none)
+                
                 InputView(text: $UNI,
                           title: "UNI",
                           placeholder: "").autocapitalization(.none)
@@ -70,7 +78,10 @@ struct RegistrationView: View {
                     Task{
                         try await viewModel.createUser(withEmail: email,
                                     password: password,
-                                    fullname: fullname)
+                                    firstname: firstname,
+                                    lastname: lastname,
+                                    UNI: UNI,
+                                    phone: phone)
                     }
                 } label : {
                     HStack{
@@ -84,7 +95,6 @@ struct RegistrationView: View {
                 .cornerRadius(10)
                 .padding(.top, 24)
                 
-                Spacer()
                 Button {
                     dismiss()
                 } label : {
@@ -97,7 +107,7 @@ struct RegistrationView: View {
                             .accentColor(Color("Gray Blue "))
                     }
                     .font(.system(size:16,weight: .bold))
-                }
+                }.padding([.bottom,.top])
                 
             }
             

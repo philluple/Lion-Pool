@@ -12,11 +12,9 @@ struct ProfileView: View {
     
     var body: some View {
         if let user = viewModel.currentUser {
-            var components = User.MOCK_USER.fullname.components(separatedBy: " ")
-            let firstName = components.removeFirst()
             VStack (spacing:0){
                 HStack{
-                    Text("Hey, \(firstName) ")
+                    Text("Hey, \(user.firstname) ")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(Color("Dark Blue "))
                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -34,7 +32,7 @@ struct ProfileView: View {
                                     .accentColor(.gray)
                                 
                                 Spacer()
-                                Text("\(User.MOCK_USER.email)")
+                                Text("\(user.email)")
                                     .foregroundColor(Color("Dark Blue "))
                                 
                             }
@@ -47,7 +45,7 @@ struct ProfileView: View {
                                     .accentColor(.gray)
                                 
                                 Spacer()
-                                //Text("\(User.MOCK_USER.UNI)")
+                                Text("\(user.UNI)")
                                     .foregroundColor(Color("Dark Blue "))
                                 
                             }
@@ -60,7 +58,7 @@ struct ProfileView: View {
                                     .accentColor(.gray)
                                 
                                 Spacer()
-                                //Text("\(User.MOCK_USER.phone)")
+                                    Text("\(user.phone)")
                                     .foregroundColor(Color("Dark Blue "))
                                 
                             }
@@ -83,7 +81,12 @@ struct ProfileView: View {
                         }
                         
                     }
-                    
+                    Button {
+                        viewModel.signOut()
+                    } label: {
+                        Text("here")
+                    }
+
                 }
             }
         }
@@ -93,6 +96,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+            .environmentObject(AuthViewModel())
     }
 }
 

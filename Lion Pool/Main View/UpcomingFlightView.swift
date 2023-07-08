@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct UpcomingFlightView: View {
+    @State var addFlight:Bool = false
     var body: some View {
         VStack{
+            //Upcoming Flights + Button
             HStack(spacing: -30){
                 Text("Upcoming flights")
                     .font(.system(size:22,weight: .medium))
                     .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
-                
-                NavigationLink(destination: RegistrationView()) {
+                Button {
+                    addFlight.toggle()
+                } label: {
                     Image(systemName:"plus.circle.fill")
                         .resizable()
                         .frame(width:25, height:25)
                         .foregroundColor(Color("Gold"))
                 }
             }
-            
             LazyVStack{
                 Rectangle()
                     .frame(width: UIScreen.main.bounds.width-50, height: 200)
@@ -34,14 +36,15 @@ struct UpcomingFlightView: View {
                                 Spacer()
                                 ForEach(0 ... 3, id: \.self) { _ in
                                     UpcomingFlightsView()
-                                }
-                            }
-                        }
-                    )
+                                } // For each
+                            } // Vstack
+                        } // Scroll View
+                    ) // Overlay
+            } // LazyStack
+            .sheet(isPresented: $addFlight){
+                AddFlightView()
             }
-            
-        
-        }
+        } // Vstack
     }
 }
 
