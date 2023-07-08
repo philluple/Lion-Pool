@@ -17,7 +17,7 @@ struct AddFlightView: View {
 
 
     
-    var airports = ["Newark Liberty Internaional (EWR)", "John F. Kennedy Aiport (JFK)", "La Guardia Airport (LGA)"]
+    var airports = ["EWR", "JFK", "LGA"]
     var body: some View {
         //Overall stack to maintain header
         VStack(spacing: 0){
@@ -85,6 +85,8 @@ struct AddFlightView: View {
 struct confirmationScreen: View {
     @Binding var dateToConfirm: Date
     @Binding var airportToConfirm: String
+    @StateObject private var flightViewModel = FlightViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     @Environment(\.presentationMode) var presentationMode
 
     
@@ -131,10 +133,26 @@ struct confirmationScreen: View {
             Spacer()
             // Apply the logic
             Button  {
-                print("confirm the shit")
+                Task{
+                    if let user = viewModel.currentUser{
+                        let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
+                        if (result == 1){
+                            HomeView()
+                        }
+                    }
+                }
             } label: {
-                Text("Yas")
+                HStack{
+                    Text("LET'S MATCH!")
+                        .font(.system(size:18,weight: .bold))
+                        .frame(width:UIScreen.main.bounds.width-40, height:52)
+                        .accentColor(Color.white)
+                }
             }
+            .background(Color("Gold"))
+            .cornerRadius(10)
+            .padding(.top, 24)
+            
             Spacer()
             }
             

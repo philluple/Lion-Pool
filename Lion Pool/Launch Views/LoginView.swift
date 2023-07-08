@@ -11,6 +11,7 @@ import Swift
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    
     @EnvironmentObject var viewModel : AuthViewModel
     
     var body: some View {

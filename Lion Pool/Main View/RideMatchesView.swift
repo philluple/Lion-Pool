@@ -10,11 +10,10 @@ import SwiftUI
 struct RideMatchesView: View {
     var body: some View {
         VStack{
-            
                 Text("Matches")
                 .font(.system(size:22,weight: .medium))
                 .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
-                
+                .padding(.top)
             
             LazyVStack{
                 Rectangle()
@@ -38,7 +37,9 @@ struct RideMatchesView: View {
             }
            
             
-        }
+        }.frame(width:UIScreen.main.bounds.width-20,height: 275)
+            .background(Color.white)
+            .cornerRadius(10)
     }
 }
 

@@ -45,8 +45,6 @@ class AuthViewModel: ObservableObject {
             // Storing the data
             print("DEBUG: before")
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-            print("DEBUG: after")
-
             await fetchUser()
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)

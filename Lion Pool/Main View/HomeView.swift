@@ -14,22 +14,22 @@ struct HomeView: View {
         NavigationView{
             ScrollView {
                 VStack (spacing: 20) {
+                    
                     UpcomingFlightView()
                         .padding([.top],UIScreen.main.bounds.height/15)
                     ScheduledRidesView()
                     RideMatchesView()
-                    UpcomingFlightView()
+                    //UpcomingFlightView()
                     
                     
                 }
                 
-            }.overlay(
+            }
+            .overlay(
                 ZStack {
-                    Color.clear
-                        .background(.thinMaterial)
-                    
+                                        
                     HStack{
-                        Text("Hey, Lion")
+                        Text("Lion Pool ")
                             .font(.system(size: 40, weight: .bold))
                             .foregroundColor(Color("Dark Blue "))
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,10 +52,16 @@ struct HomeView: View {
                     
                     
                 }
-                    .frame(height: 30)
+                    .background(Color("Gray Blue "))
+                    .frame(width: UIScreen.main.bounds.width, height: 30)
                     .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
             )
-        }
+            .frame(width:UIScreen.main.bounds.width )
+            .background(Color("Text Box"))
+                
+            .background(ignoresSafeAreaEdges: .all)
+            
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
