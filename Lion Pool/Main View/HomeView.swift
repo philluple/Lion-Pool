@@ -19,7 +19,6 @@ struct HomeView: View {
                         UpcomingFlightView()
                             .padding([.top],UIScreen.main.bounds.height/25)
                         ScheduledRidesView()
-                        UpcomingFlightView()
                     }
                     
                 }.overlay(

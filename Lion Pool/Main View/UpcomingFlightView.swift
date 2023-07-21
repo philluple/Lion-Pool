@@ -66,8 +66,23 @@ struct UpcomingFlightView: View {
                     // Update list property
                     DispatchQueue.main.async {
                         upcoming_flights = snapshot.documents.map { d in
-                            return Flight(id: d["id"] as? UUID ?? UUID(),userId: d["userId"] as? String ?? "", date: d["date"] as? Date ?? Date(), airport: d["airport"] as? String ?? "")
+                            guard let idString = d["id"] as? String,
+                                  let userId = d["userId"] as? String,
+                                  let timestamp = d["date"] as? Timestamp,
+                                  let airport = d["airport"] as? String else {
+                                      // Skip this document if any of the required fields is missing
+                                      return nil
+                                  }
+
+                            return Flight(
+                                id: UUID(uuidString: idString) ?? UUID(),
+                                userId: userId,
+                                date: timestamp.dateValue(),
+                                airport: airport
+                            )
                         }
+                        .compactMap { $0 } // Filter out any nil values resulting from missing required fields
+
                     }
                 }else{ print ("DEBUG: shit happened")}
             
