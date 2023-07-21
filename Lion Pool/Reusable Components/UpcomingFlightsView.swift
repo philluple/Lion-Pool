@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct UpcomingFlightsView: View {
-    @State var departingAirport: String
-    @State var flightDate : Date
+    @State var flight: Flight
+    @State private var popover: Bool = false
+    
+
     
     private let monthAbbrev: [String: String ] = [
         "January" : "Jan",
@@ -24,25 +26,40 @@ struct UpcomingFlightsView: View {
     ]
     
     var body: some View {
-        VStack{
-            HStack(spacing: 20){
-                Text(departingAirport)
-                    .font(.system(size:25,weight: .bold))
-                
-                Image(systemName: "airplane")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(Color("Gray Blue "))
-                    //.clipShape(Circle())
-                
-                Text("\(formattedDate(flightDate)) @ \(formattedTime(flightDate))")
-                    .font(.system(size:20))
-                
-            }
-            Divider()
-                .foregroundColor(Color.black)
+        ZStack{
+            Button(action: {
+                popover.toggle()
+            }) {
+                VStack{
+                    HStack(spacing: 20){
+                        Text(flight.airport)
+                            .font(.system(size:25,weight: .bold))
+                        
+                        Image(systemName: "airplane")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(Color("Gray Blue "))
+                        //.clipShape(Circle())
+                        HStack{
+                            Text("\(formattedDate(flight.date)) @")
+                                .font(.system(size:20))
+                            Text("\(formattedTime(flight.date))")
+                                .font(.system(size:20))
+                                .foregroundColor(Color.gray)
+                            
+                        }
+                        
+                        
+                    }
+                    Divider()
+                        .foregroundColor(Color.black)
+                }
+                .padding(.horizontal)
+            }.accentColor(Color.black)
+                .sheet(isPresented: $popover){
+                    ExpandedFlightView(flight: flight)
+                }
         }
-        .padding(.horizontal)
     }
 
     private func formattedDate( _ date: Date) -> String {
@@ -67,7 +84,7 @@ struct UpcomingFlightsView: View {
 
 struct UpcomingFlightsView_Previews: PreviewProvider {
     static var previews: some View {
-        let flyDate = Date()
-        UpcomingFlightsView(departingAirport: "EWR", flightDate: flyDate)
+        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
+        UpcomingFlightsView(flight: newFlight)
     }
 }

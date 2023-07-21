@@ -21,7 +21,6 @@ struct AddFlightView: View {
     var body: some View {
         //Overall stack to maintain header
         VStack(spacing: 0){
-            // Screen header
             List{
                 // Departure Details + image
                 Section{

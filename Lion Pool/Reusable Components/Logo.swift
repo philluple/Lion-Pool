@@ -18,7 +18,7 @@ struct Logo: View {
 
     var body: some View {
         VStack(alignment: .center, spacing: -22){
-            Text("Lion Pool")
+            Text("LionPool")
                 .font(.system(size:fontSize,weight: .bold))
                 .foregroundColor(Color(fontColor))
             Text("safer together")

@@ -13,6 +13,7 @@ struct CustomNavBarContainerView<Content: View>: View {
     @State private var fontSize: CGFloat = 35
     @State private var showBackButton: Bool = true
     
+    
     init(@ViewBuilder content: () -> Content){
         self.content = content()
     }

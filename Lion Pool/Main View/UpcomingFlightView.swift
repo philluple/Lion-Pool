@@ -13,6 +13,7 @@ import FirebaseFirestore
 struct UpcomingFlightView: View {
     @State var upcoming_flights = [Flight]()
     @EnvironmentObject var viewModel : AuthViewModel
+    
 
     var body: some View {
         if let user = viewModel.currentUser{
@@ -40,20 +41,57 @@ struct UpcomingFlightView: View {
                                 VStack{
                                     Spacer()
                                     ForEach(upcoming_flights) { flight in
-                                        UpcomingFlightsView(departingAirport: flight.airport, flightDate: flight.date )
+                                        UpcomingFlightsView(flight: flight)
                                     }
                                 }
                             }
                         )
                 }
                 
-            
+                
             }.frame(width:UIScreen.main.bounds.width-20,height: 275)
                 .background(Color.white)
                 .cornerRadius(10)
-            .onAppear{
-                fetchFlights(userId: user.id)
-            }
+                .onAppear{
+                    fetchFlights(userId: user.id)
+                }
+        }else{
+            let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
+            VStack {
+                HStack(spacing: -30){
+                    Text("Upcoming flights")
+                        .font(.system(size:22,weight: .medium))
+                        .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
+                    
+                    CustomNavLink(destination: AddFlightView().customNavigationTitle("Add a flight").customNavigationSize(35)) {
+                        Image(systemName:"plus.circle.fill")
+                            .resizable()
+                            .frame(width:25, height:25)
+                            .foregroundColor(Color("Gold"))
+                    }
+                }
+                
+                LazyVStack{
+                    Rectangle()
+                        .frame(width: UIScreen.main.bounds.width-50, height: 200)
+                        .foregroundColor(Color("TextBox"))
+                        .cornerRadius(8)
+                        .overlay(
+                            ScrollView{
+                                VStack{
+                                    Spacer()
+                                    ForEach(0...4, id: \.self) { _ in
+                                        UpcomingFlightsView(flight: newFlight )
+                                                }
+                                }
+                            }
+                        )
+                }
+                
+                
+            }.frame(width:UIScreen.main.bounds.width-20,height: 275)
+                .background(Color.white)
+                .cornerRadius(10)
         }
     }
     func fetchFlights(userId: String){
@@ -96,6 +134,10 @@ struct UpcomingFlightView: View {
 
 struct UpcomingFlightView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingFlightView()
+        List{
+            UpcomingFlightView()
+                .environmentObject(AuthViewModel())
+        }
+        
     }
 }

@@ -62,10 +62,10 @@
             filePath = "Lion Pool/Main View/UpcomingFlightView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "previews"
-            landmarkType = "24">
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "UpcomingFlightView_Previews"
+            landmarkType = "14">
             <Locations>
                <Location
                   uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - b36b100492df5a76"
@@ -111,6 +111,36 @@
                   startingLineNumber = "99"
                   endingLineNumber = "99"
                   offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c44025"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
+                  moduleName = "Lion Pool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c440c6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
+                  moduleName = "Lion Pool"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "116">
                </Location>
             </Locations>
          </BreakpointContent>
