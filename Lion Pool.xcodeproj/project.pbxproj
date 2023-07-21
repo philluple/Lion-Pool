@@ -13,6 +13,7 @@
 		75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */; };
 		75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */; };
 		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
+		7510E4AB2A61DA18004F88AC /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7510E4AA2A61DA18004F88AC /* Launch.swift */; };
 		752F99702A57B4580036ECEE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F996F2A57B4580036ECEE /* InputView.swift */; };
 		752F99742A57B76E0036ECEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99732A57B76E0036ECEE /* LoginView.swift */; };
 		752F99762A57B7D40036ECEE /* Logo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99752A57B7D40036ECEE /* Logo.swift */; };
@@ -52,6 +53,18 @@
 		754AD3FF2A59388000F78013 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754AD3FE2A59388000F78013 /* FlightViewModel.swift */; };
 		757297222A57D68300B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		757297232A57D68400B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
+		758137832A69BA7F00577409 /* ProfilePhotoSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137822A69BA7F00577409 /* ProfilePhotoSelectorView.swift */; };
+		758137852A69DAFF00577409 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137842A69DAFF00577409 /* ToolbarView.swift */; };
+		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
+		758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137882A69E12D00577409 /* CustomNavBarContainerView.swift */; };
+		7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7581378A2A69E30A00577409 /* AppNavBarView.swift */; };
+		7581378D2A69E4A900577409 /* CustomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7581378C2A69E4A900577409 /* CustomNavView.swift */; };
+		7581378F2A69E73F00577409 /* CustomNavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7581378E2A69E73F00577409 /* CustomNavLink.swift */; };
+		758137922A69EC2100577409 /* CustomNavBarPreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137912A69EC2100577409 /* CustomNavBarPreferenceKeys.swift */; };
+		758137942A69F9F800577409 /* RandomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137932A69F9F800577409 /* RandomView.swift */; };
+		758137962A6A19F800577409 /* FireBaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137952A6A19F800577409 /* FireBaseImage.swift */; };
+		758137982A6A1BAD00577409 /* ProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137972A6A1BAD00577409 /* ProfileImageViewModel.swift */; };
+		7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137992A6A2BA300577409 /* UserDataView.swift */; };
 		7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576A2A58DD8900571AD0 /* FirebaseAuth */; };
 		7595576D2A58DD8900571AD0 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576C2A58DD8900571AD0 /* FirebaseAuthCombine-Community */; };
 		7595576F2A58DD8900571AD0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576E2A58DD8900571AD0 /* FirebaseDatabase */; };
@@ -102,6 +115,7 @@
 		75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRidesView.swift; sourceTree = "<group>"; };
 		75109A98285BB85A00CAC400 /* UpcomingFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingFlightView.swift; sourceTree = "<group>"; };
 		75109A9A285BB85A00CAC400 /* RideMatchesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RideMatchesView.swift; sourceTree = "<group>"; };
+		7510E4AA2A61DA18004F88AC /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		752F996F2A57B4580036ECEE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		752F99732A57B76E0036ECEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		752F99752A57B7D40036ECEE /* Logo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logo.swift; sourceTree = "<group>"; };
@@ -111,6 +125,18 @@
 		7537511D2A57E43700B02528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		754AD3FC2A59363100F78013 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		754AD3FE2A59388000F78013 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
+		758137822A69BA7F00577409 /* ProfilePhotoSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhotoSelectorView.swift; sourceTree = "<group>"; };
+		758137842A69DAFF00577409 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
+		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
+		7581378A2A69E30A00577409 /* AppNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavBarView.swift; sourceTree = "<group>"; };
+		7581378C2A69E4A900577409 /* CustomNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavView.swift; sourceTree = "<group>"; };
+		7581378E2A69E73F00577409 /* CustomNavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavLink.swift; sourceTree = "<group>"; };
+		758137912A69EC2100577409 /* CustomNavBarPreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarPreferenceKeys.swift; sourceTree = "<group>"; };
+		758137932A69F9F800577409 /* RandomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomView.swift; sourceTree = "<group>"; };
+		758137952A6A19F800577409 /* FireBaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseImage.swift; sourceTree = "<group>"; };
+		758137972A6A1BAD00577409 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
+		758137992A6A2BA300577409 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
 		75A05E752A586C3D002ABE9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75A05E792A5896D0002ABE9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		75A05E872A58D789002ABE9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -175,10 +201,11 @@
 		75109A4C285BB7CE00CAC400 /* Lion Pool */ = {
 			isa = PBXGroup;
 			children = (
+				758137902A69EB8F00577409 /* Custom Nav Bar */,
 				75A05E872A58D789002ABE9C /* GoogleService-Info.plist */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
-				75109A83285BB85900CAC400 /* Launch Views */,
+				75109A83285BB85900CAC400 /* Initial Views */,
 				75109A95285BB85A00CAC400 /* Main View */,
 				75109A79285BB85900CAC400 /* Reusable Components */,
 				75109A51285BB7D100CAC400 /* Assets.xcassets */,
@@ -220,29 +247,34 @@
 				75109A82285BB85900CAC400 /* ImagePicker.swift */,
 				75A05E792A5896D0002ABE9C /* ProfileView.swift */,
 				752F996F2A57B4580036ECEE /* InputView.swift */,
+				758137992A6A2BA300577409 /* UserDataView.swift */,
 			);
 			path = "Reusable Components";
 			sourceTree = "<group>";
 		};
-		75109A83285BB85900CAC400 /* Launch Views */ = {
+		75109A83285BB85900CAC400 /* Initial Views */ = {
 			isa = PBXGroup;
 			children = (
 				75109A85285BB85900CAC400 /* StartScreenView.swift */,
 				752F99732A57B76E0036ECEE /* LoginView.swift */,
 				752F99772A57C8100036ECEE /* RegistrationView.swift */,
+				758137822A69BA7F00577409 /* ProfilePhotoSelectorView.swift */,
 				752F997D2A57D21D0036ECEE /* User Authentication */,
+				7510E4AA2A61DA18004F88AC /* Launch.swift */,
 			);
-			path = "Launch Views";
+			path = "Initial Views";
 			sourceTree = "<group>";
 		};
 		75109A95285BB85A00CAC400 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
 				7537511D2A57E43700B02528 /* HomeView.swift */,
+				758137842A69DAFF00577409 /* ToolbarView.swift */,
 				75109A80285BB85900CAC400 /* MatchesView.swift */,
 				75109A96285BB85A00CAC400 /* AddFlightView.swift */,
 				75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */,
 				75109A98285BB85A00CAC400 /* UpcomingFlightView.swift */,
+				758137932A69F9F800577409 /* RandomView.swift */,
 				75109A9A285BB85A00CAC400 /* RideMatchesView.swift */,
 				754AD4012A59388C00F78013 /* Flight Logic */,
 			);
@@ -270,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				752F99792A57CDBE0036ECEE /* User.swift */,
+				758137952A6A19F800577409 /* FireBaseImage.swift */,
+				758137972A6A1BAD00577409 /* ProfileImageViewModel.swift */,
 			);
 			path = "Profile ";
 			sourceTree = "<group>";
@@ -281,6 +315,19 @@
 				754AD3FE2A59388000F78013 /* FlightViewModel.swift */,
 			);
 			path = "Flight Logic";
+			sourceTree = "<group>";
+		};
+		758137902A69EB8F00577409 /* Custom Nav Bar */ = {
+			isa = PBXGroup;
+			children = (
+				7581378A2A69E30A00577409 /* AppNavBarView.swift */,
+				7581378E2A69E73F00577409 /* CustomNavLink.swift */,
+				7581378C2A69E4A900577409 /* CustomNavView.swift */,
+				758137882A69E12D00577409 /* CustomNavBarContainerView.swift */,
+				758137912A69EC2100577409 /* CustomNavBarPreferenceKeys.swift */,
+				758137862A69DD8C00577409 /* CustomNavBarView.swift */,
+			);
+			path = "Custom Nav Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,20 +482,33 @@
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
 				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
 				7536614F285BBC080077C02F /* RideMatchesView.swift in Sources */,
+				7581378D2A69E4A900577409 /* CustomNavView.swift in Sources */,
+				758137962A6A19F800577409 /* FireBaseImage.swift in Sources */,
 				7536614D285BBC080077C02F /* UpcomingFlightView.swift in Sources */,
 				754AD3FF2A59388000F78013 /* FlightViewModel.swift in Sources */,
 				7537511E2A57E43700B02528 /* HomeView.swift in Sources */,
+				7510E4AB2A61DA18004F88AC /* Launch.swift in Sources */,
+				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
 				75366130285BBBF40077C02F /* UpcomingFlightsView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
 				75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */,
+				7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */,
+				758137922A69EC2100577409 /* CustomNavBarPreferenceKeys.swift in Sources */,
 				75366151285BBC080077C02F /* ScheduledRidesView.swift in Sources */,
 				75366131285BBBF40077C02F /* ImagePicker.swift in Sources */,
 				752F99812A57D24B0036ECEE /* AuthViewModel.swift in Sources */,
+				758137852A69DAFF00577409 /* ToolbarView.swift in Sources */,
+				758137982A6A1BAD00577409 /* ProfileImageViewModel.swift in Sources */,
+				758137942A69F9F800577409 /* RandomView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,
+				7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */,
 				7536612F285BBBF40077C02F /* MatchesView.swift in Sources */,
+				758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */,
+				7581378F2A69E73F00577409 /* CustomNavLink.swift in Sources */,
 				752F99742A57B76E0036ECEE /* LoginView.swift in Sources */,
+				758137832A69BA7F00577409 /* ProfilePhotoSelectorView.swift in Sources */,
 				75366150285BBC080077C02F /* AddFlightView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

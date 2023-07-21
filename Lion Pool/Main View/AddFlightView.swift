@@ -22,12 +22,6 @@ struct AddFlightView: View {
         //Overall stack to maintain header
         VStack(spacing: 0){
             // Screen header
-            HStack{
-                Text("Flight Departure")
-                    .font(.system(size:45,weight: .bold))
-                    .foregroundColor(Color("Dark Blue "))
-            }.frame(width: UIScreen.main.bounds.width, height:UIScreen.main.bounds.height/12 )
-                .background(Color("Gray Blue "))
             List{
                 // Departure Details + image
                 Section{
@@ -136,9 +130,6 @@ struct confirmationScreen: View {
                 Task{
                     if let user = viewModel.currentUser{
                         let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
-                        if (result == 1){
-                            HomeView()
-                        }
                     }
                 }
             } label: {
@@ -155,8 +146,6 @@ struct confirmationScreen: View {
             
             Spacer()
             }
-            
-
         }
 }
 

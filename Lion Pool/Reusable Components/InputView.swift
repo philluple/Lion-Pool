@@ -13,8 +13,8 @@ struct InputView: View {
     let placeholder: String
     var isSecureField = false
     
-    let fontSize = (CGFloat)(18)
-    let tfHeight = (CGFloat)(50)
+    let fontSize = (CGFloat)(16)
+    let tfHeight = (CGFloat)(45)
     
     var body: some View {
         VStack {

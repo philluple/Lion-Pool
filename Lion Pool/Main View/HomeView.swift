@@ -6,67 +6,64 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import Firebase
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: AuthViewModel
-    
     var body: some View {
-        NavigationView{
-            ScrollView {
-                VStack (spacing: 20) {
+        if let user = viewModel.currentUser{
+            CustomNavView{
+                ScrollView {
+                    VStack (spacing: 15) {
+                        UpcomingFlightView()
+                            .padding([.top],UIScreen.main.bounds.height/25)
+                        ScheduledRidesView()
+                        UpcomingFlightView()
+                    }
                     
-                    UpcomingFlightView()
-                        .padding([.top],UIScreen.main.bounds.height/15)
-                    ScheduledRidesView()
-                    RideMatchesView()
-                    //UpcomingFlightView()
-                    
-                    
-                }
-                
-            }
-            .overlay(
-                ZStack {
-                                        
-                    HStack{
-                        Text("Lion Pool ")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundColor(Color("Dark Blue "))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding([.leading],UIScreen.main.bounds.width/25)
-                            .padding([.bottom, .top, .leading],10)
-                        
-                        NavigationLink(destination: ProfileView()){
-                            Image(systemName:"person.circle")
-                                .resizable()
-                                .frame(width:30, height:30)
+                }.overlay(
+                    ZStack {
+                        HStack{
+                            Text("Lion Pool ")
+                                .font(.system(size: 42, weight: .bold))
                                 .foregroundColor(Color("Dark Blue "))
-                                .padding([.trailing],UIScreen.main.bounds.width/25)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.leading],UIScreen.main.bounds.width/25)
+                                //.padding([.bottom, .top, .leading],10)
                             
-                        }.navigationBarBackButtonHidden()
+                            CustomNavLink(destination: ProfileView().customNavigationTitle("Hey, \(user.firstname)").customNavigationSize(35)){
+                                Image(systemName:"person.fill")
+                                    .resizable()
+                                    .frame(width:30, height:30)
+                                    .foregroundColor(Color("Dark Blue "))
+                                    //.padding([.trailing],UIScreen.main.bounds.width/25)
+                            }
                             
+                            
+                        }.padding([.trailing, .leading])
                         
-                    }//.frame(width: UIScreen.main.bounds.width)
-                    //.background(Color("Gray Blue "))
-                    //.navigationBarBackButtonHidden(true)
-                    
-                    
-                }
-                    .background(Color("Gray Blue "))
-                    .frame(width: UIScreen.main.bounds.width, height: 30)
-                    .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
-            )
-            .frame(width:UIScreen.main.bounds.width )
-            .background(Color("Text Box"))
-                
-            .background(ignoresSafeAreaEdges: .all)
-            
-        }.edgesIgnoringSafeArea(.all)
+                    }
+                        .background(Color("Gray Blue "))
+                        .frame(width: UIScreen.main.bounds.width, height: -10)
+                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+                )
+                .frame(width:UIScreen.main.bounds.width )
+                .background(Color("Text Box"))
+                .background(ignoresSafeAreaEdges: .all)
+            }
+            .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 
+
+
+
 struct HomeView_Previews: PreviewProvider {
+    
     static var previews: some View {
         HomeView()
+            .environmentObject(AuthViewModel())
     }
 }

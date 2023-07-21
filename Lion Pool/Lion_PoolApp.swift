@@ -11,6 +11,8 @@ struct Lion_PoolApp: App {
     }
     var body: some Scene {
         WindowGroup {
+//            RegistrationView()
+//                .environmentObject(viewModel)
             ContentView()
                 .environmentObject(viewModel)
         }

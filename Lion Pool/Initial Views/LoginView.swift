@@ -19,7 +19,7 @@ struct LoginView: View {
 
             VStack (){
                 //image
-                Logo().padding(.vertical,32)
+                Logo(fontColor: "Dark Blue ", fontSize: 75).padding(.vertical,32)
                 
                 VStack(spacing: 24){
                     InputView(text: $email,

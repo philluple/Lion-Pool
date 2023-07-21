@@ -15,7 +15,7 @@ struct UpcomingFlightView: View {
                     .font(.system(size:22,weight: .medium))
                     .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
                 
-                NavigationLink(destination: RegistrationView()) {
+                CustomNavLink(destination: AddFlightView().customNavigationTitle("Add flight").customNavigationSize(40)) {
                     Image(systemName:"plus.circle.fill")
                         .resizable()
                         .frame(width:25, height:25)

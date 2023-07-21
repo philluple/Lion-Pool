@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct User: Identifiable, Codable{
     let id: String
@@ -14,8 +15,5 @@ struct User: Identifiable, Codable{
     let email: String
     let UNI: String
     let phone: String
-}
-
-extension User {
-    static var MOCK_USER = (id: NSUUID().uuidString, firstname: "Phillip", lastname: "Le", email: "pnl2111@columbia.edu", UNI: "pnl2111")
+    let pfpLocation: String
 }
