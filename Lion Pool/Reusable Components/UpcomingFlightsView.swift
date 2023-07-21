@@ -26,41 +26,39 @@ struct UpcomingFlightsView: View {
     ]
     
     var body: some View {
-        ZStack{
-            Button(action: {
-                popover.toggle()
-            }) {
-                VStack{
-                    HStack(spacing: 20){
+        VStack{
+            Button(action: {popover.toggle()}) {
+                HStack{
+                    HStack{
                         Text(flight.airport)
                             .font(.system(size:25,weight: .bold))
-                        
+                        Spacer()
                         Image(systemName: "airplane")
                             .resizable()
                             .frame(width: 20, height: 20)
                             .foregroundColor(Color("Gray Blue "))
-                        //.clipShape(Circle())
-                        HStack{
-                            Text("\(formattedDate(flight.date)) @")
-                                .font(.system(size:20))
-                            Text("\(formattedTime(flight.date))")
-                                .font(.system(size:20))
-                                .foregroundColor(Color.gray)
-                            
-                        }
-                        
-                        
                     }
-                    Divider()
-                        .foregroundColor(Color.black)
-                }
-                .padding(.horizontal)
-            }.accentColor(Color.black)
-                .sheet(isPresented: $popover){
-                    ExpandedFlightView(flight: flight)
-                }
+                    Spacer()
+                    Text("\(formattedDate(flight.date))")
+                        .font(.system(size:20))
+
+                    Text("@")
+                        .font(.system(size:20))
+
+                    Text("\(formattedTime(flight.date))")
+                        .font(.system(size:20))
+                        .foregroundColor(Color.gray)
+                }.padding(.horizontal, 20)
+            }
+            .accentColor(Color.black)
+            .sheet(isPresented: $popover){
+                ExpandedFlightView(flight: flight)
+            }
+            //Divider()
         }
+        
     }
+    
 
     private func formattedDate( _ date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -85,6 +83,15 @@ struct UpcomingFlightsView: View {
 struct UpcomingFlightsView_Previews: PreviewProvider {
     static var previews: some View {
         let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
-        UpcomingFlightsView(flight: newFlight)
+        let newFlight2 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "LGA")
+        let newFlight3 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "JFK")
+        List{
+                UpcomingFlightsView(flight: newFlight)
+                UpcomingFlightsView(flight: newFlight2)
+                UpcomingFlightsView(flight: newFlight3)
+        }
+            
+        
+        
     }
 }

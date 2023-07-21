@@ -31,6 +31,9 @@ class FlightViewModel: ObservableObject{
         return 1
     }
     
+    func deleteFlight (flight: Flight) async throws{
+        
+    }
 
     func fetchDocuments(for userId: String, completion: @escaping ([Flight]?, Error?) -> Void) {
         let userFlightsRef = Firestore.firestore().collection("users").document(userId).collection("userFlights")

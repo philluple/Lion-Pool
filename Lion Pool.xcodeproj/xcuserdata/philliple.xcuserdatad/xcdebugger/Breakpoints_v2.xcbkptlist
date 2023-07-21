@@ -62,28 +62,28 @@
             filePath = "Lion Pool/Main View/UpcomingFlightView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "UpcomingFlightView_Previews"
-            landmarkType = "14">
+            startingLineNumber = "122"
+            endingLineNumber = "122"
+            landmarkName = "previews"
+            landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - b36b100492df5a76"
+                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - debc5f66378f26e7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Lion_Pool.UpcomingFlightView_Previews.init() -&gt; Lion_Pool.UpcomingFlightView_Previews"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.environmentObject&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Combine.ObservableObject&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
                   moduleName = "Lion Pool"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "0">
+                  startingLineNumber = "122"
+                  endingLineNumber = "122"
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
-                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c4b991"
+                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c44698"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -93,53 +93,8 @@
                   urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c4bbe0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
-                  moduleName = "Lion Pool"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c44025"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
-                  moduleName = "Lion Pool"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "136"
-                  endingLineNumber = "136"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  uuid = "F4B29F17-C14A-4E48-B41D-4A52BF072E7E - d969a703d2c440c6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static Lion_Pool.UpcomingFlightView_Previews.previews.getter : some"
-                  moduleName = "Lion Pool"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/philliple/Documents/Lion-Pool/Lion%20Pool/Main%20View/UpcomingFlightView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "137"
-                  endingLineNumber = "137"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
                   offsetFromSymbolStart = "116">
                </Location>
             </Locations>

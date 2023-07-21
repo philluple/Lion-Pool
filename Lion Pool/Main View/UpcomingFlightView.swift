@@ -14,15 +14,14 @@ struct UpcomingFlightView: View {
     @State var upcoming_flights = [Flight]()
     @EnvironmentObject var viewModel : AuthViewModel
     
-
+    
     var body: some View {
         if let user = viewModel.currentUser{
             VStack {
-                HStack(spacing: -30){
+                HStack(){
                     Text("Upcoming flights")
                         .font(.system(size:22,weight: .medium))
-                        .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
-                    
+                    Spacer()
                     CustomNavLink(destination: AddFlightView().customNavigationTitle("Add a flight").customNavigationSize(35)) {
                         Image(systemName:"plus.circle.fill")
                             .resizable()
@@ -30,39 +29,32 @@ struct UpcomingFlightView: View {
                             .foregroundColor(Color("Gold"))
                     }
                 }
-                
-                LazyVStack{
-                    Rectangle()
-                        .frame(width: UIScreen.main.bounds.width-50, height: 200)
-                        .foregroundColor(Color("TextBox"))
-                        .cornerRadius(8)
-                        .overlay(
-                            ScrollView{
-                                VStack{
-                                    Spacer()
-                                    ForEach(upcoming_flights) { flight in
-                                        UpcomingFlightsView(flight: flight)
-                                    }
-                                }
-                            }
-                        )
+                .padding([.leading, .trailing],15)
+                .padding(.top)
+                ScrollView{
+                    VStack{
+                        Spacer()
+                        ForEach(upcoming_flights) { flight in
+                            UpcomingFlightsView(flight: flight)
+                            Divider()
+                                .padding(.horizontal, 10)
+                        }
+                    }
                 }
-                
                 
             }.frame(width:UIScreen.main.bounds.width-20,height: 275)
                 .background(Color.white)
                 .cornerRadius(10)
+            
                 .onAppear{
                     fetchFlights(userId: user.id)
                 }
         }else{
             let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
             VStack {
-                HStack(spacing: -30){
+                HStack(){
                     Text("Upcoming flights")
                         .font(.system(size:22,weight: .medium))
-                        .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
-                    
                     CustomNavLink(destination: AddFlightView().customNavigationTitle("Add a flight").customNavigationSize(35)) {
                         Image(systemName:"plus.circle.fill")
                             .resizable()
@@ -70,30 +62,24 @@ struct UpcomingFlightView: View {
                             .foregroundColor(Color("Gold"))
                     }
                 }
-                
-                LazyVStack{
-                    Rectangle()
-                        .frame(width: UIScreen.main.bounds.width-50, height: 200)
-                        .foregroundColor(Color("TextBox"))
-                        .cornerRadius(8)
-                        .overlay(
-                            ScrollView{
-                                VStack{
-                                    Spacer()
-                                    ForEach(0...4, id: \.self) { _ in
-                                        UpcomingFlightsView(flight: newFlight )
-                                                }
-                                }
-                            }
-                        )
+                ScrollView{
+                    VStack{
+                        Spacer()
+                        ForEach(0...3, id: \.self) { _ in
+                            UpcomingFlightsView(flight: newFlight)
+                            Divider()
+                        }
+                    }
                 }
-                
                 
             }.frame(width:UIScreen.main.bounds.width-20,height: 275)
                 .background(Color.white)
                 .cornerRadius(10)
+            
+            
         }
     }
+
     func fetchFlights(userId: String){
         print("DEBUG:Retrieving user flights")
         let db = Firestore.firestore()
