@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct UpcomingFlightsView: View {
+    @State var departingAirport: String
+    @State var flightDate : Date
     var body: some View {
         VStack{
-            HStack(spacing:20){
-                Text("JFK")
+            HStack(){
+                Text(departingAirport)
                     .font(.system(size:25,weight: .bold))
                 
                 Image(systemName: "airplane")
@@ -19,11 +21,9 @@ struct UpcomingFlightsView: View {
                     .frame(width: 20, height: 20)
                     .foregroundColor(Color("Gray Blue "))
                     //.clipShape(Circle())
+                Spacer()
                 
-                Text("LAX")
-                    .font(.system(size:25,weight: .bold))
-                
-                Text("Oct 10 @ 10:30PM ")
+                Text("\(flightDate, style: .date) @ \(flightDate, style: .time)")
                     .font(.system(size:20))
                 
             }
@@ -36,6 +36,7 @@ struct UpcomingFlightsView: View {
 
 struct UpcomingFlightsView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingFlightsView()
+        let flyDate = Date()
+        UpcomingFlightsView(departingAirport: "EWR", flightDate: flyDate)
     }
 }

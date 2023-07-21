@@ -7,12 +7,10 @@
 
 import Foundation
 
-struct Flight: Codable{
+struct Flight: Codable, Identifiable{
+    let id: UUID
     let userId: String
     let date: Date
     let airport: String
 }
 
-extension User {    
-    static var MOCK_FLIGHT = (id: NSUUID().uuidString, date: Date.now, airport: "JFK")
-}

@@ -192,7 +192,7 @@ struct RegistrationView: View {
         let storageRef = Storage.storage().reference()
         
         // Check if we can turn the image into data
-        guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else { return }
+        guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
         
         let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
         let uploadTask = fileRef.putData(imageData, metadata: nil) { metadata, error in

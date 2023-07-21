@@ -18,7 +18,7 @@ class FlightViewModel: ObservableObject{
         let documentName = "\(dateString)-\(airport)"
         
         do{
-            let flight = Flight(userId: userId, date: date, airport: airport)
+            let flight = Flight(id: UUID(), userId: userId, date: date, airport: airport)
             let encodedFlight = try Firestore.Encoder().encode(flight)
             try await Firestore.firestore().collection("flights").document(flight.airport).setData(encodedFlight)
             try await Firestore.firestore().collection("users").document(userId).collection("userFlights").document(documentName).setData(encodedFlight)

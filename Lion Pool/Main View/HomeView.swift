@@ -25,7 +25,7 @@ struct HomeView: View {
                 }.overlay(
                     ZStack {
                         HStack{
-                            Text("Lion Pool ")
+                            Text("LionPool")
                                 .font(.system(size: 42, weight: .bold))
                                 .foregroundColor(Color("Dark Blue "))
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -53,6 +53,8 @@ struct HomeView: View {
                 .background(ignoresSafeAreaEdges: .all)
             }
             .edgesIgnoringSafeArea(.all)
+        }else{
+            Text("help")
         }
     }
 }
