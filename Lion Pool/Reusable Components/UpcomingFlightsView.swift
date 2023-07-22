@@ -9,9 +9,14 @@ import SwiftUI
 
 struct UpcomingFlightsView: View {
     @State var flight: Flight
+    @State private var needRefreshFromDelete: Bool = false
+    @Binding var needRefreshList: Bool
     @State private var popover: Bool = false
+    @Environment(\.presentationMode) var presentationMode
+
     
 
+//    if(needRefreshFromDelete = true, then toddle needRefreshList)
     
     private let monthAbbrev: [String: String ] = [
         "January" : "Jan",
@@ -32,7 +37,6 @@ struct UpcomingFlightsView: View {
                     HStack{
                         Text(flight.airport)
                             .font(.system(size:25,weight: .bold))
-                        Spacer()
                         Image(systemName: "airplane")
                             .resizable()
                             .frame(width: 20, height: 20)
@@ -52,8 +56,17 @@ struct UpcomingFlightsView: View {
             }
             .accentColor(Color.black)
             .sheet(isPresented: $popover){
-                ExpandedFlightView(flight: flight)
+                ExpandedFlightView(needRefreshFromExpand: $needRefreshFromDelete, flight: flight)
+            }.onChange(of: needRefreshFromDelete){
+                success in
+                if success{
+                    needRefreshList.toggle()
+                    //presentationMode.wrappedValue.dismiss()
+                    print("DEBUG: In upcoming flights view")
+                }
             }
+            
+
             //Divider()
         }
         
@@ -80,18 +93,18 @@ struct UpcomingFlightsView: View {
     }
 }
 
-struct UpcomingFlightsView_Previews: PreviewProvider {
-    static var previews: some View {
-        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
-        let newFlight2 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "LGA")
-        let newFlight3 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "JFK")
-        List{
-                UpcomingFlightsView(flight: newFlight)
-                UpcomingFlightsView(flight: newFlight2)
-                UpcomingFlightsView(flight: newFlight3)
-        }
-            
-        
-        
-    }
-}
+//struct UpcomingFlightsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
+//        let newFlight2 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "LGA")
+//        let newFlight3 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "JFK")
+//        List{
+//                UpcomingFlightsView(flight: newFlight)
+//                UpcomingFlightsView(flight: newFlight2)
+//                UpcomingFlightsView(flight: newFlight3)
+//        }
+//            
+//        
+//        
+//    }
+//}

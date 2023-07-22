@@ -195,7 +195,7 @@ struct RegistrationView: View {
         guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
         
         let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
-        let uploadTask = fileRef.putData(imageData, metadata: nil) { metadata, error in
+        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
             if let error = error {
                 // Handle any errors that occur during the upload
                 print("Error uploading image:", error.localizedDescription)

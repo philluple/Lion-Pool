@@ -10,9 +10,12 @@ import FirebaseCore
 import FirebaseFirestore
 
                 
-struct UpcomingFlightView: View {
+struct ListFlightView: View {
     @State var upcoming_flights = [Flight]()
+    @State private var needRefreshList: Bool = false
     @EnvironmentObject var viewModel : AuthViewModel
+    @Environment(\.presentationMode) var presentationMode
+
     
     
     var body: some View {
@@ -22,27 +25,46 @@ struct UpcomingFlightView: View {
                     Text("Upcoming flights")
                         .font(.system(size:22,weight: .medium))
                     Spacer()
-                    CustomNavLink(destination: AddFlightView().customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                        Image(systemName:"plus.circle.fill")
-                            .resizable()
-                            .frame(width:25, height:25)
-                            .foregroundColor(Color("Gold"))
-                    }
                 }
-                .padding([.leading, .trailing],15)
-                .padding(.top)
+                .padding(.leading, 15)
+                .padding(.top, 10)
                 ScrollView{
                     VStack{
                         Spacer()
-                        ForEach(upcoming_flights) { flight in
-                            UpcomingFlightsView(flight: flight)
-                            Divider()
-                                .padding(.horizontal, 10)
+                        ForEach(Array(upcoming_flights.enumerated()), id: \.element.id) { index, flight in
+                            UpcomingFlightsView(flight: flight, needRefreshList: $needRefreshList)
+                                .onChange(of: needRefreshList) { success in
+                                    if success {
+                                        fetchFlights(userId: user.id)
+                                        needRefreshList.toggle()
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
+
+                            if index != upcoming_flights.count - 1 {
+                                Divider()
+                                    .padding(.horizontal, 10)
+                            }
                         }
+
+//                        ForEach(upcoming_flights) { flight in
+//                            UpcomingFlightsView(flight: flight, needRefreshList: $needRefreshList)
+//                                .onChange(of: needRefreshList){
+//                                    success in
+//                                    if success{
+//                                        fetchFlights(userId: user.id)
+//                                        needRefreshList.toggle()
+//                                        presentationMode.wrappedValue.dismiss()
+//                                    }
+//                                }
+//                            Divider()
+//                                .padding(.horizontal, 10)
+//                        }
+
                     }
                 }
                 
-            }.frame(width:UIScreen.main.bounds.width-20,height: 275)
+            }.frame(width:UIScreen.main.bounds.width-20,height: (upcoming_flights.count < 4 ? CGFloat(upcoming_flights.count)*60+40 : 280))
                 .background(Color.white)
                 .cornerRadius(10)
             
@@ -55,18 +77,15 @@ struct UpcomingFlightView: View {
                 HStack(){
                     Text("Upcoming flights")
                         .font(.system(size:22,weight: .medium))
-                    CustomNavLink(destination: AddFlightView().customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                        Image(systemName:"plus.circle.fill")
-                            .resizable()
-                            .frame(width:25, height:25)
-                            .foregroundColor(Color("Gold"))
-                    }
+                        .padding(.leading, 20)
+                    Spacer()
+                    
                 }
                 ScrollView{
                     VStack{
                         Spacer()
                         ForEach(0...3, id: \.self) { _ in
-                            UpcomingFlightsView(flight: newFlight)
+                            UpcomingFlightsView(flight: newFlight, needRefreshList: $needRefreshList)
                             Divider()
                         }
                     }
@@ -121,7 +140,7 @@ struct UpcomingFlightView: View {
 struct UpcomingFlightView_Previews: PreviewProvider {
     static var previews: some View {
         List{
-            UpcomingFlightView()
+            ListFlightView()
                 .environmentObject(AuthViewModel())
         }
         

@@ -75,7 +75,6 @@ struct ProfileView: View {
     func retrievePfp(imageURLString: String) {
             DispatchQueue.global(qos: .background).async {
                 let storage = Storage.storage()
-                let storageRef = storage.reference()
                 let httpsReference = storage.reference(forURL: "\(imageURLString)")
                 httpsReference.getData(maxSize: 1024*1024) { data, error in
                     if let error = error {

@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ExpandedFlightView: View {
+    @Binding var needRefreshFromExpand: Bool
+    @StateObject private var flightViewModel = FlightViewModel()
+    
     var flight: Flight
     var cities = ["EWR": "NEWARK",
                   "JFK": "NEW YORK",
                   "LGA": "NEW YORK"]
-    init (flight: Flight){
-        self.flight = flight
-    }
     
     var body: some View {
         ZStack{
             Color("Text Box")
+            // Two vertical pillars
             HStack{
                 Rectangle()
                     .frame(width: 40, height: UIScreen.main.bounds.height-230)
@@ -30,6 +31,7 @@ struct ExpandedFlightView: View {
                     .foregroundColor(Color("Dark Blue "))
                     .padding(.trailing)
             }
+            //Two Barcodes
             VStack{
                 Image("Barcode")
                     .resizable()
@@ -41,6 +43,7 @@ struct ExpandedFlightView: View {
                     .frame(maxWidth:UIScreen.main.bounds.width - 150, maxHeight: 55)
                     .padding(.bottom, 60)
             }.ignoresSafeArea()
+            //Airplane
             ZStack{
                 Image(systemName: "airplane")
                     .resizable()
@@ -56,6 +59,32 @@ struct ExpandedFlightView: View {
                     .padding(.top,10)
                     .padding(.bottom, UIScreen.main.bounds.height-400)
             }
+            //Change to buttons later
+            HStack(spacing: 20){
+                
+                Image(systemName: "pencil.circle.fill")
+                    .resizable()
+                    .frame(width:60,height:60)
+                    .foregroundColor(Color("Gold"))
+                
+                Button {
+                    Task{
+                        let result = try await flightViewModel.deleteFlight(flight: flight)
+                        if result == 1{
+                            print("DEBUG: user deleted flight")
+                            needRefreshFromExpand.toggle()
+                        }
+                    }
+                } label: {
+                    Image(systemName: "trash.circle.fill")
+                        .resizable()
+                        .frame(width:60,height:60)
+                        .foregroundColor(Color.red)
+                }
+                
+            }
+            .padding(.leading, 150)
+            .padding(.top, 550)
             
 
         }
@@ -103,9 +132,9 @@ struct ExpandedFlightView: View {
     }
 }
 
-struct ExpandedFlightView_Previews: PreviewProvider {
-    static var previews: some View {
-        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
-        ExpandedFlightView(flight: newFlight)
-    }
-}
+//struct ExpandedFlightView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
+//        ExpandedFlightView(flight: newFlight)
+//    }
+//}
