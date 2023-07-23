@@ -14,23 +14,20 @@ struct HomeViewToolBar: View {
                 HStack{
                     Text("LionPool")
                         .font(.system(size: 42, weight: .bold))
-                        .foregroundColor(Color("Dark Blue "))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color.white)
                         .padding([.leading],UIScreen.main.bounds.width/25)
-                        //.padding([.bottom, .top, .leading],10)
-                    
+                    Spacer()
                     CustomNavLink(destination: ProfileView().customNavigationTitle("Hey, \(user.firstname)").customNavigationSize(35)){
                         Image(systemName:"person.fill")
                             .resizable()
                             .frame(width:30, height:30)
-                            .foregroundColor(Color("Dark Blue "))
+                            .foregroundColor(Color.white)
                             //.padding([.trailing],UIScreen.main.bounds.width/25)
                     }
                     
                     
                 }.padding([.trailing, .leading])
-            Color.green.ignoresSafeArea()
-            }
+            }.background(Color("Dark Blue "))
         
     }
 }

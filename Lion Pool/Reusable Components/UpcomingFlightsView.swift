@@ -92,19 +92,3 @@ struct UpcomingFlightsView: View {
         return dateFormatter.string(from: date)
     }
 }
-
-//struct UpcomingFlightsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
-//        let newFlight2 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "LGA")
-//        let newFlight3 = Flight(id: UUID(), userId: "123456", date: Date(), airport: "JFK")
-//        List{
-//                UpcomingFlightsView(flight: newFlight)
-//                UpcomingFlightsView(flight: newFlight2)
-//                UpcomingFlightsView(flight: newFlight3)
-//        }
-//            
-//        
-//        
-//    }
-//}

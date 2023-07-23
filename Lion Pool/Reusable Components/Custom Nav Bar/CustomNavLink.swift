@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 struct CustomNavLink<Label: View, Destination: View>: View {
     let destination: Destination
     let label: Label

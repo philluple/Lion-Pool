@@ -13,6 +13,7 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @State private var confirmedFlight: Bool = false
     @State private var isAddingFlight = false
+    @State private var voidEditingFlight: Bool = false
     
     var body: some View {
         if let user = viewModel.currentUser{
@@ -20,23 +21,7 @@ struct HomeView: View {
                 ScrollView {
                     VStack () {
                         Spacer()
-                        ListFlightView()
-                            .padding(.top, UIScreen.main.bounds.height/35)
-                            .overlay(alignment: .topTrailing){
-                                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                                    Image(systemName:"plus.circle.fill")
-                                        .resizable()
-                                        .frame(width:30, height:30)
-                                        .foregroundColor(Color("Gold"))
-                                        .padding(.top,35)
-                                        .padding(.trailing,15)
-                                }.onChange(of: confirmedFlight){
-                                    success in
-                                    if success{
-                                        print("HomeView")
-                                    }
-                                }
-                            }
+                        ListOfFlights
                         ScheduledRidesView()
                     }
                     
@@ -47,81 +32,55 @@ struct HomeView: View {
                                 .font(.system(size: 42, weight: .bold))
                                 .foregroundColor(Color("Dark Blue "))
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding([.leading],UIScreen.main.bounds.width/25)
+                                .padding([.leading],UIScreen.main.bounds.width/30)
                                 //.padding([.bottom, .top, .leading],10)
                             
                             CustomNavLink(destination: ProfileView().customNavigationTitle("Hey, \(user.firstname)").customNavigationSize(35)){
-                                Image(systemName:"person.fill")
-                                    .resizable()
-                                    .frame(width:30, height:30)
-                                    .foregroundColor(Color("Dark Blue "))
-                                    //.padding([.trailing],UIScreen.main.bounds.width/25)
+                                if let image = viewModel.currentUserProfileImage{
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width:40, height:40)
+                                        .foregroundColor(Color("Dark Blue "))
+                                        .overlay(Circle().stroke(Color("Text Box"), lineWidth: 4))
+                                        .clipShape(Circle())
+                                        .padding([.trailing],UIScreen.main.bounds.width/40)
+                                }else{
+                                    Image(systemName:"person.fill")
+                                        .resizable()
+                                        .frame(width:30, height:30)
+                                        .foregroundColor(Color("Dark Blue "))
+                                        .padding([.trailing],UIScreen.main.bounds.width/40)
+                                }
                             }
-                            
-                            
-                        }.padding([.trailing, .leading])
-                        
+                        }
+                        .padding([.trailing, .leading])
                     }
-                        .background(Color("Gray Blue "))
-                        .frame(width: UIScreen.main.bounds.width, height: -10)
-                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+                    .background(Color("Gray Blue "))
+                    .frame(width: UIScreen.main.bounds.width, height: -10)
+                    .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 )
                 .frame(width:UIScreen.main.bounds.width )
                 .background(Color("Text Box"))
                 .background(ignoresSafeAreaEdges: .all)
             }
             .edgesIgnoringSafeArea(.all)
-        }else{
-            CustomNavView{
-                ScrollView {
-                    VStack (spacing: 15) {
-                        ListFlightView()
-                            .padding([.top],UIScreen.main.bounds.height/25)
-                            .overlay(alignment: .topTrailing){
-                                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                                    Image(systemName:"plus.circle.fill")
-                                        .resizable()
-                                        .frame(width:30, height:30)
-                                        .foregroundColor(Color("Gold"))
-                                        .padding(.top,45)
-                                        .padding(.trailing,10)
-                                }
-                            }
-                        ScheduledRidesView()
-                    }
-
-                }.overlay(
-                    ZStack {
-                        HStack{
-                            Text("LionPool")
-                                .font(.system(size: 42, weight: .bold))
-                                .foregroundColor(Color("Dark Blue "))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding([.leading],UIScreen.main.bounds.width/25)
-                                //.padding([.bottom, .top, .leading],10)
-
-                            CustomNavLink(destination: ProfileView().customNavigationTitle("Hey, Lion").customNavigationSize(35)){
-                                Image(systemName:"person.fill")
-                                    .resizable()
-                                    .frame(width:30, height:30)
-                                    .foregroundColor(Color("Dark Blue "))
-                                    //.padding([.trailing],UIScreen.main.bounds.width/25)
-                            }
-
-
-                        }.padding([.trailing, .leading])
-
-                    }
-                        .background(Color("Gray Blue "))
-                        .frame(width: UIScreen.main.bounds.width, height: -10)
-                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
-                )
-                .frame(width:UIScreen.main.bounds.width )
-                .background(Color("Text Box"))
-                .background(ignoresSafeAreaEdges: .all)
-            }
         }
     }
+    private var ListOfFlights: some View{
+        ListFlightView()
+            .padding(.top, UIScreen.main.bounds.height/35)
+            .overlay(alignment: .topTrailing){
+                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
+                    Image(systemName:"plus.circle.fill")
+                        .resizable()
+                        .frame(width:25, height:25)
+                        .foregroundColor(Color("Gold"))
+                        .padding(.top,35)
+                        .padding(.trailing,15)
+                }
+            }
+    }
+    
 }
 
 

@@ -1,5 +1,7 @@
 import SwiftUI
 import Firebase
+import FirebaseCore
+
 
 @main
 struct Lion_PoolApp: App {
@@ -9,6 +11,7 @@ struct Lion_PoolApp: App {
     init (){
         FirebaseApp.configure()
     }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -14,6 +14,7 @@ struct AddFlightView: View {
     @State private var date = Date()
     @State private var confirmDetailsBool: Bool = false
     @State private var flightAddedSuccessfully: Bool = false
+
     @Binding var confirmedFlight: Bool
     
     @Environment(\.presentationMode) var presentationMode

@@ -14,3 +14,7 @@ struct Flight: Codable, Identifiable{
     let airport: String
 }
 
+class sharedFlightData: ObservableObject{
+    @Published var oldFlightDate = Date()
+    @Published var oldAirport = ""
+}

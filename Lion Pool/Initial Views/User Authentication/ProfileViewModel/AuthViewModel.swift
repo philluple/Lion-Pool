@@ -9,19 +9,25 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseAuth
+import FirebaseStorage
+
 
 // Publishes UI changes on the main thread
 @MainActor
 class AuthViewModel: ObservableObject {
     // Firebase user objext
+    
     @Published var userSession: FirebaseAuth.User?
     // Our user object
     @Published var currentUser: User?
+    @Published var currentUserProfileImage: UIImage? = nil
+
     
     init(){
         self.userSession = Auth.auth().currentUser
         Task {
             await fetchUser()
+            await retrievePfp()
         }
     }
     
@@ -30,6 +36,7 @@ class AuthViewModel: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
+            await retrievePfp()
             print("User has signed in")
         } catch {
             print("DEBUG: failed to login")
@@ -46,6 +53,7 @@ class AuthViewModel: ObservableObject {
             print("DEBUG: before")
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
+            await retrievePfp()
             return user.id
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
@@ -71,5 +79,24 @@ class AuthViewModel: ObservableObject {
         self.currentUser = try? snapshot.data(as: User.self)
         print("DEBUG: Current user is logged in")
         
+    }
+
+    func retrievePfp() async{
+        guard let pfpLocation = self.currentUser?.pfpLocation else { return }
+        let storage = Storage.storage()
+        if pfpLocation == ""{
+            return
+        }
+        let httpsReference = storage.reference(forURL: pfpLocation)
+        httpsReference.getData(maxSize:350*350){
+            data, error in
+            if let error = error{
+                print("Error retrieving profile picture: \(error.localizedDescription)")
+            } else{
+                if let data = data, let image = UIImage(data: data){
+                    self.currentUserProfileImage = image
+                }
+            }
+        }
     }
 }

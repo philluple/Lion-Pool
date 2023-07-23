@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseAuth
+import GoogleSignIn
 
 struct ContentView: View {
     @EnvironmentObject var viewModel: AuthViewModel

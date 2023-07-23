@@ -27,12 +27,13 @@ struct ProfileView: View {
                         .foregroundColor(Color("Text Box"))
                         .padding()
                 } else {
-                    if let image = profileImage { // 2. Use the profileImage here
+                    if let image = viewModel.currentUserProfileImage { // 2. Use the profileImage here
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 120, height: 120)
-                            .clipShape(Circle())// Set the appropriate size for the image
+                            .overlay(Circle().stroke(Color("Text Box"), lineWidth: 4))
+                            .clipShape(Circle())
                             .padding()
                         
                     } else {
@@ -68,37 +69,19 @@ struct ProfileView: View {
                 .accentColor(Color.white)
                 
             }.onAppear {
-                retrievePfp(imageURLString: imageURLString)
+                print("hello")
             }
         }
     }
-    func retrievePfp(imageURLString: String) {
-            DispatchQueue.global(qos: .background).async {
-                let storage = Storage.storage()
-                let httpsReference = storage.reference(forURL: "\(imageURLString)")
-                httpsReference.getData(maxSize: 1024*1024) { data, error in
-                    if let error = error {
-                        // Uh-oh, an error occurred!
-                        print("Error retrieving profile picture: \(error.localizedDescription)")
-                    } else {
-                        // Data for "images/island.jpg" is returned
-                        if let data = data, let image = UIImage(data: data) {
-                            // Update the profileImage State variable (on the main thread)
-                            DispatchQueue.main.async {
-                                self.profileImage = image
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    
 }
 
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
+        let mockViewModel = AuthViewModel()
         ProfileView()
-            .environmentObject(AuthViewModel())
+            .environmentObject(mockViewModel)
     }
 }
 

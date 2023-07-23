@@ -50,6 +50,10 @@ class FlightViewModel: ObservableObject{
         }
         return 1
     }
+    
+    func editFlight (oldFlight: Flight, newFlight: Flight) async throws -> Int{
+        return 1
+    }
 
     func fetchDocuments(for userId: String, completion: @escaping ([Flight]?, Error?) -> Void) {
         let userFlightsRef = Firestore.firestore().collection("users").document(userId).collection("userFlights")
