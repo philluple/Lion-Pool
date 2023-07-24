@@ -15,10 +15,8 @@ struct ProfileView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var profileImage: UIImage? = nil
     
-    //let user = User(id: "Test", firstname: "Jane", lastname: "Doe", email: "jane_doe@columbia.edu", UNI: "jane2134", phone: "(310)848-7944", pfpLocation: "")
     var body: some View {
     if let user = viewModel.currentUser {
-        let imageURLString = user.pfpLocation
             VStack (spacing:10){
                 // Profile Image
                 if user.pfpLocation.count == 0{

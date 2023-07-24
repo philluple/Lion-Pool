@@ -56,7 +56,7 @@ struct UpcomingFlightsView: View {
             }
             .accentColor(Color.black)
             .sheet(isPresented: $popover){
-                ExpandedFlightView(needRefreshFromExpand: $needRefreshFromDelete, flight: flight)
+                FlightDetailView(flight: $flight, needRefreshFromExpand: $needRefreshFromDelete)
             }.onChange(of: needRefreshFromDelete){
                 success in
                 if success{

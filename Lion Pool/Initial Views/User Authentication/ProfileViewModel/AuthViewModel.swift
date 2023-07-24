@@ -21,6 +21,7 @@ class AuthViewModel: ObservableObject {
     // Our user object
     @Published var currentUser: User?
     @Published var currentUserProfileImage: UIImage? = nil
+    //@EnvironmentObject var flightList: flightList
 
     
     init(){
@@ -37,7 +38,7 @@ class AuthViewModel: ObservableObject {
             self.userSession = result.user
             await fetchUser()
             await retrievePfp()
-            print("User has signed in")
+            print("SUCCESS: User has signed in")
         } catch {
             print("DEBUG: failed to login")
         }
@@ -54,6 +55,8 @@ class AuthViewModel: ObservableObject {
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
             await retrievePfp()
+            print("SUCCESS: \(user.id) has been created")
+
             return user.id
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
@@ -67,6 +70,8 @@ class AuthViewModel: ObservableObject {
             try Auth.auth().signOut()
             self.userSession = nil
             self.currentUser = nil
+            self.currentUserProfileImage = nil
+            print ("SUCCESS: User has signed out")
         } catch {
             print ("DEBUG: Could not sign out user")
         }
@@ -77,8 +82,7 @@ class AuthViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
-        print("DEBUG: Current user is logged in")
-        
+        print("SUCCESS: Fetched")
     }
 
     func retrievePfp() async{
@@ -91,10 +95,11 @@ class AuthViewModel: ObservableObject {
         httpsReference.getData(maxSize:350*350){
             data, error in
             if let error = error{
-                print("Error retrieving profile picture: \(error.localizedDescription)")
+                print("DEBUG: Error retrieving profile picture: \(error.localizedDescription)")
             } else{
                 if let data = data, let image = UIImage(data: data){
                     self.currentUserProfileImage = image
+                    print("SUCCESS: Downloaded user profile photo")
                 }
             }
         }

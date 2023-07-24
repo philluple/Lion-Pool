@@ -11,6 +11,8 @@ import Firebase
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var flightModel: FlightViewModel
+
     @State private var confirmedFlight: Bool = false
     @State private var isAddingFlight = false
     @State private var voidEditingFlight: Bool = false
@@ -71,12 +73,15 @@ struct HomeView: View {
             .padding(.top, UIScreen.main.bounds.height/35)
             .overlay(alignment: .topTrailing){
                 CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                    Image(systemName:"plus.circle.fill")
-                        .resizable()
-                        .frame(width:25, height:25)
-                        .foregroundColor(Color("Gold"))
-                        .padding(.top,35)
-                        .padding(.trailing,15)
+                        Text("Add flight")
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 15, weight: .bold))
+                            .frame(width: 90, height: 25)
+                            .background(Color("Gold"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
+                            .padding(.trailing,15)
+
                 }
             }
     }

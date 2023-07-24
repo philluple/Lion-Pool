@@ -7,6 +7,7 @@ import FirebaseCore
 struct Lion_PoolApp: App {
   // register ap delegate for Firebase setup
     @StateObject var viewModel = AuthViewModel()
+    @StateObject var flightModel = FlightViewModel()
     
     init (){
         FirebaseApp.configure()
@@ -16,6 +17,7 @@ struct Lion_PoolApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
+                .environmentObject(flightModel)
         }
     }
 }

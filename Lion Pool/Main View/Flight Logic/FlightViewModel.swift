@@ -11,6 +11,8 @@ import FirebaseFirestoreSwift
 import FirebaseAuth
 
 class FlightViewModel: ObservableObject{
+    @Published var flights: [Flight] = []
+
     let dateFormatter = DateFormatter()
 
     func addFlight (userId: String, date: Date, airport: String) async throws -> Int{
@@ -18,13 +20,12 @@ class FlightViewModel: ObservableObject{
         let dateString = dateFormatter.string(from: date)
         let dateAdded = Date()
         let documentName = "\(dateString)-\(airport)"
-        
-        
         do{
             let flight = Flight(id: UUID(), userId: userId, date: date, airport: airport)
             let encodedFlight = try Firestore.Encoder().encode(flight)
             try await Firestore.firestore().collection("flights").document(flight.airport).collection("userFlights").document("\(dateString)-\(userId)").setData(encodedFlight)
             try await Firestore.firestore().collection("users").document(userId).collection("userFlights").document(documentName).setData(encodedFlight)
+            print("SUCCESS: \(userId) added a flight on \(dateString) from \(airport)")
         } catch {
             print("DEBUG: could not add flight", error.localizedDescription)
         }
@@ -41,10 +42,9 @@ class FlightViewModel: ObservableObject{
         let documentName = "\(dateString)-\(flight.airport)"
         print("airport: \(flight.airport) date: \(dateString) user id: \(flight.userId)")
         do{
-            print("deleting document")
             try await Firestore.firestore().collection("flights").document(flight.airport).collection("userFlights").document("\(dateString)-\(flight.userId)").delete()
             try await Firestore.firestore().collection("users").document(flight.userId).collection("userFlights").document(documentName).delete()
-            print("deleted document")
+            print("SUCCESS: \(flight.userId) deleted a flight on \(dateString) from \(flight.airport)")
         }catch{
             print("DEBUG: could not delete flight", error.localizedDescription)
         }
@@ -54,38 +54,42 @@ class FlightViewModel: ObservableObject{
     func editFlight (oldFlight: Flight, newFlight: Flight) async throws -> Int{
         return 1
     }
+    
+    func fetchFlights(userId: String) {
+            print("DEBUG: Retrieving user flights")
+            let db = Firestore.firestore()
+            db.collection("users").document("\(userId)").collection("userFlights").getDocuments { snapshot, error in
+                if error ==  nil {
+                    // no errors
+                    if let snapshot = snapshot {
+                        // Update the flights property directly
+                        DispatchQueue.main.async {
+                            self.flights = snapshot.documents.compactMap { d in
+                                guard let idString = d["id"] as? String,
+                                      let userId = d["userId"] as? String,
+                                      let timestamp = d["date"] as? Timestamp,
+                                      let airport = d["airport"] as? String else {
+                                          // Skip this document if any of the required fields is missing
+                                          return nil
+                                      }
 
-    func fetchDocuments(for userId: String, completion: @escaping ([Flight]?, Error?) -> Void) {
-        let userFlightsRef = Firestore.firestore().collection("users").document(userId).collection("userFlights")
-        
-        userFlightsRef.getDocuments { snapshot, error in
-            if let error = error {
-                completion(nil, error)
-                return
-            }
-            
-            guard let documents = snapshot?.documents else {
-                completion([], nil)
-                return
-            }
-            
-            var flights: [Flight] = []
-            
-            for document in documents {
-                if let documentData = document.data() as? [String: Any] {
-                    do {
-                        let documentObject = try Firestore.Decoder().decode(Flight.self, from: documentData)
-                        flights.append(documentObject)
-                    } catch {
-                        completion(nil, error)
-                        return
+                                return Flight(
+                                    id: UUID(uuidString: idString) ?? UUID(),
+                                    userId: userId,
+                                    date: timestamp.dateValue(),
+                                    airport: airport
+                                )
+                            }
+                        }
+                    } else {
+                        print("DEBUG: Error fetching flights: \(error?.localizedDescription ?? "")")
                     }
+                } else {
+                    print("DEBUG: Error fetching flights: \(error?.localizedDescription ?? "")")
                 }
             }
-            
-            completion(flights, nil)
         }
-    }
+
 
 
 }
