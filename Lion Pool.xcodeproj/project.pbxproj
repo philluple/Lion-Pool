@@ -79,6 +79,10 @@
 		75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75A05E842A58C72D002ABE9C /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 75A05E832A58C72D002ABE9C /* iPhoneNumberField */; };
 		75BB9B362A578B0F00F2CC75 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 75BB9B352A578B0F00F2CC75 /* Podfile */; };
+		75D7FDC92A704A0E00779DA5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDC82A704A0E00779DA5 /* Network.swift */; };
+		75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCA2A704BBC00779DA5 /* Matches.swift */; };
+		75D7FDD02A70CB5700779DA5 /* FoundMatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCF2A70CB5700779DA5 /* FoundMatchesListView.swift */; };
+		75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */; };
 		75DE17BE2A6AE4AF0056EB56 /* ExpandedFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE17BD2A6AE4AF0056EB56 /* ExpandedFlightView.swift */; };
 		75DE17C02A6AEE870056EB56 /* Prototype.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75DE17BF2A6AEE870056EB56 /* Prototype.ttf */; };
 		75F863BF2A6B862E004034BD /* ConfirmFlightDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F863BE2A6B862E004034BD /* ConfirmFlightDetailsView.swift */; };
@@ -145,6 +149,10 @@
 		75A05E752A586C3D002ABE9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75A05E792A5896D0002ABE9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		75BB9B352A578B0F00F2CC75 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		75D7FDC82A704A0E00779DA5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		75D7FDCA2A704BBC00779DA5 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
+		75D7FDCF2A70CB5700779DA5 /* FoundMatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundMatchesListView.swift; sourceTree = "<group>"; };
+		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
 		75DE17BD2A6AE4AF0056EB56 /* ExpandedFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedFlightView.swift; sourceTree = "<group>"; };
 		75DE17BF2A6AEE870056EB56 /* Prototype.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Prototype.ttf; sourceTree = "<group>"; };
 		75DE17C12A6AEFE00056EB56 /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Lion-Pool-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -191,6 +199,7 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				75D7FDCE2A704BD100779DA5 /* Networking  */,
 				75F863C62A6BC3CD004034BD /* HomeViewToolBar.swift */,
 				75BB9B352A578B0F00F2CC75 /* Podfile */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
@@ -263,6 +272,7 @@
 				75109A82285BB85900CAC400 /* ImagePicker.swift */,
 				752F996F2A57B4580036ECEE /* InputView.swift */,
 				758137992A6A2BA300577409 /* UserDataView.swift */,
+				75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */,
 			);
 			path = "Reusable Components";
 			sourceTree = "<group>";
@@ -284,6 +294,7 @@
 				7537511D2A57E43700B02528 /* HomeView.swift */,
 				751C34F52A6DD83B00F6783C /* flight button.swift */,
 				75109A80285BB85900CAC400 /* MatchesView.swift */,
+				75D7FDCF2A70CB5700779DA5 /* FoundMatchesListView.swift */,
 				75109A96285BB85A00CAC400 /* AddFlightView.swift */,
 				75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */,
 				75A05E792A5896D0002ABE9C /* ProfileView.swift */,
@@ -343,6 +354,15 @@
 				758137862A69DD8C00577409 /* CustomNavBarView.swift */,
 			);
 			path = "Custom Nav Bar";
+			sourceTree = "<group>";
+		};
+		75D7FDCE2A704BD100779DA5 /* Networking  */ = {
+			isa = PBXGroup;
+			children = (
+				75D7FDC82A704A0E00779DA5 /* Network.swift */,
+				75D7FDCA2A704BBC00779DA5 /* Matches.swift */,
+			);
+			path = "Networking ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,9 +517,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				752F99702A57B4580036ECEE /* InputView.swift in Sources */,
+				75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */,
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
 				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
+				75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */,
 				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
 				7536614F285BBC080077C02F /* RideMatchesView.swift in Sources */,
 				7581378D2A69E4A900577409 /* CustomNavView.swift in Sources */,
@@ -510,6 +532,8 @@
 				751C34F62A6DD83B00F6783C /* flight button.swift in Sources */,
 				7537511E2A57E43700B02528 /* HomeView.swift in Sources */,
 				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
+				75D7FDD02A70CB5700779DA5 /* FoundMatchesListView.swift in Sources */,
+				75D7FDC92A704A0E00779DA5 /* Network.swift in Sources */,
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
 				75F863C72A6BC3CD004034BD /* HomeViewToolBar.swift in Sources */,
 				75366130285BBBF40077C02F /* UpcomingFlightsView.swift in Sources */,

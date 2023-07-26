@@ -10,6 +10,7 @@ import SwiftUI
 struct ExpandedFlightView: View {
     @Binding var needRefreshFromExpand: Bool
     @State private var confirmedFlight: Bool = false
+    @Environment(\.presentationMode) var presentationMode
 
     @StateObject private var flightViewModel = FlightViewModel()
     
@@ -91,7 +92,6 @@ struct ExpandedFlightView: View {
                 let result = try await flightViewModel.deleteFlight(flight: flight)
                 if result == 1{
                     print("DEBUG: user deleted flight")
-                    needRefreshFromExpand.toggle()
                 }
             }
         } label: {

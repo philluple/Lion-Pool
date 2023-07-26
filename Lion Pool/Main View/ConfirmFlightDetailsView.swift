@@ -13,98 +13,123 @@ struct ConfirmFlightDetailsView: View {
     @Binding var airportToConfirm: String
     @Binding var flightAddedSuccessfully: Bool
     //Objects to apply logic
-    @StateObject private var flightViewModel = FlightViewModel()
+    @EnvironmentObject var flightViewModel: FlightViewModel
     @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var network: Network
     @Environment(\.presentationMode) var presentationMode
-    
+    let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
+
     var body: some View {
-        VStack {
-            Text("Let's confirm!")
-                .font(.system(size: 45, weight: .bold))
-                .foregroundColor(SwiftUI.Color("Dark Blue "))
-                .padding([.top, .bottom])
-                .frame(width:UIScreen.main.bounds.width, height: 70)
-                .background(SwiftUI.Color("Gray Blue "))
-            
-            Spacer()
+        NavigationView{
+            VStack {
+                Text("Let's confirm!")
+                    .font(.system(size: 45, weight: .bold))
+                    .foregroundColor(SwiftUI.Color("Dark Blue "))
+                    .padding([.top, .bottom])
+                    .frame(width:UIScreen.main.bounds.width, height: 70)
+                    .background(SwiftUI.Color("Gray Blue "))
+                
+                Spacer()
 
-            Button {
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                ZStack(alignment: .bottomTrailing){
-                    VStack(alignment: .leading){
-                        Group{
-                            Rectangle()
-                                .frame(width: 350, height:150)
-                                .foregroundColor(Color("DarkGray"))
-                                .overlay{
-                                    Text(airportToConfirm)
-                                        .font(.system(size: 150, weight: .thin))
-                                        .foregroundColor(Color.white)
-                                        .padding(.leading,5)
-                                }
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    ZStack(alignment: .bottomTrailing){
+                        VStack(alignment: .leading){
+                            Group{
+                                Rectangle()
+                                    .frame(width: 350, height:150)
+                                    .foregroundColor(Color("DarkGray"))
+                                    .overlay{
+                                        Text(airportToConfirm)
+                                            .font(.system(size: 150, weight: .thin))
+                                            .foregroundColor(Color.white)
+                                            .padding(.leading,5)
+                                    }
+                            }
+                            Text("DATE:")
+                                .font(.system(size: 20, weight: .thin))
+                                .foregroundColor(SwiftUI.Color("Dark Blue "))
+                            Text(dateToConfirm, style:.date)
+                                .font(.system(size: 42))
+                                .foregroundColor(SwiftUI.Color("Dark Blue "))
+                            Text("TIME:")
+                                .font(.system(size: 20, weight: .thin))
+                                .foregroundColor(SwiftUI.Color("Dark Blue "))
+                            Text(dateToConfirm, style:.time)
+                                .font(.system(size: 42))
+                                .foregroundColor(SwiftUI.Color("Dark Blue "))
                         }
-                        Text("DATE:")
-                            .font(.system(size: 20, weight: .thin))
-                            .foregroundColor(SwiftUI.Color("Dark Blue "))
-                        Text(dateToConfirm, style:.date)
-                            .font(.system(size: 42))
-                            .foregroundColor(SwiftUI.Color("Dark Blue "))
-                        Text("TIME:")
-                            .font(.system(size: 20, weight: .thin))
-                            .foregroundColor(SwiftUI.Color("Dark Blue "))
-                        Text(dateToConfirm, style:.time)
-                            .font(.system(size: 42))
-                            .foregroundColor(SwiftUI.Color("Dark Blue "))
+                        .padding()
+                        .background(Color("Text Box"))
+                        
+                        
                     }
-                    .padding()
-                    .background(Color("Text Box"))
-                    
-                    
-                }
 
-                }
-            
-            Text("click to edit")
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(Color("Gold"))
-            
-            Spacer()
-            // Apply the logic
-            Button  {
-                Task{
-                    if let user = viewModel.currentUser{
-                        let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
-                        if result == 1{
-                            //Load HomeView
-                            flightAddedSuccessfully.toggle()
-                            print("SUCCESS: Added flight from user \(user.id)")
+                    }
+                
+                Text("click to edit")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundColor(Color("Gold"))
+                
+                Spacer()
+                // Apply the logic
+                Button  {
+                    Task{
+                        if let user = viewModel.currentUser{
+                            let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
+                            if result == 1{
+                                //Load HomeView
+                                let dateString = dateFormatter.string(from: dateToConfirm)
+                                let documentID = "\(dateString)-\(user.id)"
+                                print("docId: \(documentID)")
+                                await network.getMatches(newFlightDocID: documentID, airport: airportToConfirm, currentUser: user.id)
+                                //apply the logic
+                                //flightViewModel.fetchFlights(userId: user.id)
+                                print("New Right after await: \(network.matches.count)")
+
+                                flightAddedSuccessfully.toggle()
+                                print("SUCCESS: Added flight from user \(user.id)")
+                            }
                         }
                     }
+                } label: {
+                    HStack{
+                        Text("Add flight!")
+                            .font(.system(size:18,weight: .bold))
+                            .frame(width:UIScreen.main.bounds.width-40, height:52)
+                            .accentColor(Color.white)
+                    }
                 }
-            } label: {
-                HStack{
-                    Text("Add flight!")
-                        .font(.system(size:18,weight: .bold))
-                        .frame(width:UIScreen.main.bounds.width-40, height:52)
-                        .accentColor(Color.white)
+                .background(Color("Gold"))
+                .cornerRadius(10)
+                .padding(.top, 24)
+                .sheet(isPresented: $flightAddedSuccessfully){
+                    FoundMatchesListView(date: dateToConfirm, airport: airportToConfirm)
+                        .environmentObject(network)
                 }
+                //probably change in the futre
+                    
+                Spacer()
             }
-            .background(Color("Gold"))
-            .cornerRadius(10)
-            .padding(.top, 24)
-            
-            Spacer()
         }
+
     }
 }
 
-struct ConfirmFlightDetailsView_Previews: PreviewProvider {
-    @State static var flightAddedSuccessfully: Bool = false
-    @State static var date: Date = Date()
-    @State static var departAirport = "EWR"
-
-    static var previews: some View {
-        ConfirmFlightDetailsView(dateToConfirm: $date, airportToConfirm:  $departAirport, flightAddedSuccessfully: $flightAddedSuccessfully)
+extension DateFormatter {
+    convenience init(dateFormat: String) {
+        self.init()
+        self.dateFormat = dateFormat
     }
 }
+
+//struct ConfirmFlightDetailsView_Previews: PreviewProvider {
+//    @State static var flightAddedSuccessfully: Bool = false
+//    @State static var date: Date = Date()
+//    @State static var departAirport = "EWR"
+//
+//    static var previews: some View {
+//        ConfirmFlightDetailsView(dateToConfirm: $date, airportToConfirm:  $departAirport, flightAddedSuccessfully: $flightAddedSuccessfully)
+//    }
+//}

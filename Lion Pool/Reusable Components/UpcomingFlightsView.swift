@@ -9,9 +9,8 @@ import SwiftUI
 
 struct UpcomingFlightsView: View {
     @State var flight: Flight
-    @State private var needRefreshFromDelete: Bool = false
-    @Binding var needRefreshList: Bool
     @State private var popover: Bool = false
+    @EnvironmentObject var flightModel: FlightViewModel
     @Environment(\.presentationMode) var presentationMode
 
     
@@ -56,15 +55,16 @@ struct UpcomingFlightsView: View {
             }
             .accentColor(Color.black)
             .sheet(isPresented: $popover){
-                FlightDetailView(flight: $flight, needRefreshFromExpand: $needRefreshFromDelete)
-            }.onChange(of: needRefreshFromDelete){
-                success in
-                if success{
-                    needRefreshList.toggle()
-                    //presentationMode.wrappedValue.dismiss()
-                    print("DEBUG: In upcoming flights view")
-                }
+                FlightDetailView(flight: $flight)
             }
+//            .onChange(of: needRefreshFromDelete){
+//                success in
+//                if success{
+//                    needRefreshList.toggle()
+//                    //presentationMode.wrappedValue.dismiss()
+//                    print("DEBUG: In upcoming flights view")
+//                }
+//            }
             
 
             //Divider()

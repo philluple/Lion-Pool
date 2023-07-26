@@ -9,21 +9,20 @@ import SwiftUI
 
 struct FlightDetailView: View {
     @Binding var flight: Flight
-    @Binding var needRefreshFromExpand: Bool
-
+    
     //Objects to apply logic
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var flightModel: FlightViewModel
     @Environment(\.presentationMode) var presentationMode
     
     let fmt = ISO8601DateFormatter()
-
-        // Calculate the difference in days and return a formatted string
+    
+    // Calculate the difference in days and return a formatted string
     var diffs: Int {
         let components = Calendar.current.dateComponents([.day], from: Date(), to: flight.date)
         return components.day ?? 0
     }
-
+    
     var body: some View {
         VStack {
             Text("\(diffs) days until...")
@@ -79,12 +78,13 @@ struct FlightDetailView: View {
         Button {
             Task{
                 let result = try await flightModel.deleteFlight(flight: flight)
-                if result == 1{
-                    print("DEBUG: user deleted flight")
-                    needRefreshFromExpand.toggle()
+                if result == 1 {
+                    flightModel.fetchFlights(userId: flight.userId)
+                    presentationMode.wrappedValue.dismiss()
+
                 }
             }
-        } label: {
+        }label: {
             Image(systemName: "trash.circle.fill")
                 .resizable()
                 .frame(width:60,height:60)
@@ -93,9 +93,4 @@ struct FlightDetailView: View {
     }
 }
 
-//struct FlightDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        
-//        FlightDetailView(flight: <#T##Binding<Flight>#>, needRefreshFromExpand: <#T##Binding<Bool>#>)
-//    }
-//}
+

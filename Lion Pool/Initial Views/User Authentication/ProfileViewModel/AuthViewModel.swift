@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import FirebaseAuth
 import FirebaseStorage
+import SwiftUI
 
 
 // Publishes UI changes on the main thread
@@ -18,11 +19,13 @@ class AuthViewModel: ObservableObject {
     // Firebase user objext
     
     @Published var userSession: FirebaseAuth.User?
+//    @Published var flights: [Flight] = []
+    
     // Our user object
     @Published var currentUser: User?
     @Published var currentUserProfileImage: UIImage? = nil
-    //@EnvironmentObject var flightList: flightList
-
+    @EnvironmentObject var flightModel: FlightViewModel
+    
     
     init(){
         self.userSession = Auth.auth().currentUser
@@ -56,7 +59,7 @@ class AuthViewModel: ObservableObject {
             await fetchUser()
             await retrievePfp()
             print("SUCCESS: \(user.id) has been created")
-
+            
             return user.id
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
@@ -82,9 +85,9 @@ class AuthViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
-        print("SUCCESS: Fetched")
+        print("SUCCESS: Fetched the user")
     }
-
+    
     func retrievePfp() async{
         guard let pfpLocation = self.currentUser?.pfpLocation else { return }
         let storage = Storage.storage()

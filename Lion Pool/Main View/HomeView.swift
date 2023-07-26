@@ -12,7 +12,7 @@ import Firebase
 struct HomeView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     @EnvironmentObject var flightModel: FlightViewModel
-
+    
     @State private var confirmedFlight: Bool = false
     @State private var isAddingFlight = false
     @State private var voidEditingFlight: Bool = false
@@ -35,7 +35,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Dark Blue "))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding([.leading],UIScreen.main.bounds.width/30)
-                                //.padding([.bottom, .top, .leading],10)
+                            //.padding([.bottom, .top, .leading],10)
                             
                             CustomNavLink(destination: ProfileView().customNavigationTitle("Hey, \(user.firstname)").customNavigationSize(35)){
                                 if let image = viewModel.currentUserProfileImage{
@@ -57,9 +57,9 @@ struct HomeView: View {
                         }
                         .padding([.trailing, .leading])
                     }
-                    .background(Color("Gray Blue "))
-                    .frame(width: UIScreen.main.bounds.width, height: -10)
-                    .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+                        .background(Color("Gray Blue "))
+                        .frame(width: UIScreen.main.bounds.width, height: 0)
+                        .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
                 )
                 .frame(width:UIScreen.main.bounds.width )
                 .background(Color("Text Box"))
@@ -71,22 +71,12 @@ struct HomeView: View {
     private var ListOfFlights: some View{
         ListFlightView()
             .padding(.top, UIScreen.main.bounds.height/35)
-            .overlay(alignment: .topTrailing){
-                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
-                        Text("Add flight")
-                            .foregroundColor(Color.white)
-                            .font(.system(size: 15, weight: .bold))
-                            .frame(width: 90, height: 25)
-                            .background(Color("Gold"))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
-                            .padding(.trailing,15)
-
-                }
-            }
+        //.overlay(alignment: .topTrailing){
+        //}
     }
-    
 }
+    
+
 
 
 

@@ -66,8 +66,6 @@ struct ProfileView: View {
                 .padding()
                 .accentColor(Color.white)
                 
-            }.onAppear {
-                print("hello")
             }
         }
     }

@@ -12,11 +12,12 @@ import FirebaseFirestore
                 
 struct ListFlightView: View {
 //    @State var upcoming_flights = [Flight]()
+    @State private var confirmedFlight: Bool = false
     @State private var needRefreshList: Bool = false
+    @State private var hasFetchedFlights = false // Add a state variable to track whether flights have been fetched
+
     @EnvironmentObject var viewModel : AuthViewModel
-    //@EnvironmentObject var flightModel : FlightViewModel
-    @StateObject private var flightModel = FlightViewModel()
-    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var flightModel: FlightViewModel
 
     
     
@@ -27,38 +28,43 @@ struct ListFlightView: View {
                     Text("Upcoming flights")
                         .font(.system(size:22,weight: .medium))
                     Spacer()
+                    CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
+                        Text("Add flight")
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 15, weight: .bold))
+                            .frame(width: 90, height: 25)
+                            .background(Color("Gold"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
+                            .padding(.trailing,15)
+                    }
                 }
                 .padding(.leading, 15)
                 .padding(.top, 10)
                 ScrollView{
                     VStack{
                         ForEach(Array(flightModel.flights.enumerated()), id: \.element.id) { index, flight in
-                                    UpcomingFlightsView(flight: flight, needRefreshList: $needRefreshList)
-                                        .onChange(of: needRefreshList) { newValue in
-                                            if newValue {
-                                                flightModel.fetchFlights(userId: user.id)
-                                                needRefreshList.toggle()
-                                                presentationMode.wrappedValue.dismiss()
-                                            }
-                                        }
-
-                                    if index != flightModel.flights.count - 1 {
-                                        Divider()
-                                            .padding(.horizontal, 10)
-                                    }
-                                }
+                            UpcomingFlightsView(flight: flight)
+                                
+                            if index != flightModel.flights.count - 1 {
+                                Divider()
+                                    .padding(.horizontal, 10)
                             }
+                        }
                     }
-                
-            }.frame(width:UIScreen.main.bounds.width-20,height: (flightModel.flights.count < 4 ? CGFloat(flightModel.flights.count)*60+40 : 280))
-                //.frame(width:UIScreen.main.bounds.width-20,height: flightModel.flights.count < 4 ? CGFloat(flightModel.flights.count*(65)) + 65: 4*65)
-                .background(Color.white)
-                .cornerRadius(10)
-            
-                .onAppear{
-                    flightModel.fetchFlights(userId: user.id)
                 }
-        }else{
+                
+            }
+            .frame(width:UIScreen.main.bounds.width-20,height: (flightModel.flights.count < 4 ? CGFloat(flightModel.flights.count)*60+40 : 280))
+            .background(Color.white)
+            .cornerRadius(10)
+            .onAppear{
+                if !hasFetchedFlights{
+                    flightModel.fetchFlights(userId: user.id)
+                    hasFetchedFlights = true
+                }
+            }
+            }else{
             let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
             VStack {
                 HStack(){
@@ -71,7 +77,7 @@ struct ListFlightView: View {
                     VStack{
                         Spacer()
                         ForEach(0...3, id: \.self) { _ in
-                            UpcomingFlightsView(flight: newFlight, needRefreshList: $needRefreshList)
+                            UpcomingFlightsView(flight: newFlight)
                             Divider()
                         }
                     }
