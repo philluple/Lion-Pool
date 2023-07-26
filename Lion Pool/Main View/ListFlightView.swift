@@ -45,6 +45,7 @@ struct ListFlightView: View {
                     VStack{
                         ForEach(Array(flightModel.flights.enumerated()), id: \.element.id) { index, flight in
                             UpcomingFlightsView(flight: flight)
+                            
                             if index != flightModel.flights.count - 1 {
                                 Divider()
                                     .padding(.horizontal, 10)

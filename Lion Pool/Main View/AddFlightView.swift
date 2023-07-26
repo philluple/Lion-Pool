@@ -5,6 +5,8 @@
 //  Created by Phillip Le on 6/13/22.
 //
 
+
+
 import SwiftUI
 import Swift
 
@@ -34,7 +36,6 @@ struct AddFlightView: View {
     
     var body: some View {
         //Overall stack to maintain header
-        NavigationView{
             VStack(){
                 List{
                     DatePicker(
@@ -84,15 +85,12 @@ struct AddFlightView: View {
                         .onChange(of: flightAddedSuccessfully){
                             success in
                             if success{
-                                //presentationMode.wrappedValue.dismiss()
-                                confirmDetailsBool.toggle()
+                                presentationMode.wrappedValue.dismiss()
                             }
                         }
                 }
             }
         }
-
-    }
     
 }
 
