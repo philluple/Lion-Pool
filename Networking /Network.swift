@@ -11,12 +11,11 @@ import SwiftUI
 class Network: ObservableObject{
     @Published var matches: [match] = []
     @Published var foundMatch: Bool = false
-    let baseURL = "http://192.168.254.205:3000/api/matches"
+    let baseURL = "http://localhost:3000/api/matches"
     
     func getMatches(newFlightDocID: String, airport: String, currentUser: String) async{
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        //foundMatch = false
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
         let document = newFlightDocID
         let airport = airport
         let fullURL = "\(baseURL)?docId=\(document)&airport=\(airport)&currentUser=\(currentUser)"
