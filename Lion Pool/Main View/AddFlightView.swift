@@ -84,7 +84,8 @@ struct AddFlightView: View {
                         .onChange(of: flightAddedSuccessfully){
                             success in
                             if success{
-                                presentationMode.wrappedValue.dismiss()
+                                //presentationMode.wrappedValue.dismiss()
+                                confirmDetailsBool.toggle()
                             }
                         }
                 }

@@ -80,15 +80,12 @@ struct ConfirmFlightDetailsView: View {
                             let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
                             if result == 1{
                                 //Load HomeView
-                                let dateString = dateFormatter.string(from: dateToConfirm)
-                                let documentID = "\(dateString)-\(user.id)"
+//                                let dateString = dateFormatter.string(from: dateToConfirm)
+//                                let documentID = "\(dateString)-\(user.id)"
                                 //await network.getMatches(newFlightDocID: documentID, airport: airportToConfirm, currentUser: user.id)
                                 //apply the logic
                                 flightViewModel.fetchFlights(userId: user.id)
-                                print("New Right after await: \(network.matches.count)")
                                 flightAddedSuccessfully.toggle()
-                                print("SUCCESS: Added flight from user \(user.id)")
-
                             }
                         }
                     }
