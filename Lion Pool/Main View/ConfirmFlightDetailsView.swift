@@ -82,14 +82,13 @@ struct ConfirmFlightDetailsView: View {
                                 //Load HomeView
                                 let dateString = dateFormatter.string(from: dateToConfirm)
                                 let documentID = "\(dateString)-\(user.id)"
-                                print("docId: \(documentID)")
-                                await network.getMatches(newFlightDocID: documentID, airport: airportToConfirm, currentUser: user.id)
+                                //await network.getMatches(newFlightDocID: documentID, airport: airportToConfirm, currentUser: user.id)
                                 //apply the logic
-                                //flightViewModel.fetchFlights(userId: user.id)
+                                flightViewModel.fetchFlights(userId: user.id)
                                 print("New Right after await: \(network.matches.count)")
-
                                 flightAddedSuccessfully.toggle()
                                 print("SUCCESS: Added flight from user \(user.id)")
+
                             }
                         }
                     }
@@ -104,11 +103,6 @@ struct ConfirmFlightDetailsView: View {
                 .background(Color("Gold"))
                 .cornerRadius(10)
                 .padding(.top, 24)
-                .sheet(isPresented: $flightAddedSuccessfully){
-                    FoundMatchesListView(date: dateToConfirm, airport: airportToConfirm)
-                        .environmentObject(network)
-                }
-                //probably change in the futre
                     
                 Spacer()
             }

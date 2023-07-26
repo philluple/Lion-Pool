@@ -66,6 +66,7 @@ struct HomeView: View {
                 .background(ignoresSafeAreaEdges: .all)
             }
             .edgesIgnoringSafeArea(.all)
+            .navigationBarBackButtonHidden()
         }
     }
     private var ListOfFlights: some View{

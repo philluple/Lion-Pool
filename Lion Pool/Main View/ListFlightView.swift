@@ -45,7 +45,6 @@ struct ListFlightView: View {
                     VStack{
                         ForEach(Array(flightModel.flights.enumerated()), id: \.element.id) { index, flight in
                             UpcomingFlightsView(flight: flight)
-                                
                             if index != flightModel.flights.count - 1 {
                                 Divider()
                                     .padding(.horizontal, 10)
@@ -87,43 +86,6 @@ struct ListFlightView: View {
                 .cornerRadius(10)
         }
     }
-
-//    func fetchFlights(userId: String){
-//        print("DEBUG:Retrieving user flights")
-//        let db = Firestore.firestore()
-//        db.collection("users").document("\(userId)").collection("userFlights").getDocuments { snapshot, error in
-//            if error ==  nil {
-//                // no errors
-//                if let snapshot = snapshot{
-//                    // Update list property
-//                    DispatchQueue.main.async {
-//                        upcoming_flights = snapshot.documents.map { d in
-//                            guard let idString = d["id"] as? String,
-//                                  let userId = d["userId"] as? String,
-//                                  let timestamp = d["date"] as? Timestamp,
-//                                  let airport = d["airport"] as? String else {
-//                                      // Skip this document if any of the required fields is missing
-//                                      return nil
-//                                  }
-//
-//                            return Flight(
-//                                id: UUID(uuidString: idString) ?? UUID(),
-//                                userId: userId,
-//                                date: timestamp.dateValue(),
-//                                airport: airport
-//                            )
-//                        }
-//                        .compactMap { $0 } // Filter out any nil values resulting from missing required fields
-//
-//                    }
-//                }else{ print ("DEBUG: shit happened")}
-//            
-//            }else{
-//                print("DEBUG: more shit happened")
-//            }
-//        }
-//        
-//    }
 }
 
 struct UpcomingFlightView_Previews: PreviewProvider {
