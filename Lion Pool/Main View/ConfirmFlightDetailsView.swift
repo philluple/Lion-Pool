@@ -5,6 +5,25 @@
 //  Created by Phillip Le on 7/21/23.
 //
 
+.onAppear {
+            network.getMatches(newFlightDocID: "your_flight_doc_id", airport: "your_airport", currentUser: "your_user") { statusCode in
+                if statusCode == 200 {
+                    // Handle success, use the 'network.matches' property here
+                    print("Matches fetched successfully!")
+                } else if statusCode == 204 {
+                    // Handle success with no content
+                    print("No matches found.")
+                } else {
+                    // Handle other status codes or errors
+                    print("Error occurred with status code: \(statusCode)")
+                }
+            }
+        }
+    }
+
+
+
+
 import SwiftUI
 
 struct ConfirmFlightDetailsView: View {
@@ -12,7 +31,7 @@ struct ConfirmFlightDetailsView: View {
     @Binding var dateToConfirm: Date
     @Binding var airportToConfirm: String
     @Binding var flightAddedSuccessfully: Bool
-    @State var findMatches: Bool = false
+    @State var loadingMatches: Bool = false
     //Objects to apply logic
     @EnvironmentObject var flightViewModel: FlightViewModel
     @EnvironmentObject var viewModel: AuthViewModel
@@ -21,9 +40,10 @@ struct ConfirmFlightDetailsView: View {
     let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
 
     var body: some View {
-        if findMatches {
+        if network.done {
             VStack {
                 Text("Matches")
+                    .font(.system(size: 45, weight: .bold))
                     .foregroundColor(SwiftUI.Color("Dark Blue "))
                     .padding([.top, .bottom])
                     .frame(width:UIScreen.main.bounds.width, height: 70)
@@ -33,22 +53,13 @@ struct ConfirmFlightDetailsView: View {
                         FlightMatch(match: match).padding([.vertical],5)
                     }
                 }
-                
-//                if(network.matches.count == 0){
-//                    Text("We couldn't find a match. Check back as your flight date approaches!")
-//                    font(.system(size: 20, weight: .semibold))
-//                        .padding()
-//                }
-////                }else{
-//                    ScrollView{
-//                        ForEach(network.matches, id: \.userId) { match in
-//                            FlightMatch(match: match).padding([.vertical],5)
-//                        }
-//                    }
-//                }
-                
-                
-                //Home Button
+                    
+                Text("Matches")
+                    .foregroundColor(SwiftUI.Color("Dark Blue "))
+                    .padding([.top, .bottom])
+                    .frame(width:UIScreen.main.bounds.width, height: 70)
+                    .background(SwiftUI.Color("Gray Blue "))
+
                 Button {
                     flightAddedSuccessfully.toggle()
                 } label: {
@@ -62,7 +73,7 @@ struct ConfirmFlightDetailsView: View {
                         .font(.system(size: 45, weight: .bold))
                         .foregroundColor(SwiftUI.Color("Dark Blue "))
                         .padding([.top, .bottom])
-                        .frame(width:UIScreen.main.bounds.width, height: 70)
+                        .frame(width:UIScreen.main.bounds.width, height: 50)
                         .background(SwiftUI.Color("Gray Blue "))
                     
                     Spacer()
@@ -122,7 +133,7 @@ struct ConfirmFlightDetailsView: View {
                                     print("made request")
                                     //apply the logic
                                     flightViewModel.fetchFlights(userId: user.id)
-                                    findMatches.toggle()
+                                    loadingMatches.toggle()
                                     //flightAddedSuccessfully.toggle()
                                 }
                             }

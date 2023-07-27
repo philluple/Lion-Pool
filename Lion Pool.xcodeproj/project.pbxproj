@@ -75,6 +75,7 @@
 		759557752A58DD8900571AD0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 759557742A58DD8900571AD0 /* FirebaseFirestoreSwift */; };
 		759557772A58DD8900571AD0 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 759557762A58DD8900571AD0 /* FirebaseStorage */; };
 		759557792A58DD8900571AD0 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 759557782A58DD8900571AD0 /* FirebaseStorageCombine-Community */; };
+		759B43D02A7230CA0050D2C4 /* FindingMatchLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759B43CF2A7230CA0050D2C4 /* FindingMatchLoading.swift */; };
 		75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E752A586C3D002ABE9C /* ContentView.swift */; };
 		75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75A05E842A58C72D002ABE9C /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 75A05E832A58C72D002ABE9C /* iPhoneNumberField */; };
@@ -146,6 +147,7 @@
 		758137952A6A19F800577409 /* FireBaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseImage.swift; sourceTree = "<group>"; };
 		758137972A6A1BAD00577409 /* ProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageViewModel.swift; sourceTree = "<group>"; };
 		758137992A6A2BA300577409 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
+		759B43CF2A7230CA0050D2C4 /* FindingMatchLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindingMatchLoading.swift; sourceTree = "<group>"; };
 		75A05E752A586C3D002ABE9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75A05E792A5896D0002ABE9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		75BB9B352A578B0F00F2CC75 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
@@ -225,6 +227,7 @@
 				75F863BE2A6B862E004034BD /* ConfirmFlightDetailsView.swift */,
 				75DE17C12A6AEFE00056EB56 /* Lion-Pool-Info.plist */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
+				759B43CF2A7230CA0050D2C4 /* FindingMatchLoading.swift */,
 				75DE17BF2A6AEE870056EB56 /* Prototype.ttf */,
 				751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
@@ -546,6 +549,7 @@
 				75366131285BBBF40077C02F /* ImagePicker.swift in Sources */,
 				752F99812A57D24B0036ECEE /* AuthViewModel.swift in Sources */,
 				758137982A6A1BAD00577409 /* ProfileImageViewModel.swift in Sources */,
+				759B43D02A7230CA0050D2C4 /* FindingMatchLoading.swift in Sources */,
 				758137942A69F9F800577409 /* RandomView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,

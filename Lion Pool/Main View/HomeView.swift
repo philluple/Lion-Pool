@@ -67,6 +67,7 @@ struct HomeView: View {
             }
             .edgesIgnoringSafeArea(.all)
             //.navigationBarBackButtonHidden()
+            
         }
     }
     private var ListOfFlights: some View{
