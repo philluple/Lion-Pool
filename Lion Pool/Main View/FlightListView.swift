@@ -14,7 +14,7 @@ struct FlightListView: View {
 //    @State var upcoming_flights = [Flight]()
     @State private var confirmedFlight: Bool = false
     @State private var needRefreshList: Bool = false
-    @State private var hasFetchedFlights = false // Add a state variable to track whether flights have been fetched
+    @State private var hasFetchedFlights = false
 
     @EnvironmentObject var viewModel : AuthViewModel
     @EnvironmentObject var flightModel: FlightViewModel
@@ -35,7 +35,7 @@ struct FlightListView: View {
                             .frame(width: 90, height: 25)
                             .background(Color("Gold"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                        //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
+                            //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
                             .padding(.trailing,15)
                     }
                 }
@@ -64,28 +64,7 @@ struct FlightListView: View {
                     hasFetchedFlights = true
                 }
             }
-            }else{
-            let newFlight = Flight(id: UUID(), userId: "123456", date: Date(), airport: "EWR")
-            VStack {
-                HStack(){
-                    Text("Upcoming flights")
-                        .font(.system(size:22,weight: .medium))
-                        .padding(.leading, 20)
-                    Spacer()
-                }
-                ScrollView{
-                    VStack{
-                        Spacer()
-                        ForEach(0...3, id: \.self) { _ in
-                            UpcomingFlightsView(flight: newFlight)
-                            Divider()
-                        }
-                    }
-                }
-            }.frame(width:UIScreen.main.bounds.width-20,height: 275)
-                .background(Color.white)
-                .cornerRadius(10)
-        }
+            }
     }
 }
 

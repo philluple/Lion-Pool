@@ -27,7 +27,7 @@ class Network: ObservableObject{
         let fullURL = "\(baseURL)?docId=\(document)&airport=\(airport)&currentUser=\(currentUser)"
         
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
-        
+        print("URL: \(url)")
         let urlRequest = URLRequest(url:url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {

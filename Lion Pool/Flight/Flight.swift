@@ -13,6 +13,7 @@ struct Flight: Codable, Identifiable{
     let userId: String
     let date: Date
     let airport: String
+    let foundMatch: Bool
 }
 
 class sharedFlightData: ObservableObject{

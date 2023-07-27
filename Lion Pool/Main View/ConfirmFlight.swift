@@ -8,14 +8,17 @@
 
 import SwiftUI
 
-struct ConfirmFlightDetailsView: View {
+struct ConfirmFlight: View {
     //This comes from add flight
     @Binding var dateToConfirm: Date
     @Binding var airportToConfirm: String
     @Binding var flightAddedSuccessfully: Bool
-   
-    @State var matchesToPass: [match] = []
+    
+    @State var flightAdded: Bool = false
+    @State var userId: String = ""
     @State var matchesFound: Bool = false
+    @State private var opacity = 0.0
+    
     //@State var noMathcesFound: Bool = false
     //Objects to apply logic
     @EnvironmentObject var flightViewModel: FlightViewModel
@@ -32,11 +35,16 @@ struct ConfirmFlightDetailsView: View {
                 PageHeader
                 Spacer()
                 FlightDetails
+                Text("Sorry, each day can only have one flight")
+                    .font(.system(size:18, weight:.semibold))
+                    .foregroundColor(Color.red)
+                    .opacity(opacity)
+                ConfirmFlight
                 Spacer()
-                AddFlightButton
-                Spacer()
-            }.fullScreenCover(isPresented: $matchesFound, content: {
-                MatchesListView(date: dateToConfirm, airport: airportToConfirm, matches: network.matches)
+            }.fullScreenCover(isPresented: $flightAdded, content: {
+                if let user = viewModel.currentUser{
+                    FindingMatchLoading(date: dateToConfirm, airport: airportToConfirm, network: network, userId: user.id)
+                }
             })
         }
     }
@@ -93,25 +101,39 @@ struct ConfirmFlightDetailsView: View {
             .background(SwiftUI.Color("Gray Blue "))
     }
     
+    private var ConfirmFlight: some View{
+        Button {
+            Task{
+                if let user = viewModel.currentUser{
+                    let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
+                    if result == 1{
+                        flightAdded.toggle()
+                    }
+                    if result == 0{
+                        opacity = 1.0
+                    }
+                }
+            }
+        } label: {
+            HStack{
+                Text("GET MATCHED")
+                    .font(.system(size:18,weight: .bold))
+                    .frame(width:UIScreen.main.bounds.width-40, height:52)
+                    .accentColor(Color.white)
+            }
+        }
+        .background(Color("Gold"))
+        .cornerRadius(10)
+        .padding(.top, 24)
+
+
+    }
     private var AddFlightButton: some View {
         Button  {
             Task{
                 if let user = viewModel.currentUser{
                     let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
                     if result == 1{
-                        //Load HomeView
-                        let dateString = dateFormatter.string(from: dateToConfirm)
-                        let documentID = "\(dateString)-\(user.id)"
-                        network.getMatches(newFlightDocID: documentID, airport: airportToConfirm, currentUser: user.id){ result in switch result{
-                        case.success(_):
-                            matchesFound.toggle()
-                        case .noMatches:
-                            flightAddedSuccessfully.toggle()
-                            print("No matches found.")
-                        case .failure(let error):
-                            print ("bad \(error)")
-                        }
-                        }
                         flightViewModel.fetchFlights(userId: user.id)
                     }
                 }

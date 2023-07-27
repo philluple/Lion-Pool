@@ -6,14 +6,50 @@
 //
 
 import SwiftUI
+import Combine
+
+public class RandomNumberGenerator: ObservableObject {
+    @Published var randomNumber: Int = 0
+    private var timer: AnyCancellable?
+
+    init() {
+        startGeneratingRandomNumber()
+    }
+
+    private func startGeneratingRandomNumber() {
+        timer = Timer.publish(every: 3, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                self.randomNumber = Int.random(in: 0...6)%6
+            }
+    }
+
+}
 
 struct FindingMatchLoading: View {
-    @State private var isLoading = false
-    @State private var dots = ""
-    @State private var showNextView = false
+    //variables that need to be passed
+    var date: Date
+    var airport: String
+    var network: Network
+    var userId: String
+    
+    
+    @State var isLoading = false
+    @State var dots = ""
+    @State var showNextView = false
+    @State var index = 0
+    @State var matchesFound: Bool = false
+    @State var goHome: Bool = false
+    @State var elapsedTime: TimeInterval = 0
+    let maxElapsedTime: TimeInterval = 3 // Set the desired duration in seconds
 
-    private let maxDots = 3
-    private let animationInterval = 0.5
+    @StateObject private var randomNumberGenerator = RandomNumberGenerator()
+
+    let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
+    let maxDots = 3
+    let animationInterval = 0.5
+    
+    var thingsToPack = ["sunblock", "underwear", "toothbrush", "to text your mom when your flight takes off", "to download your songs", "to find a plant guardian"]
     
     var body: some View {
         VStack(){
@@ -34,21 +70,47 @@ struct FindingMatchLoading: View {
                     startLoadingAnimation()
                 }
             
+            Text("Dont forget \(thingsToPack[randomNumberGenerator.randomNumber])")
             Spacer()
-            
-            NavigationLink(
-                destination: HomeView(),
-                isActive: $showNextView,
-                label: { EmptyView() }
-            )
+
+                .fullScreenCover(isPresented: Binding<Bool>(get: {
+                    return matchesFound
+                }, set: { _ in
+                    // You can leave this empty or add your own handling if needed
+                }), content: {
+                    MatchesListView(date: date, airport: airport, matches: network.matches)
+                })
+
+                .fullScreenCover(isPresented: Binding<Bool>(get: {
+                    return goHome && showNextView
+                }, set: { _ in
+                    // You can leave this empty or add your own handling if needed
+                }), content: {
+                    NoMatchView()
+                })
         }
         .onAppear {
             // Start a timer to trigger the navigation after a few seconds (e.g., 3 seconds)
-            Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { _ in
+            let dateString = dateFormatter.string(from: date)
+            let documentID = "\(dateString)-\(userId)"
+            network.getMatches(newFlightDocID: documentID, airport: airport, currentUser: userId){ result in switch result{
+            case.success(let matches):
+                print("From here \(matches)")
+                matchesFound.toggle()
+            case .noMatches:
+                goHome.toggle()
+                print("No matches found.")
+            case .failure(let error):
+                print ("bad \(error)")
+            }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + maxElapsedTime) {
                 showNextView = true
             }
+
         }
     }
+    
     private func startLoadingAnimation() {
         let timer = Timer.scheduledTimer(withTimeInterval: animationInterval, repeats: true) { _ in
             isLoading.toggle()
@@ -66,10 +128,7 @@ struct FindingMatchLoading: View {
             }
         }
     }
+    
+    
 }
 
-struct FindingMatchLoading_Previews: PreviewProvider {
-    static var previews: some View {
-        FindingMatchLoading()
-    }
-}
