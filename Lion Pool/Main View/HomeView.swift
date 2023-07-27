@@ -71,7 +71,7 @@ struct HomeView: View {
         }
     }
     private var ListOfFlights: some View{
-        ListFlightView()
+        FlightListView()
             .padding(.top, UIScreen.main.bounds.height/35)
         //.overlay(alignment: .topTrailing){
         //}

@@ -8,18 +8,23 @@
 import Foundation
 import SwiftUI
 
+enum FetchResult {
+    case success([match])
+    case noMatches
+    case failure(Error)
+}
+
 class Network: ObservableObject{
-    @Published var matches: [match] = []
-    @Published var done: Bool = false
+    var matches: [match] = []
+
     let baseURL = "http://localhost:3000/api/matches"
     
-    func getMatches(newFlightDocID: String, airport: String, currentUser: String, completion: @escaping (Int) -> Void) {
+    func getMatches(newFlightDocID: String, airport: String, currentUser: String, completion: @escaping (FetchResult) -> Void) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         let document = newFlightDocID
         let airport = airport
         let fullURL = "\(baseURL)?docId=\(document)&airport=\(airport)&currentUser=\(currentUser)"
-        var statusCode = 0
         
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         
@@ -33,33 +38,38 @@ class Network: ObservableObject{
             guard let response = response as? HTTPURLResponse else {
                 return
             }
-            statusCode = response.statusCode
             print("Status code: \(response.statusCode)")
             if response.statusCode == 200 {
                 guard let data = data else {
-                    completion(statusCode)
+                    DispatchQueue.main.async {
+                        completion(.noMatches)
+                    }
                     return
                 }
-                DispatchQueue.main.async {
-                    do {
-                        let decoder = JSONDecoder()
-                        let decodedMatches = try decoder.decode([match].self, from: data)
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedMatches = try decoder.decode([match].self, from: data)
+                    print(decodedMatches)
+                    DispatchQueue.main.async {
                         self.matches = decodedMatches
-                        statusCode = 200
-                    } catch let error {
-                        print("Error decoding: ", error)
+                        completion(.success(decodedMatches))
+                    }
+                } catch let error {
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
                     }
                 }
+
             }
             if response.statusCode == 204 {
                 DispatchQueue.main.async {
-                    statusCode = 204
+                    completion(.noMatches)
                 }
             }
-            completion(statusCode)
         }
         
         dataTask.resume()
+        print("Count: \(matches.count)")
     }
 
 }

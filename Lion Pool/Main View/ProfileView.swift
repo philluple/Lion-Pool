@@ -51,7 +51,6 @@ struct ProfileView: View {
                 // Rest of the shit
                 UserDataView(title: "Email", userInfo: user.email)
                 UserDataView(title: "UNI", userInfo: user.UNI)
-                UserDataView(title: "Phone", userInfo: user.phone)
                 Spacer()
                 
                 Button {

@@ -10,7 +10,7 @@ import FirebaseCore
 import FirebaseFirestore
 
                 
-struct ListFlightView: View {
+struct FlightListView: View {
 //    @State var upcoming_flights = [Flight]()
     @State private var confirmedFlight: Bool = false
     @State private var needRefreshList: Bool = false
@@ -92,7 +92,7 @@ struct ListFlightView: View {
 struct UpcomingFlightView_Previews: PreviewProvider {
     static var previews: some View {
         List{
-            ListFlightView()
+            FlightListView()
                 .environmentObject(AuthViewModel())
         }
         

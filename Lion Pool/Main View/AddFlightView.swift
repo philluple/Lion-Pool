@@ -16,7 +16,6 @@ struct AddFlightView: View {
     @State private var date = Date()
     @State private var confirmDetailsBool: Bool = false
     @State private var flightAddedSuccessfully: Bool = false
-    var network = Network()
 
     @Binding var confirmedFlight: Bool
     
@@ -81,7 +80,6 @@ struct AddFlightView: View {
                 }
                 .sheet(isPresented: $confirmDetailsBool){
                     ConfirmFlightDetailsView(dateToConfirm: $date, airportToConfirm: $departAirport, flightAddedSuccessfully: $flightAddedSuccessfully)
-                        .environmentObject(network)
                         .onChange(of: flightAddedSuccessfully){
                             success in
                             if success{

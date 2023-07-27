@@ -102,25 +102,6 @@ struct RegistrationView: View {
                           placeholder: "Confirm your password",
                           isSecureField: true).autocapitalization(.none)
                 
-                VStack(spacing: 15){
-                    Text("Phone Number")
-                        .font(.system(size:18,weight: .regular))
-                        .frame(width: UIScreen.main.bounds.width-50, alignment:.leading)
-                    
-                    iPhoneNumberField("(000) 000-0000", text: $phone)
-                        .flagHidden(false)
-                        .flagSelectable(true)
-                        .font(UIFont(size: 20, weight: .light,design: .rounded))
-                        .maximumDigits(10)
-                        .foregroundColor(Color.gray)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width-50, height: 50)
-                        .background(Color("Text Box"))
-                        .cornerRadius(5)
-                    //.shadow(color: .gray, radius: 10)
-                        .padding([.leading, .trailing], 25)
-                    
-                }
                 Group{
                     Button {
                         Task{
@@ -129,7 +110,6 @@ struct RegistrationView: View {
                                                                               firstname: firstname,
                                                                               lastname: lastname,
                                                                               UNI: UNI,
-                                                                              phone: phone,
                                                                               pfpLocation: fileRef){
                                 if profileImage != nil {
                                     uploadPhoto(userId: newUserId)
@@ -171,21 +151,7 @@ struct RegistrationView: View {
         guard let selectedImage = selectedImage else { return}
         profileImage = Image(uiImage: selectedImage)
     }
-//    func uploadPhoto (userId: String){
-//        guard selectedImage != nil else {return}
-//        let db = Firestore.firestore()
-//        let storageRef = Storage.storage().reference()
-//
-//        //Check if we can turn image into data
-//        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
-//        guard imageData != nil else {return}
-//
-//        let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
-//        let uploadTask = fileRef.putData(imageData!, metadata: nil){
-//            metadata, error in
-//        }
-//        db.collection("users").document(userId).setData(["pfpLocation":fileRef])
-//    }
+
     func uploadPhoto(userId: String) {
         guard let selectedImage = selectedImage else { return }
         let db = Firestore.firestore()

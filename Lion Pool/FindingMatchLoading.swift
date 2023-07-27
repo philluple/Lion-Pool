@@ -50,12 +50,12 @@ struct FindingMatchLoading: View {
         }
     }
     private func startLoadingAnimation() {
-            let timer = Timer.scheduledTimer(withTimeInterval: animationInterval, repeats: true) { _ in
-                isLoading.toggle()
-                updateDots()
-            }
-            timer.fire()
+        let timer = Timer.scheduledTimer(withTimeInterval: animationInterval, repeats: true) { _ in
+            isLoading.toggle()
+            updateDots()
         }
+        timer.fire()
+    }
         
     private func updateDots() {
         if isLoading {
