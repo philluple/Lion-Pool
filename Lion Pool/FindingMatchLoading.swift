@@ -28,10 +28,11 @@ public class RandomNumberGenerator: ObservableObject {
 
 struct FindingMatchLoading: View {
     //variables that need to be passed
-    var date: Date
+    var flightId: UUID
     var airport: String
     var network: Network
     var userId: String
+    var date: Date
     
     
     @State var isLoading = false
@@ -90,18 +91,15 @@ struct FindingMatchLoading: View {
                 })
         }
         .onAppear {
-            // Start a timer to trigger the navigation after a few seconds (e.g., 3 seconds)
-            let dateString = dateFormatter.string(from: date)
-            let documentID = "\(dateString)-\(userId)"
-            network.getMatches(newFlightDocID: documentID, airport: airport, currentUser: userId){ result in switch result{
+            network.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
             case.success(let matches):
                 print("From here \(matches)")
                 matchesFound.toggle()
             case .noMatches:
                 goHome.toggle()
                 print("No matches found.")
-            case .failure(let error):
-                print ("bad \(error)")
+            case .failure:
+                print("Failed")
             }
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + maxElapsedTime) {

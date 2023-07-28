@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import FirebaseFirestore
 
 struct ConfirmFlight: View {
     //This comes from add flight
@@ -17,8 +18,10 @@ struct ConfirmFlight: View {
     @State var flightAdded: Bool = false
     @State var userId: String = ""
     @State var matchesFound: Bool = false
-    @State private var opacity = 0.0
+    @State var opacity = 0.0
+    @State var addedFlightId: UUID? = nil
     
+//    var flight: Flight = Flight(id: UUID(), userId: "", date: Date(), airport: "", foundMatch: false)
     //@State var noMathcesFound: Bool = false
     //Objects to apply logic
     @EnvironmentObject var flightViewModel: FlightViewModel
@@ -42,8 +45,8 @@ struct ConfirmFlight: View {
                 ConfirmFlight
                 Spacer()
             }.fullScreenCover(isPresented: $flightAdded, content: {
-                if let user = viewModel.currentUser{
-                    FindingMatchLoading(date: dateToConfirm, airport: airportToConfirm, network: network, userId: user.id)
+                if let flightId = addedFlightId{
+                    FindingMatchLoading(flightId: flightId, airport: airportToConfirm, network: network, userId: userId, date: dateToConfirm)
                 }
             })
         }
@@ -101,33 +104,38 @@ struct ConfirmFlight: View {
             .background(SwiftUI.Color("Gray Blue "))
     }
     
-    private var ConfirmFlight: some View{
+    private var ConfirmFlight: some View {
         Button {
-            Task{
-                if let user = viewModel.currentUser{
-                    let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
-                    if result == 1{
-                        flightAdded.toggle()
-                    }
-                    if result == 0{
-                        opacity = 1.0
+            Task {
+                if let user = viewModel.currentUser {
+                    network.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm) { result in
+                        switch result {
+                        case .success(let flight):
+                            DispatchQueue.main.async{
+                                addedFlightId = flight.id
+                                userId = flight.userId
+                                flightAdded.toggle()
+                            }
+                        case .failure:
+                            opacity = 1.0
+                        }
                     }
                 }
             }
         } label: {
-            HStack{
+            HStack {
                 Text("GET MATCHED")
-                    .font(.system(size:18,weight: .bold))
-                    .frame(width:UIScreen.main.bounds.width-40, height:52)
+                    .font(.system(size: 18, weight: .bold))
+                    .frame(width: UIScreen.main.bounds.width - 40, height: 52)
                     .accentColor(Color.white)
             }
         }
         .background(Color("Gold"))
         .cornerRadius(10)
         .padding(.top, 24)
-
-
     }
+
+    
     private var AddFlightButton: some View {
         Button  {
             Task{
@@ -162,13 +170,3 @@ extension DateFormatter {
         self.dateFormat = dateFormat
     }
 }
-
-//struct ConfirmFlightDetailsView_Previews: PreviewProvider {
-//    @State static var flightAddedSuccessfully: Bool = false
-//    @State static var date: Date = Date()
-//    @State static var departAirport = "EWR"
-//
-//    static var previews: some View {
-//        ConfirmFlightDetailsView(dateToConfirm: $date, airportToConfirm:  $departAirport, flightAddedSuccessfully: $flightAddedSuccessfully)
-//    }
-//}

@@ -48,6 +48,7 @@
 		7537511E2A57E43700B02528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537511D2A57E43700B02528 /* HomeView.swift */; };
 		754AD3FD2A59363100F78013 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754AD3FC2A59363100F78013 /* Flight.swift */; };
 		754AD3FF2A59388000F78013 /* FlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754AD3FE2A59388000F78013 /* FlightViewModel.swift */; };
+		756E4BD12A736628002A8006 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E4BD02A736628002A8006 /* File.swift */; };
 		757297222A57D68300B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		757297232A57D68400B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
@@ -123,6 +124,7 @@
 		7537511D2A57E43700B02528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		754AD3FC2A59363100F78013 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		754AD3FE2A59388000F78013 /* FlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightViewModel.swift; sourceTree = "<group>"; };
+		756E4BD02A736628002A8006 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
 		7581378A2A69E30A00577409 /* AppNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavBarView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				756E4BD02A736628002A8006 /* File.swift */,
 				75BB9B352A578B0F00F2CC75 /* Podfile */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
 				75109A5D285BB7D100CAC400 /* Lion PoolTests */,
@@ -552,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */,
+				756E4BD12A736628002A8006 /* File.swift in Sources */,
 				75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */,
 				7537511A2A57DE1F00B02528 /* RegistrationView.swift in Sources */,
 				75366157285BBC090077C02F /* FlightListView.swift in Sources */,

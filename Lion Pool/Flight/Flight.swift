@@ -11,8 +11,8 @@ import FirebaseFirestore
 struct Flight: Codable, Identifiable{
     let id: UUID
     let userId: String
-    let date: Date
     let airport: String
+    let date: String
     let foundMatch: Bool
 }
 

@@ -21,9 +21,9 @@ struct Logo: View {
             Text("LionPool")
                 .font(.system(size:fontSize,weight: .bold))
                 .foregroundColor(Color(fontColor))
-            Text("safer together")
-                .font(.system(size:fontSize/2,weight: .bold))
-                .foregroundColor(Color(fontColor))
+//            Text("safer together")
+//                .font(.system(size:fontSize/2,weight: .bold))
+//                .foregroundColor(Color(fontColor))
         }
     }
 }

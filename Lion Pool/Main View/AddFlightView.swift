@@ -9,7 +9,7 @@
 
 import SwiftUI
 import Swift
-
+import FirebaseFirestore
 
 struct AddFlightView: View {
     @State private var departAirport = ""

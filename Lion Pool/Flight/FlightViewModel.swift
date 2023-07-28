@@ -9,12 +9,11 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 import FirebaseAuth
+import FirebaseFirestore
 
 class FlightViewModel: ObservableObject{
     
     @Published var flights: [Flight] = []
-    
-    
     let dateFormatter = DateFormatter()
 
     func addFlight (userId: String, date: Date, airport: String) async throws -> Int{
@@ -35,13 +34,12 @@ class FlightViewModel: ObservableObject{
                 .limit(to: 1)
         do{
             let existingFlightSnapshot = try await existingFlightQuery.getDocuments()
-
             if !existingFlightSnapshot.isEmpty {
                 // A flight with the same airport and date already exists for the user
                 print("ERROR: Flight already exists at \(airport) on \(dateString) for user \(userId)")
                 return 0
             } else{
-                let flight = Flight(id: UUID(), userId: userId, date: date, airport: airport, foundMatch: match)
+                let flight = Flight(id: UUID(), userId: userId, airport: airport, date: "",  foundMatch: match)
                 let encodedFlight = try Firestore.Encoder().encode(flight)
                 try await Firestore.firestore().collection("flights").document(flight.airport).collection("userFlights").document("\(dateString)-\(userId)").setData(encodedFlight)
                 try await Firestore.firestore().collection("users").document(userId).collection("userFlights").document(documentName).setData(encodedFlight)
@@ -56,26 +54,24 @@ class FlightViewModel: ObservableObject{
         return 1
     }
     
-    func deleteFlight (flight: Flight) async throws -> Int{
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        let dateString = dateFormatter.string(from: flight.date)
-        let documentName = "\(dateString)-\(flight.airport)"
-        do{
-            try await Firestore.firestore().collection("flights").document(flight.airport).collection("userFlights").document("\(dateString)-\(flight.userId)").delete()
-            if flight.foundMatch{
-                try await Firestore.firestore().collection("users").document(flight.userId).collection("userFlights").document(documentName).delete()
-
-            }
-            try await Firestore.firestore().collection("users").document(flight.userId).collection("userFlights").document(documentName).delete()
-            print("SUCCESS: \(flight.userId) deleted a flight on \(dateString) from \(flight.airport)")
-            //await fetchFlights(userId: flight.userId)
-        }catch{
-            print("DEBUG: could not delete flight", error.localizedDescription)
-        }
-        return 1
-    }
-    
-
+//    func deleteFlight (flight: Flight) async throws -> Int{
+//        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+//        let dateString = dateFormatter.string(from: flight.date)
+//        let documentName = "\(dateString)-\(flight.airport)"
+//        do{
+//            try await Firestore.firestore().collection("flights").document(flight.airport).collection("userFlights").document("\(dateString)-\(flight.userId)").delete()
+//            if flight.foundMatch{
+//                try await Firestore.firestore().collection("users").document(flight.userId).collection("userFlights").document(documentName).delete()
+//            }
+//            try await Firestore.firestore().collection("users").document(flight.userId).collection("userFlights").document(documentName).delete()
+//            print("SUCCESS: \(flight.userId) deleted a flight on \(dateString) from \(flight.airport)")
+//            //await fetchFlights(userId: flight.userId)
+//        }catch{
+//            print("DEBUG: could not delete flight", error.localizedDescription)
+//        }
+//        return 1
+//    }
+//
     func fetchFlights(userId: String){
         let db = Firestore.firestore()
             db.collection("users").document("\(userId)").collection("userFlights").getDocuments { snapshot, error in
@@ -87,7 +83,7 @@ class FlightViewModel: ObservableObject{
                             self.flights = snapshot.documents.compactMap { d in
                                 guard let idString = d["id"] as? String,
                                       let userId = d["userId"] as? String,
-                                      let timestamp = d["date"] as? Timestamp,
+                                      let timestamp = d["date"] as? String,
                                       let airport = d["airport"] as? String,
                                       let foundMatch = d["foundMatch"] as? Bool
                                         else {
@@ -98,8 +94,8 @@ class FlightViewModel: ObservableObject{
                                 return Flight(
                                     id: UUID(uuidString: idString) ?? UUID(),
                                     userId: userId,
-                                    date: timestamp.dateValue(),
                                     airport: airport,
+                                    date: timestamp,
                                     foundMatch: foundMatch
                                 )
                             }

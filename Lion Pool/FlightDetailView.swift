@@ -18,19 +18,20 @@ struct FlightDetailView: View {
     let fmt = ISO8601DateFormatter()
     
     // Calculate the difference in days and return a formatted string
-    var diffs: Int {
-        let components = Calendar.current.dateComponents([.day], from: Date(), to: flight.date)
-        return components.day ?? 0
-    }
+//    var diffs: Int {
+//        let date = flight.date
+//        let components = Calendar.current.dateComponents([.day], from: Date(), to: date)
+//        return components.day ?? 0
+//    }
     
     var body: some View {
         VStack {
-            Text("\(diffs) days until...")
-                .font(.system(size: 45, weight: .bold))
-                .foregroundColor(SwiftUI.Color("Dark Blue "))
-                .padding([.top, .bottom])
-                .frame(width:UIScreen.main.bounds.width, height: 70)
-                .background(SwiftUI.Color("Gray Blue "))
+//            //Text("\(diffs) days until...")
+//                .font(.system(size: 45, weight: .bold))
+//                .foregroundColor(SwiftUI.Color("Dark Blue "))
+//                .padding([.top, .bottom])
+//                .frame(width:UIScreen.main.bounds.width, height: 70)
+//                .background(SwiftUI.Color("Gray Blue "))
             
             Spacer()
             RoundedRectangle(cornerRadius: 10)
@@ -54,13 +55,13 @@ struct FlightDetailView: View {
                             Text("DATE:")
                                 .font(.system(size: 20, weight: .thin))
                                 .foregroundColor(SwiftUI.Color("Dark Blue "))
-                            Text(flight.date, style:.date)
+                            Text(flight.date)
                                 .font(.system(size: 42))
                                 .foregroundColor(SwiftUI.Color("Dark Blue "))
                             Text("TIME:")
                                 .font(.system(size: 20, weight: .thin))
                                 .foregroundColor(SwiftUI.Color("Dark Blue "))
-                            Text(flight.date, style:.time)
+                            Text(flight.date)
                                 .font(.system(size: 42))
                                 .foregroundColor(SwiftUI.Color("Dark Blue "))
                         }
@@ -68,29 +69,29 @@ struct FlightDetailView: View {
                 }
             HStack{
                 Spacer()
-                deleteFlightButton
+                //deleteFlightButton
                     .padding(.trailing)
             }.padding(.top)
             Spacer()
         }
     }
-    private var deleteFlightButton: some View{
-        Button {
-            Task{
-                let result = try await flightModel.deleteFlight(flight: flight)
-                if result == 1 {
-                    flightModel.fetchFlights(userId: flight.userId)
-                    presentationMode.wrappedValue.dismiss()
-
-                }
-            }
-        }label: {
-            Image(systemName: "trash.circle.fill")
-                .resizable()
-                .frame(width:60,height:60)
-                .foregroundColor(Color.red)
-        }
-    }
+//    private var deleteFlightButton: some View{
+//        Button {
+//            Task{
+//                let result = try await flightModel.deleteFlight(flight: flight)
+//                if result == 1 {
+//                    flightModel.fetchFlights(userId: flight.userId)
+//                    presentationMode.wrappedValue.dismiss()
+//
+//                }
+//            }
+//        }label: {
+//            Image(systemName: "trash.circle.fill")
+//                .resizable()
+//                .frame(width:60,height:60)
+//                .foregroundColor(Color.red)
+//        }
+//    }
 }
 
 

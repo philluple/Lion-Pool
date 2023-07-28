@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct UpcomingFlightsView: View {
     @State var flight: Flight
@@ -42,13 +43,15 @@ struct UpcomingFlightsView: View {
                             .foregroundColor(Color("Gray Blue "))
                     }
                     Spacer()
-                    Text("\(formattedDate(flight.date))")
+                    //Text("\(formattedDate(flight.date.dateValue()))")
+                    Text(flight.date)
                         .font(.system(size:20))
 
                     Text("@")
                         .font(.system(size:20))
 
-                    Text("\(formattedTime(flight.date))")
+//                    Text("\(formattedTime(flight.date.dateValue()))")
+                    Text(flight.date)
                         .font(.system(size:20))
                         .foregroundColor(Color.gray)
                 }.padding(.horizontal, 20)
