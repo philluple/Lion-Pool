@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseFirestore
 
 enum MatchResult {
-    case success([match])
+    case success([Match])
     case noMatches
     case failure
 }
@@ -20,15 +20,67 @@ enum AddResult{
     case failure
 }
 
-class Network: ObservableObject{
-    var matches: [match] = []
-    let dateFormatter = DateFormatter()
-//    var flight = Flight(id: UUID(), userId: "user123", airport: "JFK", date: "2023-07-27T12:34:56Z", foundMatch: true)
+enum DeleteResult{
+    case success
+    case failure
+    
+}
 
+class NetworkModel: ObservableObject{
+    
+    @Published var matches: [UUID: [Match]] = [:]
+    @Published var flights: [UUID: Flight] = [:]
+    
+        
     let baseURL = "http://localhost:3000/api"
     
+    func signOut (){
+        matches = [:]
+        flights = [:]
+    }
+    
+    func fetchFlights(userId: String){
+        let userId = userId
+        let fullURL = "\(baseURL)/user/fetchFlights?userId=\(userId)"
+        guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
+        let urlRequest = URLRequest(url: url)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                print("Error with response")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let decodedFlights = try decoder.decode([Flight].self, from: data)
+                    DispatchQueue.main.async {
+                        for flight in decodedFlights {
+                            self.flights[flight.id] = flight
+                        }
+                    }
+                } catch {
+                    print("\(error.localizedDescription)")
+                    print("Error decoding flights")
+                    return
+                }
+            }
+        }
+        dataTask.resume()
+        print("Just fetched flights for this bitch")
+    }
+    
+    
     func addFlight(userId: String, date: Date, airport: String, completion: @escaping (AddResult)-> Void) {
-
+        
         let dateFormatter = ISO8601DateFormatter()
         let formattedDate = dateFormatter.string(from: date)
         
@@ -52,7 +104,7 @@ class Network: ObservableObject{
         
         request.httpBody = try? JSONSerialization.data(withJSONObject: flightData)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                
+        
         let dataTask = URLSession.shared.dataTask(with: request) {data, response, error in
             if let error = error {
                 print("Error with adding flight: \(error.localizedDescription)")
@@ -70,7 +122,7 @@ class Network: ObservableObject{
                         let flightData = try decoder.decode(Flight.self, from: data)
                         DispatchQueue.main.async{
                             print("SUCCESS: Successfully added flight")
-//                            self.flight = flightData
+                            self.flights[flightData.id] = flightData
                             completion(.success(flightData))
                         }
                     } catch let decodingError{
@@ -94,10 +146,9 @@ class Network: ObservableObject{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         let flightId = flightId
-        let airport = airport
         let userId = userId
+        let airport = airport
         let fullURL = "\(baseURL)/matches?flightId=\(flightId)&userId=\(userId)&airport=\(airport)"
-        print(fullURL)
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         let urlRequest = URLRequest(url:url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -119,10 +170,9 @@ class Network: ObservableObject{
                 }
                 do {
                     let decoder = JSONDecoder()
-                    let decodedMatches = try decoder.decode([match].self, from: data)
-                    print(decodedMatches)
+                    let decodedMatches = try decoder.decode([Match].self, from: data)
                     DispatchQueue.main.async {
-                        self.matches = decodedMatches
+                        self.matches[flightId] = decodedMatches
                         completion(.success(decodedMatches))
                     }
                 } catch {
@@ -130,7 +180,7 @@ class Network: ObservableObject{
                         completion(.failure)
                     }
                 }
-
+                
             }
             if response.statusCode == 204 {
                 DispatchQueue.main.async {
@@ -142,5 +192,42 @@ class Network: ObservableObject{
         dataTask.resume()
         print("Count: \(matches.count)")
     }
-
+    
+    func deleteFlight(userId: String, flightId: UUID, airport: String, completion: @escaping (DeleteResult) -> Void){
+        let userId = userId
+        let flightId = flightId
+        let airport = airport
+        
+        let fullURL = "\(baseURL)/flight/deleteFlight?flightId=\(flightId)&userId=\(userId)&airport=\(airport)"
+        guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
+        let urlRequest = URLRequest(url:url)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                DispatchQueue.main.async {
+                    completion(.failure)
+                }
+                return
+            }
+            
+            if response.statusCode == 200 {
+                DispatchQueue.main.async {
+                    self.flights.removeValue(forKey: flightId)
+                    self.matches.removeValue(forKey: flightId)
+                    completion(.success)
+                }
+            } else {
+                // Prompt the user to try again later - 500
+                DispatchQueue.main.async {
+                    completion(.failure)
+                }
+                
+            }
+        }
+        dataTask.resume()
+    }
 }

@@ -26,11 +26,10 @@ public class RandomNumberGenerator: ObservableObject {
 
 }
 
-struct FindingMatchLoading: View {
+struct FindingMatchView: View {
     //variables that need to be passed
     var flightId: UUID
     var airport: String
-    var network: Network
     var userId: String
     var date: Date
     
@@ -43,10 +42,11 @@ struct FindingMatchLoading: View {
     @State var goHome: Bool = false
     @State var elapsedTime: TimeInterval = 0
     let maxElapsedTime: TimeInterval = 3 // Set the desired duration in seconds
-
+    
     @StateObject private var randomNumberGenerator = RandomNumberGenerator()
-
-    let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
+    @EnvironmentObject var networkModel : NetworkModel
+    
+//    let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
     let maxDots = 3
     let animationInterval = 0.5
     
@@ -79,7 +79,8 @@ struct FindingMatchLoading: View {
                 }, set: { _ in
                     // You can leave this empty or add your own handling if needed
                 }), content: {
-                    MatchesListView(date: date, airport: airport, matches: network.matches)
+                    EmptyView()
+                    MatchesListView(date: date, airport: airport)
                 })
 
                 .fullScreenCover(isPresented: Binding<Bool>(get: {
@@ -91,7 +92,7 @@ struct FindingMatchLoading: View {
                 })
         }
         .onAppear {
-            network.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
+            networkModel.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
             case.success(let matches):
                 print("From here \(matches)")
                 matchesFound.toggle()

@@ -5,19 +5,20 @@ import FirebaseCore
 
 @main
 struct Lion_PoolApp: App {
-  // register ap delegate for Firebase setup
-    @StateObject var viewModel = AuthViewModel()
-    @StateObject var flightModel = FlightViewModel()
+
+    @StateObject var userModel = UserModel()
+    @StateObject var networkModel = NetworkModel()
     
-    init (){
+    init() {
         FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(viewModel)
-                .environmentObject(flightModel)
+                .environmentObject(userModel)
+                .environmentObject(networkModel)
+
         }
     }
 }

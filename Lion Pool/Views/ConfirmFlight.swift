@@ -24,9 +24,8 @@ struct ConfirmFlight: View {
 //    var flight: Flight = Flight(id: UUID(), userId: "", date: Date(), airport: "", foundMatch: false)
     //@State var noMathcesFound: Bool = false
     //Objects to apply logic
-    @EnvironmentObject var flightViewModel: FlightViewModel
-    @EnvironmentObject var viewModel: AuthViewModel
-    @StateObject var network = Network()
+    @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var networkModel: NetworkModel
 
     //@StateObject var network: Network
     @Environment(\.presentationMode) var presentationMode
@@ -46,7 +45,7 @@ struct ConfirmFlight: View {
                 Spacer()
             }.fullScreenCover(isPresented: $flightAdded, content: {
                 if let flightId = addedFlightId{
-                    FindingMatchLoading(flightId: flightId, airport: airportToConfirm, network: network, userId: userId, date: dateToConfirm)
+                    FindingMatchView(flightId: flightId, airport: airportToConfirm, userId: userId, date: dateToConfirm)
                 }
             })
         }
@@ -107,8 +106,8 @@ struct ConfirmFlight: View {
     private var ConfirmFlight: some View {
         Button {
             Task {
-                if let user = viewModel.currentUser {
-                    network.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm) { result in
+                if let user = userModel.currentUser {
+                    networkModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm) { result in
                         switch result {
                         case .success(let flight):
                             DispatchQueue.main.async{
@@ -136,29 +135,6 @@ struct ConfirmFlight: View {
     }
 
     
-    private var AddFlightButton: some View {
-        Button  {
-            Task{
-                if let user = viewModel.currentUser{
-                    let result = try await flightViewModel.addFlight(userId: user.id, date: dateToConfirm, airport: airportToConfirm)
-                    if result == 1{
-                        flightViewModel.fetchFlights(userId: user.id)
-                    }
-                }
-            }
-        } label: {
-            HStack{
-                Text("Add flight!")
-                    .font(.system(size:18,weight: .bold))
-                    .frame(width:UIScreen.main.bounds.width-40, height:52)
-                    .accentColor(Color.white)
-            }
-        }
-        .background(Color("Gold"))
-        .cornerRadius(10)
-        .padding(.top, 24)
-
-    }
     
     
 }

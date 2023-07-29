@@ -20,7 +20,7 @@ struct AddFlightView: View {
     @Binding var confirmedFlight: Bool
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: UserModel
     
     var airports = ["EWR", "JFK", "LGA"]
     

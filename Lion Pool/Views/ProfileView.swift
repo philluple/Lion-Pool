@@ -12,7 +12,8 @@ import FirebaseAuth
 
 
 struct ProfileView: View {
-    @EnvironmentObject var viewModel : AuthViewModel
+    @EnvironmentObject var viewModel : UserModel
+    @EnvironmentObject var networkModel: NetworkModel
     @State private var profileImage: UIImage? = nil
     
     var body: some View {
@@ -74,7 +75,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockViewModel = AuthViewModel()
+        let mockViewModel = UserModel()
         ProfileView()
             .environmentObject(mockViewModel)
     }

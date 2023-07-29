@@ -26,7 +26,7 @@ struct RegistrationView: View {
     @State private var fileRef: String = ""
     
     @Environment (\.dismiss) var dismiss
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var viewModel: UserModel
     
     var body: some View {
         VStack(spacing: -2){

@@ -12,7 +12,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
-    @EnvironmentObject var viewModel : AuthViewModel
+    @EnvironmentObject var viewModel : UserModel
     
     var body: some View {
         NavigationView{

@@ -10,7 +10,7 @@ import FirebaseStorage
 
 
 struct FlightMatch: View {
-    let match: match?
+    let match: Match?
     @State private var matchImage: UIImage? // Assuming this is a UIImage
 
     var body: some View {
@@ -91,9 +91,9 @@ struct FlightMatch: View {
     }
 }
 
-struct FlightMatch_Previews: PreviewProvider {
-    static var previews: some View {
-        @State var newMatch = match(date: "2023-08-01T02:03:00.000Z", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FFeqlCm9u3kQgRXbIaVaLLYrvldE3-pfp.jpg?alt=media&token=36fe4246-87a7-43cb-ab07-5d22cc315c6e", userId: "FeqlCm9u3kQgRXbIaVaLLYrvldE3", name: "Lion Cunt")
-        FlightMatch(match: newMatch)
-    }
-}
+//struct FlightMatch_Previews: PreviewProvider {
+//    static var previews: some View {
+//        @State var newMatch = match(date: "2023-08-01T02:03:00.000Z", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FFeqlCm9u3kQgRXbIaVaLLYrvldE3-pfp.jpg?alt=media&token=36fe4246-87a7-43cb-ab07-5d22cc315c6e", userId: "FeqlCm9u3kQgRXbIaVaLLYrvldE3", name: "Lion Cunt")
+//        FlightMatch(match: newMatch)
+//    }
+//}

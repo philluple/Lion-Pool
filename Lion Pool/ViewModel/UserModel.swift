@@ -15,16 +15,15 @@ import SwiftUI
 
 // Publishes UI changes on the main thread
 @MainActor
-class AuthViewModel: ObservableObject {
+class UserModel: ObservableObject {
     // Firebase user objext
     
     @Published var userSession: FirebaseAuth.User?
-//    @Published var flights: [Flight] = []
     
     // Our user object
     @Published var currentUser: User?
     @Published var currentUserProfileImage: UIImage? = nil
-    @EnvironmentObject var flightModel: FlightViewModel
+    @EnvironmentObject var networkModel: NetworkModel
     
     
     init(){

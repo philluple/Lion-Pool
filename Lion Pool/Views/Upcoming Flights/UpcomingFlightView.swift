@@ -8,16 +8,11 @@
 import SwiftUI
 import FirebaseFirestore
 
-struct UpcomingFlightsView: View {
+struct UpcomingFlightView: View {
     @State var flight: Flight
     @State private var popover: Bool = false
-    @EnvironmentObject var flightModel: FlightViewModel
     @Environment(\.presentationMode) var presentationMode
 
-    
-
-//    if(needRefreshFromDelete = true, then toddle needRefreshList)
-    
     private let monthAbbrev: [String: String ] = [
         "January" : "Jan",
         "February" : "Feb",
@@ -43,15 +38,15 @@ struct UpcomingFlightsView: View {
                             .foregroundColor(Color("Gray Blue "))
                     }
                     Spacer()
-                    //Text("\(formattedDate(flight.date.dateValue()))")
-                    Text(flight.date)
+//                    Text("\(formattedDate(flight.date.dateValue()))")
+                    Text(formattedDate(flight.dateFromISOString(flight.date)!))
                         .font(.system(size:20))
 
                     Text("@")
                         .font(.system(size:20))
 
 //                    Text("\(formattedTime(flight.date.dateValue()))")
-                    Text(flight.date)
+                    Text(formattedTime(flight.dateFromISOString(flight.date)!))
                         .font(.system(size:20))
                         .foregroundColor(Color.gray)
                 }.padding(.horizontal, 20)
@@ -60,17 +55,6 @@ struct UpcomingFlightsView: View {
             .sheet(isPresented: $popover){
                 FlightDetailView(flight: $flight)
             }
-//            .onChange(of: needRefreshFromDelete){
-//                success in
-//                if success{
-//                    needRefreshList.toggle()
-//                    //presentationMode.wrappedValue.dismiss()
-//                    print("DEBUG: In upcoming flights view")
-//                }
-//            }
-            
-
-            //Divider()
         }
         
     }

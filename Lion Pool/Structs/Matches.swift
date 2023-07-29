@@ -8,7 +8,9 @@
 import Foundation
 import Firebase
 
-struct match: Decodable{
+struct Match: Decodable, Identifiable{
+    var id: UUID
+    var flightId: UUID
     var date: String
     var pfp: String
     var userId: String

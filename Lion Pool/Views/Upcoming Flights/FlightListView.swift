@@ -14,10 +14,10 @@ struct FlightListView: View {
 //    @State var upcoming_flights = [Flight]()
     @State private var confirmedFlight: Bool = false
     @State private var needRefreshList: Bool = false
-    @State private var hasFetchedFlights = false
+    @State private var initialFetch = false
 
-    @EnvironmentObject var viewModel : AuthViewModel
-    @EnvironmentObject var flightModel: FlightViewModel
+    @EnvironmentObject var viewModel : UserModel
+    @EnvironmentObject var networkModel: NetworkModel
 
     
     
@@ -35,7 +35,6 @@ struct FlightListView: View {
                             .frame(width: 90, height: 25)
                             .background(Color("Gold"))
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            //.padding(.top, (flightModel.flights.count != 0 ? 40 : 30))
                             .padding(.trailing,15)
                     }
                 }
@@ -43,28 +42,25 @@ struct FlightListView: View {
                 .padding(.top, 10)
                 ScrollView{
                     VStack{
-                        ForEach(Array(flightModel.flights.enumerated()), id: \.element.id) { index, flight in
-                            UpcomingFlightsView(flight: flight)
-                            
-                            if index != flightModel.flights.count - 1 {
-                                Divider()
-                                    .padding(.horizontal, 10)
-                            }
+                        ForEach(Array(networkModel.flights.values), id: \.self) { flight in
+                            UpcomingFlightView(flight: flight)
                         }
                     }
                 }
-                
             }
-            .frame(width:UIScreen.main.bounds.width-20,height: (flightModel.flights.count < 4 ? CGFloat(flightModel.flights.count)*60+40 : 280))
+                
+            .frame(width:UIScreen.main.bounds.width-20,height: (networkModel.flights.count < 4 ? CGFloat(networkModel.flights.count)*60+40 : 280))
             .background(Color.white)
             .cornerRadius(10)
             .onAppear{
-                if !hasFetchedFlights{
-                    flightModel.fetchFlights(userId: user.id)
-                    hasFetchedFlights = true
+                if !initialFetch{
+                    networkModel.fetchFlights(userId: user.id)
+                    initialFetch.toggle()
                 }
             }
-            }
+        }else{
+            Text("Hello")
+        }
     }
 }
 
@@ -72,7 +68,7 @@ struct UpcomingFlightView_Previews: PreviewProvider {
     static var previews: some View {
         List{
             FlightListView()
-                .environmentObject(AuthViewModel())
+                .environmentObject(UserModel())
         }
         
     }

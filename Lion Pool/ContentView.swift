@@ -11,13 +11,11 @@ import FirebaseAuth
 import GoogleSignIn
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AuthViewModel
-    @EnvironmentObject var flightModel: FlightViewModel
-    
+    @EnvironmentObject var userModel: UserModel
+
     var body: some View {
         Group {
-            if viewModel.userSession != nil {
-                //let user = viewModel.currentUser
+            if userModel.userSession != nil {
                 HomeView()
             } else {
                 LoginView()
@@ -25,9 +23,3 @@ struct ContentView: View {
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}

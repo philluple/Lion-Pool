@@ -10,13 +10,9 @@ import FirebaseAuth
 import Firebase
 
 struct HomeView: View {
-    @EnvironmentObject var viewModel: AuthViewModel
-    @EnvironmentObject var flightModel: FlightViewModel
-    
-    @State private var confirmedFlight: Bool = false
-    @State private var isAddingFlight = false
-    @State private var voidEditingFlight: Bool = false
-    
+    @EnvironmentObject var viewModel: UserModel
+    @EnvironmentObject var networkModel: NetworkModel
+        
     var body: some View {
         if let user = viewModel.currentUser{
             CustomNavView{
@@ -66,7 +62,7 @@ struct HomeView: View {
                 .background(ignoresSafeAreaEdges: .all)
             }
             .edgesIgnoringSafeArea(.all)
-            //.navigationBarBackButtonHidden()
+            .navigationBarBackButtonHidden()
             
         }
     }
@@ -87,6 +83,6 @@ struct HomeView_Previews: PreviewProvider {
     
     static var previews: some View {
         HomeView()
-            .environmentObject(AuthViewModel())
+            .environmentObject(UserModel())
     }
 }
