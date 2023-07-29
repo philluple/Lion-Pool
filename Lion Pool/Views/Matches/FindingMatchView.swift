@@ -93,8 +93,7 @@ struct FindingMatchView: View {
         }
         .onAppear {
             networkModel.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
-            case.success(let matches):
-                print("From here \(matches)")
+            case.success:
                 matchesFound.toggle()
             case .noMatches:
                 goHome.toggle()

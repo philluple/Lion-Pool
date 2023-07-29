@@ -48,6 +48,9 @@
 		756E4BD12A736628002A8006 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E4BD02A736628002A8006 /* File.swift */; };
 		757297222A57D68300B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		757297232A57D68400B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
+		75731D392A75BC4A0001B01E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D382A75BC4A0001B01E /* Request.swift */; };
+		75731D3B2A75C7940001B01E /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3A2A75C7940001B01E /* RequestView.swift */; };
+		75731D3D2A75CD130001B01E /* RequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3C2A75CD130001B01E /* RequestListView.swift */; };
 		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
 		758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137882A69E12D00577409 /* CustomNavBarContainerView.swift */; };
 		7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7581378A2A69E30A00577409 /* AppNavBarView.swift */; };
@@ -122,6 +125,9 @@
 		7537511D2A57E43700B02528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		754AD3FC2A59363100F78013 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		756E4BD02A736628002A8006 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		75731D382A75BC4A0001B01E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		75731D3A2A75C7940001B01E /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
+		75731D3C2A75CD130001B01E /* RequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListView.swift; sourceTree = "<group>"; };
 		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
 		7581378A2A69E30A00577409 /* AppNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavBarView.swift; sourceTree = "<group>"; };
@@ -275,6 +281,7 @@
 				75A05E792A5896D0002ABE9C /* ProfileView.swift */,
 				758E03882A74FF3300FC7EF6 /* Upcoming Flights */,
 				758E03862A74FE9700FC7EF6 /* Add Flight */,
+				75731D3A2A75C7940001B01E /* RequestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				75D7FDCA2A704BBC00779DA5 /* Matches.swift */,
+				75731D382A75BC4A0001B01E /* Request.swift */,
 				754AD3FC2A59363100F78013 /* Flight.swift */,
 				752F99792A57CDBE0036ECEE /* User.swift */,
 			);
@@ -326,6 +334,7 @@
 				759B43CF2A7230CA0050D2C4 /* FindingMatchView.swift */,
 				75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */,
 				75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */,
+				75731D3C2A75CD130001B01E /* RequestListView.swift */,
 				759B43D12A72EB0E0050D2C4 /* NoMatchView.swift */,
 			);
 			path = Matches;
@@ -494,6 +503,7 @@
 				75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */,
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
 				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
+				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
 				75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */,
 				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
@@ -507,7 +517,9 @@
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
 				75366130285BBBF40077C02F /* UpcomingFlightView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
+				75731D3B2A75C7940001B01E /* RequestView.swift in Sources */,
 				75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */,
+				75731D3D2A75CD130001B01E /* RequestListView.swift in Sources */,
 				7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */,
 				758137922A69EC2100577409 /* CustomNavBarPreferenceKeys.swift in Sources */,
 				75366151285BBC080077C02F /* ScheduledRidesView.swift in Sources */,

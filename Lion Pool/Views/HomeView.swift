@@ -19,8 +19,12 @@ struct HomeView: View {
                 ScrollView {
                     VStack () {
                         Spacer()
-                        ListOfFlights
-                        ScheduledRidesView()
+                        VStack (spacing: 15){
+                            ListOfFlights
+                            RequestListView()
+                            ScheduledRidesView()
+                        }
+                       
                     }
                     
                 }.overlay(
@@ -84,5 +88,6 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(UserModel())
+            .environmentObject(NetworkModel())
     }
 }

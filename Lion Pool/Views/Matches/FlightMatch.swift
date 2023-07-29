@@ -11,8 +11,12 @@ import FirebaseStorage
 
 struct FlightMatch: View {
     let match: Match?
+    @Binding var hitRequestButton: Bool
     @State private var matchImage: UIImage? // Assuming this is a UIImage
+    @EnvironmentObject var networkModel: NetworkModel
+    @EnvironmentObject var userModel: UserModel
 
+    
     var body: some View {
         if let match = match{
             RoundedRectangle(cornerRadius: 10)
@@ -33,7 +37,7 @@ struct FlightMatch: View {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 100, height: 100)
+                                .frame(width: 150, height: 150)
                             
                         }
                         VStack{
@@ -41,7 +45,19 @@ struct FlightMatch: View {
                                 .font(.system(size: 30, weight: .bold))
                                 .foregroundColor(Color("Dark Blue "))
                             Text("CC '24")
-                            HStack{
+                            Button {
+                                if let user = userModel.currentUser{
+                                    networkModel.sendRequest(match: match, senderUserId: user.id){ result in switch result{
+                                    case.success:
+                                        hitRequestButton.toggle()
+                                        print("Nice")
+                                    case.failure:
+                                        //load a sheet
+                                        print("Oh no")
+                                    }
+                                    }
+                                }
+                            }label: {
                                 RoundedRectangle(cornerRadius:10)
                                     .fill(Color("Gold"))
                                     .frame(width: 150, height:30)
@@ -52,8 +68,8 @@ struct FlightMatch: View {
                                             .padding(.horizontal, 10)
                                             .padding(.vertical, 5)
                                     }
-                               
                             }
+
                         }
                         
 
@@ -93,7 +109,7 @@ struct FlightMatch: View {
 
 //struct FlightMatch_Previews: PreviewProvider {
 //    static var previews: some View {
-//        @State var newMatch = match(date: "2023-08-01T02:03:00.000Z", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FFeqlCm9u3kQgRXbIaVaLLYrvldE3-pfp.jpg?alt=media&token=36fe4246-87a7-43cb-ab07-5d22cc315c6e", userId: "FeqlCm9u3kQgRXbIaVaLLYrvldE3", name: "Lion Cunt")
+//        @State var newMatch = Match(id: UUID(), flightId: UUID(), date: "2023-08-01T02:03:00.000Z", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FFeqlCm9u3kQgRXbIaVaLLYrvldE3-pfp.jpg?alt=media&token=36fe4246-87a7-43cb-ab07-5d22cc315c6e", userId: "FeqlCm9u3kQgRXbIaVaLLYrvldE3", name: "Lion Cunt")
 //        FlightMatch(match: newMatch)
 //    }
 //}

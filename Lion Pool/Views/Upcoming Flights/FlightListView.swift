@@ -48,7 +48,6 @@ struct FlightListView: View {
                     }
                 }
             }
-                
             .frame(width:UIScreen.main.bounds.width-20,height: (networkModel.flights.count < 4 ? CGFloat(networkModel.flights.count)*60+40 : 280))
             .background(Color.white)
             .cornerRadius(10)

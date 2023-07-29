@@ -12,7 +12,8 @@ struct MatchesListView: View {
     let date: Date
     let airport: String
     @State var dismiss: Bool = false
-
+    @State var resquested: Bool = false
+    
     @EnvironmentObject var networkModel: NetworkModel
     var body: some View {
         NavigationView{
@@ -31,9 +32,9 @@ struct MatchesListView: View {
                 Spacer()
                 ScrollView{
                     ForEach(Array(networkModel.matches.values.flatMap { $0 }), id: \.id) { match in
-                        FlightMatch(match: match).padding(.vertical, 5)
+                        FlightMatch(match: match, hitRequestButton: $dismiss).padding(.vertical, 5)
                     }
-
+                    
                 }
                 Button {
                     dismiss.toggle()
@@ -42,15 +43,15 @@ struct MatchesListView: View {
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(Color("Gray Blue "))
                 }
-
+                
+                
                 NavigationLink(destination: HomeView(), isActive: $dismiss) {
                     EmptyView()
                 }.navigationBarBackButtonHidden()
-
-            
-            }.navigationBarBackButtonHidden()
-        }.navigationBarBackButtonHidden()
-
+                
+            }
+            .overlay(Color.white.opacity(dismiss ? 1.0 : 0.0)) // Fix the overlay and opacity here
+        }
+        .navigationBarBackButtonHidden()
     }
 }
-
