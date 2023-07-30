@@ -16,11 +16,6 @@ struct NoMatchView: View {
         } label: {
             VStack(alignment: .center){
                 Spacer()
-//                Image(systemName: "airplane")
-//                    .resizable()
-//                    .accentColor(Color("Dark Blue "))
-//                    .frame(width:100, height:100)
-//                    .rotationEffect(.degrees(-90))
                 Text("Sorry, we couldn't find you a match")
                     .font(.system(size:35,weight: .semibold))
                     .foregroundColor(Color("Dark Blue "))
@@ -34,9 +29,9 @@ struct NoMatchView: View {
             .background(Color("Gray Blue "))
             .ignoresSafeArea()
         }
-//        .onAppear{
-//            startTimer()
-//        }
+        .onAppear{
+            startTimer()
+        }
         .fullScreenCover(isPresented: $goHome) {
             HomeView()
         }

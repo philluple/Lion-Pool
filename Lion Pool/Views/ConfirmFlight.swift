@@ -43,11 +43,12 @@ struct ConfirmFlight: View {
                     .opacity(opacity)
                 ConfirmFlight
                 Spacer()
-            }.fullScreenCover(isPresented: $flightAdded, content: {
-                if let flightId = addedFlightId{
-                    FindingMatchView(flightId: flightId, airport: airportToConfirm, userId: userId, date: dateToConfirm)
+                if let flightId = addedFlightId {
+                    NavigationLink(destination: FindingMatchView(flightId: flightId, airport: airportToConfirm, userId: userId, date: dateToConfirm), isActive: $flightAdded){
+                        EmptyView()
+                    }
                 }
-            })
+            }
         }
     }
     private var FlightDetails: some View{

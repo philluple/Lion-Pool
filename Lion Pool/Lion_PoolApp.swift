@@ -2,7 +2,6 @@ import SwiftUI
 import Firebase
 import FirebaseCore
 
-
 @main
 struct Lion_PoolApp: App {
 

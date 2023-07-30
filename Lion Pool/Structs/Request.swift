@@ -12,7 +12,8 @@ struct Request: Identifiable, Decodable{
     var senderFlightId: UUID
     var recieverFlightId: UUID
     var recieverUserId: String
-    var date: String
+    var requestDate: String
+    var flightDate: String
     var pfp: String
     var name: String
     var status: String

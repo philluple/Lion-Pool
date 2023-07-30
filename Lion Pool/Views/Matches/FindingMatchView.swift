@@ -53,60 +53,63 @@ struct FindingMatchView: View {
     var thingsToPack = ["sunblock", "underwear", "toothbrush", "to text your mom when your flight takes off", "to download your songs", "to find a plant guardian"]
     
     var body: some View {
-        VStack(){
-            Text("Finding matches")
-                .font(.system(size: 45, weight: .bold))
-                .foregroundColor(Color("Dark Blue "))
-                .padding()
-                .frame(width: UIScreen.main.bounds.width, height: 55)
-                .background(Color("Gray Blue "))
-            
-            Spacer()
-            
-            Text("Matching in progress" + dots)
-                .font(.system(size: 30, weight: .bold))
-                .padding([.top, .bottom])
-                .frame(width: UIScreen.main.bounds.width, height: 70)
-                .onAppear {
-                    startLoadingAnimation()
+        NavigationView{
+            VStack(){
+                Text("Finding matches")
+                    .font(.system(size: 45, weight: .bold))
+                    .foregroundColor(Color("Dark Blue "))
+                    .padding()
+                    .frame(width: UIScreen.main.bounds.width, height: 55)
+                    .background(Color("Gray Blue "))
+                
+                Spacer()
+                
+                Text("Matching in progress" + dots)
+                    .font(.system(size: 30, weight: .bold))
+                    .padding([.top, .bottom])
+                    .frame(width: UIScreen.main.bounds.width, height: 70)
+                    .onAppear {
+                        startLoadingAnimation()
+                    }
+                
+                Text("Dont forget \(thingsToPack[randomNumberGenerator.randomNumber])")
+                Spacer()
+
+                    .fullScreenCover(isPresented: Binding<Bool>(get: {
+                        return matchesFound
+                    }, set: { _ in
+                        // You can leave this empty or add your own handling if needed
+                    }), content: {
+                        EmptyView()
+                        MatchesListView(date: date, airport: airport)
+                    })
+
+                    .fullScreenCover(isPresented: Binding<Bool>(get: {
+                        return goHome && showNextView
+                    }, set: { _ in
+                        // You can leave this empty or add your own handling if needed
+                    }), content: {
+                        NoMatchView()
+                    })
+            }
+            .onAppear {
+                networkModel.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
+                case.success:
+                    matchesFound.toggle()
+                case .noMatches:
+                    goHome.toggle()
+                    print("No matches found.")
+                case .failure:
+                    print("Failed")
                 }
-            
-            Text("Dont forget \(thingsToPack[randomNumberGenerator.randomNumber])")
-            Spacer()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + maxElapsedTime) {
+                    showNextView = true
+                }
 
-                .fullScreenCover(isPresented: Binding<Bool>(get: {
-                    return matchesFound
-                }, set: { _ in
-                    // You can leave this empty or add your own handling if needed
-                }), content: {
-                    EmptyView()
-                    MatchesListView(date: date, airport: airport)
-                })
-
-                .fullScreenCover(isPresented: Binding<Bool>(get: {
-                    return goHome && showNextView
-                }, set: { _ in
-                    // You can leave this empty or add your own handling if needed
-                }), content: {
-                    NoMatchView()
-                })
-        }
-        .onAppear {
-            networkModel.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
-            case.success:
-                matchesFound.toggle()
-            case .noMatches:
-                goHome.toggle()
-                print("No matches found.")
-            case .failure:
-                print("Failed")
-            }
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + maxElapsedTime) {
-                showNextView = true
             }
 
-        }
+        }.navigationBarBackButtonHidden(true)
     }
     
     private func startLoadingAnimation() {

@@ -13,6 +13,7 @@
 		75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */; };
 		75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */; };
 		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
+		75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75111D882A761C1F0064F990 /* TimeUtils.swift */; };
 		751C34EF2A6CF08200F6783C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */; };
 		751C34F22A6CF11E00F6783C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F12A6CF11E00F6783C /* GoogleSignIn */; };
 		751C34F42A6CF11E00F6783C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F32A6CF11E00F6783C /* GoogleSignInSwift */; };
@@ -23,11 +24,11 @@
 		752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99772A57C8100036ECEE /* RegistrationView.swift */; };
 		752F997A2A57CDBE0036ECEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99792A57CDBE0036ECEE /* User.swift */; };
 		752F99812A57D24B0036ECEE /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99802A57D24B0036ECEE /* UserModel.swift */; };
-		75366130285BBBF40077C02F /* UpcomingFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* UpcomingFlightView.swift */; };
+		75366130285BBBF40077C02F /* FlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* FlightView.swift */; };
 		75366131285BBBF40077C02F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A82285BB85900CAC400 /* ImagePicker.swift */; };
-		75366138285BBBF50077C02F /* UpcomingFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* UpcomingFlightView.swift */; };
+		75366138285BBBF50077C02F /* FlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* FlightView.swift */; };
 		75366139285BBBF50077C02F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A82285BB85900CAC400 /* ImagePicker.swift */; };
-		75366140285BBBF60077C02F /* UpcomingFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* UpcomingFlightView.swift */; };
+		75366140285BBBF60077C02F /* FlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A81285BB85900CAC400 /* FlightView.swift */; };
 		75366141285BBBF60077C02F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A82285BB85900CAC400 /* ImagePicker.swift */; };
 		75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A85285BB85900CAC400 /* StartScreenView.swift */; };
 		75366148285BBBFC0077C02F /* StartScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A85285BB85900CAC400 /* StartScreenView.swift */; };
@@ -108,12 +109,13 @@
 		75109A64285BB7D100CAC400 /* Lion PoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lion PoolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITests.swift; sourceTree = "<group>"; };
 		75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		75109A81285BB85900CAC400 /* UpcomingFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingFlightView.swift; sourceTree = "<group>"; };
+		75109A81285BB85900CAC400 /* FlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightView.swift; sourceTree = "<group>"; };
 		75109A82285BB85900CAC400 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		75109A85285BB85900CAC400 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
 		75109A96285BB85A00CAC400 /* AddFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlightView.swift; sourceTree = "<group>"; };
 		75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRidesView.swift; sourceTree = "<group>"; };
 		75109A98285BB85A00CAC400 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
+		75111D882A761C1F0064F990 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		751C34F72A6DEDE800F6783C /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
 		752F996F2A57B4580036ECEE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
+				75111D882A761C1F0064F990 /* TimeUtils.swift */,
 				758E03832A74FDAB00FC7EF6 /* ViewModel */,
 				758E03822A74FD8500FC7EF6 /* Structs */,
 				751C34F72A6DEDE800F6783C /* FlightDetailView.swift */,
@@ -344,7 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				75109A98285BB85A00CAC400 /* FlightListView.swift */,
-				75109A81285BB85900CAC400 /* UpcomingFlightView.swift */,
+				75109A81285BB85900CAC400 /* FlightView.swift */,
 			);
 			path = "Upcoming Flights";
 			sourceTree = "<group>";
@@ -515,7 +518,7 @@
 				75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */,
 				75D7FDC92A704A0E00779DA5 /* NetworkModel.swift in Sources */,
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
-				75366130285BBBF40077C02F /* UpcomingFlightView.swift in Sources */,
+				75366130285BBBF40077C02F /* FlightView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
 				75731D3B2A75C7940001B01E /* RequestView.swift in Sources */,
 				75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */,
@@ -529,6 +532,7 @@
 				758E038A2A75001500FC7EF6 /* ConfirmFlight.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,
+				75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */,
 				7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */,
 				758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */,
 				7581378F2A69E73F00577409 /* CustomNavLink.swift in Sources */,
@@ -549,7 +553,7 @@
 				75366139285BBBF50077C02F /* ImagePicker.swift in Sources */,
 				75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */,
 				7537511C2A57DE1F00B02528 /* LoginView.swift in Sources */,
-				75366138285BBBF50077C02F /* UpcomingFlightView.swift in Sources */,
+				75366138285BBBF50077C02F /* FlightView.swift in Sources */,
 				75366148285BBBFC0077C02F /* StartScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,7 +568,7 @@
 				75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */,
 				7537511A2A57DE1F00B02528 /* RegistrationView.swift in Sources */,
 				75366157285BBC090077C02F /* FlightListView.swift in Sources */,
-				75366140285BBBF60077C02F /* UpcomingFlightView.swift in Sources */,
+				75366140285BBBF60077C02F /* FlightView.swift in Sources */,
 				7536615B285BBC090077C02F /* ScheduledRidesView.swift in Sources */,
 				75366141285BBBF60077C02F /* ImagePicker.swift in Sources */,
 				7537511B2A57DE1F00B02528 /* LoginView.swift in Sources */,

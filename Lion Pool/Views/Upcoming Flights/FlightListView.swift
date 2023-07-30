@@ -43,22 +43,37 @@ struct FlightListView: View {
                 ScrollView{
                     VStack{
                         ForEach(Array(networkModel.flights.values), id: \.self) { flight in
-                            UpcomingFlightView(flight: flight)
+                            FlightView(flight: flight)
                         }
                     }
                 }
             }
-            .frame(width:UIScreen.main.bounds.width-20,height: (networkModel.flights.count < 4 ? CGFloat(networkModel.flights.count)*60+40 : 280))
+            .frame(width:UIScreen.main.bounds.width-20,height: calculateHeight(for: networkModel.flights.count))
             .background(Color.white)
             .cornerRadius(10)
             .onAppear{
                 if !initialFetch{
                     networkModel.fetchFlights(userId: user.id)
+                    networkModel.fetchRequests(userId: user.id)
                     initialFetch.toggle()
                 }
             }
         }else{
             Text("Hello")
+        }
+    }
+    
+    private func calculateHeight(for count: Int) -> CGFloat {
+        let maxItemCount: Int = 4
+        let itemHeight: CGFloat = 45
+        
+        if count == 0 {
+            return CGFloat(50)
+        }
+        else if count < maxItemCount {
+            return CGFloat(count) * itemHeight + 50
+        } else {
+            return CGFloat(4) * itemHeight
         }
     }
 }
