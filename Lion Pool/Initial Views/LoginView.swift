@@ -13,6 +13,7 @@ struct LoginView: View {
     @State private var password = ""
     
     @EnvironmentObject var viewModel : UserModel
+    @EnvironmentObject var networkModel: NetworkModel
     
     var body: some View {
         NavigationView{
@@ -67,8 +68,10 @@ struct LoginView: View {
             }
            
         }
+        .onAppear{
+            networkModel.signOut()
+        }
     }
-        
 }
 
 struct LoginView_Previews: PreviewProvider {

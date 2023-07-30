@@ -12,7 +12,7 @@ import Firebase
 struct HomeView: View {
     @EnvironmentObject var viewModel: UserModel
     @EnvironmentObject var networkModel: NetworkModel
-        
+    
     var body: some View {
         if let user = viewModel.currentUser{
             CustomNavView{
@@ -24,7 +24,7 @@ struct HomeView: View {
                             RequestListView()
                             ScheduledRidesView()
                         }
-                       
+                        
                     }
                     
                 }.overlay(
@@ -67,9 +67,14 @@ struct HomeView: View {
             }
             .edgesIgnoringSafeArea(.all)
             .navigationBarBackButtonHidden()
-            
+            .onAppear{
+                networkModel.fetchFlights(userId: user.id)
+                networkModel.fetchRequests(userId: user.id)
+                networkModel.fetchInRequests(userId: user.id)
+            }
         }
     }
+    
     private var ListOfFlights: some View{
         FlightListView()
             .padding(.top, UIScreen.main.bounds.height/35)
@@ -78,11 +83,6 @@ struct HomeView: View {
     }
 }
     
-
-
-
-
-
 struct HomeView_Previews: PreviewProvider {
     
     static var previews: some View {

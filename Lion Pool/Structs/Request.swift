@@ -7,15 +7,16 @@
 
 import Foundation
 
-struct Request: Identifiable, Decodable{
+struct Request: Identifiable, Decodable, Hashable{
     var id: UUID
     var senderFlightId: UUID
     var recieverFlightId: UUID
     var recieverUserId: String
-    var requestDate: String
+//    var requestDate: String
     var flightDate: String
     var pfp: String
     var name: String
     var status: String
     var airport: String
+    var acknowledged: Bool
 }

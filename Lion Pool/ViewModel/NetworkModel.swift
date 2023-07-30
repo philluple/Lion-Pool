@@ -29,21 +29,101 @@ enum Result{
 
 
 class NetworkModel: ObservableObject{
-    
     @Published var matches: [UUID: [Match]] = [:]
     @Published var flights: [UUID: Flight] = [:]
-    @Published var requests: [Request] = []
+    @Published var requests: [UUID: Request] = [:]
+    @Published var inRequests: [UUID: Request] = [:]
     
-    
-        
+    let decoder = JSONDecoder()
     let baseURL = "http://localhost:3000/api"
     
+    
     func signOut (){
-        matches = [:]
-        flights = [:]
+        self.matches = [:]
+        self.flights = [:]
+        self.requests = [:]
     }
     
+    
+    func fetchInRequests(userId: String){
+        print("Attempting to fetch incoming requests")
+        let fullURL = "\(baseURL)/user/fetchInRequests?userId=\(userId)"
+        guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
+        let urlRequest = URLRequest(url: url)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
+            if let error = error {
+                print("Request error: ",error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else{
+                print("Error with response")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let decodedRequests = try self.decoder.decode([Request].self, from: data)
+                    DispatchQueue.main.async {
+                        for request in decodedRequests {
+                            self.inRequests[request.recieverFlightId] = request
+                        }
+                        print("Success")
+                    }
+                } catch {
+                    print("\(error.localizedDescription)")
+                    print("Error decoding requests")
+                    return
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func fetchRequests(userId: String){
+        print("Attempting to fetch request")
+        let fullURL = "\(baseURL)/user/fetchRequests?userId=\(userId)"
+        guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
+        let urlRequest = URLRequest(url: url)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
+            if let error = error {
+                print("Request error: ",error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else{
+                print("Error with response")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let decodedRequests = try self.decoder.decode([Request].self, from: data)
+                    DispatchQueue.main.async {
+                        for request in decodedRequests{
+                            self.requests[request.senderFlightId] = request
+                        }
+                        print("Success")
+                    }
+                } catch {
+                    print("\(error.localizedDescription)")
+                    print("Error decoding requests")
+                    return
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
+    
     func sendRequest(match: Match, senderUserId: String, completion: @escaping (Result)-> Void){
+       print("Attempting to send request")
         let fullURL = "\(baseURL)/matches/request?senderFlightId=\(match.senderFlightId)&senderUserId=\(senderUserId)&recieverFlightId=\(match.recieverFlightId)&recieverUserId=\(match.recieverUserId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let URLrequest = URLRequest(url: url)
@@ -62,16 +142,27 @@ class NetworkModel: ObservableObject{
                     return
                 }
                 do {
-                    let decoder = JSONDecoder()
-                    let decodedRequest = try decoder.decode(Request.self, from: data)
+                    print(data)
+                    let decodedRequest = try self.decoder.decode(Request.self, from: data)
                     DispatchQueue.main.async{
-                        print("Added a request")
-                        self.requests.append(decodedRequest)
+                        self.requests[decodedRequest.senderFlightId] = decodedRequest
                         completion(.success)
                     }
                 }catch {
-                    DispatchQueue.main.async{
-                        print("Error: \(error.localizedDescription)")
+//                    DispatchQueue.main.async{
+//                        print("Error from sendrequest: \(error.localizedDescription)")
+//                        completion(.failure)
+//                    }
+                    DispatchQueue.main.async {
+                        if let jsonData = try? JSONSerialization.jsonObject(with: data, options: []),
+                           let prettyPrintedData = try? JSONSerialization.data(withJSONObject: jsonData, options: .prettyPrinted),
+                           let jsonString = String(data: prettyPrintedData, encoding: .utf8) {
+                            print("Received JSON data:\n\(jsonString)")
+                        } else {
+                            print("Received data (not in JSON format):\n\(data)")
+                        }
+                        
+                        print("Error from sendrequest: \(error.localizedDescription)")
                         completion(.failure)
                     }
                 }
@@ -87,7 +178,7 @@ class NetworkModel: ObservableObject{
     }
     
     func fetchFlights(userId: String){
-        let userId = userId
+        print("Attempting to fetch flights")
         let fullURL = "\(baseURL)/user/fetchFlights?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
@@ -107,8 +198,7 @@ class NetworkModel: ObservableObject{
                     return
                 }
                 do {
-                    let decoder = JSONDecoder()
-                    let decodedFlights = try decoder.decode([Flight].self, from: data)
+                    let decodedFlights = try self.decoder.decode([Flight].self, from: data)
                     DispatchQueue.main.async {
                         for flight in decodedFlights {
                             self.flights[flight.id] = flight
@@ -127,7 +217,7 @@ class NetworkModel: ObservableObject{
     
     
     func addFlight(userId: String, date: Date, airport: String, completion: @escaping (AddResult)-> Void) {
-        
+        print("Attempting to add flight")
         let dateFormatter = ISO8601DateFormatter()
         let formattedDate = dateFormatter.string(from: date)
         
@@ -165,8 +255,7 @@ class NetworkModel: ObservableObject{
                         return
                     }
                     do {
-                        let decoder = JSONDecoder()
-                        let flightData = try decoder.decode(Flight.self, from: data)
+                        let flightData = try self.decoder.decode(Flight.self, from: data)
                         DispatchQueue.main.async{
                             print("SUCCESS: Successfully added flight")
                             self.flights[flightData.id] = flightData
@@ -190,6 +279,7 @@ class NetworkModel: ObservableObject{
     }
     
     func getMatches(flightId: UUID, userId: String, airport: String, completion: @escaping (MatchResult) -> Void) {
+        print("Attempting to get matches")
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
         let flightId = flightId
@@ -216,8 +306,7 @@ class NetworkModel: ObservableObject{
                     return
                 }
                 do {
-                    let decoder = JSONDecoder()
-                    let decodedMatches = try decoder.decode([Match].self, from: data)
+                    let decodedMatches = try self.decoder.decode([Match].self, from: data)
                     DispatchQueue.main.async {
                         self.matches[flightId] = decodedMatches
                         completion(.success)
@@ -240,49 +329,9 @@ class NetworkModel: ObservableObject{
         dataTask.resume()
         print("Count: \(matches.count)")
     }
-//        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-//            if let error = error {
-//                print("Request error: ", error)
-//                return
-//            }
-//
-//            guard let response = response as? HTTPURLResponse else {
-//                return
-//            }
-//            if response.statusCode == 200 {
-//                guard let data = data else {
-//                    DispatchQueue.main.async {
-//                        completion(.noMatches)
-//                    }
-//                    return
-//                }
-//                do {
-//                    let decoder = JSONDecoder()
-//                    let decodedMatches = try decoder.decode(Match.self, from: data)
-//                    DispatchQueue.main.async {
-////                        self.matches[flightId] = decodedMatches
-//                        completion(.success)
-//                    }
-//                } catch {
-//                    DispatchQueue.main.async {
-//                        print("failed to execute the do statement \(error.localizedDescription) " )
-//                        completion(.failure)
-//                    }
-//                }
-//
-//            }
-//            if response.statusCode == 204 {
-//                DispatchQueue.main.async {
-//                    completion(.noMatches)
-//                }
-//            }
-//        }
-        
-//        dataTask.resume()
-//        print("Count: \(matches.count)")
-//    }
     
     func deleteFlight(userId: String, flightId: UUID, airport: String, completion: @escaping (Result) -> Void){
+        print("Attempting to delete flights")
         let userId = userId
         let flightId = flightId
         let airport = airport
@@ -307,6 +356,7 @@ class NetworkModel: ObservableObject{
                 DispatchQueue.main.async {
                     self.flights.removeValue(forKey: flightId)
                     self.matches.removeValue(forKey: flightId)
+                    self.requests.removeValue(forKey: flightId)
                     completion(.success)
                 }
             } else {

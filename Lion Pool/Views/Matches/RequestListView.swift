@@ -22,7 +22,7 @@ struct RequestListView: View {
             }.padding(.top,20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(){
-                    ForEach(networkModel.requests) { request in
+                    ForEach(Array(networkModel.requests.values), id: \.self) { request in
                         RequestView(request: request)
                         Divider()
                             .padding(.bottom)

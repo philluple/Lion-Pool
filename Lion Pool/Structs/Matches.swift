@@ -16,5 +16,15 @@ struct Match: Decodable, Identifiable{
     var date: String
     var pfp: String
     var name: String
+    
+//    init(id: UUID, senderFlightId: UUID, recieverFlightId: UUID, recieverUserId: String, date: String, pfp: String, name: String){
+//        self.id = id
+//        self.senderFlightId = senderFlightId
+//        self.recieverFlightId = recieverFlightId
+//        self.recieverUserId = recieverUserId
+//        self.date = date
+//        self.pfp = pfp
+//        self.name = name
+//    }
+    
 }
-

@@ -40,8 +40,8 @@ struct RequestView: View {
                 
                 Text(request.name)
                     .font(.system(size: 16, weight: .semibold))
-                Text("To: \(request.airport)")
-                    .font(.system(size: 12))
+//                Text("To: \(request.airport)")
+//                    .font(.system(size: 12))
                 Text(formattedDate(RequestView.flight.dateFromISOString(request.flightDate)!))
                     .font(.system(size: 12))
                 Text("\(request.status)")

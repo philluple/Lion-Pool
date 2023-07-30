@@ -18,9 +18,13 @@ struct FlightDetailView: View {
     
 //     Calculate the difference in days and return a formatted string
     var diffs: Int {
-        let date = time.dateFromISOString(flight.date)
-        let components = Calendar.current.dateComponents([.day], from: Date(), to: date!)
-        return components.day ?? 0
+        if let date = time.dateFromISOString(flight.date) {
+            let components = Calendar.current.dateComponents([.day], from: Date(), to: date)
+            return components.day ?? 0
+        } else{
+            return 0
+        }
+        
     }
     
     var body: some View {
@@ -103,3 +107,9 @@ struct FlightDetailView: View {
 }
 
 
+struct FlightDetailView_Previews: PreviewProvider {
+    static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "July 20, 2023", foundMatch: false)
+    static var previews: some View {
+        FlightDetailView(flight: flight)
+    }
+}
