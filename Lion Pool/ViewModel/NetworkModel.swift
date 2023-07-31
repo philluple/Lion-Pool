@@ -27,7 +27,6 @@ enum Result{
 }
 
 
-
 class NetworkModel: ObservableObject{
     @Published var matches: [UUID: [Match]] = [:]
     @Published var flights: [UUID: Flight] = [:]
@@ -71,11 +70,11 @@ class NetworkModel: ObservableObject{
                         for request in decodedRequests {
                             self.inRequests[request.recieverFlightId] = request
                         }
-                        print("Success")
+                        return
                     }
                 } catch {
                     print("\(error.localizedDescription)")
-                    print("Error decoding requests")
+                    print("Error decoding requests fron Inrequests")
                     return
                 }
             }
@@ -109,11 +108,11 @@ class NetworkModel: ObservableObject{
                         for request in decodedRequests{
                             self.requests[request.senderFlightId] = request
                         }
-                        print("Success")
+                        return
                     }
                 } catch {
                     print("\(error.localizedDescription)")
-                    print("Error decoding requests")
+                    print("Error decoding requests from fetchRequests")
                     return
                 }
             }
@@ -149,19 +148,7 @@ class NetworkModel: ObservableObject{
                         completion(.success)
                     }
                 }catch {
-//                    DispatchQueue.main.async{
-//                        print("Error from sendrequest: \(error.localizedDescription)")
-//                        completion(.failure)
-//                    }
-                    DispatchQueue.main.async {
-                        if let jsonData = try? JSONSerialization.jsonObject(with: data, options: []),
-                           let prettyPrintedData = try? JSONSerialization.data(withJSONObject: jsonData, options: .prettyPrinted),
-                           let jsonString = String(data: prettyPrintedData, encoding: .utf8) {
-                            print("Received JSON data:\n\(jsonString)")
-                        } else {
-                            print("Received data (not in JSON format):\n\(data)")
-                        }
-                        
+                    DispatchQueue.main.async{
                         print("Error from sendrequest: \(error.localizedDescription)")
                         completion(.failure)
                     }
@@ -337,6 +324,7 @@ class NetworkModel: ObservableObject{
         let airport = airport
         
         let fullURL = "\(baseURL)/flight/deleteFlight?flightId=\(flightId)&userId=\(userId)&airport=\(airport)"
+        print(fullURL)
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         let urlRequest = URLRequest(url:url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in

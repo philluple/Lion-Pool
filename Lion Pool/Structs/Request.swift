@@ -18,5 +18,5 @@ struct Request: Identifiable, Decodable, Hashable{
     var name: String
     var status: String
     var airport: String
-    var acknowledged: Bool
+    var acknowledged: Bool?
 }
