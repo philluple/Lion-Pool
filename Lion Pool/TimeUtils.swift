@@ -25,30 +25,43 @@ class TimeUtils {
     ]
     
     //Pass a Date() Object and convert to date string
-    func formattedDate( _ date: String) -> String {
+    func formattedDate(_ date: String) -> String {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
-        let newDate = dateFromISOString(date)
-        let monthString = dateFormatter.string(from: newDate!)
-        if let abbreviatedMonth = monthAbbrev[monthString] {
-            return abbreviatedMonth
+        
+        if let newDate = dateFromISOString(date) {
+            let monthString = dateFormatter.string(from: newDate)
+            if let abbreviatedMonth = monthAbbrev[monthString] {
+                return abbreviatedMonth
+            }
+            return monthString
+        } else {
+            // Handle the case when dateFromISOString returns nil
+            // For example, return a default value or an error message
+            return "Invalid Date"
         }
-        return monthString
     }
 
     //Pass a Date() Object and convert to time string
-    func formattedTime(_ date: String) ->String {
+    func formattedTime(_ date: String) -> String {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
-        let newDate = dateFromISOString(date)
-        return dateFormatter.string(from: newDate!)
+        
+        if let newDate = dateFromISOString(date) {
+            return dateFormatter.string(from: newDate)
+        } else {
+            // Handle the case when dateFromISOString returns nil
+            // For example, return a default value or an error message
+            return "Invalid Time"
+        }
     }
-    
+
     func dateFromISOString(_ dateString: String) -> Date? {
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return dateFormatter.date(from: dateString)
     }
+
     
 }
 

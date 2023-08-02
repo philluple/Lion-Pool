@@ -12,11 +12,11 @@ struct Request: Identifiable, Decodable, Hashable{
     var senderFlightId: UUID
     var recieverFlightId: UUID
     var recieverUserId: String
-//    var requestDate: String
+    var senderUserId: String
     var flightDate: String
     var pfp: String
     var name: String
     var status: String
     var airport: String
-    var acknowledged: Bool?
+    var notify: Bool?
 }

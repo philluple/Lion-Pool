@@ -10,21 +10,12 @@ import Firebase
 
 struct Match: Decodable, Identifiable{
     var id: UUID
-    var senderFlightId: UUID
-    var recieverFlightId: UUID
-    var recieverUserId: String
+    var flightId: UUID
+    var matchFlightId: UUID
+    var matchUserId: String
     var date: String
     var pfp: String
     var name: String
-    
-//    init(id: UUID, senderFlightId: UUID, recieverFlightId: UUID, recieverUserId: String, date: String, pfp: String, name: String){
-//        self.id = id
-//        self.senderFlightId = senderFlightId
-//        self.recieverFlightId = recieverFlightId
-//        self.recieverUserId = recieverUserId
-//        self.date = date
-//        self.pfp = pfp
-//        self.name = name
-//    }
-    
+    var notify: Bool?
+    var airport: String
 }

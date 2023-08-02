@@ -47,11 +47,13 @@
 		7537511C2A57DE1F00B02528 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99732A57B76E0036ECEE /* LoginView.swift */; };
 		7537511E2A57E43700B02528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537511D2A57E43700B02528 /* HomeView.swift */; };
 		754AD3FD2A59363100F78013 /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754AD3FC2A59363100F78013 /* Flight.swift */; };
-		756E4BD12A736628002A8006 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756E4BD02A736628002A8006 /* File.swift */; };
+		75596AC12A78F63E00C6C819 /* Lion-Pool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75596AC02A78F63D00C6C819 /* Lion-Pool-Info.plist */; };
+		75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75596AC22A79694600C6C819 /* ConfirmFlight.swift */; };
+		75596AC52A7969FB00C6C819 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75596AC42A7969FB00C6C819 /* NotificationView.swift */; };
 		757297222A57D68300B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		757297232A57D68400B8EE3D /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		75731D392A75BC4A0001B01E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D382A75BC4A0001B01E /* Request.swift */; };
-		75731D3B2A75C7940001B01E /* RequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3A2A75C7940001B01E /* RequestView.swift */; };
+		75731D3B2A75C7940001B01E /* ConfirmedMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */; };
 		75731D3D2A75CD130001B01E /* RequestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3C2A75CD130001B01E /* RequestListView.swift */; };
 		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
 		758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137882A69E12D00577409 /* CustomNavBarContainerView.swift */; };
@@ -62,7 +64,6 @@
 		7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137992A6A2BA300577409 /* UserDataView.swift */; };
 		758E03842A74FE5400FC7EF6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537511D2A57E43700B02528 /* HomeView.swift */; };
 		758E03852A74FE5400FC7EF6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7537511D2A57E43700B02528 /* HomeView.swift */; };
-		758E038A2A75001500FC7EF6 /* ConfirmFlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758E03892A75001500FC7EF6 /* ConfirmFlight.swift */; };
 		7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576A2A58DD8900571AD0 /* FirebaseAuth */; };
 		7595576D2A58DD8900571AD0 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576C2A58DD8900571AD0 /* FirebaseAuthCombine-Community */; };
 		7595576F2A58DD8900571AD0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576E2A58DD8900571AD0 /* FirebaseDatabase */; };
@@ -76,7 +77,6 @@
 		75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E752A586C3D002ABE9C /* ContentView.swift */; };
 		75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75A05E842A58C72D002ABE9C /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 75A05E832A58C72D002ABE9C /* iPhoneNumberField */; };
-		75BB9B362A578B0F00F2CC75 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 75BB9B352A578B0F00F2CC75 /* Podfile */; };
 		75D7FDC92A704A0E00779DA5 /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDC82A704A0E00779DA5 /* NetworkModel.swift */; };
 		75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCA2A704BBC00779DA5 /* Matches.swift */; };
 		75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */; };
@@ -128,9 +128,11 @@
 		752F99802A57D24B0036ECEE /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7537511D2A57E43700B02528 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		754AD3FC2A59363100F78013 /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
-		756E4BD02A736628002A8006 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		75596AC02A78F63D00C6C819 /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Lion-Pool-Info.plist"; sourceTree = "<group>"; };
+		75596AC22A79694600C6C819 /* ConfirmFlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmFlight.swift; sourceTree = "<group>"; };
+		75596AC42A7969FB00C6C819 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		75731D382A75BC4A0001B01E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		75731D3A2A75C7940001B01E /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
+		75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedMatchView.swift; sourceTree = "<group>"; };
 		75731D3C2A75CD130001B01E /* RequestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListView.swift; sourceTree = "<group>"; };
 		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
@@ -139,17 +141,14 @@
 		7581378E2A69E73F00577409 /* CustomNavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavLink.swift; sourceTree = "<group>"; };
 		758137912A69EC2100577409 /* CustomNavBarPreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarPreferenceKeys.swift; sourceTree = "<group>"; };
 		758137992A6A2BA300577409 /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
-		758E03892A75001500FC7EF6 /* ConfirmFlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfirmFlight.swift; path = "Lion Pool/Views/ConfirmFlight.swift"; sourceTree = SOURCE_ROOT; };
 		759B43CF2A7230CA0050D2C4 /* FindingMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindingMatchView.swift; sourceTree = "<group>"; };
 		759B43D12A72EB0E0050D2C4 /* NoMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchView.swift; sourceTree = "<group>"; };
 		75A05E752A586C3D002ABE9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75A05E792A5896D0002ABE9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		75BB9B352A578B0F00F2CC75 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
 		75D7FDC82A704A0E00779DA5 /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		75D7FDCA2A704BBC00779DA5 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
 		75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListView.swift; sourceTree = "<group>"; };
 		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
-		75DE17C12A6AEFE00056EB56 /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Lion-Pool-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,8 +190,6 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
-				756E4BD02A736628002A8006 /* File.swift */,
-				75BB9B352A578B0F00F2CC75 /* Podfile */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
 				75109A5D285BB7D100CAC400 /* Lion PoolTests */,
 				75109A67285BB7D100CAC400 /* Lion PoolUITests */,
@@ -213,16 +210,13 @@
 		75109A4C285BB7CE00CAC400 /* Lion Pool */ = {
 			isa = PBXGroup;
 			children = (
-				75DE17C12A6AEFE00056EB56 /* Lion-Pool-Info.plist */,
+				75596AC02A78F63D00C6C819 /* Lion-Pool-Info.plist */,
 				751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
 				75111D882A761C1F0064F990 /* TimeUtils.swift */,
 				758E03832A74FDAB00FC7EF6 /* ViewModel */,
 				758E03822A74FD8500FC7EF6 /* Structs */,
-				751C34F72A6DEDE800F6783C /* FlightDetailView.swift */,
-				75109A83285BB85900CAC400 /* Initial Views */,
-				75109A95285BB85A00CAC400 /* Views */,
 				75109A79285BB85900CAC400 /* Reusable Components */,
 				75109A51285BB7D100CAC400 /* Assets.xcassets */,
 				75109A53285BB7D100CAC400 /* Preview Content */,
@@ -280,6 +274,7 @@
 		75109A95285BB85A00CAC400 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75109A83285BB85900CAC400 /* Initial Views */,
 				7537511D2A57E43700B02528 /* HomeView.swift */,
 				751ECBDD2A782E16006357E3 /* ImageCache.swift */,
 				758E03872A74FEBA00FC7EF6 /* Matches */,
@@ -287,7 +282,7 @@
 				75A05E792A5896D0002ABE9C /* ProfileView.swift */,
 				758E03882A74FF3300FC7EF6 /* Upcoming Flights */,
 				758E03862A74FE9700FC7EF6 /* Add Flight */,
-				75731D3A2A75C7940001B01E /* RequestView.swift */,
+				75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +316,7 @@
 			children = (
 				75D7FDC82A704A0E00779DA5 /* NetworkModel.swift */,
 				752F99802A57D24B0036ECEE /* UserModel.swift */,
+				75109A95285BB85A00CAC400 /* Views */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -328,8 +324,9 @@
 		758E03862A74FE9700FC7EF6 /* Add Flight */ = {
 			isa = PBXGroup;
 			children = (
+				751C34F72A6DEDE800F6783C /* FlightDetailView.swift */,
+				75596AC22A79694600C6C819 /* ConfirmFlight.swift */,
 				75109A96285BB85A00CAC400 /* AddFlightView.swift */,
-				758E03892A75001500FC7EF6 /* ConfirmFlight.swift */,
 			);
 			path = "Add Flight";
 			sourceTree = "<group>";
@@ -351,6 +348,7 @@
 			children = (
 				75109A98285BB85A00CAC400 /* FlightListView.swift */,
 				75109A81285BB85900CAC400 /* FlightView.swift */,
+				75596AC42A7969FB00C6C819 /* NotificationView.swift */,
 			);
 			path = "Upcoming Flights";
 			sourceTree = "<group>";
@@ -477,6 +475,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75596AC12A78F63E00C6C819 /* Lion-Pool-Info.plist in Resources */,
 				75109A55285BB7D100CAC400 /* Preview Assets.xcassets in Resources */,
 				751C34EF2A6CF08200F6783C /* GoogleService-Info.plist in Resources */,
 				75109A52285BB7D100CAC400 /* Assets.xcassets in Resources */,
@@ -494,7 +493,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75BB9B362A578B0F00F2CC75 /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +508,7 @@
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
 				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
+				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
 				75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */,
 				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
@@ -521,10 +520,11 @@
 				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
 				75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */,
 				75D7FDC92A704A0E00779DA5 /* NetworkModel.swift in Sources */,
+				75596AC52A7969FB00C6C819 /* NotificationView.swift in Sources */,
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
 				75366130285BBBF40077C02F /* FlightView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
-				75731D3B2A75C7940001B01E /* RequestView.swift in Sources */,
+				75731D3B2A75C7940001B01E /* ConfirmedMatchView.swift in Sources */,
 				75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */,
 				75731D3D2A75CD130001B01E /* RequestListView.swift in Sources */,
 				7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */,
@@ -533,7 +533,6 @@
 				75366131285BBBF40077C02F /* ImagePicker.swift in Sources */,
 				752F99812A57D24B0036ECEE /* UserModel.swift in Sources */,
 				759B43D02A7230CA0050D2C4 /* FindingMatchView.swift in Sources */,
-				758E038A2A75001500FC7EF6 /* ConfirmFlight.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,
 				75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */,
@@ -567,7 +566,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */,
-				756E4BD12A736628002A8006 /* File.swift in Sources */,
 				758E03842A74FE5400FC7EF6 /* HomeView.swift in Sources */,
 				75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */,
 				7537511A2A57DE1F00B02528 /* RegistrationView.swift in Sources */,
