@@ -17,13 +17,13 @@ import SwiftUI
 @MainActor
 class UserModel: ObservableObject {
     // Firebase user objext
-    
+    static let shared = UserModel()
     @Published var userSession: FirebaseAuth.User?
     
     // Our user object
     @Published var currentUser: User?
     @Published var currentUserProfileImage: UIImage? = nil
-    @EnvironmentObject var networkModel: NetworkModel
+//    @EnvironmentObject var networkModel: NetworkModel
     
     
     init(){

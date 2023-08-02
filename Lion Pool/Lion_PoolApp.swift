@@ -5,8 +5,6 @@ import FirebaseCore
 @main
 struct Lion_PoolApp: App {
 
-    @StateObject var userModel = UserModel()
-    @StateObject var networkModel = NetworkModel()
     
     init() {
         FirebaseApp.configure()
@@ -15,8 +13,11 @@ struct Lion_PoolApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(userModel)
-                .environmentObject(networkModel)
+                .environmentObject(UserModel())
+                .environmentObject(RequestModel())
+                .environmentObject(MatchModel())
+                .environmentObject(FlightModel())
+
 
         }
     }

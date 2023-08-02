@@ -13,7 +13,11 @@ struct NotificationView: View {
     let timeUtil = TimeUtils()
     @StateObject private var imageLoader: ImageLoader
     @EnvironmentObject var userModel: UserModel
-    @EnvironmentObject var networkModel: NetworkModel
+//    @EnvironmentObject var networkModel: NetworkModel
+    @EnvironmentObject var requestModel: RequestModel
+    @EnvironmentObject var matchModel: MatchModel
+    
+    
     
     init(request: Request?) {
         self.request = request
@@ -65,7 +69,7 @@ struct NotificationView: View {
                     HStack(spacing: 10){
                         if let user = userModel.currentUser{
                             Button {
-                                networkModel.rejectRequest(request: request, userId: user.id)
+                                requestModel.rejectRequest(request: request, userId: user.id)
                             } label: {
                                 Image(systemName: "x.circle.fill")
                                     .resizable()
@@ -73,7 +77,14 @@ struct NotificationView: View {
                                     .foregroundColor(Color.red)
                             }
                             Button {
-                                networkModel.acceptRequest(request: request, currentUser: user)
+                                requestModel.acceptRequest(request: request, currentUser: user){ result in
+                                    switch result{
+                                    case.success:
+                                        matchModel.matchesConfirmed.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
+                                    case.failure:
+                                        print("Failed to accept request")
+                                    }
+                                }
                             } label: {
                                 Image(systemName: "checkmark.circle.fill")
                                     .resizable()
@@ -94,15 +105,15 @@ struct NotificationView: View {
         }    }
 }
 
-struct NotificationView_Previews: PreviewProvider {
-    static var request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "12345", senderUserId: "12345", flightDate: "July 20, 2023", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FyMnqGkrVeGVELfzp8oFevQCnLUs2-pfp.jpg?alt=media&token=29eb6d1e-07ab-4553-ae23-7fc7d6ebcc69", name: "Bitch Cunt", status: "PENDING", airport: "HE", notify: true)
-    static var previews: some View {
-        NotificationView(request: request)
-            .environmentObject(NetworkModel())
-            .environmentObject(UserModel())
-        
-    }
-}
+//struct NotificationView_Previews: PreviewProvider {
+//    static var request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "12345", senderUserId: "12345", flightDate: "July 20, 2023", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FyMnqGkrVeGVELfzp8oFevQCnLUs2-pfp.jpg?alt=media&token=29eb6d1e-07ab-4553-ae23-7fc7d6ebcc69", name: "Bitch Cunt", status: "PENDING", airport: "HE", notify: true)
+//    static var previews: some View {
+//        NotificationView(request: request)
+//            .environmentObject(NetworkModel())
+//            .environmentObject(UserModel())
+//        
+//    }
+//}
 
 
 
