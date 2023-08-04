@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseStorage
 
-struct NotificationView: View {
+struct RequestView: View {
     let request: Request
     let timeUtil = TimeUtils()
     let imageUtil = ImageUtils()
@@ -31,40 +31,12 @@ struct NotificationView: View {
                     .font(.system(size: 12))
                 Text(timeUtil.formattedDate(request.flightDate))
                     .font(.system(size: 12))
-                
-                HStack(spacing: 10){
-                    if let user = userModel.currentUser{
-                        Button {
-                            requestModel.rejectRequest(request: request, userId: user.id)
-                        } label: {
-                            Image(systemName: "x.circle.fill")
-                                .resizable()
-                                .frame(width:50, height:50)
-                                .foregroundColor(Color.red)
-                        }
-                        Button {
-                            requestModel.acceptRequest(request: request, currentUser: user){ result in
-                                switch result{
-                                case.success:
-                                    if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
-                                        existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
-                                        matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
-                                    }else{
-                                        matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
-                                    }
-                                case.failure:
-                                    print("Failed to accept request")
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "checkmark.circle.fill")
-                                .resizable()
-                                .frame(width:50, height:50)
-                                .foregroundColor(Color.green)
-                        }
-                    }
-                    
-                }
+                Text(request.status)
+                    .font(.system(size:12, weight: .semibold))
+                    .frame(width: 40, height:20)
+                    .cornerRadius(10)
+                    .foregroundColor(Color.white)
+                    .background(Color("Gold"))
                 
             }
             
@@ -119,3 +91,4 @@ struct NotificationView: View {
         
     }
 }
+

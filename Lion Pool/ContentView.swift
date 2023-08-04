@@ -21,5 +21,9 @@ struct ContentView: View {
                 LoginView()
             }
         }
+        .onAppear {
+            // Trigger initial user session check when ContentView appears
+            userModel.checkUserSession()
+        }
     }
 }

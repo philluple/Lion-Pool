@@ -21,11 +21,12 @@ class FlightModel: ObservableObject{
     @Published var flights: [UUID: Flight] = [:]
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://localhost:3000/api"
+    let baseURL = "http://localhost:3000/api/flight"
     
     func fetchFlights(userId: String){
         print("Attempting to fetch flights")
-        let fullURL = "\(baseURL)/user/fetchFlights?userId=\(userId)"
+        self.flights = [:]
+        let fullURL = "\(baseURL)/fetchFlights?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -67,7 +68,7 @@ class FlightModel: ObservableObject{
         let flightId = flightId
         let airport = airport
         
-        let fullURL = "\(baseURL)/flight/deleteFlight?flightId=\(flightId)&userId=\(userId)&airport=\(airport)"
+        let fullURL = "\(baseURL)/deleteFlight?flightId=\(flightId)&userId=\(userId)&airport=\(airport)"
         print(fullURL)
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         let urlRequest = URLRequest(url:url)
@@ -111,7 +112,7 @@ class FlightModel: ObservableObject{
         let date = formattedDate
         let airport = airport
         
-        let fullURL = "\(baseURL)/flight/addFlight"
+        let fullURL = "\(baseURL)/addFlight"
         print (fullURL)
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         

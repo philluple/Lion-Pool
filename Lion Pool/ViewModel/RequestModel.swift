@@ -13,7 +13,7 @@ class RequestModel: ObservableObject{
     @Published var inRequests: [UUID: [Request]] = [:]
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://localhost:3000/api"
+    let baseURL = "http://localhost:3000/api/request"
     
 
     enum Result{
@@ -22,7 +22,7 @@ class RequestModel: ObservableObject{
     }
     
     func updateNotify (flightId: UUID, userId: String){
-        let fullURL = "\(baseURL)/user/updateNotify?flightId=\(flightId)&userId=\(userId)"
+        let fullURL = "\(baseURL)/updateNotify?flightId=\(flightId)&userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
@@ -47,7 +47,7 @@ class RequestModel: ObservableObject{
     
     func acceptRequest (request: Request, currentUser: User, completion: @escaping (Result)-> Void){
         // Reciever data
-        let fullURL = "\(baseURL)/user/acceptRequest"
+        let fullURL = "\(baseURL)/accept"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         
         var httpRequest = URLRequest(url: url)
@@ -79,9 +79,8 @@ class RequestModel: ObservableObject{
                 if httpResponse.statusCode == 200 {
                     //use MatchData to populate a match and add it to the matches array
                     DispatchQueue.main.async{
+                        print("Accepted request")
                         completion(.success)
-                        
-//                        self.confirmedMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
                     }
                 } else{
                     print("Could not add flight!")
@@ -94,7 +93,7 @@ class RequestModel: ObservableObject{
     func rejectRequest (request: Request, userId: String){
         print("Attempting to reject")
         let id = request.id
-        let fullURL = "\(baseURL)/user/rejectRequest?id=\(id)&recieverUserId=\(userId)&senderUserId=\(request.senderUserId)"
+        let fullURL = "\(baseURL)/reject?id=\(id)&recieverUserId=\(userId)&senderUserId=\(request.senderUserId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
@@ -125,7 +124,8 @@ class RequestModel: ObservableObject{
     
     func fetchInRequests(userId: String){
         print("Attempting to fetch incoming requests")
-        let fullURL = "\(baseURL)/user/fetchInRequests?userId=\(userId)"
+        inRequests = [:]
+        let fullURL = "\(baseURL)/fetchInRequests?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
@@ -171,7 +171,8 @@ class RequestModel: ObservableObject{
     
     func fetchRequests(userId: String){
         print("Attempting to fetch request")
-        let fullURL = "\(baseURL)/user/fetchRequests?userId=\(userId)"
+        requests = [:]
+        let fullURL = "\(baseURL)/fetchOutRequests?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) {(data, response, error) in
@@ -210,7 +211,7 @@ class RequestModel: ObservableObject{
     
     func sendRequest(match: Match, senderUserId: String, completion: @escaping (Result)-> Void){
         print("Attempting to send request")
-        let fullURL = "\(baseURL)/matches/request?senderFlightId=\(match.flightId)&senderUserId=\(senderUserId)&recieverFlightId=\(match.matchFlightId)&recieverUserId=\(match.matchUserId)"
+        let fullURL = "\(baseURL)/send?senderFlightId=\(match.flightId)&senderUserId=\(senderUserId)&recieverFlightId=\(match.matchFlightId)&recieverUserId=\(match.matchUserId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let URLrequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: URLrequest) { (data, response, error) in

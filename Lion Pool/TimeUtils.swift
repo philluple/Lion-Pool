@@ -25,24 +25,20 @@ class TimeUtils {
     ]
     
     //Pass a Date() Object and convert to date string
+    //Pass a Date() Object and convert to date string
+    // Pass a Date() Object and convert to date string
     func formattedDate(_ date: String) -> String {
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
         if let newDate = dateFromISOString(date) {
-            let monthString = dateFormatter.string(from: newDate)
-            if let abbreviatedMonth = monthAbbrev[monthString] {
-                return abbreviatedMonth
-            }
-            return monthString
+            return dateFormatter.string(from: newDate)
         } else {
-            // Handle the case when dateFromISOString returns nil
-            // For example, return a default value or an error message
             return "Invalid Date"
         }
     }
 
-    //Pass a Date() Object and convert to time string
+    // Pass a Date() Object and convert to time string
     func formattedTime(_ date: String) -> String {
         dateFormatter.dateStyle = .none
         dateFormatter.timeStyle = .short
@@ -50,11 +46,34 @@ class TimeUtils {
         if let newDate = dateFromISOString(date) {
             return dateFormatter.string(from: newDate)
         } else {
-            // Handle the case when dateFromISOString returns nil
-            // For example, return a default value or an error message
             return "Invalid Time"
         }
     }
+    func extractDay(_ date: String) -> String {
+        if let newDate = dateFromISOString(date) {
+            let calendar = Calendar.current
+            let day = calendar.component(.day, from: newDate)
+            return String(day)
+        } else {
+            return "Invalid Date"
+        }
+    }
+    
+    func extractMonth(_ date: String) -> String {
+        if let newDate = dateFromISOString(date) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM"
+            let monthString = dateFormatter.string(from: newDate)
+            
+            if let abbreviatedMonth = monthAbbrev[monthString] {
+                return abbreviatedMonth
+            }
+            return monthString
+        } else {
+            return "Invalid Date"
+        }
+    }
+    
 
     func dateFromISOString(_ dateString: String) -> Date? {
         let dateFormatter = ISO8601DateFormatter()

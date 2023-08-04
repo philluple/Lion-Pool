@@ -16,30 +16,48 @@ import SwiftUI
 // Publishes UI changes on the main thread
 @MainActor
 class UserModel: ObservableObject {
-    // Firebase user objext
-    static let shared = UserModel()
+
     @Published var userSession: FirebaseAuth.User?
-    
-    // Our user object
     @Published var currentUser: User?
-    @Published var currentUserProfileImage: UIImage? = nil
-//    @EnvironmentObject var networkModel: NetworkModel
-    
+    @Published var currentUserProfileImage: Image? = nil
+
+    let imageUtil = ImageUtils()
     
     init(){
         self.userSession = Auth.auth().currentUser
         Task {
             await fetchUser()
-            await retrievePfp()
+            await fetchPfp()
         }
     }
     
+    func checkUserSession() {
+        // Add an observer to the Firebase Authentication state
+        Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+            guard let self = self else { return }
+            
+            if let user = user {
+                self.userSession = user
+            
+                Task {
+                    await self.fetchUser()
+//                    await self.retrievePfp()
+                }
+            } else {
+                // User is signed out, set userSession to nil and reset currentUser data
+                self.userSession = nil
+                self.currentUser = nil
+                self.currentUserProfileImage = nil
+            }
+        }
+    }
+
     func signIn(withEmail email: String, password: String) async throws{
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
-            await retrievePfp()
+//            await retrievePfp()
             print("SUCCESS: User has signed in")
         } catch {
             print("DEBUG: failed to login")
@@ -56,7 +74,7 @@ class UserModel: ObservableObject {
             print("DEBUG: before")
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
-            await retrievePfp()
+//            await retrievePfp()
             print("SUCCESS: \(user.id) has been created")
             
             return user.id
@@ -87,22 +105,23 @@ class UserModel: ObservableObject {
         print("SUCCESS: Fetched the user")
     }
     
-    func retrievePfp() async{
-        guard let pfpLocation = self.currentUser?.pfpLocation else { return }
-        let storage = Storage.storage()
-        if pfpLocation == ""{
+    func fetchPfp() async {
+        guard let pfp = self.currentUser?.pfpLocation else{
             return
         }
-        let httpsReference = storage.reference(forURL: pfpLocation)
-        httpsReference.getData(maxSize:350*350){
-            data, error in
-            if let error = error{
-                print("DEBUG: Error retrieving profile picture: \(error.localizedDescription)")
-            } else{
-                if let data = data, let image = UIImage(data: data){
-                    self.currentUserProfileImage = image
-                    print("SUCCESS: Downloaded user profile photo")
-                }
+        guard let id = self.currentUser?.id else{
+            return
+        }
+        if pfp == "" {
+            return
+        }
+        imageUtil.fetchImage(userId: id){ result in
+            switch result {
+            case .success(let uiImage):
+                self.currentUserProfileImage = Image(uiImage: uiImage)
+            case .failure:
+                // Set a placeholder image or handle the error state
+                self.currentUserProfileImage = Image(systemName: "person.circle.fill")
             }
         }
     }
