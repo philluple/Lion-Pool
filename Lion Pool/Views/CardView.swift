@@ -78,11 +78,11 @@ struct CardView: View {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: true)
-
-    static var previews: some View {
-        CardView(flight: flight)
-            .environmentObject(MatchModel())
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: true)
+//
+//    static var previews: some View {
+//        CardView(flight: flight)
+//            .environmentObject(MatchModel())
+//    }
+//}

@@ -12,6 +12,9 @@ import GoogleSignIn
 
 struct ContentView: View {
     @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var matchModel: MatchModel
+    @EnvironmentObject var requestModel: RequestModel
+    @EnvironmentObject var flightModel: FlightModel
     
     var body: some View {
         Group {
@@ -22,8 +25,8 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            // Trigger initial user session check when ContentView appears
             userModel.checkUserSession()
+            print("In here")
         }
     }
 }

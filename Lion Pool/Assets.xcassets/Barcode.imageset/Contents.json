@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "barcodepng 1.png",
+      "filename" : "Barcode.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "barcodepng.png",
+      "filename" : "Barcode 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "barcodepng 2.png",
+      "filename" : "Barcode 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -15,10 +15,26 @@ class RequestModel: ObservableObject{
     let jsonDecoder = JSONDecoder()
     let baseURL = "http://localhost:3000/api/request"
     
+    init(){
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        fetchRequests(userId: userId!)
+        fetchRequests(userId: userId!)
+    }
 
     enum Result{
         case success
         case failure
+    }
+    
+    func signOut(){
+        self.requests = [:]
+        self.inRequests = [:]
+    }
+    
+    func signIn(){
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        fetchRequests(userId: userId!)
+        fetchRequests(userId: userId!)
     }
     
     func updateNotify (flightId: UUID, userId: String){

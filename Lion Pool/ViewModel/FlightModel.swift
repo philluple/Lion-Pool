@@ -18,14 +18,29 @@ enum AddResult{
 }
 
 class FlightModel: ObservableObject{
-    @Published var flights: [UUID: Flight] = [:]
+    //    @Published var flights: [UUID: Flight] = [:]
+    @Published var flights: [Flight] = []
     
     let jsonDecoder = JSONDecoder()
     let baseURL = "http://localhost:3000/api/flight"
     
+    init(){
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        fetchFlights(userId: userId!)
+    }
+    
+    func signIn(){
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        fetchFlights(userId: userId!)
+    }
+    
+    func signOut(){
+        self.flights = []
+    }
+    
     func fetchFlights(userId: String){
         print("Attempting to fetch flights")
-        self.flights = [:]
+        self.flights = []
         let fullURL = "\(baseURL)/fetchFlights?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
@@ -34,12 +49,12 @@ class FlightModel: ObservableObject{
                 print("Request error: ", error)
                 return
             }
-            
+
             guard let response = response as? HTTPURLResponse else {
                 print("Error with response")
                 return
             }
-            
+
             if response.statusCode == 200 {
                 guard let data = data else {
                     return
@@ -48,7 +63,8 @@ class FlightModel: ObservableObject{
                     let decodedFlights = try self.jsonDecoder.decode([Flight].self, from: data)
                     DispatchQueue.main.async {
                         for flight in decodedFlights {
-                            self.flights[flight.id] = flight
+                            self.flights.append(flight)
+                            print(flight)
                         }
                     }
                 } catch {
@@ -59,7 +75,6 @@ class FlightModel: ObservableObject{
             }
         }
         dataTask.resume()
-        print("Just fetched flights for this bitch")
     }
     
     func deleteFlight(userId: String, flightId: UUID, airport: String, completion: @escaping (FlightResult) -> Void){
@@ -87,9 +102,11 @@ class FlightModel: ObservableObject{
             
             if response.statusCode == 200 {
                 DispatchQueue.main.async {
-                    self.flights.removeValue(forKey: flightId)
-//                    self.matches.removeValue(forKey: flightId)
-//                    self.requests.removeValue(forKey: flightId)
+                    if let index = self.flights.firstIndex(where: { $0.id == flightId }) {
+                        self.flights.remove(at: index)
+                    } else {
+                        // Object with target ID not found in the array
+                    }
                     completion(.success)
                 }
             } else {
@@ -145,7 +162,7 @@ class FlightModel: ObservableObject{
                         let flightData = try self.jsonDecoder.decode(Flight.self, from: data)
                         DispatchQueue.main.async{
                             print("SUCCESS: Successfully added flight")
-                            self.flights[flightData.id] = flightData
+                            self.flights.append(flightData)
                             completion(.success(flightData))
                         }
                     } catch let decodingError{

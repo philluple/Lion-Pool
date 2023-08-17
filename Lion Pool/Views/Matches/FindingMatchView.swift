@@ -44,7 +44,7 @@ struct FindingMatchView: View {
     let maxElapsedTime: TimeInterval = 3 // Set the desired duration in seconds
     
     @StateObject private var randomNumberGenerator = RandomNumberGenerator()
-    @EnvironmentObject var networkModel : NetworkModel
+    @EnvironmentObject var matchModel : MatchModel
     
 //    let dateFormatter = DateFormatter(dateFormat: "yyyyMMddHHmmss")
     let maxDots = 3
@@ -93,7 +93,7 @@ struct FindingMatchView: View {
                     })
             }
             .onAppear {
-                networkModel.getMatches(flightId: flightId, userId: userId, airport: airport){ result in switch result{
+                matchModel.findMatch(flightId: flightId, userId: userId, airport: airport){ result in switch result{
                 case.success:
                     matchesFound.toggle()
                 case .noMatches:

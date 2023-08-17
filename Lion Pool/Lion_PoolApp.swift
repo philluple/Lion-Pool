@@ -4,7 +4,6 @@ import FirebaseCore
 
 @main
 struct Lion_PoolApp: App {
-
     
     init() {
         FirebaseApp.configure()
@@ -17,9 +16,8 @@ struct Lion_PoolApp: App {
                 .environmentObject(RequestModel())
                 .environmentObject(MatchModel())
                 .environmentObject(FlightModel())
-
-
         }
     }
+    
 }
 

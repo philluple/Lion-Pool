@@ -13,7 +13,10 @@ import FirebaseAuth
 
 struct ProfileView: View {
     @EnvironmentObject var viewModel : UserModel
-    @EnvironmentObject var networkModel: NetworkModel
+    @EnvironmentObject var matchModel : MatchModel
+    @EnvironmentObject var requestModel : RequestModel
+    @EnvironmentObject var flightModel : FlightModel
+//    @EnvironmentObject var networkModel: NetworkModel
     @State private var profileImage: UIImage? = nil
     
     var body: some View {
@@ -27,7 +30,7 @@ struct ProfileView: View {
                         .padding()
                 } else {
                     if let image = viewModel.currentUserProfileImage { // 2. Use the profileImage here
-                        Image(uiImage: image)
+                        image
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 120, height: 120)
@@ -55,6 +58,9 @@ struct ProfileView: View {
                 Spacer()
                 
                 Button {
+                    matchModel.signOut()
+                    flightModel.signOut()
+                    requestModel.signOut()
                     viewModel.signOut()
                 } label: {
                     Text("Sign out")

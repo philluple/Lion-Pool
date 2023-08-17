@@ -11,11 +11,12 @@ import FirebaseStorage
 
 struct FlightMatch: View {
     let match: Match?
+    let imageUtil = ImageUtils()
     @Binding var hitRequestButton: Bool
-    @State private var matchImage: UIImage? // Assuming this is a UIImage
-    @EnvironmentObject var networkModel: NetworkModel
+    @State private var userImage: Image? // Assuming this is a UIImage
     @EnvironmentObject var userModel: UserModel
-
+    @EnvironmentObject var requestModel: RequestModel
+    
     
     var body: some View {
         if let match = match{
@@ -24,21 +25,13 @@ struct FlightMatch: View {
                 .frame(width: UIScreen.main.bounds.width - 50, height: 200)
                 .overlay{
                     HStack{
-                        if let image = matchImage {
-                            Image(uiImage: image)
+                        if let userImage = userImage{
+                            userImage
                                 .resizable()
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color("TextOutlineDark"), lineWidth: 4))
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width:150, height:150)
-                            
-                            
-                        }else{
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 150, height: 150)
-                            
                         }
                         VStack{
                             Text(match.name)
@@ -47,7 +40,7 @@ struct FlightMatch: View {
                             Text("CC '24")
                             Button {
                                 if let user = userModel.currentUser{
-                                    networkModel.sendRequest(match: match, senderUserId: user.id){ result in switch result{
+                                    requestModel.sendRequest(match: match, senderUserId: user.id){ result in switch result{
                                     case.success:
                                         hitRequestButton.toggle()
                                         print("Nice")
@@ -69,47 +62,23 @@ struct FlightMatch: View {
                                             .padding(.vertical, 5)
                                     }
                             }
-
+                            
                         }
                         
-
+                        
                     }
                 }
-            .onAppear{
-                loadImage()
-                print ("SUCCESS: loaded the image")
-            }
-
-        }else{
-            Text("nothing there")
-        }
-    }
-
-
-    func loadImage(){
-        
-        guard let pfp = match?.pfp, !pfp.isEmpty else {
-                return
-        }
-        
-        let storage = Storage.storage()
-        let httpsReference = storage.reference(forURL: pfp)
-        httpsReference.getData(maxSize: 750*750) { data, error in
-            if let error = error {
-                print("DEBUG: Error retrieving profile picture: \(error.localizedDescription)")
-            } else {
-                if let data = data, let image = UIImage(data: data) {
-                    matchImage = image
-                    print("SUCCESS: Downloaded user profile photo")
+                .onAppear{
+                    imageUtil.fetchImage(userId: match.matchUserId){ result in
+                        switch result {
+                        case .success(let uiImage):
+                            self.userImage = Image(uiImage: uiImage)
+                        case .failure:
+                            // Set a placeholder image or handle the error state
+                            self.userImage = Image(systemName: "person.circle.fill")
+                        }
+                    }
                 }
-            }
         }
     }
 }
-
-//struct FlightMatch_Previews: PreviewProvider {
-//    static var previews: some View {
-//        @State var newMatch = Match(id: UUID(), flightId: UUID(), date: "2023-08-01T02:03:00.000Z", pfp: "https://firebasestorage.googleapis.com:443/v0/b/lion-pool-f5755.appspot.com/o/profile-images%2FFeqlCm9u3kQgRXbIaVaLLYrvldE3-pfp.jpg?alt=media&token=36fe4246-87a7-43cb-ab07-5d22cc315c6e", userId: "FeqlCm9u3kQgRXbIaVaLLYrvldE3", name: "Lion Cunt")
-//        FlightMatch(match: newMatch)
-//    }
-//}

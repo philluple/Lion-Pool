@@ -20,6 +20,7 @@ class UserModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var currentUserProfileImage: Image? = nil
+    
 
     let imageUtil = ImageUtils()
     
@@ -35,7 +36,6 @@ class UserModel: ObservableObject {
         // Add an observer to the Firebase Authentication state
         Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             guard let self = self else { return }
-            
             if let user = user {
                 self.userSession = user
             
@@ -57,7 +57,10 @@ class UserModel: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
             await fetchUser()
-//            await retrievePfp()
+            await fetchPfp()
+            if let userId = self.currentUser?.id {
+                UserDefaults.standard.set(userId, forKey: "userId")
+            }
             print("SUCCESS: User has signed in")
         } catch {
             print("DEBUG: failed to login")
@@ -74,9 +77,9 @@ class UserModel: ObservableObject {
             print("DEBUG: before")
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
             await fetchUser()
-//            await retrievePfp()
+            await fetchPfp()
             print("SUCCESS: \(user.id) has been created")
-            
+            UserDefaults.standard.set(user.id, forKey: "userId")
             return user.id
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
@@ -95,10 +98,10 @@ class UserModel: ObservableObject {
         } catch {
             print ("DEBUG: Could not sign out user")
         }
-        
     }
     
     func fetchUser() async {
+        print("Fetching user")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
@@ -115,14 +118,17 @@ class UserModel: ObservableObject {
         if pfp == "" {
             return
         }
-        imageUtil.fetchImage(userId: id){ result in
-            switch result {
-            case .success(let uiImage):
-                self.currentUserProfileImage = Image(uiImage: uiImage)
-            case .failure:
-                // Set a placeholder image or handle the error state
-                self.currentUserProfileImage = Image(systemName: "person.circle.fill")
+        DispatchQueue.main.async{
+            self.imageUtil.fetchImage(userId: id){ result in
+                switch result {
+                case .success(let uiImage):
+                    self.currentUserProfileImage = Image(uiImage: uiImage)
+                case .failure:
+                    // Set a placeholder image or handle the error state
+                    self.currentUserProfileImage = Image(systemName: "person.circle.fill")
+                }
             }
         }
+
     }
 }

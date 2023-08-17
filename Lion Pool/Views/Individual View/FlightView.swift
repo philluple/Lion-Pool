@@ -13,11 +13,16 @@ struct FlightView: View {
     let time = TimeUtils()
     @State private var popover: Bool = false
     @Environment(\.presentationMode) var presentationMode
-
+    @EnvironmentObject var requestModel: RequestModel
+    
     
     var body: some View {
         VStack{
-            Button(action: {popover.toggle()}) {
+            Button {
+                popover.toggle()
+                requestModel.fetchRequests(userId: flight.userId)
+                
+            } label: {
                 HStack{
                     HStack{
                         Text(flight.airport)
@@ -43,7 +48,7 @@ struct FlightView: View {
             }
             .accentColor(Color.black)
             .sheet(isPresented: $popover){
-                FlightDetailView(flight: flight)
+                NewFlightDetailView(flight: flight)
             }
         }
         

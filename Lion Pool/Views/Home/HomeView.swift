@@ -11,8 +11,10 @@ import Firebase
 
 struct HomeView: View {
     @EnvironmentObject var viewModel: UserModel
-    @EnvironmentObject var networkModel: NetworkModel
-    
+    @EnvironmentObject var flightModel: FlightModel
+    @EnvironmentObject var matchModel: MatchModel
+    @EnvironmentObject var requestModel: RequestModel
+
     var body: some View {
         CustomNavView{
             ScrollView {
@@ -20,7 +22,7 @@ struct HomeView: View {
                     Spacer()
                     VStack (spacing: 15){
                         ListOfFlights
-                        RequestListView()
+                        ConfirmedMatchesListView()
                     }
                 }
             }.overlay(PageHeader)
@@ -30,13 +32,6 @@ struct HomeView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden()
-        .onAppear{
-            if let user = viewModel.currentUser{
-                networkModel.fetchFlights(userId: user.id)
-                networkModel.fetchRequests(userId: user.id)
-                networkModel.fetchInRequests(userId: user.id)
-            }
-        }
     }
     
     private var PageHeader: some View{
@@ -44,14 +39,14 @@ struct HomeView: View {
             HStack{
                 Text("LionPool")
                     .font(.system(size: 42, weight: .bold))
+//                    .font(Font.custom("ChicagoFlf", size: 32))
                     .foregroundColor(Color("Dark Blue "))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading],UIScreen.main.bounds.width/30)
-                //.padding([.bottom, .top, .leading],10)
                 
                 CustomNavLink(destination: ProfileView().customNavigationTitle("Account info").customNavigationSize(35)){
                     if let image = viewModel.currentUserProfileImage{
-                        Image(uiImage: image)
+                        image
                             .resizable()
                             .frame(width:40, height:40)
                             .foregroundColor(Color("Dark Blue "))
@@ -68,24 +63,15 @@ struct HomeView: View {
                 }
             }
             .padding([.trailing, .leading])
-        }
             .background(Color("Gray Blue "))
             .frame(width: UIScreen.main.bounds.width, height: 0)
             .frame(maxHeight: UIScreen.main.bounds.height, alignment: .top)
+        }
     }
+    
     private var ListOfFlights: some View{
         FlightListView()
             .padding(.top, UIScreen.main.bounds.height/35)
-        //.overlay(alignment: .topTrailing){
-        //}
     }
 }
     
-struct HomeView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        HomeView()
-            .environmentObject(UserModel())
-            .environmentObject(NetworkModel())
-    }
-}

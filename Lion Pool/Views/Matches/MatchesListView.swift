@@ -14,7 +14,8 @@ struct MatchesListView: View {
     @State var dismiss: Bool = false
     @State var resquested: Bool = false
     
-    @EnvironmentObject var networkModel: NetworkModel
+    @EnvironmentObject var matchModel: MatchModel
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -31,7 +32,7 @@ struct MatchesListView: View {
                     .font(.system(size: 16, weight: .semibold))
                 Spacer()
                 ScrollView{
-                    ForEach(Array(networkModel.matches.values.flatMap { $0 }), id: \.id) { match in
+                    ForEach(Array(matchModel.matchesFound.values.flatMap { $0 }), id: \.id) { match in
                         FlightMatch(match: match, hitRequestButton: $dismiss).padding(.vertical, 5)
                     }
                     
