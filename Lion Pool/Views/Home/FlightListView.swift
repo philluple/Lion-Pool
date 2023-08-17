@@ -42,9 +42,15 @@ struct FlightListView: View {
             .padding(.top, 10)
             ScrollView{
                 VStack{
-                    ForEach(flightModel.flights, id: \.self) { flight in
+                    ForEach(Array(flightModel.flights.enumerated()), id: \.element.id) { (index, flight) in
                         FlightView(flight: flight)
+                        
+                        if index != flightModel.flights.count - 1 {
+                            Divider()
+                                .padding(.horizontal)
+                        }
                     }
+
                 }
             }
         }
@@ -55,7 +61,7 @@ struct FlightListView: View {
     }
     
     private func calculateHeight(for count: Int) -> CGFloat {
-        let maxItemCount: Int = 4
+        let maxItemCount: Int = 5
         let itemHeight: CGFloat = 45
         
         if count == 0 {

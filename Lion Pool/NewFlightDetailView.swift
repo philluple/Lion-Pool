@@ -20,12 +20,9 @@ struct NewFlightDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var findMatches: Bool = false
     @State private var displayFind = false
+    @State private var isSheetPresented = false
     
-    let airportCity: [String: String ] = [
-        "EWR" : "Newark",
-        "JFK" : "New York",
-        "LGA": "La Guardia"
-    ]
+    
     
     //     Calculate the difference in days and return a formatted string
     var diffs: Int {
@@ -54,7 +51,7 @@ struct NewFlightDetailView: View {
                         // Display the "Find Matches" button
                         VStack{
                             Spacer()
-                            flightDetails
+                            FlightDetaiTicket(flight: flight)
                                 .padding(.top, 100)
                             HStack{
                                 Spacer()
@@ -65,7 +62,7 @@ struct NewFlightDetailView: View {
                         }
                     }else{
                         VStack{
-                            flightDetails
+                            FlightDetaiTicket(flight: flight)
                                 .padding(.top, 100)
                             if let inRequestArray = requestModel.inRequests[flight.id] {
                                 Spacer()
@@ -116,8 +113,24 @@ struct NewFlightDetailView: View {
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 .background(Color("Text Box"))
                 .ignoresSafeArea()
-                .onAppear{
-                    requestModel.
+                .sheet(isPresented: $isSheetPresented){
+                    if let user = userModel.currentUser{
+                        ConfirmChoiceView(title: "Delete Flight", message: nil, flight: flight, request: nil) {
+                            flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
+                                switch result {
+                                case .success:
+                                    presentationMode.wrappedValue.dismiss()
+                                case .failure:
+                                    print("could not delete")
+                                }
+                            }
+                        } onReject: {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+
+                        
+                    }
+                    
                 }
         }
     }
@@ -178,70 +191,6 @@ struct NewFlightDetailView: View {
         }
     }
     
-    private var flightDetail2: some View{
-        HStack{
-            border.padding(.leading)
-            Spacer()
-            VStack(alignment: .center, spacing: 20){
-                VStack(spacing: -10){
-                    Text("\(airportCity[flight.airport] ?? "nil")")
-//                            .font(.system(size: 30))
-                        .font(Font.custom("font000000002a85a6df", size: 20))
-                        .textCase(.uppercase)
-                        .foregroundColor(Color.black)
-
-                    Text("\(flight.airport)")
-                            .font(.system(size: 70, weight: .bold))
-                            .foregroundColor(Color.black)
-                }
-                HStack{
-                    if let user = userModel.currentUser{
-                        VStack(alignment: .leading){
-                            Text("Passenger:")
-                                .font(.system(size: 14, weight: .semibold))
-
-                            Text("\(user.firstname)")
-                                .font(.system(size: 14, weight: .thin))
-                        }
-                        
-                    } else{
-                        VStack(alignment: .leading){
-                            Text("Passenger:")
-                                .font(.system(size: 14, weight: .semibold))
-                            Text("Phillip Le")
-                                .font(.system(size: 14, weight: .thin))
-                        }
-                       
-                    }
-                    Spacer()
-                }
-                HStack{
-                    VStack(alignment: .leading){
-                        Text("Date: ")
-                            .font(.system(size: 12, weight: .semibold))
-                        Text("\(time.formattedDate(flight.date))")
-                            .font(.system(size: 12, weight: .thin))
-                    }
-                    Spacer()
-                    VStack(alignment: .leading){
-                        Text("Time: ")
-                            .font(.system(size: 12, weight: .semibold))
-                        Text("\(time.formattedTime(flight.date))")
-                            .font(.system(size: 12, weight: .thin))
-                            .foregroundColor(Color.black)
-                    }
-                    
-                }
-                
-                
-            }.padding(.leading)
-            Spacer()
-            border.padding(.trailing)
-            
-        }.frame(width: UIScreen.main.bounds.width-50, height: 400)
-            .background(Color.white)
-            .cornerRadius(10)
-    }
     private var border: some View{
         Rectangle()
             .frame(width: 10, height: 350)
@@ -284,21 +233,20 @@ struct NewFlightDetailView: View {
     
     private var deleteFlightButton: some View{
         Button {
-            Task{
-                if let user = userModel.currentUser{
-                    flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
-                        switch result {
-                        case .success:
-                            presentationMode.wrappedValue.dismiss()
-                        case .failure:
-                            print("could not delete")
-                        }
-                        
-                        
-                    }
-                }
-                
-            }
+            isSheetPresented.toggle()
+//            Task{
+//                if let user = userModel.currentUser{
+//                    flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
+//                        switch result {
+//                        case .success:
+//                            presentationMode.wrappedValue.dismiss()
+//                        case .failure:
+//                            print("could not delete")
+//                        }
+//                    }
+//                }
+//
+//            }
         }label: {
             ZStack{
                 Circle()
@@ -312,59 +260,7 @@ struct NewFlightDetailView: View {
         }
     }
     
-    private var flightDetails: some View{
-        HStack{
-            Rectangle()
-                .frame(width: 10, height: 140)
-                .padding(.leading, 10)
-                .foregroundColor(Color("Gray Blue "))
-            VStack(alignment: .leading){
-                Image(systemName: "airplane")
-                HStack{
-                    Text("\(airportCity[flight.airport] ?? "nil")")
-                        .font(.system(size: 25, weight: .bold))
-                        .foregroundColor(Color.black)
-                }
-                Text("Date: \(time.formattedDate(flight.date))")
-                    .font(.system(size: 12, weight: .thin))
-                Text("Time: \(time.formattedTime(flight.date))")
-                    .font(.system(size: 12, weight: .thin))
-                    .foregroundColor(Color.black)
-                
-            }.padding(.leading)
-            Spacer()
-            VStack(alignment: .center, spacing: 0){
-                Spacer()
-                Text(flight.airport)
-                    .font(.system(size: 25, weight: .bold))
-                    .foregroundColor(Color.white)
-                    .frame(width: 65, height: 30)
-                    .background(Color.black)
-                Text("DEPARTURES")
-                    .font(.system(size: 10))
-//                VStack{
-//                    Text("\(diffs)")
-//                        .font(Font.custom("ChicagoFlf", size: 32))
-//                }
-//
-                
-//                Image("Barcode")
-//                    .resizable()
-//                    .frame(width:80, height: 80)
-                Spacer()
-            }.padding([.top], 10)
-            
-            Rectangle()
-                .frame(width: 10, height: 140)
-                .padding(.trailing, 10)
-                .foregroundColor(Color("Gray Blue "))
-            
-        }.frame(width: UIScreen.main.bounds.width-50, height: 150)
-            .background(Color.white)
-            .cornerRadius(10)
-        
-    }
-    
+
     
     
     

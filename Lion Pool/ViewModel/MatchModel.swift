@@ -16,11 +16,11 @@ enum MatchResult {
 class MatchModel: ObservableObject{
     @Published var matchesFound: [UUID: [Match]] = [:]
     @Published var matchesConfirmed: [UUID: [Match]] = [:]
-    let userId = UserDefaults.standard.string(forKey: "userId")
-
+    
     
     init(){
-        fetchMatches()
+        let userId = UserDefaults.standard.string(forKey: "userId")
+        fetchMatches(userId: userId!)
     }
     
     let jsonDecoder = JSONDecoder()
@@ -28,7 +28,7 @@ class MatchModel: ObservableObject{
     
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")
-        fetchMatches()
+        fetchMatches(userId: userId!)
     }
     
     func signOut(){
@@ -36,9 +36,9 @@ class MatchModel: ObservableObject{
         self.matchesConfirmed = [:]
     }
     
-    func fetchMatches (){
+    func fetchMatches (userId: String){
         self.matchesConfirmed = [:]
-        let fullURL = "\(baseURL)/fetchMatches?userId=\(String(describing: userId))"
+        let fullURL = "\(baseURL)/fetchMatches?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in

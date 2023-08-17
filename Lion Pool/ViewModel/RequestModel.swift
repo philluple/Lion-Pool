@@ -18,7 +18,7 @@ class RequestModel: ObservableObject{
     init(){
         let userId = UserDefaults.standard.string(forKey: "userId")
         fetchRequests(userId: userId!)
-        fetchRequests(userId: userId!)
+        fetchInRequests(userId: userId!)
     }
 
     enum Result{
@@ -34,7 +34,7 @@ class RequestModel: ObservableObject{
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")
         fetchRequests(userId: userId!)
-        fetchRequests(userId: userId!)
+        fetchInRequests(userId: userId!)
     }
     
     func updateNotify (flightId: UUID, userId: String){
@@ -96,6 +96,7 @@ class RequestModel: ObservableObject{
                     //use MatchData to populate a match and add it to the matches array
                     DispatchQueue.main.async{
                         print("Accepted request")
+                        self.inRequests.removeValue(forKey: request.recieverFlightId)
                         completion(.success)
                     }
                 } else{

@@ -34,11 +34,11 @@ struct ConfirmedMatchesListView: View {
         .background(Color.white)
         .cornerRadius(10)
         
-        .onAppear{
-            if let user = userModel.currentUser{
-                matchModel.fetchMatches(userId: user.id)
-            }
-        }
+//        .onAppear{
+//            if let user = userModel.currentUser{
+//                matchModel.fetchMatches(userId: user.id)
+//            }
+//        }
     }
 }
 

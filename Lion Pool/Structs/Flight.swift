@@ -8,12 +8,18 @@
 import Foundation
 import FirebaseFirestore
 
-struct Flight: Codable, Identifiable, Hashable{
+protocol IdentifiableObjectType {
+    var objectType: String { get }
+}
+struct Flight: Codable, Identifiable, Hashable, IdentifiableObjectType{
     let id: UUID
     let userId: String
     let airport: String
     let date: String
     let foundMatch: Bool
+    var objectType: String {
+        return "Flight"
+    }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
