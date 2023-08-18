@@ -107,11 +107,11 @@ struct FlightDetailView: View {
                 }
                 .background(Color("Text Box"))
                     .ignoresSafeArea()
-                .onAppear{
-                    if let user = userModel.currentUser{
-                        requestModel.updateNotify(flightId: flight.id, userId: user.id)
-                    }
-                }
+//                .onAppear{
+//                    if let user = userModel.currentUser{
+//                        requestModel.updateNotify(flightId: flight.id, userId: user.id)
+//                    }
+//                }
 
             } .background(Color("Text Box"))
                 .ignoresSafeArea()

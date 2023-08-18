@@ -19,40 +19,66 @@ struct ConfirmChoiceView: View {
     var body: some View {
         NavigationView {
             ZStack { // Use a ZStack as the outer container
-                Color("Text Box")
+//                Color("TextBox").ignoresSafeArea()
                 VStack(spacing: 20){
                     Group{
                         if let flight = flight{
                             FlightDetaiTicket(flight: flight)
                                 .padding(.vertical)
-                            if let message = message{
-                                Text(message)
-                                    .font(.system(size:15,weight: .semibold))
-                            }
-                            HStack(spacing:20){
-                                Button {
-                                    onReject()
-                                } label: {
-                                    Text("Cancel")
-                                        .font(.system(size:15,weight: .bold))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(Color("Text Box"), lineWidth: 2)
+                                )
+                            
+                            VStack{
+                                Text("\(title)?")
+                                    .font(.system(size:20,weight: .semibold))
+                                    .textCase(.uppercase)
+                                    .padding(.top)
+    
+                                if let message = message{
+                                    Divider()
+                                        .padding(.horizontal)
+                                    Text(message)
+                                        .font(.system(size:14,weight: .semibold))
                                         .foregroundColor(Color("DarkGray"))
-                                        .frame(width: 120, height: 40)
-                                        .background(Color.white)
-                                        .cornerRadius(8)
+                                        .padding(.horizontal)
+                                        .multilineTextAlignment(.center)
+                                    Divider()
+                                        .padding()
                                 }
-                                Button {
-                                    onConfirm()
-                                } label: {
-                                    Text("Delete flight")
-                                        .font(.system(size:15,weight: .bold))
-                                        .foregroundColor(Color.white)
-                                        .frame(width: 120, height: 40)
-                                        .background(Color("Gold"))
-                                        .cornerRadius(8)
-                                }
-                               
+                                Rectangle()
+                                    .frame(width: UIScreen.main.bounds.width, height: 5)
+                                    .foregroundColor(Color("Gray Blue "))
+                                    .padding(.vertical, 10)
+                                HStack(spacing:20){
+                                    Button {
+                                        onReject()
+                                    } label: {
+                                        Text("Cancel")
+                                            .font(.system(size:15,weight: .bold))
+                                            .foregroundColor(Color("DarkGray"))
+                                            .frame(width: 120, height: 40)
+                                            .background(Color.white)
+                                            .cornerRadius(8)
+                                    }
+                                    Button {
+                                        onConfirm()
+                                    } label: {
+                                        Text("Yes, delete")
+                                            .font(.system(size:15,weight: .bold))
+                                            .foregroundColor(Color.white)
+                                            .frame(width: 120, height: 40)
+                                            .background(Color("Gold"))
+                                            .cornerRadius(8)
+                                    }
+                                   
 
-                            }
+                                }.padding(.bottom)
+                            }.frame(width: UIScreen.main.bounds.width-50, height: 150)
+                                .background(Color("Text Box"))
+                                .cornerRadius(10)
+                
                         }else if let request = request{
                             RequestView(request: request)
                                 .padding(.vertical)
@@ -74,7 +100,7 @@ struct ConfirmChoiceView: View {
                                 Button {
                                     onConfirm()
                                 } label: {
-                                    Text("Delete flight")
+                                    Text("Yes, delete")
                                         .font(.system(size:15,weight: .bold))
                                         .foregroundColor(Color.white)
                                         .frame(width: 120, height: 40)
@@ -89,19 +115,18 @@ struct ConfirmChoiceView: View {
 
                 }
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .principal){
-                    VStack{
-                        Text(title)
-                            .font(.system(size:40,weight: .bold))
-                            .foregroundColor(Color("Dark Blue "))
-                    }.frame(width: UIScreen.main.bounds.width, height: 60)
-                        .background(Color("Gray Blue "))
-                        .ignoresSafeArea()
-                }
-            }
-            .background(Color("Text Box"))
+//            .navigationBarTitleDisplayMode(.inline)
+//            .toolbar{
+//                ToolbarItem(placement: .principal){
+//                    VStack{
+//                        Text(title)
+//                            .font(.system(size:40,weight: .bold))
+//                            .foregroundColor(Color("Dark Blue "))
+//                    }.frame(width: UIScreen.main.bounds.width, height: 60)
+//                        .background(Color("Gray Blue "))
+//                        .ignoresSafeArea()
+//                }
+//            }
         }
         .navigationViewStyle(StackNavigationViewStyle()) // To prevent double navigation bar in some cases
         .ignoresSafeArea()

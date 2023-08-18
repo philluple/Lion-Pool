@@ -10,9 +10,9 @@ import SwiftUI
 struct NewFlightDetailView: View {
     let flight : Flight
     let time =  TimeUtils()
-
-
-
+    
+    
+    
     //Objects to apply logic
     @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var requestModel: RequestModel
@@ -127,7 +127,7 @@ struct NewFlightDetailView: View {
                         } onReject: {
                             presentationMode.wrappedValue.dismiss()
                         }
-
+                        
                         
                     }
                     
@@ -234,19 +234,7 @@ struct NewFlightDetailView: View {
     private var deleteFlightButton: some View{
         Button {
             isSheetPresented.toggle()
-//            Task{
-//                if let user = userModel.currentUser{
-//                    flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
-//                        switch result {
-//                        case .success:
-//                            presentationMode.wrappedValue.dismiss()
-//                        case .failure:
-//                            print("could not delete")
-//                        }
-//                    }
-//                }
-//
-//            }
+            
         }label: {
             ZStack{
                 Circle()
@@ -258,19 +246,35 @@ struct NewFlightDetailView: View {
                     .foregroundColor(Color.white)
             }
         }
+        .confirmationDialog("Would you like to delete this flight?",
+                            isPresented: $isSheetPresented) {
+            Button("Delete", role: .destructive) {
+                Task{
+                    if let user = userModel.currentUser{
+                        flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
+                            switch result {
+                            case .success:
+                                presentationMode.wrappedValue.dismiss()
+                            case .failure:
+                                print("could not delete")
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
     }
+}
     
 
     
-    
-    
-//    struct NewFlightDetailView_Previews: PreviewProvider {
-//        static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: false)
-//        static var previews: some View {
-//            NewFlightDetailView(flight: flight)
-//                .environmentObject(RequestModel())
-//                .environmentObject(FlightModel())
-//                .environmentObject(UserModel())
-//        }
-//    }
+struct NewFlightDetailView_Previews: PreviewProvider {
+    static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: false)
+    static var previews: some View {
+        NewFlightDetailView(flight: flight)
+            .environmentObject(RequestModel())
+            .environmentObject(FlightModel())
+            .environmentObject(UserModel())
+    }
 }
