@@ -72,6 +72,14 @@
 		75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75881F6F2A7C8E990067AFA5 /* ExpandedMatchView.swift */; };
 		75881F732A7D99C50067AFA5 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
 		75881F742A7D99C50067AFA5 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
+		758DF8EC2A8F0B400002BFF2 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8EB2A8F0B400002BFF2 /* FacebookAEM */; };
+		758DF8EE2A8F0B400002BFF2 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8ED2A8F0B400002BFF2 /* FacebookBasics */; };
+		758DF8F02A8F0B400002BFF2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8EF2A8F0B400002BFF2 /* FacebookCore */; };
+		758DF8F22A8F0B400002BFF2 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8F12A8F0B400002BFF2 /* FacebookLogin */; };
+		758DF8F42A8F0B400002BFF2 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8F32A8F0B400002BFF2 /* FacebookShare */; };
+		758DF8FA2A8F1EB00002BFF2 /* InstagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */; };
+		758DF9022A8F35440002BFF2 /* InstagramWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF9012A8F35440002BFF2 /* InstagramWebView.swift */; };
+		758DF9042A8F367D0002BFF2 /* FakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF9032A8F367D0002BFF2 /* FakeView.swift */; };
 		7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576A2A58DD8900571AD0 /* FirebaseAuth */; };
 		7595576D2A58DD8900571AD0 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576C2A58DD8900571AD0 /* FirebaseAuthCombine-Community */; };
 		7595576F2A58DD8900571AD0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576E2A58DD8900571AD0 /* FirebaseDatabase */; };
@@ -162,6 +170,9 @@
 		75881F6B2A7C204E0067AFA5 /* imageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageUtils.swift; sourceTree = "<group>"; };
 		75881F6D2A7C4E900067AFA5 /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
 		75881F6F2A7C8E990067AFA5 /* ExpandedMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedMatchView.swift; sourceTree = "<group>"; };
+		758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramView.swift; sourceTree = "<group>"; };
+		758DF9012A8F35440002BFF2 /* InstagramWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramWebView.swift; sourceTree = "<group>"; };
+		758DF9032A8F367D0002BFF2 /* FakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeView.swift; sourceTree = "<group>"; };
 		75985C562A8D9EB400103AA1 /* ChicagoFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChicagoFLF.ttf; sourceTree = "<group>"; };
 		75985C582A8DB65A00103AA1 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		75985C5A2A8DD39D00103AA1 /* ConfirmChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfirmChoiceView.swift; path = "Lion Pool/ViewModel/ConfirmChoiceView.swift"; sourceTree = SOURCE_ROOT; };
@@ -180,13 +191,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758DF8EE2A8F0B400002BFF2 /* FacebookBasics in Frameworks */,
+				758DF8EC2A8F0B400002BFF2 /* FacebookAEM in Frameworks */,
 				759557712A58DD8900571AD0 /* FirebaseDatabaseSwift in Frameworks */,
 				75A05E842A58C72D002ABE9C /* iPhoneNumberField in Frameworks */,
 				7595576D2A58DD8900571AD0 /* FirebaseAuthCombine-Community in Frameworks */,
+				758DF8F22A8F0B400002BFF2 /* FacebookLogin in Frameworks */,
 				759557752A58DD8900571AD0 /* FirebaseFirestoreSwift in Frameworks */,
 				7595576F2A58DD8900571AD0 /* FirebaseDatabase in Frameworks */,
 				751C34F22A6CF11E00F6783C /* GoogleSignIn in Frameworks */,
 				759557772A58DD8900571AD0 /* FirebaseStorage in Frameworks */,
+				758DF8F42A8F0B400002BFF2 /* FacebookShare in Frameworks */,
+				758DF8F02A8F0B400002BFF2 /* FacebookCore in Frameworks */,
 				7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */,
 				759557792A58DD8900571AD0 /* FirebaseStorageCombine-Community in Frameworks */,
 				759557732A58DD8900571AD0 /* FirebaseFirestore in Frameworks */,
@@ -214,6 +230,8 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				758DF9012A8F35440002BFF2 /* InstagramWebView.swift */,
+				758DF9032A8F367D0002BFF2 /* FakeView.swift */,
 				751507682A84B01900B0031B /* Lion-Pool-Info.plist */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
 				75109A5D285BB7D100CAC400 /* Lion PoolTests */,
@@ -242,6 +260,7 @@
 				75985C582A8DB65A00103AA1 /* Checklist.swift */,
 				751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
+				758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
 				75109A95285BB85A00CAC400 /* Views */,
 				75B46D1C2A84AB81002EE5D2 /* Utils */,
@@ -448,6 +467,11 @@
 				759557782A58DD8900571AD0 /* FirebaseStorageCombine-Community */,
 				751C34F12A6CF11E00F6783C /* GoogleSignIn */,
 				751C34F32A6CF11E00F6783C /* GoogleSignInSwift */,
+				758DF8EB2A8F0B400002BFF2 /* FacebookAEM */,
+				758DF8ED2A8F0B400002BFF2 /* FacebookBasics */,
+				758DF8EF2A8F0B400002BFF2 /* FacebookCore */,
+				758DF8F12A8F0B400002BFF2 /* FacebookLogin */,
+				758DF8F32A8F0B400002BFF2 /* FacebookShare */,
 			);
 			productName = "Lion Pool";
 			productReference = 75109A4A285BB7CE00CAC400 /* Lion Pool.app */;
@@ -525,6 +549,7 @@
 				75A05E822A58C72D002ABE9C /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				759557692A58DD8900571AD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				751C34F02A6CF11E00F6783C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 75109A4B285BB7CE00CAC400 /* Products */;
 			projectDirPath = "";
@@ -576,7 +601,9 @@
 				75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */,
 				75985C5B2A8DD39D00103AA1 /* ConfirmChoiceView.swift in Sources */,
 				752DC02C2A8497840054F7AD /* NewFlightDetailView.swift in Sources */,
+				758DF9022A8F35440002BFF2 /* InstagramWebView.swift in Sources */,
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
+				758DF9042A8F367D0002BFF2 /* FakeView.swift in Sources */,
 				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
@@ -611,6 +638,7 @@
 				759B43D02A7230CA0050D2C4 /* FindingMatchView.swift in Sources */,
 				75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
+				758DF8FA2A8F1EB00002BFF2 /* InstagramView.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,
 				75881F6C2A7C204E0067AFA5 /* imageUtils.swift in Sources */,
 				75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */,
@@ -799,6 +827,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FMGY5Z7S6;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lion\\ Pool",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Lion-Pool-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -812,6 +844,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				NEW_SETTING = "";
+				NEW_SETTING1 = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-Pool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -830,6 +863,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";
 				DEVELOPMENT_TEAM = 3FMGY5Z7S6;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lion\\ Pool",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Lion-Pool-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -843,6 +880,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				NEW_SETTING = "";
+				NEW_SETTING1 = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Lion-Pool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -973,6 +1011,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
 		759557692A58DD8900571AD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1001,6 +1047,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 751C34F02A6CF11E00F6783C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		758DF8EB2A8F0B400002BFF2 /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		758DF8ED2A8F0B400002BFF2 /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		758DF8EF2A8F0B400002BFF2 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		758DF8F12A8F0B400002BFF2 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
+		758DF8F32A8F0B400002BFF2 /* FacebookShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookShare;
 		};
 		7595576A2A58DD8900571AD0 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

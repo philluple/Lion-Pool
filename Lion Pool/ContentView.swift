@@ -15,8 +15,10 @@ struct ContentView: View {
     @EnvironmentObject var matchModel: MatchModel
     @EnvironmentObject var requestModel: RequestModel
     @EnvironmentObject var flightModel: FlightModel
+
     
     var body: some View {
+//        FakeView()
         Group {
             if userModel.userSession != nil {
                 HomeView()

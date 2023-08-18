@@ -18,13 +18,13 @@ class MatchModel: ObservableObject{
     @Published var matchesConfirmed: [UUID: [Match]] = [:]
     
     
-    init(){
-        let userId = UserDefaults.standard.string(forKey: "userId")
-        fetchMatches(userId: userId!)
-    }
+//    init(){
+//        let userId = UserDefaults.standard.string(forKey: "userId")
+//        fetchMatches(userId: userId!)
+//    }
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://localhost:3000/api/match"
+    let baseURL = "https://34.94.113.133/:3000/api/match"
     
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")

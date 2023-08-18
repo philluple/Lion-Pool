@@ -22,13 +22,13 @@ class FlightModel: ObservableObject{
     @Published var flights: [Flight] = []
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://localhost:3000/api/flight"
+    let baseURL = "https://34.94.113.133/:3000/api/flight"
     
-    init(){
-        let userId = UserDefaults.standard.string(forKey: "userId")
-        fetchFlights(userId: userId!)
-    }
-    
+//    init(){
+//        let userId = UserDefaults.standard.string(forKey: "userId")
+//        fetchFlights(userId: userId!)
+//    }
+//    
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")
         fetchFlights(userId: userId!)

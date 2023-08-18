@@ -231,6 +231,7 @@ struct NewFlightDetailView: View {
         }.frame(width: UIScreen.main.bounds.width-55)
     }
     
+    
     private var deleteFlightButton: some View{
         Button {
             isSheetPresented.toggle()
@@ -246,23 +247,32 @@ struct NewFlightDetailView: View {
                     .foregroundColor(Color.white)
             }
         }
-        .confirmationDialog("Would you like to delete this flight?",
-                            isPresented: $isSheetPresented) {
-            Button("Delete", role: .destructive) {
-                Task{
-                    if let user = userModel.currentUser{
-                        flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
-                            switch result {
-                            case .success:
-                                presentationMode.wrappedValue.dismiss()
-                            case .failure:
-                                print("could not delete")
+        .alert(isPresented: $isSheetPresented) {
+            Alert(
+                title: Text("Delete Flight"),
+                message: Text("If it's about the matches, we promise it is not you"),
+                primaryButton: .default(
+                    Text("Cancel"),
+                    action: {
+                        isSheetPresented.toggle()
+                    }
+                ),
+                secondaryButton: .destructive(
+                    Text("Delete"),
+                    action: {
+                        if let user = userModel.currentUser {
+                            flightModel.deleteFlight(userId: user.id, flightId: flight.id, airport: flight.airport) { result in
+                                switch result {
+                                case .success:
+                                    presentationMode.wrappedValue.dismiss()
+                                case .failure:
+                                    print("could not delete")
+                                }
                             }
                         }
                     }
-                    
-                }
-            }
+                )
+            )
         }
     }
 }
