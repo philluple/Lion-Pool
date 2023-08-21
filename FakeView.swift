@@ -19,9 +19,6 @@ struct FakeView: View {
             NavigationView{
                 InstagramWebView()
                     .ignoresSafeArea()
-                    .onReceive(responseURL.publisher){ recievedURL in
-                        print("Received URL: \(recievedURL)")
-                    }
                     .navigationBarTitleDisplayMode(.inline)
             }
         }

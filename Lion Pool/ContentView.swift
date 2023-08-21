@@ -18,17 +18,16 @@ struct ContentView: View {
 
     
     var body: some View {
-//        FakeView()
-        Group {
-            if userModel.userSession != nil {
-                HomeView()
-            } else {
-                LoginView()
-            }
-        }
-        .onAppear {
-            userModel.checkUserSession()
-            print("In here")
-        }
+        FakeView()
+//        Group {
+//            if userModel.userSession != nil {
+//                HomeView()
+//            } else {
+//                LoginView()
+//            }
+//        }
+//        .onAppear {
+//            userModel.checkUserSession()
+//        }
     }
 }

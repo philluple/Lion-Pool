@@ -14,10 +14,9 @@ enum ImageResult{
 }
 
 class ImageUtils {
-    let baseURL = "http://localhost:3000/api/flight"
     
     func fetchImage(userId: String, completion: @escaping (ImageResult) -> Void) {
-        let fullURL = "http://localhost:3000/api/fetchImage?userId=\(userId)"
+        let fullURL = "https://lion-pool.com/api/fetchImage?userId=\(userId)"
         guard let url = URL(string: fullURL) else {
             fatalError("Missing URL")
         }

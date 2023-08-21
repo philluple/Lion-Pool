@@ -22,13 +22,14 @@ class FlightModel: ObservableObject{
     @Published var flights: [Flight] = []
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "https://34.94.113.133/:3000/api/flight"
+    let baseURL = "https://lion-pool.com/api/flight"
     
-//    init(){
-//        let userId = UserDefaults.standard.string(forKey: "userId")
-//        fetchFlights(userId: userId!)
-//    }
-//    
+    init(){
+        if let userId = UserDefaults.standard.string(forKey: "userId"){
+            fetchFlights(userId: userId)
+        }
+    }
+
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")
         fetchFlights(userId: userId!)
@@ -42,6 +43,7 @@ class FlightModel: ObservableObject{
         print("Attempting to fetch flights")
         self.flights = []
         let fullURL = "\(baseURL)/fetchFlights?userId=\(userId)"
+        print(fullURL)
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in

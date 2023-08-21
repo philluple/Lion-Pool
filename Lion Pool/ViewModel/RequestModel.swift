@@ -13,13 +13,14 @@ class RequestModel: ObservableObject{
     @Published var inRequests: [UUID: [Request]] = [:]
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "https://34.94.113.133:3000/api/request"
+    let baseURL = "https://lion-pool.com/api/request"
     
-//    init(){
-//        let userId = UserDefaults.standard.string(forKey: "userId")
-//        fetchRequests(userId: userId!)
-//        fetchInRequests(userId: userId!)
-//    }
+    init(){
+        if let userId = UserDefaults.standard.string(forKey: "userId"){
+            fetchRequests(userId: userId)
+            fetchInRequests(userId: userId)
+        }
+    }
 
     enum Result{
         case success
