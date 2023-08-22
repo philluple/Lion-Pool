@@ -25,9 +25,12 @@ struct RegistrationView: View {
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var fileRef: String = ""
-    
+    var imageUtil = ImageUtils()
     @Environment (\.dismiss) var dismiss
     @EnvironmentObject var viewModel: UserModel
+    
+    @State private var isCameraSource = false // Add this state
+
     
     enum School: String, CaseIterable, Identifiable {
         case CC, Barnard, SEAS, GS
@@ -115,7 +118,7 @@ struct RegistrationView: View {
                 
             }
             .sheet(isPresented: $showImagePicker, onDismiss: loadImage){
-                Lion_Pool.ImagePicker(selectedImage: $selectedImage)
+                Lion_Pool.ImagePicker(selectedImage: $selectedImage, isCameraSource: $isCameraSource)
             }
         }
     }
@@ -129,7 +132,9 @@ struct RegistrationView: View {
                                                                   UNI: UNI,
                                                                   pfpLocation: fileRef){
                     if profileImage != nil {
-                        uploadPhoto(userId: newUserId)
+                        Task{
+                            await imageUtil.uploadPhoto(userId: newUserId, selectedImage: selectedImage)
+                        }
                     }
                 }
             }
@@ -167,24 +172,24 @@ struct RegistrationView: View {
         profileImage = Image(uiImage: selectedImage)
     }
 
-    func uploadPhoto(userId: String) {
-        guard let selectedImage = selectedImage else { return }
-        let db = Firestore.firestore()
-        let storageRef = Storage.storage().reference()
-        
-        // Check if we can turn the image into data
-        guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
-        
-        let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
-        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
-            if let error = error {
-                // Handle any errors that occur during the upload
-                print("Error uploading image:", error.localizedDescription)
-            } else {
-                db.collection("users").document(userId).setData(["pfpLocation": "profile-images/\(userId)-pfp.jpg"], merge: true)
-            }
-        }
-    }
+//    func uploadPhoto(userId: String) {
+//        guard let selectedImage = selectedImage else { return }
+//        let db = Firestore.firestore()
+//        let storageRef = Storage.storage().reference()
+//
+//        // Check if we can turn the image into data
+//        guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
+//
+//        let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
+//        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
+//            if let error = error {
+//                // Handle any errors that occur during the upload
+//                print("Error uploading image:", error.localizedDescription)
+//            } else {
+//                db.collection("users").document(userId).setData(["pfpLocation": "profile-images/\(userId)-pfp.jpg"], merge: true)
+//            }
+//        }
+//    }
 }
     
     struct RegistrationView_Previews: PreviewProvider {

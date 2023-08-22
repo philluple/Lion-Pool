@@ -22,7 +22,7 @@ class FlightModel: ObservableObject{
     @Published var flights: [Flight] = []
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "https://lion-pool.com/api/flight"
+    let baseURL = "http://34.125.37.144:3000/api/flight"
     
     init(){
         if let userId = UserDefaults.standard.string(forKey: "userId"){
@@ -66,7 +66,9 @@ class FlightModel: ObservableObject{
                     DispatchQueue.main.async {
                         for flight in decodedFlights {
                             self.flights.append(flight)
+                            
                         }
+                        UserDefaults.standard.set(self.flights.count, forKey: "flights")
                     }
                 } catch {
                     print("\(error.localizedDescription)")
@@ -107,6 +109,12 @@ class FlightModel: ObservableObject{
                         self.flights.remove(at: index)
                     } else {
                         // Object with target ID not found in the array
+                    }
+                    if let existingCounter = UserDefaults.standard.value(forKey: "flights") as? Int{
+                        let incrementedCounter = existingCounter - 1
+                        UserDefaults.standard.set(incrementedCounter, forKey: "flights")
+                    } else{
+                        UserDefaults.standard.set(self.flights.count, forKey: "flights")
                     }
                     completion(.success)
                 }
@@ -162,19 +170,19 @@ class FlightModel: ObservableObject{
                     do {
                         let flightData = try self.jsonDecoder.decode(Flight.self, from: data)
                         DispatchQueue.main.async{
-                            //                            print("SUCCESS: Successfully added flight")
-                            //                            self.flights.append(flightData)
-                            //                            completion(.success(flightData))
                             self.flights.sort { $0.date < $1.date }
-                            // Find the index where the new flight should be inserted based on its date
                             if let insertionIndex = self.flights.firstIndex(where: { $0.date > flightData.date }) {
                                 self.flights.insert(flightData, at: insertionIndex)
                             } else {
-                                // The new flight has the latest date, so append it at the end
                                 self.flights.append(flightData)
                             }
-                            
                             completion(.success(flightData))
+                            if let existingCounter = UserDefaults.standard.value(forKey: "flights") as? Int{
+                                let incrementedCounter = existingCounter + 1
+                                UserDefaults.standard.set(incrementedCounter, forKey: "flights")
+                            } else{
+                                UserDefaults.standard.set(self.flights.count, forKey: "flights")
+                            }
                         }
                     } catch let decodingError{
                         DispatchQueue.main.async{

@@ -15,6 +15,7 @@
 		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
 		75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75111D882A761C1F0064F990 /* TimeUtils.swift */; };
 		751507692A84B01900B0031B /* Lion-Pool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751507682A84B01900B0031B /* Lion-Pool-Info.plist */; };
+		751A4AEE2A954781001CAE22 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751A4AED2A954781001CAE22 /* ChoiceView.swift */; };
 		751C34EF2A6CF08200F6783C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */; };
 		751C34F22A6CF11E00F6783C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F12A6CF11E00F6783C /* GoogleSignIn */; };
 		751C34F42A6CF11E00F6783C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F32A6CF11E00F6783C /* GoogleSignInSwift */; };
@@ -72,6 +73,8 @@
 		75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75881F6F2A7C8E990067AFA5 /* ExpandedMatchView.swift */; };
 		75881F732A7D99C50067AFA5 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
 		75881F742A7D99C50067AFA5 /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
+		758B6CCE2A9441500065B67B /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 758B6CCD2A9441500065B67B /* PartialSheet */; };
+		758B6CD02A94447E0065B67B /* ChooseImageMedium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758B6CCF2A94447E0065B67B /* ChooseImageMedium.swift */; };
 		758DF8EC2A8F0B400002BFF2 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8EB2A8F0B400002BFF2 /* FacebookAEM */; };
 		758DF8EE2A8F0B400002BFF2 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8ED2A8F0B400002BFF2 /* FacebookBasics */; };
 		758DF8F02A8F0B400002BFF2 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8EF2A8F0B400002BFF2 /* FacebookCore */; };
@@ -102,6 +105,7 @@
 		75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCA2A704BBC00779DA5 /* Matches.swift */; };
 		75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */; };
 		75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */; };
+		75EE9C722A94369B000F6896 /* HalfScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE9C712A94369B000F6896 /* HalfScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +143,7 @@
 		75109A98285BB85A00CAC400 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
 		75111D882A761C1F0064F990 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		751507682A84B01900B0031B /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lion-Pool-Info.plist"; sourceTree = "<group>"; };
+		751A4AED2A954781001CAE22 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 		751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		751C34F72A6DEDE800F6783C /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
 		752DC02B2A8497840054F7AD /* NewFlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFlightDetailView.swift; sourceTree = "<group>"; };
@@ -170,6 +175,7 @@
 		75881F6B2A7C204E0067AFA5 /* imageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageUtils.swift; sourceTree = "<group>"; };
 		75881F6D2A7C4E900067AFA5 /* RequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestView.swift; sourceTree = "<group>"; };
 		75881F6F2A7C8E990067AFA5 /* ExpandedMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedMatchView.swift; sourceTree = "<group>"; };
+		758B6CCF2A94447E0065B67B /* ChooseImageMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseImageMedium.swift; sourceTree = "<group>"; };
 		758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramView.swift; sourceTree = "<group>"; };
 		758DF9012A8F35440002BFF2 /* InstagramWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramWebView.swift; sourceTree = "<group>"; };
 		758DF9032A8F367D0002BFF2 /* FakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeView.swift; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 		75D7FDCA2A704BBC00779DA5 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
 		75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListView.swift; sourceTree = "<group>"; };
 		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
+		75EE9C712A94369B000F6896 /* HalfScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +211,7 @@
 				758DF8F42A8F0B400002BFF2 /* FacebookShare in Frameworks */,
 				758DF8F02A8F0B400002BFF2 /* FacebookCore in Frameworks */,
 				7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */,
+				758B6CCE2A9441500065B67B /* PartialSheet in Frameworks */,
 				759557792A58DD8900571AD0 /* FirebaseStorageCombine-Community in Frameworks */,
 				759557732A58DD8900571AD0 /* FirebaseFirestore in Frameworks */,
 				751C34F42A6CF11E00F6783C /* GoogleSignInSwift in Frameworks */,
@@ -230,7 +238,9 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				751A4AED2A954781001CAE22 /* ChoiceView.swift */,
 				758DF9012A8F35440002BFF2 /* InstagramWebView.swift */,
+				75EE9C712A94369B000F6896 /* HalfScreenView.swift */,
 				758DF9032A8F367D0002BFF2 /* FakeView.swift */,
 				751507682A84B01900B0031B /* Lion-Pool-Info.plist */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
@@ -432,6 +442,7 @@
 			children = (
 				7537511D2A57E43700B02528 /* HomeView.swift */,
 				75A05E792A5896D0002ABE9C /* ProfileView.swift */,
+				758B6CCF2A94447E0065B67B /* ChooseImageMedium.swift */,
 				75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */,
 				75731D3C2A75CD130001B01E /* ConfirmedMatchesListView.swift */,
 				75109A98285BB85A00CAC400 /* FlightListView.swift */,
@@ -472,6 +483,7 @@
 				758DF8EF2A8F0B400002BFF2 /* FacebookCore */,
 				758DF8F12A8F0B400002BFF2 /* FacebookLogin */,
 				758DF8F32A8F0B400002BFF2 /* FacebookShare */,
+				758B6CCD2A9441500065B67B /* PartialSheet */,
 			);
 			productName = "Lion Pool";
 			productReference = 75109A4A285BB7CE00CAC400 /* Lion Pool.app */;
@@ -550,6 +562,7 @@
 				759557692A58DD8900571AD0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				751C34F02A6CF11E00F6783C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				758B6CCC2A9441500065B67B /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = 75109A4B285BB7CE00CAC400 /* Products */;
 			projectDirPath = "";
@@ -608,6 +621,7 @@
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
+				758B6CD02A94447E0065B67B /* ChooseImageMedium.swift in Sources */,
 				75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */,
 				75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */,
 				7581378D2A69E4A900577409 /* CustomNavView.swift in Sources */,
@@ -623,6 +637,7 @@
 				75596AC52A7969FB00C6C819 /* NotificationView.swift in Sources */,
 				75985C592A8DB65A00103AA1 /* Checklist.swift in Sources */,
 				752F99762A57B7D40036ECEE /* Logo.swift in Sources */,
+				751A4AEE2A954781001CAE22 /* ChoiceView.swift in Sources */,
 				75366130285BBBF40077C02F /* FlightView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
 				755A28AF2A7A33E900B4C9B7 /* FlightModel.swift in Sources */,
@@ -643,6 +658,7 @@
 				75881F6C2A7C204E0067AFA5 /* imageUtils.swift in Sources */,
 				75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */,
 				7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */,
+				75EE9C722A94369B000F6896 /* HalfScreenView.swift in Sources */,
 				758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */,
 				7581378F2A69E73F00577409 /* CustomNavLink.swift in Sources */,
 				752F99742A57B76E0036ECEE /* LoginView.swift in Sources */,
@@ -1011,6 +1027,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		758B6CCC2A9441500065B67B /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:AndreaMiotto/PartialSheet.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		758DF8EA2A8F0B400002BFF2 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
@@ -1047,6 +1071,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 751C34F02A6CF11E00F6783C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		758B6CCD2A9441500065B67B /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 758B6CCC2A9441500065B67B /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
 		};
 		758DF8EB2A8F0B400002BFF2 /* FacebookAEM */ = {
 			isa = XCSwiftPackageProductDependency;

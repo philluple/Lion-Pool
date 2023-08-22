@@ -10,6 +10,7 @@ import UIKit
 
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
+    @Binding var isCameraSource: Bool
     @Environment(\.presentationMode) var presentationMode
     
     func makeCoordinator() -> Coordinator {
@@ -19,6 +20,11 @@ struct ImagePicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> some UIViewController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
+        if isCameraSource{
+            picker.sourceType = .camera
+        }else{
+            picker.sourceType = .photoLibrary
+        }
         return picker
     }
     

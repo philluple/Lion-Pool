@@ -1,6 +1,7 @@
 import SwiftUI
 import Firebase
 import FirebaseCore
+import PartialSheet
 
 @main
 struct Lion_PoolApp: App {
@@ -16,6 +17,7 @@ struct Lion_PoolApp: App {
                 .environmentObject(RequestModel())
                 .environmentObject(MatchModel())
                 .environmentObject(FlightModel())
+                .attachPartialSheetToRoot()
         }
     }
     

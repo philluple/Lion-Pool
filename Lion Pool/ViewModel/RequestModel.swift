@@ -13,7 +13,7 @@ class RequestModel: ObservableObject{
     @Published var inRequests: [UUID: [Request]] = [:]
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "https://lion-pool.com/api/request"
+    let baseURL = "http://34.125.37.144:3000/api/request"
     
     init(){
         if let userId = UserDefaults.standard.string(forKey: "userId"){
@@ -98,6 +98,12 @@ class RequestModel: ObservableObject{
                     DispatchQueue.main.async{
                         print("Accepted request")
                         self.inRequests.removeValue(forKey: request.recieverFlightId)
+                        if let existingCounter = UserDefaults.standard.value(forKey: "matches") as? Int{
+                            let incrementedCounter = existingCounter + 1
+                            UserDefaults.standard.set(incrementedCounter, forKey: "matches")
+                        } else{
+                            UserDefaults.standard.set(1, forKey: "matches")
+                        }
                         completion(.success)
                     }
                 } else{

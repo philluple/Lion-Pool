@@ -59,9 +59,14 @@ class UserModel: ObservableObject {
             self.userSession = result.user
             await fetchUser()
             await fetchPfp()
-            if let userId = self.currentUser?.id {
-                UserDefaults.standard.set(userId, forKey: "userId")
+            if let userId = self.currentUser?.id,
+               let firstname = self.currentUser?.firstname,
+               let lastname = self.currentUser?.lastname {
+                   let name = "\(firstname) \(lastname)"
+                   UserDefaults.standard.set(userId, forKey: "userId")
+                   UserDefaults.standard.set(name, forKey: "name")
             }
+
             print("SUCCESS: User has signed in")
         } catch {
             print("DEBUG: failed to login")
@@ -80,7 +85,13 @@ class UserModel: ObservableObject {
             await fetchUser()
             await fetchPfp()
             print("SUCCESS: \(user.id) has been created")
-            UserDefaults.standard.set(user.id, forKey: "userId")
+            if let userId = self.currentUser?.id,
+               let firstname = self.currentUser?.firstname,
+               let lastname = self.currentUser?.lastname {
+                   let name = "\(firstname) \(lastname)"
+                   UserDefaults.standard.set(userId, forKey: "userId")
+                   UserDefaults.standard.set(name, forKey: "name")
+            }
             return user.id
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
@@ -106,10 +117,18 @@ class UserModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
+        if let userId = self.currentUser?.id,
+           let firstname = self.currentUser?.firstname,
+           let lastname = self.currentUser?.lastname {
+               let name = "\(firstname) \(lastname)"
+               UserDefaults.standard.set(userId, forKey: "userId")
+               UserDefaults.standard.set(name, forKey: "name")
+        }
         print("SUCCESS: Fetched the user")
     }
     
     func fetchPfp() async {
+        print("Fetching")
         guard let pfp = self.currentUser?.pfpLocation else{
             return
         }
@@ -125,8 +144,7 @@ class UserModel: ObservableObject {
                 case .success(let uiImage):
                     self.currentUserProfileImage = Image(uiImage: uiImage)
                 case .failure:
-                    // Set a placeholder image or handle the error state
-                    self.currentUserProfileImage = Image(systemName: "person.circle.fill")
+                    print("Failed")
                 }
             }
         }
