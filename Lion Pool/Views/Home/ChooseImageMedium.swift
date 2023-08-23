@@ -109,7 +109,7 @@ struct ChooseImageMedium: View {
                         Lion_Pool.ImagePicker(selectedImage: $selectedImage, isCameraSource: $camera)
                     }
                 }.padding(.top)
-                    .accentColor(Color.gray)
+                    .accentColor(Color("DarkGray"))
             }.padding(.bottom)
                 .padding(.leading)
 

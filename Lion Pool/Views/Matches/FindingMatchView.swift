@@ -50,20 +50,12 @@ struct FindingMatchView: View {
     let maxDots = 3
     let animationInterval = 0.5
     
-    var thingsToPack = ["sunblock", "underwear", "toothbrush", "to text your mom when your flight takes off", "to download your songs", "to find a plant guardian"]
+    var thingsToPack = ["sunblock", "underwear", "toothbrush", "to text your mom when your flight takes off", "to download your songs", "to find a plant guardian", "to take out your piercings"]
     
     var body: some View {
         NavigationView{
             VStack(){
-                Text("Finding matches")
-                    .font(.system(size: 45, weight: .bold))
-                    .foregroundColor(Color("Dark Blue "))
-                    .padding()
-                    .frame(width: UIScreen.main.bounds.width, height: 55)
-                    .background(Color("Gray Blue "))
-                
                 Spacer()
-                
                 Text("Matching in progress" + dots)
                     .font(.system(size: 30, weight: .bold))
                     .padding([.top, .bottom])
@@ -74,7 +66,6 @@ struct FindingMatchView: View {
                 
                 Text("Dont forget \(thingsToPack[randomNumberGenerator.randomNumber])")
                 Spacer()
-
                     .fullScreenCover(isPresented: Binding<Bool>(get: {
                         return matchesFound
                     }, set: { _ in
@@ -91,6 +82,7 @@ struct FindingMatchView: View {
                     }), content: {
                         NoMatchView()
                     })
+                Spacer()
             }
             .onAppear {
                 matchModel.findMatch(flightId: flightId, userId: userId, airport: airport){ result in switch result{

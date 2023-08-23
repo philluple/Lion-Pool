@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct NewFlightDetailView: View {
     let flight : Flight
     let time =  TimeUtils()
-    
-    
-    
+
     //Objects to apply logic
     @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var requestModel: RequestModel
@@ -23,8 +22,6 @@ struct NewFlightDetailView: View {
     @State private var isSheetPresented = false
     
     
-    
-    //     Calculate the difference in days and return a formatted string
     var diffs: Int {
         if let date = time.dateFromISOString(flight.date) {
             let components = Calendar.current.dateComponents([.day], from: Date(), to: date)
@@ -60,6 +57,7 @@ struct NewFlightDetailView: View {
                             }.padding([.trailing], 25)
                                 .padding(.top,5)
                         }
+                        
                     }else{
                         VStack{
                             FlightDetaiTicket(flight: flight)
@@ -101,37 +99,21 @@ struct NewFlightDetailView: View {
                             
                         }
                         
-                    }
-                }
+                    }                }
                 
                 if let user = userModel.currentUser{
-                    NavigationLink(destination: FindingMatchView(flightId: flight.id, airport: flight.airport, userId: user.id, date: time.dateFromISOString(flight.date) ?? Date()), isActive: $findMatches){
+                    NavigationLink(destination: FindingMatchView(flightId: flight.id, airport: flight.airport, userId: user.id, date: time.dateFromISOString(flight.date) ?? Date()).navigationBarHidden(true), isActive: $findMatches){
                         EmptyView()
-                    }
+                    }.navigationBarHidden(true)
                 }
-                
             }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 .background(Color("Text Box"))
                 .ignoresSafeArea()
-                .sheet(isPresented: $isSheetPresented){
-                    if let user = userModel.currentUser{
-                        ConfirmChoiceView(title: "Delete Flight", message: nil, flight: flight, request: nil) {
-                            flightModel.deleteFlight(userId: user.id, flightId: flight.id,  airport: flight.airport){ result in
-                                switch result {
-                                case .success:
-                                    presentationMode.wrappedValue.dismiss()
-                                case .failure:
-                                    print("could not delete")
-                                }
-                            }
-                        } onReject: {
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                        
-                        
-                    }
-                    
-                }
+            .partialSheet(isPresented: $isSheetPresented){
+                ChoiceView(isPresented: $isSheetPresented, firstAction:
+                    deleteFlight, firstOption: "Yes, delete", secondOption: "Cancel", title: "Delete this flight?")
+            }
+
         }
     }
     private var airport: some View{
@@ -235,7 +217,6 @@ struct NewFlightDetailView: View {
     private var deleteFlightButton: some View{
         Button {
             isSheetPresented.toggle()
-            
         }label: {
             ZStack{
                 Circle()
@@ -247,32 +228,19 @@ struct NewFlightDetailView: View {
                     .foregroundColor(Color.white)
             }
         }
-        .alert(isPresented: $isSheetPresented) {
-            Alert(
-                title: Text("Delete Flight"),
-                message: Text("If it's about the matches, we promise it is not you"),
-                primaryButton: .default(
-                    Text("Cancel"),
-                    action: {
-                        isSheetPresented.toggle()
-                    }
-                ),
-                secondaryButton: .destructive(
-                    Text("Delete"),
-                    action: {
-                        if let user = userModel.currentUser {
-                            flightModel.deleteFlight(userId: user.id, flightId: flight.id, airport: flight.airport) { result in
-                                switch result {
-                                case .success:
-                                    presentationMode.wrappedValue.dismiss()
-                                case .failure:
-                                    print("could not delete")
-                                }
-                            }
-                        }
-                    }
-                )
-            )
+    }
+    private func deleteFlight() {
+        if let user = userModel.currentUser {
+            flightModel.deleteFlight(userId: user.id, flightId: flight.id, airport: flight.airport) { result in
+                switch result {
+                case .success:
+                    presentationMode.wrappedValue.dismiss()
+                case .failure:
+                    print("could not delete")
+                }
+            }
+        } else {
+            print("Error")
         }
     }
 }

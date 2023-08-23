@@ -35,6 +35,25 @@ struct CustomNavBarContainerView<Content: View>: View {
     }
 }
 
+struct CustomNavigationBarModifier: ViewModifier {
+    var isHidden: Bool
+    
+    init(isHidden: Bool) {
+        self.isHidden = isHidden
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                UINavigationBar.appearance().isHidden = self.isHidden
+            }
+            .onDisappear {
+                UINavigationBar.appearance().isHidden = false
+            }
+    }
+}
+
+
 struct CustomNavBarContainerView_Previews: PreviewProvider {
     static var previews: some View {
         CustomNavBarContainerView{

@@ -13,6 +13,8 @@
 		75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */; };
 		75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */; };
 		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
+		751110112A95AB0E000EDC4D /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751110102A95AB0E000EDC4D /* SettingView.swift */; };
+		751110132A95AB36000EDC4D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751110122A95AB36000EDC4D /* SettingsView.swift */; };
 		75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75111D882A761C1F0064F990 /* TimeUtils.swift */; };
 		751507692A84B01900B0031B /* Lion-Pool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751507682A84B01900B0031B /* Lion-Pool-Info.plist */; };
 		751A4AEE2A954781001CAE22 /* ChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751A4AED2A954781001CAE22 /* ChoiceView.swift */; };
@@ -141,6 +143,8 @@
 		75109A96285BB85A00CAC400 /* AddFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlightView.swift; sourceTree = "<group>"; };
 		75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRidesView.swift; sourceTree = "<group>"; };
 		75109A98285BB85A00CAC400 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
+		751110102A95AB0E000EDC4D /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = "../../Library/Developer/Xcode/DerivedData/Lion_Pool-dsflartghyhrhfdmedrcixagnynx/SourcePackages/checkouts/swift-protobuf/SettingView.swift"; sourceTree = "<group>"; };
+		751110122A95AB36000EDC4D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		75111D882A761C1F0064F990 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		751507682A84B01900B0031B /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lion-Pool-Info.plist"; sourceTree = "<group>"; };
 		751A4AED2A954781001CAE22 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				751110122A95AB36000EDC4D /* SettingsView.swift */,
+				751110102A95AB0E000EDC4D /* SettingView.swift */,
 				751A4AED2A954781001CAE22 /* ChoiceView.swift */,
 				758DF9012A8F35440002BFF2 /* InstagramWebView.swift */,
 				75EE9C712A94369B000F6896 /* HalfScreenView.swift */,
@@ -620,6 +626,7 @@
 				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
+				751110132A95AB36000EDC4D /* SettingsView.swift in Sources */,
 				75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */,
 				758B6CD02A94447E0065B67B /* ChooseImageMedium.swift in Sources */,
 				75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */,
@@ -631,6 +638,7 @@
 				759B43D22A72EB0E0050D2C4 /* NoMatchView.swift in Sources */,
 				7537511E2A57E43700B02528 /* HomeView.swift in Sources */,
 				75881F6E2A7C4E900067AFA5 /* RequestView.swift in Sources */,
+				751110112A95AB0E000EDC4D /* SettingView.swift in Sources */,
 				759A00862A7B1C5C002BE671 /* CardView.swift in Sources */,
 				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
 				75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */,

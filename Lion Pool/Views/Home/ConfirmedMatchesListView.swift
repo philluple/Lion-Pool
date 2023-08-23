@@ -15,9 +15,9 @@ struct ConfirmedMatchesListView: View {
         VStack{
             HStack{
                 Text("Confirmed Matches")
-                    .font(.system(size:22,weight: .medium))
+                    .font(.system(size:20,weight: .medium))
                 Spacer()
-            }.position(x:200, y: 20)
+            }.position(x:200, y: 35)
             
             ScrollView(.horizontal, showsIndicators: true){
                 HStack{
@@ -30,7 +30,7 @@ struct ConfirmedMatchesListView: View {
                     }
                 }
             }
-        }.frame(width:UIScreen.main.bounds.width-20,height: 260)
+        }.frame(width:UIScreen.main.bounds.width-20,height: 240)
         .background(Color.white)
         .cornerRadius(10)
         

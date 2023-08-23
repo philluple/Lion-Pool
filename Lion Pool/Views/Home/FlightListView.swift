@@ -26,12 +26,12 @@ struct FlightListView: View {
         VStack {
             HStack(){
                 Text("Upcoming flights")
-                    .font(.system(size:22,weight: .medium))
+                    .font(.system(size:20,weight: .medium))
                 Spacer()
-                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(35)) {
+                CustomNavLink(destination: AddFlightView(confirmedFlight: $confirmedFlight).customNavigationTitle("Add a flight").customNavigationSize(30)) {
                     Text("Add flight")
                         .foregroundColor(Color.white)
-                        .font(.system(size: 15, weight: .bold))
+                        .font(.system(size: 14, weight: .bold))
                         .frame(width: 90, height: 25)
                         .background(Color("Gold"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -62,7 +62,7 @@ struct FlightListView: View {
     
     private func calculateHeight(for count: Int) -> CGFloat {
         let maxItemCount: Int = 5
-        let itemHeight: CGFloat = 55
+        let itemHeight: CGFloat = 45
         
         if count == 0 {
             return CGFloat(50)
@@ -80,6 +80,8 @@ struct UpcomingFlightView_Previews: PreviewProvider {
         List{
             FlightListView()
                 .environmentObject(UserModel())
+                .environmentObject(FlightModel())
+                .environmentObject(RequestModel())
         }
         
     }

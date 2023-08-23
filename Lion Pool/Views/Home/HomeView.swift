@@ -38,27 +38,31 @@ struct HomeView: View {
         ZStack {
             HStack{
                 Text("LionPool")
-                    .font(.system(size: 42, weight: .bold))
+                    .font(.system(size: 30, weight: .bold))
 //                    .font(Font.custom("ChicagoFlf", size: 32))
                     .foregroundColor(Color("Dark Blue "))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading],UIScreen.main.bounds.width/30)
                 
-                CustomNavLink(destination: ProfileView().customNavigationTitle("Account info").customNavigationSize(35)){
+                CustomNavLink(destination: ProfileView().customNavigationTitle("Account info").customNavigationSize(30)){
                     if let image = viewModel.currentUserProfileImage{
                         image
                             .resizable()
-                            .frame(width:40, height:40)
+                            .frame(width:35, height:35)
                             .foregroundColor(Color("Dark Blue "))
-                            .overlay(Circle().stroke(Color("Text Box"), lineWidth: 4))
+                            .overlay(Circle().stroke(Color("Text Box"), lineWidth: 2))
                             .clipShape(Circle())
                             .padding([.trailing],UIScreen.main.bounds.width/40)
+                            .padding(.vertical, 4)
+
                     }else{
                         Image(systemName:"person.fill")
                             .resizable()
                             .frame(width:30, height:30)
                             .foregroundColor(Color("Dark Blue "))
                             .padding([.trailing],UIScreen.main.bounds.width/40)
+                            .padding(.bottom,2)
+
                     }
                 }
             }

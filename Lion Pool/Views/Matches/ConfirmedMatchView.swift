@@ -18,7 +18,7 @@ struct ConfirmedMatchView: View {
                     if let image = image {
                         image
                             .resizable()
-                            .frame(width: 90, height: 90)
+                            .frame(width: 80, height: 80)
                             .clipShape(Circle())
                             .foregroundColor(Color.gray)
                     } else {
