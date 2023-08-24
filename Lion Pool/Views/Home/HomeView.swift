@@ -39,12 +39,11 @@ struct HomeView: View {
             HStack{
                 Text("LionPool")
                     .font(.system(size: 30, weight: .bold))
-//                    .font(Font.custom("ChicagoFlf", size: 32))
                     .foregroundColor(Color("Dark Blue "))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading],UIScreen.main.bounds.width/30)
                 
-                CustomNavLink(destination: ProfileView().customNavigationTitle("Account info").customNavigationSize(30)){
+                CustomNavLink(destination: ProfileView().customNavigationTitle("Account info").customNavigationSize(32)){
                     if let image = viewModel.currentUserProfileImage{
                         image
                             .resizable()

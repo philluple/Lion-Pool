@@ -22,6 +22,7 @@
 		751C34F22A6CF11E00F6783C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F12A6CF11E00F6783C /* GoogleSignIn */; };
 		751C34F42A6CF11E00F6783C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F32A6CF11E00F6783C /* GoogleSignInSwift */; };
 		751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
+		752B07362A96B6DD005208BB /* InstagramModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B07352A96B6DD005208BB /* InstagramModel.swift */; };
 		752DC02C2A8497840054F7AD /* NewFlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752DC02B2A8497840054F7AD /* NewFlightDetailView.swift */; };
 		752F99702A57B4580036ECEE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F996F2A57B4580036ECEE /* InputView.swift */; };
 		752F99742A57B76E0036ECEE /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F99732A57B76E0036ECEE /* LoginView.swift */; };
@@ -150,6 +151,8 @@
 		751A4AED2A954781001CAE22 /* ChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceView.swift; sourceTree = "<group>"; };
 		751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		751C34F72A6DEDE800F6783C /* FlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightDetailView.swift; sourceTree = "<group>"; };
+		752B07342A968B53005208BB /* Lion Pool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Lion Pool.entitlements"; sourceTree = "<group>"; };
+		752B07352A96B6DD005208BB /* InstagramModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramModel.swift; sourceTree = "<group>"; };
 		752DC02B2A8497840054F7AD /* NewFlightDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFlightDetailView.swift; sourceTree = "<group>"; };
 		752F996F2A57B4580036ECEE /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		752F99732A57B76E0036ECEE /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 		75109A4C285BB7CE00CAC400 /* Lion Pool */ = {
 			isa = PBXGroup;
 			children = (
+				752B07342A968B53005208BB /* Lion Pool.entitlements */,
 				756FFCAC2A85A5230080DF90 /* DECTERM.ttf */,
 				75985C562A8D9EB400103AA1 /* ChicagoFLF.ttf */,
 				752DC02B2A8497840054F7AD /* NewFlightDetailView.swift */,
@@ -276,6 +280,7 @@
 				75985C582A8DB65A00103AA1 /* Checklist.swift */,
 				751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */,
 				75A05E752A586C3D002ABE9C /* ContentView.swift */,
+				752B07352A96B6DD005208BB /* InstagramModel.swift */,
 				758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */,
 				75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */,
 				75109A95285BB85A00CAC400 /* Views */,
@@ -638,6 +643,7 @@
 				759B43D22A72EB0E0050D2C4 /* NoMatchView.swift in Sources */,
 				7537511E2A57E43700B02528 /* HomeView.swift in Sources */,
 				75881F6E2A7C4E900067AFA5 /* RequestView.swift in Sources */,
+				752B07362A96B6DD005208BB /* InstagramModel.swift in Sources */,
 				751110112A95AB0E000EDC4D /* SettingView.swift in Sources */,
 				759A00862A7B1C5C002BE671 /* CardView.swift in Sources */,
 				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
@@ -846,6 +852,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lion Pool/Lion Pool.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";
@@ -882,6 +889,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Lion Pool/Lion Pool.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Lion Pool/Preview Content\"";

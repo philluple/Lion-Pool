@@ -40,14 +40,16 @@ struct ProfileView: View {
                 .padding(.bottom, 10)
                 .padding(.top, 20)
             AccountStats
+            Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
+            {
+                Text("Connect your Instagram")
+            }
             Divider()
                 .padding(.horizontal,40)
                 .padding(.top, 10)
                 .padding(.bottom, 20)
 
             Spacer()
-            
-            Link("Connect your instagram", destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/api/instagram-callback&scope=user_profile,user_media&response_type=code")!)
 
             signOut
             
@@ -87,31 +89,49 @@ struct ProfileView: View {
                         Text("Phillip Le")
                             .font(.system(size:16, weight: .semibold))
                     }
-                    if let user = userModel.currentUser{
-                        Label{
-                            Text("\(user.email)")
-                                .font(.system(size:14))
-                                .foregroundColor(Color.gray)
-                                .padding(10)
-                        } icon :{
-                            Image(systemName: "envelope")
-                                .foregroundColor(Color.gray)
-                        }.background(Color("Text Box"), in: Capsule())
-                            .labelStyle(.titleOnly)
-                            .accentColor(Color("DarkGray"))
-                    }else{
-                        Label{
-                            Text("pnl2111@columbia.edu")
-                                .font(.system(size:14))
-                                .foregroundColor(Color.gray)
-                                .padding(10)
-                        } icon :{
-                            Image(systemName: "envelope")
-                                .foregroundColor(Color.gray)
-                        }.background(Color("Text Box"), in: Capsule())
-                            .labelStyle(.titleOnly)
-                            .accentColor(Color("DarkGray"))
-                    }
+//                    if let user = userModel.currentUser{
+//                        Label{
+//                            Text("\(user.email)")
+//                                .font(.system(size:14))
+//                                .foregroundColor(Color.gray)
+//                                .padding(10)
+//                        } icon :{
+//                            Image(systemName: "envelope")
+//                                .foregroundColor(Color.gray)
+//                        }.background(Color("Text Box"), in: Capsule())
+//                            .labelStyle(.titleOnly)
+//                            .accentColor(Color("DarkGray"))
+//                    }else{
+//                        Label{
+//                            Text("pnl2111@columbia.edu")
+//                                .font(.system(size:14))
+//                                .foregroundColor(Color.gray)
+//                                .padding(10)
+//                        } icon :{
+//                            Image(systemName: "envelope")
+//                                .foregroundColor(Color.gray)
+//                        }.background(Color("Text Box"), in: Capsule())
+//                            .labelStyle(.titleOnly)
+//                            .accentColor(Color("DarkGray"))
+//                    }
+//                    if let username = UserDefaults.standard.string(forKey: "instagram_user"){
+//                        Label{
+//                            Text("@\(username)")
+//                                .font(.system(size:14))
+//                                .foregroundColor(Color.gray)
+//                                .padding(10)
+//                        } icon :{
+//                            Image(systemName: "envelope")
+//                                .foregroundColor(Color.gray)
+//                        }.background(Color("Text Box"), in: Capsule())
+//                            .labelStyle(.titleOnly)
+//                            .accentColor(Color("DarkGray"))
+//                    }else{
+//                        Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
+//                        {
+//                            Text("Connect your Instagram")
+//                        }
+//                    }
                 }.padding(.leading, 20)
             }
             Spacer()

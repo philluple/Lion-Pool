@@ -139,7 +139,6 @@ class FlightModel: ObservableObject{
         let airport = airport
         
         let fullURL = "\(baseURL)/addFlight"
-        print (fullURL)
         guard let url = URL(string: fullURL) else { fatalError("Missing URL")}
         
         // Form the HTTP Request
@@ -159,7 +158,6 @@ class FlightModel: ObservableObject{
             if let error = error {
                 print("Error with adding flight: \(error.localizedDescription)")
             } else if let httpResponse = response as? HTTPURLResponse {
-                print ("Status code: \(httpResponse .statusCode)")
                 if httpResponse.statusCode == 200 {
                     guard let data = data else {
                         DispatchQueue.main.async{
