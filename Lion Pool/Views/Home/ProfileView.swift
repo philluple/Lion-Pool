@@ -11,13 +11,26 @@ import FirebaseStorage
 import FirebaseAuth
 import PartialSheet
 
+struct ImageWrapper: Identifiable {
+    var id: UUID = UUID()
+    var image: Image
+}
 
 struct ProfileView: View {
     @EnvironmentObject var userModel : UserModel
     @EnvironmentObject var matchModel : MatchModel
     @EnvironmentObject var requestModel : RequestModel
     @EnvironmentObject var flightModel : FlightModel
+    @EnvironmentObject var instagramModel: InstagramAPI
     @Environment(\.presentationMode) var presentationMode
+//    @ObservedObject var imageLoader = ImageLoader() // Replace with your ViewModel
+
+    let columns: [GridItem] = [
+            GridItem(.flexible(), spacing: 2),
+            GridItem(.flexible(), spacing: 2),
+            GridItem(.flexible())
+    ]
+    
     var imageUitl = ImageUtils()
     
     @State private var displayedImage: Image?
@@ -48,7 +61,19 @@ struct ProfileView: View {
                 .padding(.horizontal,40)
                 .padding(.top, 10)
                 .padding(.bottom, 20)
-
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 2) {
+                    ForEach(instagramModel.posts, id: \.id) { identifiableImage in
+                        Image(uiImage: identifiableImage.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 100, height: 100) // Equal width and height
+                            .clipped()
+                    }
+                }
+                .padding()
+            }
+            
             Spacer()
 
             signOut

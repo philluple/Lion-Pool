@@ -18,9 +18,10 @@ struct Lion_PoolApp: App {
                 .environmentObject(RequestModel())
                 .environmentObject(MatchModel())
                 .environmentObject(FlightModel())
+                .environmentObject(instagramModel)
                 .attachPartialSheetToRoot()
                 .onOpenURL { url in
-                    print(url)
+//                    print(url)
                     instagramModel.getAuthToken(from: url)
                 }
         }

@@ -6,9 +6,35 @@
 //
 
 import Foundation
+import SwiftUI
 
-class InstagramAPI {
-    func getAuthToken (from url: URL){
+struct ImageFeed: Codable {
+    var feed: [String: String]
+    var username: String
+}
+
+struct IdentifiableImage: Identifiable{
+    let id: String
+    let image: UIImage
+}
+
+class InstagramAPI: ObservableObject{
+    @Published var posts: [IdentifiableImage] = []
+    
+    func loadImageData(from imageURL: URL, id: String) {
+        URLSession.shared.dataTask(with: imageURL) { data, _, error in
+            if let data = data, let uiImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    let identifiableImage = IdentifiableImage(id: id, image: uiImage)
+                    self.posts.append(identifiableImage)
+                }
+            } else if let error = error {
+                print("Error loading image:", error)
+            }
+        }.resume()
+    }
+    
+    func getAuthToken (from url: URL) {
         if let userId = UserDefaults.standard.string(forKey: "userId"){
             if let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems,
                let code = queryItems.first(where: { $0.name == "code" })?.value {
@@ -33,9 +59,24 @@ class InstagramAPI {
                         if httpResponse.statusCode == 200 {
                             if let data = data {
                                 do {
-                                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]{
-                                        if let username = json["username"] as? String{
-                                            UserDefaults.standard.set(username, forKey: "instagram_user")
+                                    let decoder = JSONDecoder()
+                                    let imageFeed = try decoder.decode(ImageFeed.self, from: data)
+                                    let username = imageFeed.username
+                                    UserDefaults.standard.set(username, forKey: "instagram_handle")
+                                    DispatchQueue.main.async{
+                                        if !imageFeed.feed.isEmpty {
+                                            for (key, value) in imageFeed.feed {
+                                                if let imageURL = URL(string: value) {
+                                                    if let imageData = try? Data(contentsOf: imageURL) {
+                                                        if let uiImage = UIImage(data: imageData) {
+                                                            let identifiableImage = IdentifiableImage(id: key, image: uiImage)
+                                                            self.posts.append(identifiableImage)
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        } else{
+                                            print("Empty")
                                         }
                                     }
                                 } catch {
