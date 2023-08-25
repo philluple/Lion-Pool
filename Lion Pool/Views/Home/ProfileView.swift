@@ -53,10 +53,7 @@ struct ProfileView: View {
                 .padding(.bottom, 10)
                 .padding(.top, 20)
             AccountStats
-            Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
-            {
-                Text("Connect your Instagram")
-            }
+            
             Divider()
                 .padding(.horizontal,40)
                 .padding(.top, 10)
@@ -114,6 +111,8 @@ struct ProfileView: View {
                         Text("Phillip Le")
                             .font(.system(size:16, weight: .semibold))
                     }
+                    InstagramButton
+
 //                    if let user = userModel.currentUser{
 //                        Label{
 //                            Text("\(user.email)")
@@ -161,6 +160,24 @@ struct ProfileView: View {
             }
             Spacer()
         }.padding(.leading, 20)
+    }
+    
+    
+    private var InstagramButton: some View{
+        Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
+        {
+            HStack{
+                Image("instagram-logo")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                Text("Connect your Instagram")
+                    .font(.system(size: 14, weight: .semibold))
+            }
+            
+        }.frame(width: 210, height: 30)
+            .background(Color("Gray Blue "))
+            .cornerRadius(10)
+        .accentColor(Color.white)
     }
     
     private var AccountStats: some View{
@@ -280,27 +297,34 @@ struct ProfileView_Previews: PreviewProvider {
             NavigationView {
                 ProfileView()
                     .environmentObject(UserModel())
+                    .environmentObject(InstagramAPI())
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
             
-            NavigationView {
-                ProfileView()
-                    .environmentObject(UserModel())
-            }
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-
-            // Preview for iPhone 13 Pro Max
-            NavigationView {
-                ProfileView()
-                    .environmentObject(UserModel())
-            }
-            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-            
-            NavigationView {
-                ProfileView()
-                    .environmentObject(UserModel())
-            }
-            .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
+//            NavigationView {
+//                ProfileView()
+//                    .environmentObject(UserModel())
+//                    .environmentObject(InstagramAPI())
+//
+//            }
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
+//
+//            // Preview for iPhone 13 Pro Max
+//            NavigationView {
+//                ProfileView()
+//                    .environmentObject(UserModel())
+//                    .environmentObject(InstagramAPI())
+//
+//            }
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
+//
+//            NavigationView {
+//                ProfileView()
+//                    .environmentObject(UserModel())
+//                    .environmentObject(InstagramAPI())
+//
+//            }
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
         }
     }
 }

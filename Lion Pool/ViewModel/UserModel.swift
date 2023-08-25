@@ -20,8 +20,6 @@ class UserModel: ObservableObject {
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
     @Published var currentUserProfileImage: Image? = nil
-    
-
     let imageUtil = ImageUtils()
     
     init(){
@@ -76,6 +74,13 @@ class UserModel: ObservableObject {
     func createUser(withEmail email: String, password: String, firstname: String, lastname: String, UNI: String, pfpLocation: String) async throws -> String?{
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            result.user.sendEmailVerification { error in
+                if let error = error {
+                    print("Failed to send verification email: \(error.localizedDescription)")
+                } else {
+                    print("Verification email sent successfully")
+                }
+            }
             self.userSession = result.user
             let user = User(id: result.user.uid, firstname: firstname, lastname: lastname, email: email, UNI: UNI, pfpLocation: pfpLocation)
             let encodedUser = try Firestore.Encoder().encode(user)
@@ -151,3 +156,5 @@ class UserModel: ObservableObject {
 
     }
 }
+
+
