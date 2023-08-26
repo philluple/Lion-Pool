@@ -64,6 +64,7 @@
 		75731D392A75BC4A0001B01E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D382A75BC4A0001B01E /* Request.swift */; };
 		75731D3B2A75C7940001B01E /* ConfirmedMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */; };
 		75731D3D2A75CD130001B01E /* ConfirmedMatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3C2A75CD130001B01E /* ConfirmedMatchesListView.swift */; };
+		757B5ED42A99A9D600199194 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B5ED32A99A9D600199194 /* WaitingView.swift */; };
 		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
 		758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137882A69E12D00577409 /* CustomNavBarContainerView.swift */; };
 		7581378B2A69E30A00577409 /* AppNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7581378A2A69E30A00577409 /* AppNavBarView.swift */; };
@@ -173,6 +174,7 @@
 		75731D382A75BC4A0001B01E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedMatchView.swift; sourceTree = "<group>"; };
 		75731D3C2A75CD130001B01E /* ConfirmedMatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedMatchesListView.swift; sourceTree = "<group>"; };
+		757B5ED32A99A9D600199194 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
 		7581378A2A69E30A00577409 /* AppNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavBarView.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				757B5ED32A99A9D600199194 /* WaitingView.swift */,
 				751110122A95AB36000EDC4D /* SettingsView.swift */,
 				751110102A95AB0E000EDC4D /* SettingView.swift */,
 				751A4AED2A954781001CAE22 /* ChoiceView.swift */,
@@ -668,6 +671,7 @@
 				75366131285BBBF40077C02F /* ImagePicker.swift in Sources */,
 				752F99812A57D24B0036ECEE /* UserModel.swift in Sources */,
 				759B43D02A7230CA0050D2C4 /* FindingMatchView.swift in Sources */,
+				757B5ED42A99A9D600199194 /* WaitingView.swift in Sources */,
 				75A5DBE52A9814AE00BAF8FA /* AuthViewModel.swift in Sources */,
 				75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,

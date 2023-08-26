@@ -12,7 +12,6 @@ import FirebaseFirestore
 import FirebaseCore
 
 struct RegistrationView: View {
-    @State private var email = ""
     @State private var firstname = ""
     @State private var lastname = ""
     @State private var password = ""
@@ -47,6 +46,10 @@ struct RegistrationView: View {
             ScrollView{
                 ImagePicker
                 
+                InputView(text: $UNI,
+                          title: "UNI",
+                          placeholder: "").autocapitalization(.none)
+                
                 InputView(text: $firstname,
                           title: "First Name",
                           placeholder: "Roaree")
@@ -54,14 +57,6 @@ struct RegistrationView: View {
                 InputView(text: $lastname,
                           title: "Last Name",
                           placeholder: "Minouche")
-                
-                InputView(text: $email,
-                          title: "Email Address",
-                          placeholder: "UNI@columbia.edu").autocapitalization(.none)
-                
-                InputView(text: $UNI,
-                          title: "UNI",
-                          placeholder: "").autocapitalization(.none)
                 
                 InputView(text: $password,
                           title: "Password",
@@ -122,15 +117,12 @@ struct RegistrationView: View {
             }
         }
     }
+    
     private var SignUpButton: some View{
+        
         Button {
             Task{
-                if let newUserId = try await viewModel.createUser(withEmail: email,
-                                                                  password: password,
-                                                                  firstname: firstname,
-                                                                  lastname: lastname,
-                                                                  UNI: UNI,
-                                                                  pfpLocation: fileRef){
+                if let newUserId = try await viewModel.createUser( UNI: UNI, password: password, firstname: firstname, lastname: lastname, pfpLocation: fileRef){
                     if profileImage != nil {
                         Task{
                             await imageUtil.uploadPhoto(userId: newUserId, selectedImage: selectedImage)
@@ -171,25 +163,6 @@ struct RegistrationView: View {
         guard let selectedImage = selectedImage else { return}
         profileImage = Image(uiImage: selectedImage)
     }
-
-//    func uploadPhoto(userId: String) {
-//        guard let selectedImage = selectedImage else { return }
-//        let db = Firestore.firestore()
-//        let storageRef = Storage.storage().reference()
-//
-//        // Check if we can turn the image into data
-//        guard let imageData = selectedImage.jpegData(compressionQuality: 0.5) else { return }
-//
-//        let fileRef = storageRef.child("profile-images/\(userId)-pfp.jpg")
-//        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
-//            if let error = error {
-//                // Handle any errors that occur during the upload
-//                print("Error uploading image:", error.localizedDescription)
-//            } else {
-//                db.collection("users").document(userId).setData(["pfpLocation": "profile-images/\(userId)-pfp.jpg"], merge: true)
-//            }
-//        }
-//    }
 }
     
     struct RegistrationView_Previews: PreviewProvider {

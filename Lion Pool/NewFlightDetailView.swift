@@ -114,6 +114,8 @@ struct NewFlightDetailView: View {
                     deleteFlight, firstOption: "Yes, delete", secondOption: "Cancel", title: "Delete this flight?")
             }
 
+        }.onAppear {
+            self.isSheetPresented = false
         }
     }
     private var airport: some View{

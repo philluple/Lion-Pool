@@ -9,33 +9,91 @@ import Foundation
 import SwiftUI
 
 struct ImageFeed: Codable {
-    var feed: [String: String]
     var username: String
+    var feed: [post]
+}
+
+struct post: Codable, Identifiable {
+    var id: String
+    var imageURL: String
+    var time: String
 }
 
 struct IdentifiableImage: Identifiable{
     let id: String
     let image: UIImage
+    let time: Date
 }
 
 class InstagramAPI: ObservableObject{
+    @Published var feed: [post] = []
     @Published var posts: [IdentifiableImage] = []
     
-    func loadImageData(from imageURL: URL, id: String) {
-        URLSession.shared.dataTask(with: imageURL) { data, _, error in
-            if let data = data, let uiImage = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    let identifiableImage = IdentifiableImage(id: id, image: uiImage)
-                    self.posts.append(identifiableImage)
-                }
-            } else if let error = error {
-                print("Error loading image:", error)
-            }
-        }.resume()
+    init(){
+        if let username = UserDefaults.standard.string(forKey: "instagram_handle"){
+            loadPostsFromUserDefaults()
+        }
     }
     
+    func loadImageData(id: String, post: post) {
+        if let url = URL(string: post.imageURL) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            URLSession.shared.dataTask(with: url) { data, _, error in
+                if let data = data, let uiImage = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        let timeDate = dateFormatter.date(from: post.time) ?? Date()
+                        let identifiableImage = IdentifiableImage(id: id, image: uiImage, time: timeDate)
+                        // Find the appropriate index to insert the new image
+                        if let index = self.posts.firstIndex(where: { $0.time <= timeDate }) {
+                            self.posts.insert(identifiableImage, at: index)
+                        } else {
+                            self.posts.append(identifiableImage) // If it's the latest date
+                        }
+                    }
+                } else if let error = error {
+                    print("Error loading image:", error)
+                }
+            }.resume()
+        }
+    }
+    
+    func saveImageFeed(feed: ImageFeed) {
+            do {
+                let encodedData = try JSONEncoder().encode(feed)
+                UserDefaults.standard.set(encodedData, forKey: "feed")
+            } catch {
+                print("Error encoding posts:", error)
+            }
+        }
+
+        // Load posts from UserDefaults
+    func loadPostsFromUserDefaults() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let encodedData = UserDefaults.standard.data(forKey: "feed") {
+            do {
+                let decodedPosts = try JSONDecoder().decode(ImageFeed.self, from: encodedData)
+                for post in decodedPosts.feed {
+                    //value is the post
+                    let timeDate = dateFormatter.date(from: post.time) ?? Date()
+                    if let index = self.posts.firstIndex(where: { $0.time <= timeDate }) {
+                        self.feed.insert(post, at: index)
+                    } else {
+                        self.feed.append(post) // If it's the latest date
+                    }
+                }
+                
+            } catch {
+                print("Error decoding posts:", error)
+            }
+        }
+    }
+
     // Initial
     func getAuthToken(from url: URL) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         if let userId = UserDefaults.standard.string(forKey: "userId") {
             if let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems,
                let code = queryItems.first(where: { $0.name == "code" })?.value {
@@ -66,18 +124,23 @@ class InstagramAPI: ObservableObject{
                                 let imageFeed = try decoder.decode(ImageFeed.self, from: data)
                                 let username = imageFeed.username
                                 UserDefaults.standard.set(username, forKey: "instagram_handle")
-                                
                                 DispatchQueue.main.async {
                                     if !imageFeed.feed.isEmpty {
-                                        for (key, value) in imageFeed.feed {
-                                            if let imageURL = URL(string: value) {
-                                                self.loadImageData(from: imageURL, id: key)
+                                        for post in imageFeed.feed {
+                                            //value is the post
+                                            let timeDate = dateFormatter.date(from: post.time) ?? Date()
+                                            if let index = self.posts.firstIndex(where: { $0.time <= timeDate }) {
+                                                self.feed.insert(post, at: index)
+                                            } else {
+                                                self.feed.append(post) // If it's the latest date
                                             }
                                         }
+                                        self.saveImageFeed(feed: imageFeed)
+                                        
                                     } else {
                                         print("Empty")
+                                        
                                     }
-                                    UserDefaults.standard.set(true, forKey: "connected-instagram")
                                 }
                             } catch {
                                 print("Error parsing JSON", error)

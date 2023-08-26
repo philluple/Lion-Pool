@@ -22,9 +22,18 @@ struct ContentView: View {
         Group {
             if userModel.userSession != nil {
                 HomeView()
-            } else {
+            } else{
                 LoginView()
             }
+//            if userModel.userSession != nil {
+//                if userModel.verificationStatus == .verified{
+//                    HomeView()
+//                } else{
+//                    WaitingView()
+//                }
+//            } else {
+//                LoginView()
+//            }
         }
         .onAppear {
             userModel.checkUserSession()

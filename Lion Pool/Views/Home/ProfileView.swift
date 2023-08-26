@@ -15,6 +15,12 @@ struct ImageWrapper: Identifiable {
     var id: UUID = UUID()
     var image: Image
 }
+func returnDate(date: Date) -> String{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//    print(dateFormatter.string(from: date))
+    return dateFormatter.string(from: date)
+}
 
 struct ProfileView: View {
     @EnvironmentObject var userModel : UserModel
@@ -28,7 +34,7 @@ struct ProfileView: View {
     let columns: [GridItem] = [
             GridItem(.flexible(), spacing: 2),
             GridItem(.flexible(), spacing: 2),
-            GridItem(.flexible())
+            GridItem(.flexible(), spacing: 2)
     ]
     
     var imageUitl = ImageUtils()
@@ -45,6 +51,7 @@ struct ProfileView: View {
     @State private var isPresentView: Bool = false
 
 
+
     var body: some View {
         VStack{
             AccountInfo
@@ -58,17 +65,31 @@ struct ProfileView: View {
                 .padding(.horizontal,40)
                 .padding(.top, 10)
                 .padding(.bottom, 20)
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 2) {
-                    ForEach(instagramModel.posts, id: \.id) { identifiableImage in
-                        Image(uiImage: identifiableImage.image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 100, height: 100) // Equal width and height
-                            .clipped()
+            GeometryReader { geometry in
+                VStack{
+                    HStack{
+                        Text("Recent Instagram Photos")
+                            .font(.system(size: 18, weight: .bold))
+                        Spacer()
                     }
-                }
-                .padding()
+                    LazyVGrid(columns: columns, spacing: 4){
+                        ForEach(instagramModel.feed){ post in
+                            AsyncImage(url: URL(string: post.imageURL)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15) // Adjust size based on GeometryReader
+                                    .cornerRadius(5)
+                                    .clipped()
+                            } placeholder: {
+                                Color.clear // Using an empty color as a placeholder
+                                    .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
+                                    .cornerRadius(5)
+                            }
+                        }
+                    }
+                }.padding(.horizontal)
+
             }
             
             Spacer()
@@ -112,50 +133,6 @@ struct ProfileView: View {
                             .font(.system(size:16, weight: .semibold))
                     }
                     InstagramButton
-
-//                    if let user = userModel.currentUser{
-//                        Label{
-//                            Text("\(user.email)")
-//                                .font(.system(size:14))
-//                                .foregroundColor(Color.gray)
-//                                .padding(10)
-//                        } icon :{
-//                            Image(systemName: "envelope")
-//                                .foregroundColor(Color.gray)
-//                        }.background(Color("Text Box"), in: Capsule())
-//                            .labelStyle(.titleOnly)
-//                            .accentColor(Color("DarkGray"))
-//                    }else{
-//                        Label{
-//                            Text("pnl2111@columbia.edu")
-//                                .font(.system(size:14))
-//                                .foregroundColor(Color.gray)
-//                                .padding(10)
-//                        } icon :{
-//                            Image(systemName: "envelope")
-//                                .foregroundColor(Color.gray)
-//                        }.background(Color("Text Box"), in: Capsule())
-//                            .labelStyle(.titleOnly)
-//                            .accentColor(Color("DarkGray"))
-//                    }
-//                    if let username = UserDefaults.standard.string(forKey: "instagram_user"){
-//                        Label{
-//                            Text("@\(username)")
-//                                .font(.system(size:14))
-//                                .foregroundColor(Color.gray)
-//                                .padding(10)
-//                        } icon :{
-//                            Image(systemName: "envelope")
-//                                .foregroundColor(Color.gray)
-//                        }.background(Color("Text Box"), in: Capsule())
-//                            .labelStyle(.titleOnly)
-//                            .accentColor(Color("DarkGray"))
-//                    }else{
-//                        Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
-//                        {
-//                            Text("Connect your Instagram")
-//                        }
-//                    }
                 }.padding(.leading, 20)
             }
             Spacer()
