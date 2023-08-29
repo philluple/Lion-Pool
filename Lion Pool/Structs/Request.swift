@@ -19,4 +19,5 @@ struct Request: Identifiable, Decodable, Hashable{
     var status: String
     var airport: String
     var notify: Bool?
+    var message: String?
 }

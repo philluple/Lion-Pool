@@ -19,25 +19,29 @@ struct RequestView: View {
     @EnvironmentObject var matchModel: MatchModel
     
     var body: some View {
-        ZStack {
-            Base
             VStack{
                 NotificationCircle()
                 ProfilePicture()
-                
                 Text(request.name)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 14, weight: .semibold))
+                    .multilineTextAlignment(.center)
                 Text("To: \(request.airport)")
                     .font(.system(size: 12))
                 Text(timeUtil.formattedDate(request.flightDate))
                     .font(.system(size: 12))
                 Text(request.status)
                     .font(.system(size:12, weight: .semibold))
-                    .frame(width: 40, height:20)
-                    .cornerRadius(10)
                     .foregroundColor(Color.white)
-                    .background(Color("Gold"))
+                    .padding(4)
+                    .background(Color("Gold"), in: RoundedRectangle(cornerRadius: 10))
                 
+            }
+            .padding(10)
+            .frame(minWidth: 125)
+            .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
+            .overlay{
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color("TextOutlineDark"), lineWidth: 1)
             }
             
             .onAppear {
@@ -51,7 +55,6 @@ struct RequestView: View {
                     }
                 }
             }
-        }
     }
     
     private var Base: some View{
@@ -80,7 +83,7 @@ struct RequestView: View {
         if let userImage = userImage{
             userImage
                 .resizable()
-                .frame(width: 90, height: 90)
+                .frame(width: 75, height: 75)
                 .clipShape(Circle())
                 .foregroundColor(Color.gray)
                 .overlay(
@@ -92,3 +95,12 @@ struct RequestView: View {
     }
 }
 
+struct RequestView_Preview: PreviewProvider {
+    static var previews: some View {
+        let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "12345", senderUserId: "45678", flightDate: "March 15, 2000", pfp: "nil", name: "Phillip Le", status: "PENDING", airport: "EWR")
+        RequestView(request: request)
+            .environmentObject(UserModel())
+            .environmentObject(RequestModel())
+            .environmentObject(MatchModel())
+    }
+}

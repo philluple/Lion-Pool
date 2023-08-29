@@ -104,7 +104,6 @@
 		75A05E762A586C3D002ABE9C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E752A586C3D002ABE9C /* ContentView.swift */; };
 		75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75A05E842A58C72D002ABE9C /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 75A05E832A58C72D002ABE9C /* iPhoneNumberField */; };
-		75A5DBE52A9814AE00BAF8FA /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A5DBE42A9814AE00BAF8FA /* AuthViewModel.swift */; };
 		75B46D1D2A84ABD4002EE5D2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75B46D1E2A84ABD4002EE5D2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A05E792A5896D0002ABE9C /* ProfileView.swift */; };
 		75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCA2A704BBC00779DA5 /* Matches.swift */; };
@@ -197,7 +196,6 @@
 		759B43D12A72EB0E0050D2C4 /* NoMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMatchView.swift; sourceTree = "<group>"; };
 		75A05E752A586C3D002ABE9C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		75A05E792A5896D0002ABE9C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		75A5DBE42A9814AE00BAF8FA /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		75D7FDCA2A704BBC00779DA5 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
 		75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListView.swift; sourceTree = "<group>"; };
 		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 			children = (
 				752B07352A96B6DD005208BB /* InstagramModel.swift */,
 				752F99802A57D24B0036ECEE /* UserModel.swift */,
-				75A5DBE42A9814AE00BAF8FA /* AuthViewModel.swift */,
 				755A28AA2A7A33CA00B4C9B7 /* MatchModel.swift */,
 				755A28AC2A7A33D900B4C9B7 /* RequestModel.swift */,
 				755A28AE2A7A33E900B4C9B7 /* FlightModel.swift */,
@@ -672,7 +669,6 @@
 				752F99812A57D24B0036ECEE /* UserModel.swift in Sources */,
 				759B43D02A7230CA0050D2C4 /* FindingMatchView.swift in Sources */,
 				757B5ED42A99A9D600199194 /* WaitingView.swift in Sources */,
-				75A5DBE52A9814AE00BAF8FA /* AuthViewModel.swift in Sources */,
 				75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				758DF8FA2A8F1EB00002BFF2 /* InstagramView.swift in Sources */,

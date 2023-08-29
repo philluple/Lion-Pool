@@ -39,7 +39,7 @@ class ImageUtils {
     }
     
     func updatePhoto(userId: String){
-        let fullURL = "http://34.125.37.144:3000/api/updateImage?userId=\(userId)"
+        let fullURL = "https://lion-pool.com/api/updateImage?userId=\(userId)"
         guard let url = URL(string: fullURL) else {
             fatalError("Missing URL")
         }

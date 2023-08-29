@@ -38,8 +38,8 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack(spacing: -2){
-            Logo(fontColor: "Dark Blue ", fontSize: 65)
-                .frame(width: UIScreen.main.bounds.width, height: 90)
+            Logo(fontColor: "Dark Blue ", fontSize: 30)
+                .frame(width: UIScreen.main.bounds.width)
                 .background(Color("Gray Blue "))
                 .padding([.bottom],2)
             

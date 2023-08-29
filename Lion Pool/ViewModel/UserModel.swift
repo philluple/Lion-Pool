@@ -34,23 +34,6 @@ class UserModel: ObservableObject {
             await fetchPfp()
         }
     }
-
-//    init(){
-//        if let currentUser = Auth.auth().currentUser{
-//            self.userSession = currentUser
-//        if userSession!.isEmailVerified{
-//                print("verified")
-//                verificationStatus = .verified
-//                Task {
-//                    await fetchUser()
-//                    await fetchPfp()
-//                }
-//        } else {
-//            verificationStatus = .pending
-//            print("pending")
-//        }
-//        }
-//    }
     
     func resendVerification(){
         if let user = self.userSession{
@@ -66,7 +49,7 @@ class UserModel: ObservableObject {
             if let user = user {
                 self.userSession = user
                 Task {
-                    print(user.email)
+                    print(user.email!)
                     print(user.isEmailVerified)
                     await self.fetchUser()
                     let isEmailVerified = user.isEmailVerified
@@ -91,6 +74,7 @@ class UserModel: ObservableObject {
     func signIn(withEmail email: String, password: String) async throws{
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            print(result)
             self.userSession = result.user
             await fetchUser()
             await fetchPfp()

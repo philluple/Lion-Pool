@@ -55,12 +55,13 @@ struct FlightDetailView: View {
                     Spacer()
                     Group{
                         if requestModel.inRequests[flight.id]?.isEmpty ?? true,
-                           requestModel.requests[flight.id] == nil {
+                           requestModel.requests[flight.id]?.isEmpty ?? true {
                             // Display the "Find Matches" button
-                            findMatchesButton
+//                            findMatchesButton
+                            Text("Hello")
                         }else{
                             if let inRequestArray = requestModel.inRequests[flight.id] {
-                                Spacer()
+//                                Spacer()
                                 VStack(spacing: 0) {
                                     // Remove the white rectangle here, we'll use only the Text with background color
                                     HStack {
@@ -88,8 +89,11 @@ struct FlightDetailView: View {
                                             .padding(.leading, 15)
                                         Spacer()
                                     }.frame(width: UIScreen.main.bounds.width - 20)
-                                    RequestView(request: outRequest)
-                                        .padding(.leading)
+                                    ForEach(outRequest) { request in
+                                        RequestView(request: request)
+                                            .padding(.leading)
+                                    }
+                                    
                                 }.frame(width:UIScreen.main.bounds.width-20, height: 300)
                             }
                             

@@ -131,10 +131,6 @@ struct ConfirmFlight: View {
         .cornerRadius(10)
         .padding(.top, 24)
     }
-
-    
-    
-    
 }
 
 

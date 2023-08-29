@@ -9,7 +9,7 @@ import Foundation
 
 
 class RequestModel: ObservableObject{
-    @Published var requests: [UUID: Request] = [:]
+    @Published var requests: [UUID: [Request]] = [:]
     @Published var inRequests: [UUID: [Request]] = [:]
     
     let jsonDecoder = JSONDecoder()
@@ -217,10 +217,18 @@ class RequestModel: ObservableObject{
                 do {
                     let decodedRequests = try self.jsonDecoder.decode([Request].self, from: data)
                     DispatchQueue.main.async {
-                        for request in decodedRequests{
-                            self.requests[request.senderFlightId] = request
+                        for request in decodedRequests {
+                            let senderFlightId = request.senderFlightId
+                            if var existingRequests = self.requests[senderFlightId] {
+                                // If there are existing requests for this recieverFlightId, append the new request to the array
+                                existingRequests.append(request)
+                                self.requests[senderFlightId] = existingRequests
+                            } else {
+                                // If there are no existing requests for this recieverFlightId, create a new array and add the request
+                                self.requests[senderFlightId] = [request]
+                            }
                         }
-                        return
+                        print(self.requests)
                     }
                 } catch {
                     print("\(error.localizedDescription)")
@@ -256,8 +264,16 @@ class RequestModel: ObservableObject{
                     print(data)
                     let decodedRequest = try self.jsonDecoder.decode(Request.self, from: data)
                     DispatchQueue.main.async{
-                        self.requests[decodedRequest.senderFlightId] = decodedRequest
-                        completion(.success)
+                        print(decodedRequest)
+                        let recieverFlightId = decodedRequest.recieverFlightId
+                        if var existingRequests = self.requests[recieverFlightId] {
+                            // If there are existing requests for this recieverFlightId, append the new request to the array
+                            existingRequests.append(decodedRequest)
+                            self.requests[recieverFlightId] = existingRequests
+                        } else {
+                            // If there are no existing requests for this recieverFlightId, create a new array and add the request
+                            self.requests[recieverFlightId] = [decodedRequest]
+                        }
                     }
                 }catch {
                     DispatchQueue.main.async{

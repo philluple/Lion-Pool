@@ -19,55 +19,62 @@ struct NotificationView: View {
     @EnvironmentObject var matchModel: MatchModel
     
     var body: some View {
-        ZStack {
-            Base
-            VStack{
-                NotificationCircle()
-                ProfilePicture()
-                
-                Text(request.name)
-                    .font(.system(size: 16, weight: .semibold))
-                Text("To: \(request.airport)")
-                    .font(.system(size: 12))
-                Text(timeUtil.formattedDate(request.flightDate))
-                    .font(.system(size: 12))
-                
-                HStack(spacing: 10){
-                    if let user = userModel.currentUser{
+        VStack{
+            ProfilePicture()
+            Text(request.name)
+                .font(.system(size: 16, weight: .semibold))
+            Text("To: \(request.airport)")
+                .font(.system(size: 12))
+            Text(timeUtil.formattedDate(request.flightDate))
+                .font(.system(size: 12))
+            
+            HStack(spacing: 10){
+                if let user = userModel.currentUser{
+                    Button {
+                        requestModel.rejectRequest(request: request, userId: user.id)
+                    } label: {
+                        Image(systemName: "x.circle.fill")
+                            .resizable()
+                            .frame(width:35, height:35)
+                            .foregroundColor(Color("Red"))
+                    }
+                    Button {
+                        requestModel.acceptRequest(request: request, currentUser: user){ result in
+                            switch result{
+                            case.success:
+                                acceptMatch()
+                            case.failure:
+                                print("Failed to accept request")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "checkmark.circle.fill")
+                            .resizable()
+                            .frame(width:35, height:35)
+                            .foregroundColor(Color.green)
+                    }
+                }else{
+                    HStack{
                         Button {
-                            requestModel.rejectRequest(request: request, userId: user.id)
+                            print("bye")
                         } label: {
                             Image(systemName: "x.circle.fill")
                                 .resizable()
-                                .frame(width:50, height:50)
-                                .foregroundColor(Color.red)
+                                .frame(width:35, height:35)
+                                .foregroundColor(Color("Red"))
                         }
                         Button {
-                            requestModel.acceptRequest(request: request, currentUser: user){ result in
-                                switch result{
-                                case.success:
-                                    if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
-                                        existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
-                                        matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
-                                    }else{
-                                        matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
-                                    }
-                                case.failure:
-                                    print("Failed to accept request")
-                                }
-                            }
+                            print("hello")
                         } label: {
                             Image(systemName: "checkmark.circle.fill")
                                 .resizable()
-                                .frame(width:50, height:50)
-                                .foregroundColor(Color.green)
+                                .frame(width:35, height:35)
+                                .foregroundColor(Color("Green"))
                         }
                     }
-                    
                 }
                 
             }
-            
             .onAppear {
                 imageUtil.fetchImage(userId: request.senderUserId) { result in
                     switch result {
@@ -80,18 +87,25 @@ struct NotificationView: View {
                 }
             }
         }
+        .padding(10)
+        .frame(minWidth: 125)
+        .background(Color.white, in: RoundedRectangle(cornerRadius: 10))
+        .overlay{
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color("TextOutlineDark"), lineWidth: 1)
+        }
+//            .accentColor(Color("DarkGray"))
+        
     }
     
-    private var Base: some View{
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white)
-            .frame(width: 150, height: 225)
-            .overlay{
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color("TextOutlineDark"), lineWidth: 1)
-            }
+    private func acceptMatch() {
+        if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
+            existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
+            matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
+        }else{
+            matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
+        }
     }
-    
     @ViewBuilder
     private func NotificationCircle() -> some View{
         if let circle = request.notify{
@@ -108,7 +122,7 @@ struct NotificationView: View {
         if let userImage = userImage{
             userImage
                 .resizable()
-                .frame(width: 90, height: 90)
+                .frame(width: 75, height: 75)
                 .clipShape(Circle())
                 .foregroundColor(Color.gray)
                 .overlay(
@@ -117,5 +131,21 @@ struct NotificationView: View {
                 )
         }
         
+    }
+}
+
+struct NotificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "1234", senderUserId: "2ch5NVLOfecaawnrjGjXnAVhHWy1", flightDate: "March 15,2022", pfp: "2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", status: "REJECTED", airport: "EWR")
+            // Preview for iPhone SE (1st generation)
+            NavigationView {
+                NotificationView(request: request)
+                    .environmentObject(UserModel())
+                    .environmentObject(RequestModel())
+                    .environmentObject(MatchModel())
+            }
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
+        }
     }
 }

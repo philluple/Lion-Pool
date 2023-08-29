@@ -44,7 +44,7 @@ struct NewFlightDetailView: View {
             ScrollView(.vertical){
                 Group{
                     if requestModel.inRequests[flight.id]?.isEmpty ?? true,
-                       requestModel.requests[flight.id] == nil {
+                       requestModel.requests[flight.id]?.isEmpty ?? true {
                         // Display the "Find Matches" button
                         VStack{
                             Spacer()
@@ -63,43 +63,16 @@ struct NewFlightDetailView: View {
                             FlightDetaiTicket(flight: flight)
                                 .padding(.top, 100)
                             if let inRequestArray = requestModel.inRequests[flight.id] {
-                                Spacer()
-                                VStack(spacing: 0) {
-                                    // Remove the white rectangle here, we'll use only the Text with background color
-                                    HStack {
-                                        Text("Incoming requests")
-                                            .font(.custom("DECTERM", size: 20))
-                                        
-                                        //                                            .font(.system(size: 22, weight: .medium))
-                                            .padding(.leading, 15)
-                                        Spacer()
-                                    }.frame(width: UIScreen.main.bounds.width - 20)
-                                    ScrollView(.horizontal, showsIndicators: true) {
-                                        HStack(spacing: 10) { // Use HStack and ForEach here
-                                            ForEach(inRequestArray) { inRequest in
-                                                NotificationView(request: inRequest)
-                                            }
-                                        }
-                                    }.padding([.leading, .top])
-                                }.frame(width:UIScreen.main.bounds.width-20, height: 300)
+                                IncomingRequestsView(inRequestArray: inRequestArray)
                             }
-                            if let outRequest = requestModel.requests[flight.id]{
-                                VStack (alignment: .leading){
-                                    HStack {
-                                        Text("Requests you sent")
-                                            .font(.system(size: 22, weight: .medium))
-                                            .padding(.leading, 15)
-                                        Spacer()
-                                    }.frame(width: UIScreen.main.bounds.width - 20)
-                                    RequestView(request: outRequest)
-                                        .padding(.leading)
-                                    
-                                }.frame(width:UIScreen.main.bounds.width-20, height: 300)
+                            if let outRequestArray = requestModel.requests[flight.id]{
+                                OutRequestsView(outRequestsArray: outRequestArray)
                             }
                             
                         }
                         
-                    }                }
+                    }
+                }
                 
                 if let user = userModel.currentUser{
                     NavigationLink(destination: FindingMatchView(flightId: flight.id, airport: flight.airport, userId: user.id, date: time.dateFromISOString(flight.date) ?? Date()).navigationBarHidden(true), isActive: $findMatches){
@@ -118,6 +91,8 @@ struct NewFlightDetailView: View {
             self.isSheetPresented = false
         }
     }
+    
+    
     private var airport: some View{
         VStack(alignment: .center, spacing: 0){
             Text(flight.airport)
@@ -247,7 +222,53 @@ struct NewFlightDetailView: View {
     }
 }
     
+struct OutRequestsView: View{
+    var outRequestsArray: [Request]
+    var body: some View{
+        VStack (alignment: .leading){
+            HStack {
+                Text("Requests you sent")
+                    .font(.system(size: 22, weight: .medium))
+                    .padding(.leading, 15)
+                Spacer()
+            }.frame(width: UIScreen.main.bounds.width - 20)
+            ScrollView(.horizontal, showsIndicators: true){
+                HStack(spacing: 10){
+                    ForEach(outRequestsArray){ request in
+                        RequestView(request: request)
+                            .padding(.leading)
+                    }
+                }
+            }
+//            .padding([.leading, .top])
+            
+        }.frame(width:UIScreen.main.bounds.width-20)
+    }
+}
 
+struct IncomingRequestsView: View {
+    var inRequestArray: [Request]
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Incoming requests")
+                    .font(.system(size: 22, weight: .medium))
+                    .padding(.leading, 15)
+                Spacer()
+            }
+            .frame(width: UIScreen.main.bounds.width - 20)
+            ScrollView(.horizontal, showsIndicators: true) {
+                HStack(spacing: 10) {
+                    ForEach(inRequestArray) { inRequest in
+                        NotificationView(request: inRequest)
+                    }
+                }
+            }
+            .padding([.leading])
+        }
+        .frame(width: UIScreen.main.bounds.width - 20)
+    }
+}
     
 struct NewFlightDetailView_Previews: PreviewProvider {
     static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: false)

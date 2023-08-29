@@ -28,21 +28,78 @@ struct IdentifiableImage: Identifiable{
 class InstagramAPI: ObservableObject{
     @Published var feed: [post] = []
     @Published var posts: [IdentifiableImage] = []
+    let dateFormatter = DateFormatter()
     
     init(){
-        if let username = UserDefaults.standard.string(forKey: "instagram_handle"){
-            loadPostsFromUserDefaults()
+        if let _ = UserDefaults.standard.string(forKey: "instagram_handle"){
+            if let userId = UserDefaults.standard.string(forKey: "userId"){
+                fetchFeed(userId: userId)
+            }
         }
     }
     
+    func signOut (){
+        self.feed = []
+        self.posts = []
+    }
+    
+    func fetchFeed(userId: String) {
+        self.feed = []
+        let fullURL = "http://34.125.37.144:3000/api/fetchFeed?\(userId)"
+        guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
+        let urlRequest = URLRequest(url: url)
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                print("Error with response")
+                return
+            }
+            
+            if response.statusCode == 200 {
+                guard let data = data else {
+                    return
+                }
+                do {
+                    let decoder = JSONDecoder()
+                    let imageFeed = try decoder.decode(ImageFeed.self, from: data)
+                    let username = imageFeed.username
+                    DispatchQueue.main.async {
+                        if !imageFeed.feed.isEmpty {
+                            for post in imageFeed.feed {
+                                //value is the post
+                                let timeDate = self.dateFormatter.date(from: post.time) ?? Date()
+                                if let index = self.posts.firstIndex(where: { $0.time <= timeDate }) {
+                                    self.feed.insert(post, at: index)
+                                } else {
+                                    self.feed.append(post) // If it's the latest date
+                                }
+                            }
+                        } else {
+                            print("Empty")
+                            
+                        }
+                    }
+                } catch {
+                    print("\(error.localizedDescription)")
+                    print("Error fetching matches")
+                    return
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
     func loadImageData(id: String, post: post) {
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         if let url = URL(string: post.imageURL) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             URLSession.shared.dataTask(with: url) { data, _, error in
                 if let data = data, let uiImage = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        let timeDate = dateFormatter.date(from: post.time) ?? Date()
+                        let timeDate = self.dateFormatter.date(from: post.time) ?? Date()
                         let identifiableImage = IdentifiableImage(id: id, image: uiImage, time: timeDate)
                         // Find the appropriate index to insert the new image
                         if let index = self.posts.firstIndex(where: { $0.time <= timeDate }) {
@@ -58,7 +115,7 @@ class InstagramAPI: ObservableObject{
         }
     }
     
-    func saveImageFeed(feed: ImageFeed) {
+        func saveImageFeed(feed: ImageFeed) {
             do {
                 let encodedData = try JSONEncoder().encode(feed)
                 UserDefaults.standard.set(encodedData, forKey: "feed")
@@ -123,7 +180,6 @@ class InstagramAPI: ObservableObject{
                                 let decoder = JSONDecoder()
                                 let imageFeed = try decoder.decode(ImageFeed.self, from: data)
                                 let username = imageFeed.username
-                                UserDefaults.standard.set(username, forKey: "instagram_handle")
                                 DispatchQueue.main.async {
                                     if !imageFeed.feed.isEmpty {
                                         for post in imageFeed.feed {
@@ -136,7 +192,7 @@ class InstagramAPI: ObservableObject{
                                             }
                                         }
                                         self.saveImageFeed(feed: imageFeed)
-                                        
+                                        UserDefaults.standard.set(username, forKey: "instagram_handle")
                                     } else {
                                         print("Empty")
                                         

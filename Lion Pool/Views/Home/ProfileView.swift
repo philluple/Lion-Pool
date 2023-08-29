@@ -29,6 +29,7 @@ struct ProfileView: View {
     @EnvironmentObject var flightModel : FlightModel
     @EnvironmentObject var instagramModel: InstagramAPI
     @Environment(\.presentationMode) var presentationMode
+    @State var username: String = ""
 //    @ObservedObject var imageLoader = ImageLoader() // Replace with your ViewModel
 
     let columns: [GridItem] = [
@@ -132,7 +133,11 @@ struct ProfileView: View {
                         Text("Phillip Le")
                             .font(.system(size:16, weight: .semibold))
                     }
-                    InstagramButton
+                    if case self.username = UserDefaults.standard.string(forKey: "instagram_handle"){
+                        Text(self.username)
+                    } else{
+                        InstagramButton
+                    }
                 }.padding(.leading, 20)
             }
             Spacer()
@@ -141,7 +146,7 @@ struct ProfileView: View {
     
     
     private var InstagramButton: some View{
-        Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app/&scope=user_profile,user_media&response_type=code")!)
+        Link(destination: URL(string: "https://api.instagram.com/oauth/authorize?client_id=1326528034640707&redirect_uri=https://lion-pool.com/app&scope=user_profile,user_media&response_type=code")!)
         {
             HStack{
                 Image("instagram-logo")
@@ -261,7 +266,11 @@ struct ProfileView: View {
         matchModel.signOut()
         flightModel.signOut()
         requestModel.signOut()
+        instagramModel.signOut()
+        UserDefaults.resetStandardUserDefaults()
         userModel.signOut()
+
+        
     }
     
 }
@@ -277,31 +286,6 @@ struct ProfileView_Previews: PreviewProvider {
                     .environmentObject(InstagramAPI())
             }
             .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
-            
-//            NavigationView {
-//                ProfileView()
-//                    .environmentObject(UserModel())
-//                    .environmentObject(InstagramAPI())
-//
-//            }
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
-//
-//            // Preview for iPhone 13 Pro Max
-//            NavigationView {
-//                ProfileView()
-//                    .environmentObject(UserModel())
-//                    .environmentObject(InstagramAPI())
-//
-//            }
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro Max"))
-//
-//            NavigationView {
-//                ProfileView()
-//                    .environmentObject(UserModel())
-//                    .environmentObject(InstagramAPI())
-//
-//            }
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 13"))
         }
     }
 }

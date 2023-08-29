@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 struct MatchesListView: View {
 
@@ -13,6 +14,7 @@ struct MatchesListView: View {
     let airport: String
     @State var dismiss: Bool = false
     @State var resquested: Bool = false
+    @State private var confirmation: Bool = false
     
     @EnvironmentObject var matchModel: MatchModel
     
@@ -33,9 +35,8 @@ struct MatchesListView: View {
                 Spacer()
                 ScrollView{
                     ForEach(Array(matchModel.matchesFound.values.flatMap { $0 }), id: \.id) { match in
-                        FlightMatch(match: match, hitRequestButton: $dismiss).padding(.vertical, 5)
+                        FlightMatch(match: match, confirmation: $confirmation).padding(.vertical, 5)
                     }
-                    
                 }
                 Button {
                     dismiss.toggle()
@@ -45,14 +46,37 @@ struct MatchesListView: View {
                         .foregroundColor(Color("Gray Blue "))
                 }
                 
-                
                 NavigationLink(destination: HomeView(), isActive: $dismiss) {
                     EmptyView()
                 }.navigationBarBackButtonHidden()
                 
             }
             .overlay(Color.white.opacity(dismiss ? 1.0 : 0.0)) // Fix the overlay and opacity here
+            .partialSheet(isPresented: $confirmation){
+                ChoiceView(isPresented: $confirmation, firstAction: firstAction, firstOption: "Sign out", secondOption: "Cancel", title: "Would you like to sign out")
+            }
         }
         .navigationBarBackButtonHidden()
+    }
+    
+}
+struct MatchesListviewPreview: PreviewProvider {
+    static var previews: some View {
+        let sampleDate = Date()
+        let matchModel = MatchModel()
+
+        // Initialize an array of Match objects
+        let array: [Match] = [
+            Match(id: UUID(), flightId: UUID(), matchFlightId: UUID(), matchUserId: "12345", date: "January 12", pfp: "profile-images/2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Phillip Le", airport: "EWR"),
+            Match(id: UUID(), flightId: UUID(), matchFlightId: UUID(), matchUserId: "12345", date: "January 12", pfp: "profile-images/2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", airport: "EWR"),
+            Match(id: UUID(), flightId: UUID(), matchFlightId: UUID(), matchUserId: "12345", date: "January 12", pfp: "profile-images/2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Xurxo Riesco", airport: "EWR")
+        ]
+
+        // Assuming matchModel is an instance of a class and matchesFound is a dictionary property
+        let randomUUID = UUID() // Use the same UUID for each match to simulate dictionary insertion
+        matchModel.matchesFound[randomUUID] = array
+
+        return MatchesListView(date: sampleDate, airport: "EWR")
+            .environmentObject(matchModel)
     }
 }
