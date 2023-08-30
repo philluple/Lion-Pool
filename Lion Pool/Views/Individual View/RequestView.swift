@@ -57,16 +57,6 @@ struct RequestView: View {
             }
     }
     
-    private var Base: some View{
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white)
-            .frame(width: 150, height: 225)
-            .overlay{
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color("TextOutlineDark"), lineWidth: 1)
-            }
-    }
-    
     @ViewBuilder
     private func NotificationCircle() -> some View{
         if let circle = request.notify{
@@ -91,7 +81,6 @@ struct RequestView: View {
                         .stroke(Color.white, lineWidth: 2) // Add the border with specified color and line width
                 )
         }
-        
     }
 }
 

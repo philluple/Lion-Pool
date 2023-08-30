@@ -68,9 +68,7 @@ struct NewFlightDetailView: View {
                             if let outRequestArray = requestModel.requests[flight.id]{
                                 OutRequestsView(outRequestsArray: outRequestArray)
                             }
-                            
                         }
-                        
                     }
                 }
                 

@@ -24,6 +24,7 @@ struct RegistrationView: View {
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var fileRef: String = ""
+    @State private var errorMsg: String = ""
     var imageUtil = ImageUtils()
     @Environment (\.dismiss) var dismiss
     @EnvironmentObject var viewModel: UserModel
@@ -68,6 +69,14 @@ struct RegistrationView: View {
                           placeholder: "Confirm your password",
                           isSecureField: true).autocapitalization(.none)
                 
+                if errorMsg != ""{
+                    Text(errorMsg)
+                        .font(.system(size:14, weight:.semibold))
+                        .multilineTextAlignment(.center)
+                        .frame(width: UIScreen.main.bounds.width-50)
+                        .foregroundColor(Color.red)
+                        .padding(.vertical)
+                }
                 Group{
                     SignUpButton
                     LoginButton
@@ -84,13 +93,13 @@ struct RegistrationView: View {
                 if let profileImage = profileImage {
                     profileImage
                         .resizable()
-                        .frame(width: UIScreen.main.bounds.width/2.75, height:UIScreen.main.bounds.width/2.75)
+                        .frame(width: 100, height: 100)
                         .clipShape(Circle())
                         .padding(.top)
                     
                 }else{
                     Circle()
-                        .frame(width: UIScreen.main.bounds.width/2.75)
+                        .frame(width: 100)
                         .foregroundColor(Color("Text Box"))
                         .padding(.top)
                         .overlay(
@@ -102,7 +111,7 @@ struct RegistrationView: View {
                                     .padding(.top)
                                 Image(systemName: "plus.circle.fill")
                                     .resizable()
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 20, height: 20)
                                     .foregroundColor(Color("Gold"))
                                     .padding([.leading, .top],110)
                             }
@@ -118,30 +127,40 @@ struct RegistrationView: View {
         }
     }
     
+    
     private var SignUpButton: some View{
-        
         Button {
-            Task{
-                if let newUserId = try await viewModel.createUser( UNI: UNI, password: password, firstname: firstname, lastname: lastname, pfpLocation: fileRef){
-                    if profileImage != nil {
-                        Task{
-                            await imageUtil.uploadPhoto(userId: newUserId, selectedImage: selectedImage)
+            if password == confirmPassword {
+                errorMsg = ""
+                Task{
+                    if let result = try? await viewModel.createUser( UNI: UNI, password: password, firstname: firstname, lastname: lastname, pfpLocation: fileRef){
+                        switch result {
+                        case .success(let userId):
+                            if profileImage != nil {
+                                Task{
+                                    await imageUtil.uploadPhoto(userId: userId, selectedImage: selectedImage)
+                                }
+                            }
+                        case .system(let error):
+                            self.errorMsg = error
+                        case .user(let error):
+                            self.errorMsg = error
                         }
                     }
                 }
+            } else {
+                errorMsg = "Passwords don't match"
             }
-        } label : {
-            HStack{
-                Text("LET'S RIDE!")
-                    .font(.system(size:18,weight: .bold))
-                    .frame(width:UIScreen.main.bounds.width-40, height:52)
-                    .accentColor(.white)
-            }
-        }
-        .background(Color("Gold"))
-        .cornerRadius(10)
-        .padding(.top, 24)
+        } label: {
+            Text("LET'S RIDE!")
+                .font(.system(size: 18, weight: .bold))
+                .frame(width: UIScreen.main.bounds.width - 40, height: 52)
+                .accentColor(.white)
+        } .background(Color("Gold"))
+            .cornerRadius(10)
+            .padding(.top, 24)
     }
+
     
     private var LoginButton: some View{
         Button {

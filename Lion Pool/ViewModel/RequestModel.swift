@@ -61,7 +61,7 @@ class RequestModel: ObservableObject{
         }
         dataTask.resume()
     }
-    
+
     func acceptRequest (request: Request, currentUser: User, completion: @escaping (Result)-> Void){
         // Reciever data
         let fullURL = "\(baseURL)/accept"
@@ -97,7 +97,8 @@ class RequestModel: ObservableObject{
                     //use MatchData to populate a match and add it to the matches array
                     DispatchQueue.main.async{
                         print("Accepted request")
-                        self.inRequests.removeValue(forKey: request.recieverFlightId)
+                        self.inRequests[request.recieverFlightId] = []
+                        self.requests[request.senderFlightId] = []
                         if let existingCounter = UserDefaults.standard.value(forKey: "matches") as? Int{
                             let incrementedCounter = existingCounter + 1
                             UserDefaults.standard.set(incrementedCounter, forKey: "matches")
@@ -239,7 +240,6 @@ class RequestModel: ObservableObject{
         }
         dataTask.resume()
     }
-    
     
     func sendRequest(match: Match, senderUserId: String, completion: @escaping (Result)-> Void){
         print("Attempting to send request")

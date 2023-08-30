@@ -66,7 +66,6 @@ class FlightModel: ObservableObject{
                     DispatchQueue.main.async {
                         for flight in decodedFlights {
                             self.flights.append(flight)
-                            
                         }
                         UserDefaults.standard.set(self.flights.count, forKey: "flights")
                     }

@@ -50,8 +50,7 @@ struct ProfileView: View {
     @State private var signOutSheet: Bool = false
     @State private var settingSheet: Bool = false
     @State private var isPresentView: Bool = false
-
-
+    @State private var showInstaButton: Bool = true
 
     var body: some View {
         VStack{
@@ -66,36 +65,40 @@ struct ProfileView: View {
                 .padding(.horizontal,40)
                 .padding(.top, 10)
                 .padding(.bottom, 20)
-            GeometryReader { geometry in
-                VStack{
-                    HStack{
-                        Text("Recent Instagram Photos")
-                            .font(.system(size: 18, weight: .bold))
-                        Spacer()
-                    }
-                    LazyVGrid(columns: columns, spacing: 4){
-                        ForEach(instagramModel.feed){ post in
-                            AsyncImage(url: URL(string: post.imageURL)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15) // Adjust size based on GeometryReader
-                                    .cornerRadius(5)
-                                    .clipped()
-                            } placeholder: {
-                                Color.clear // Using an empty color as a placeholder
-                                    .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
-                                    .cornerRadius(5)
+            if (instagramModel.displayPost){
+                GeometryReader { geometry in
+                    VStack{
+                        HStack{
+                            Text("Recent Instagram Photos")
+                                .font(.system(size: 18, weight: .bold))
+                            Spacer()
+                        }
+                        LazyVGrid(columns: columns, spacing: 4){
+                            ForEach(instagramModel.feed){ post in
+                                AsyncImage(url: URL(string: post.imageURL)) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15) // Adjust size based on GeometryReader
+                                        .cornerRadius(5)
+                                        .clipped()
+                                } placeholder: {
+                                    Color.clear // Using an empty color as a placeholder
+                                        .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
+                                        .cornerRadius(5)
+                                }
                             }
                         }
-                    }
-                }.padding(.horizontal)
-
+                    }.padding(.horizontal)
+                    
+                }
             }
+            
             
             Spacer()
 
             signOut
+            
             
             .partialSheet(isPresented: $isSheetPresented){
                 ChooseImageMedium(camera: $camera, library: $library, selected: $selected, showSheet: $isSheetPresented, changedPfp: $changedPfp)
@@ -103,17 +106,6 @@ struct ProfileView: View {
             .partialSheet(isPresented: $signOutSheet){
                 ChoiceView(isPresented: $signOutSheet, firstAction: signOutAction, firstOption: "Sign out", secondOption: "Cancel", title: "Would you like to sign out")
             }
-            
-            .onChange(of: changedPfp) { newValue in
-                if newValue {
-                    Task {
-                        await userModel.fetchPfp()
-                        displayedImage = userModel.currentUserProfileImage // Assign the fetched image to displayedImage
-                    }
-                }
-            }
-
-
         }
     }
     
@@ -133,10 +125,16 @@ struct ProfileView: View {
                         Text("Phillip Le")
                             .font(.system(size:16, weight: .semibold))
                     }
-                    if case self.username = UserDefaults.standard.string(forKey: "instagram_handle"){
-                        Text(self.username)
-                    } else{
+                    if instagramModel.displayPost == false{
                         InstagramButton
+                    }else{
+                        if let username = UserDefaults.standard.string(forKey: "instagram_handle"){
+                            Text("@\(username)")
+                                .padding(5)
+                                .font(.system(size: 14, weight: .semibold))
+                                .background(Color("Gray Blue "), in: RoundedRectangle(cornerRadius: 10))
+                                .foregroundColor(Color.white)
+                        }
                     }
                 }.padding(.leading, 20)
             }

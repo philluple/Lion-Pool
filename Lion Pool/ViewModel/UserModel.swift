@@ -12,6 +12,16 @@ import FirebaseAuth
 import FirebaseStorage
 import SwiftUI
 
+enum CreateUser{
+    case success(String)
+    case user(String)
+    case system(String)
+}
+
+enum LogIn{
+    case success
+    case failure(String)
+}
 
 enum VerificationStatus {
     case verified, pending, newUser
@@ -71,7 +81,7 @@ class UserModel: ObservableObject {
     }
 
 
-    func signIn(withEmail email: String, password: String) async throws{
+    func signIn(withEmail email: String, password: String) async throws-> LogIn{
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             print(result)
@@ -85,14 +95,22 @@ class UserModel: ObservableObject {
                    UserDefaults.standard.set(userId, forKey: "userId")
                    UserDefaults.standard.set(name, forKey: "name")
             }
-
-            print("SUCCESS: User has signed in")
+            return .success
         } catch {
-            print("DEBUG: failed to login")
+            print(error)
+            if (error.localizedDescription == "There is no user record corresponding to this identifier.The user may have been deleted"){
+                return .failure("Hmmm, we couldn't find that account. Try creating one")
+            }
+            else if (error.localizedDescription == "The password is invalid or the user does not have a password."){
+                return .failure("Incorrect password, try again!")
+            }
+            else{
+                return .failure(error.localizedDescription)
+            }
         }
     }
     
-    func createUser(UNI: String, password: String, firstname: String, lastname: String, pfpLocation: String) async throws -> String? {
+    func createUser(UNI: String, password: String, firstname: String, lastname: String, pfpLocation: String) async throws -> CreateUser {
         let email = UNI + "@columbia.edu"
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -103,54 +121,26 @@ class UserModel: ObservableObject {
                                 firstname, lastname: lastname, email: email, UNI: UNI, pfpLocation: pfpLocation)
             let encodedUser = try Firestore.Encoder().encode(user)
             try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-
+            
             do {
                 try await result.user.sendEmailVerification()
                 verificationStatus = VerificationStatus.pending
                 print("Verification email sent successfully")
-                return result.user.uid
+                return .success(user.id)
             } catch {
                 print("Failed to send verification email:", error.localizedDescription)
-                return nil
+                return .system("Sorry, we were not able to create your account. Come back at a later time")
             }
         } catch {
             print("DEBUG: could not create account", error.localizedDescription)
-            return nil
+            if (error.localizedDescription == "The email address is already in use by another account."){
+                return .user("Your UNI is already associated with another account, try logging in!")
+            } else{
+                return .user(error.localizedDescription)
+            }
         }
     }
-    
-//    func createUser(withEmail email: String, password: String, firstname: String, lastname: String, UNI: String, pfpLocation: String) async throws -> String?{
-//        do {
-//            let result = try await Auth.auth().createUser(withEmail: email, password: password)
-//            result.user.sendEmailVerification { error in
-//                if let error = error {
-//                    print("Failed to send verification email: \(error.localizedDescription)")
-//                } else {
-//                    print("Verification email sent successfully")
-//                }
-//            }
-//            self.userSession = result.user
-//            let user = User(id: result.user.uid, firstname: firstname, lastname: lastname, email: email, UNI: UNI, pfpLocation: pfpLocation)
-//            let encodedUser = try Firestore.Encoder().encode(user)
-//            // Storing the data
-//            print("DEBUG: before")
-//            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
-//            await fetchUser()
-//            await fetchPfp()
-//            print("SUCCESS: \(user.id) has been created")
-//            if let userId = self.currentUser?.id,
-//               let firstname = self.currentUser?.firstname,
-//               let lastname = self.currentUser?.lastname {
-//                   let name = "\(firstname) \(lastname)"
-//                   UserDefaults.standard.set(userId, forKey: "userId")
-//                   UserDefaults.standard.set(name, forKey: "name")
-//            }
-//            return user.id
-//        } catch {
-//            print("DEBUG: could not create account", error.localizedDescription)
-//            return nil
-//        }
-//    }
+
     
     func signOut() {
         // take us back to login screen

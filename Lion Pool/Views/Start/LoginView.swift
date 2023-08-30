@@ -11,6 +11,7 @@ import Swift
 struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
+    @State private var errorMsg = ""
     
     @EnvironmentObject var userModel : UserModel
     @EnvironmentObject var matchModel : MatchModel
@@ -32,13 +33,28 @@ struct LoginView: View {
                               title: "Password",
                               placeholder: "Enter your password",
                               isSecureField: true).autocapitalization(.none)
+                    if errorMsg != ""{
+                        Text(errorMsg)
+                            .font(.system(size:14, weight:.semibold))
+                            .multilineTextAlignment(.center)
+                            .frame(width: UIScreen.main.bounds.width-50)
+                            .foregroundColor(Color.red)
+                            .padding(.vertical, 5)
+                    }
                 }
                 Button {
                     Task{
-                        try await userModel.signIn(withEmail: email, password: password)
-                        matchModel.signIn()
-                        flightModel.signIn()
-                        requestModel.signIn()
+                        if let result = try? await userModel.signIn(withEmail: email, password: password){
+                            switch result{
+                            case .success:
+                                matchModel.signIn()
+                                flightModel.signIn()
+                                requestModel.signIn()
+                            case .failure(let message):
+                                self.errorMsg =  message
+                            }
+                        }
+                        
                     }
                 } label : {
                     HStack{
