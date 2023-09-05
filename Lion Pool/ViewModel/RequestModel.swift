@@ -97,8 +97,14 @@ class RequestModel: ObservableObject{
                     //use MatchData to populate a match and add it to the matches array
                     DispatchQueue.main.async{
                         print("Accepted request")
-                        self.inRequests[request.recieverFlightId] = []
-                        self.requests[request.senderFlightId] = []
+                        if let requestToReject = self.inRequests[request.recieverFlightId]{
+                            for reject in requestToReject{
+                                if reject.id == request.id{
+                                    continue
+                                }
+                                self.rejectRequest(request: reject, userId: currentUser.id)
+                            }
+                        }
                         if let existingCounter = UserDefaults.standard.value(forKey: "matches") as? Int{
                             let incrementedCounter = existingCounter + 1
                             UserDefaults.standard.set(incrementedCounter, forKey: "matches")

@@ -14,7 +14,7 @@ struct MatchesListView: View {
     let airport: String
     @State var dismiss: Bool = false
     @State var resquested: Bool = false
-    @State private var confirmation: Bool = false
+
     
     @EnvironmentObject var matchModel: MatchModel
     
@@ -35,7 +35,7 @@ struct MatchesListView: View {
                 Spacer()
                 ScrollView{
                     ForEach(Array(matchModel.matchesFound.values.flatMap { $0 }), id: \.id) { match in
-                        FlightMatch(match: match, confirmation: $confirmation).padding(.vertical, 5)
+                        FlightMatch(match: match).padding(.vertical, 5)
                     }
                 }
                 Button {
@@ -52,9 +52,9 @@ struct MatchesListView: View {
                 
             }
             .overlay(Color.white.opacity(dismiss ? 1.0 : 0.0)) // Fix the overlay and opacity here
-            .partialSheet(isPresented: $confirmation){
-                ChoiceView(isPresented: $confirmation, firstAction: firstAction, firstOption: "Sign out", secondOption: "Cancel", title: "Would you like to sign out")
-            }
+//            .partialSheet(isPresented: $confirmation){
+//                ChoiceView(isPresented: $confirmation, firstAction: firstAction, firstOption: "Sign out", secondOption: "Cancel", title: "Would you like to sign out")
+//            }
         }
         .navigationBarBackButtonHidden()
     }

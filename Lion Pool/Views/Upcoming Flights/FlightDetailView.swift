@@ -75,7 +75,13 @@ struct FlightDetailView: View {
                                     ScrollView(.horizontal, showsIndicators: true) {
                                         HStack(spacing: 10) { // Use HStack and ForEach here
                                             ForEach(inRequestArray) { inRequest in
-                                                NotificationView(request: inRequest)
+                                                NotificationView(request: inRequest) { request, accepted in
+                                                    if accepted {
+                                                        print("Accepted")
+                                                    } else{
+                                                        print("Rejected")
+                                                    }
+                                                }
                                             }
                                         }
                                     }.padding([.leading, .top])

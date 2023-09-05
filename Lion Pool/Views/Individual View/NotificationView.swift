@@ -10,6 +10,7 @@ import FirebaseStorage
 
 struct NotificationView: View {
     let request: Request
+    var onButtonTap: (Request, Bool) -> Void
     let timeUtil = TimeUtils()
     let imageUtil = ImageUtils()
     
@@ -31,7 +32,8 @@ struct NotificationView: View {
             HStack(spacing: 10){
                 if let user = userModel.currentUser{
                     Button {
-                        requestModel.rejectRequest(request: request, userId: user.id)
+                        onButtonTap(request, true)
+//                        requestModel.rejectRequest(request: request, userId: user.id)
                     } label: {
                         Image(systemName: "x.circle.fill")
                             .resizable()
@@ -39,14 +41,16 @@ struct NotificationView: View {
                             .foregroundColor(Color("Red"))
                     }
                     Button {
-                        requestModel.acceptRequest(request: request, currentUser: user){ result in
-                            switch result{
-                            case.success:
-                                acceptMatch()
-                            case.failure:
-                                print("Failed to accept request")
-                            }
-                        }
+//                        requestModel.acceptRequest(request: request, currentUser: user){ result in
+//                            switch result{
+//                            case.success:
+//                                acceptMatch()
+//                            case.failure:
+//                                print("Failed to accept request")
+//                            }
+//                        }
+                        onButtonTap(request, false)
+
                     } label: {
                         Image(systemName: "checkmark.circle.fill")
                             .resizable()
@@ -134,18 +138,18 @@ struct NotificationView: View {
     }
 }
 
-struct NotificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "1234", senderUserId: "2ch5NVLOfecaawnrjGjXnAVhHWy1", flightDate: "March 15,2022", pfp: "2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", status: "REJECTED", airport: "EWR")
-            // Preview for iPhone SE (1st generation)
-            NavigationView {
-                NotificationView(request: request)
-                    .environmentObject(UserModel())
-                    .environmentObject(RequestModel())
-                    .environmentObject(MatchModel())
-            }
-            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
-        }
-    }
-}
+//struct NotificationView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "1234", senderUserId: "2ch5NVLOfecaawnrjGjXnAVhHWy1", flightDate: "March 15,2022", pfp: "2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", status: "REJECTED", airport: "EWR")
+//            // Preview for iPhone SE (1st generation)
+//            NavigationView {
+//                NotificationView(request: request)
+//                    .environmentObject(UserModel())
+//                    .environmentObject(RequestModel())
+//                    .environmentObject(MatchModel())
+//            }
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
+//        }
+//    }
+//}

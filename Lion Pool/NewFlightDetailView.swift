@@ -16,10 +16,13 @@ struct NewFlightDetailView: View {
     @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var requestModel: RequestModel
     @EnvironmentObject var flightModel: FlightModel
+    @EnvironmentObject var matchModel: MatchModel
     @Environment(\.presentationMode) var presentationMode
     @State var findMatches: Bool = false
     @State private var displayFind = false
     @State private var isSheetPresented = false
+    @State private var rejectSheet = false
+    @State private var acceptSheet = false
     
     
     var diffs: Int {
@@ -64,6 +67,9 @@ struct NewFlightDetailView: View {
                                 .padding(.top, 100)
                             if let inRequestArray = requestModel.inRequests[flight.id] {
                                 IncomingRequestsView(inRequestArray: inRequestArray)
+                                    .environmentObject(requestModel)
+                                    .environmentObject(userModel)
+                                    .environmentObject(matchModel)
                             }
                             if let outRequestArray = requestModel.requests[flight.id]{
                                 OutRequestsView(outRequestsArray: outRequestArray)
@@ -84,7 +90,6 @@ struct NewFlightDetailView: View {
                 ChoiceView(isPresented: $isSheetPresented, firstAction:
                     deleteFlight, firstOption: "Yes, delete", secondOption: "Cancel", title: "Delete this flight?")
             }
-
         }.onAppear {
             self.isSheetPresented = false
         }
@@ -245,6 +250,11 @@ struct OutRequestsView: View{
 }
 
 struct IncomingRequestsView: View {
+    @EnvironmentObject var requestModel: RequestModel
+    @EnvironmentObject var userModel: UserModel
+    @EnvironmentObject var matchModel: MatchModel
+    
+    let userId: String
     var inRequestArray: [Request]
     var body: some View {
         VStack(alignment: .leading) {
@@ -257,17 +267,41 @@ struct IncomingRequestsView: View {
             .frame(width: UIScreen.main.bounds.width - 20)
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: 10) {
-                    ForEach(inRequestArray) { inRequest in
-                        NotificationView(request: inRequest)
+                    if let user = userModel.currentUser{
+                        ForEach(inRequestArray) { inRequest in
+                            NotificationView(request: inRequest) { request, accepted in
+                                if accepted {
+                                    requestModel.rejectRequest(request: request, userId: user.id)
+                                } else {
+                                    requestModel.acceptRequest(request: request, currentUser: user){ result in
+                                        switch result{
+                                        case.success:
+                                            acceptMatch(request: request)
+                                        case.failure:
+                                            print("Failed to accept request")
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
+
                 }
+                .padding([.leading])
             }
-            .padding([.leading])
+            .frame(width: UIScreen.main.bounds.width - 20)
         }
-        .frame(width: UIScreen.main.bounds.width - 20)
+    }
+    private func acceptMatch(request: Request) {
+        if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
+            existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
+            matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
+        }else{
+            matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
+        }
     }
 }
-    
+                       
 struct NewFlightDetailView_Previews: PreviewProvider {
     static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: false)
     static var previews: some View {

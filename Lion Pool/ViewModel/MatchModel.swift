@@ -70,6 +70,8 @@ class MatchModel: ObservableObject{
                                 self.matchesConfirmed[match.flightId] = [match]
                             }
                         }
+                        let count = self.matchesConfirmed.count
+                        UserDefaults.standard.set(count, forKey: "matches")
                     }
                 } catch {
                     print("\(error.localizedDescription)")
