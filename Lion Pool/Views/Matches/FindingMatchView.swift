@@ -52,9 +52,12 @@ struct FindingMatchView: View {
     
     var thingsToPack = ["sunblock", "underwear", "toothbrush", "to text your mom when your flight takes off", "to download your songs", "to find a plant guardian", "to take out your piercings"]
     
+    @State private var isMatchesListActive = false
+    @State private var isNoMatchActive = false
+
     var body: some View {
-        NavigationView{
-            VStack(){
+        NavigationView {
+            VStack {
                 Spacer()
                 Text("Matching in progress" + dots)
                     .font(.system(size: 30, weight: .bold))
@@ -66,43 +69,37 @@ struct FindingMatchView: View {
                 
                 Text("Dont forget \(thingsToPack[randomNumberGenerator.randomNumber])")
                 Spacer()
-                    .fullScreenCover(isPresented: Binding<Bool>(get: {
-                        return matchesFound
-                    }, set: { _ in
-                        // You can leave this empty or add your own handling if needed
-                    }), content: {
-                        EmptyView()
-                        MatchesListView(date: date, airport: airport)
-                    })
-
-                    .fullScreenCover(isPresented: Binding<Bool>(get: {
-                        return goHome && showNextView
-                    }, set: { _ in
-                        // You can leave this empty or add your own handling if needed
-                    }), content: {
-                        NoMatchView()
-                    })
+                
+                NavigationLink("", isActive: $isMatchesListActive) {
+                    MatchesListView(date: date, airport: airport)
+                }.navigationBarBackButtonHidden()
+                
+                NavigationLink("", isActive: $isNoMatchActive) {
+                    NoMatchView()
+                }.navigationBarBackButtonHidden()
+                
                 Spacer()
             }
             .onAppear {
-                matchModel.findMatch(flightId: flightId, userId: userId, airport: airport){ result in switch result{
-                case.success:
-                    matchesFound.toggle()
-                case .noMatches:
-                    goHome.toggle()
-                    print("No matches found.")
-                case .failure:
-                    print("Failed")
-                }
+                matchModel.findMatch(flightId: flightId, userId: userId, airport: airport) { result in
+                    switch result {
+                    case .success:
+                        isMatchesListActive = true
+                    case .noMatches:
+                        isNoMatchActive = true
+                        print("No matches found.")
+                    case .failure:
+                        print("Failed")
+                    }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + maxElapsedTime) {
                     showNextView = true
                 }
-
             }
-
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
     }
+
     
     private func startLoadingAnimation() {
         let timer = Timer.scheduledTimer(withTimeInterval: animationInterval, repeats: true) { _ in
@@ -124,4 +121,3 @@ struct FindingMatchView: View {
     
     
 }
-

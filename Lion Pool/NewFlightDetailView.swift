@@ -21,8 +21,9 @@ struct NewFlightDetailView: View {
     @State var findMatches: Bool = false
     @State private var displayFind = false
     @State private var isSheetPresented = false
-    @State private var rejectSheet = false
-    @State private var acceptSheet = false
+    @State private var confirmation = false
+    @State private var rejection = false
+    @State private var match: Match?
     
     
     var diffs: Int {
@@ -62,20 +63,39 @@ struct NewFlightDetailView: View {
                         }
                         
                     }else{
-                        VStack{
-                            FlightDetaiTicket(flight: flight)
-                                .padding(.top, 100)
-                            if let inRequestArray = requestModel.inRequests[flight.id] {
-                                IncomingRequestsView(inRequestArray: inRequestArray)
-                                    .environmentObject(requestModel)
-                                    .environmentObject(userModel)
-                                    .environmentObject(matchModel)
-                            }
-                            if let outRequestArray = requestModel.requests[flight.id]{
-                                OutRequestsView(outRequestsArray: outRequestArray)
+                        Group{
+                            VStack{
+                                FlightDetaiTicket(flight: flight)
+                                    .padding(.top, 100)
+                                if let inRequestArray = requestModel.inRequests[flight.id] {
+                                    IncomingRequestsView(inRequestArray: inRequestArray)
+                                }
+                                if let outRequestArray = requestModel.requests[flight.id]{
+                                    VStack (alignment: .leading){
+                                        HStack {
+                                            Text("Requests you sent")
+                                                .font(.system(size: 22, weight: .medium))
+                                                .padding(.leading, 15)
+                                            Spacer()
+                                        }.frame(width: UIScreen.main.bounds.width - 20)
+                                        ScrollView(.horizontal, showsIndicators: true){
+                                            HStack(spacing: 10){
+                                                ForEach(outRequestArray){ request in
+                                                    RequestView(request: request)
+                                                        .padding(.leading)
+                                                }
+                                            }
+                                        }
+                                    }.frame(width:UIScreen.main.bounds.width-20)
+                                }
                             }
                         }
+
                     }
+                }
+                
+                if let match = self.match{
+                    Text("This flight has a match!!!")
                 }
                 
                 if let user = userModel.currentUser{
@@ -90,8 +110,12 @@ struct NewFlightDetailView: View {
                 ChoiceView(isPresented: $isSheetPresented, firstAction:
                     deleteFlight, firstOption: "Yes, delete", secondOption: "Cancel", title: "Delete this flight?")
             }
+
         }.onAppear {
-            self.isSheetPresented = false
+            print("Appearing")
+            if let matchingMatch = matchModel.matchesConfirmed[flight.id]{
+                self.match = matchingMatch
+            }
         }
     }
     
@@ -225,36 +249,14 @@ struct NewFlightDetailView: View {
     }
 }
     
-struct OutRequestsView: View{
-    var outRequestsArray: [Request]
-    var body: some View{
-        VStack (alignment: .leading){
-            HStack {
-                Text("Requests you sent")
-                    .font(.system(size: 22, weight: .medium))
-                    .padding(.leading, 15)
-                Spacer()
-            }.frame(width: UIScreen.main.bounds.width - 20)
-            ScrollView(.horizontal, showsIndicators: true){
-                HStack(spacing: 10){
-                    ForEach(outRequestsArray){ request in
-                        RequestView(request: request)
-                            .padding(.leading)
-                    }
-                }
-            }
-//            .padding([.leading, .top])
-            
-        }.frame(width:UIScreen.main.bounds.width-20)
-    }
-}
+//struct OutRequestsView: View{
+//    var outRequestsArray: [Request]
+//    var body: some View{
+//    }
+//}
 
 struct IncomingRequestsView: View {
-    @EnvironmentObject var requestModel: RequestModel
-    @EnvironmentObject var userModel: UserModel
-    @EnvironmentObject var matchModel: MatchModel
     
-    let userId: String
     var inRequestArray: [Request]
     var body: some View {
         VStack(alignment: .leading) {
@@ -267,41 +269,17 @@ struct IncomingRequestsView: View {
             .frame(width: UIScreen.main.bounds.width - 20)
             ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: 10) {
-                    if let user = userModel.currentUser{
-                        ForEach(inRequestArray) { inRequest in
-                            NotificationView(request: inRequest) { request, accepted in
-                                if accepted {
-                                    requestModel.rejectRequest(request: request, userId: user.id)
-                                } else {
-                                    requestModel.acceptRequest(request: request, currentUser: user){ result in
-                                        switch result{
-                                        case.success:
-                                            acceptMatch(request: request)
-                                        case.failure:
-                                            print("Failed to accept request")
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    ForEach(inRequestArray) { inRequest in
+                        NotificationView(request: inRequest)
                     }
-
                 }
-                .padding([.leading])
             }
-            .frame(width: UIScreen.main.bounds.width - 20)
+            .padding([.leading])
         }
-    }
-    private func acceptMatch(request: Request) {
-        if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
-            existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
-            matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
-        }else{
-            matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
-        }
+        .frame(width: UIScreen.main.bounds.width - 20)
     }
 }
-                       
+    
 struct NewFlightDetailView_Previews: PreviewProvider {
     static private var flight = Flight(id: UUID(), userId: "12345", airport: "EWR", date: "2023-08-02T12:34:56Z", foundMatch: false)
     static var previews: some View {

@@ -10,7 +10,6 @@ import FirebaseStorage
 
 struct NotificationView: View {
     let request: Request
-    var onButtonTap: (Request, Bool) -> Void
     let timeUtil = TimeUtils()
     let imageUtil = ImageUtils()
     
@@ -18,6 +17,7 @@ struct NotificationView: View {
     @EnvironmentObject var userModel: UserModel
     @EnvironmentObject var requestModel: RequestModel
     @EnvironmentObject var matchModel: MatchModel
+    
     
     var body: some View {
         VStack{
@@ -32,8 +32,7 @@ struct NotificationView: View {
             HStack(spacing: 10){
                 if let user = userModel.currentUser{
                     Button {
-                        onButtonTap(request, true)
-//                        requestModel.rejectRequest(request: request, userId: user.id)
+                        requestModel.rejectRequest(request: request, userId: user.id)
                     } label: {
                         Image(systemName: "x.circle.fill")
                             .resizable()
@@ -41,16 +40,16 @@ struct NotificationView: View {
                             .foregroundColor(Color("Red"))
                     }
                     Button {
-//                        requestModel.acceptRequest(request: request, currentUser: user){ result in
-//                            switch result{
-//                            case.success:
-//                                acceptMatch()
-//                            case.failure:
-//                                print("Failed to accept request")
-//                            }
-//                        }
-                        onButtonTap(request, false)
-
+                        requestModel.acceptRequest(request: request, currentUser: user){ result in
+                            switch result{
+                            case.success(let match):
+                                DispatchQueue.main.async {
+                                    matchModel.matchesConfirmed[request.recieverFlightId] = match
+                                }
+                            case.failure:
+                                print("Failed to accept request")
+                            }
+                        }
                     } label: {
                         Image(systemName: "checkmark.circle.fill")
                             .resizable()
@@ -102,14 +101,7 @@ struct NotificationView: View {
         
     }
     
-    private func acceptMatch() {
-        if var existingMatches = matchModel.matchesConfirmed[request.recieverFlightId]{
-            existingMatches.append(Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport))
-            matchModel.matchesConfirmed[request.recieverFlightId] = existingMatches
-        }else{
-            matchModel.matchesConfirmed[request.recieverFlightId] = [Match(id: request.id, flightId: request.recieverFlightId, matchFlightId: request.senderFlightId, matchUserId: request.senderUserId, date: request.flightDate, pfp: request.pfp, name: request.name, airport: request.airport)]
-        }
-    }
+    
     @ViewBuilder
     private func NotificationCircle() -> some View{
         if let circle = request.notify{
@@ -138,18 +130,18 @@ struct NotificationView: View {
     }
 }
 
-//struct NotificationView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "1234", senderUserId: "2ch5NVLOfecaawnrjGjXnAVhHWy1", flightDate: "March 15,2022", pfp: "2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", status: "REJECTED", airport: "EWR")
-//            // Preview for iPhone SE (1st generation)
-//            NavigationView {
-//                NotificationView(request: request)
-//                    .environmentObject(UserModel())
-//                    .environmentObject(RequestModel())
-//                    .environmentObject(MatchModel())
-//            }
-//            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
-//        }
-//    }
-//}
+struct NotificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            let request = Request(id: UUID(), senderFlightId: UUID(), recieverFlightId: UUID(), recieverUserId: "1234", senderUserId: "2ch5NVLOfecaawnrjGjXnAVhHWy1", flightDate: "March 15,2022", pfp: "2ch5NVLOfecaawnrjGjXnAVhHWy1-pfp.jpg", name: "Geneva Ng", status: "REJECTED", airport: "EWR")
+            // Preview for iPhone SE (1st generation)
+            NavigationView {
+                NotificationView(request: request)
+                    .environmentObject(UserModel())
+                    .environmentObject(RequestModel())
+                    .environmentObject(MatchModel())
+            }
+            .previewDevice(PreviewDevice(rawValue: "iPhone 13 Pro"))
+        }
+    }
+}

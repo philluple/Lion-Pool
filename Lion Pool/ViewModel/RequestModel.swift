@@ -23,7 +23,7 @@ class RequestModel: ObservableObject{
     }
 
     enum Result{
-        case success
+        case success(Match)
         case failure
     }
     
@@ -94,27 +94,36 @@ class RequestModel: ObservableObject{
             } else if let httpResponse = response as? HTTPURLResponse {
                 print ("Status code: \(httpResponse .statusCode)")
                 if httpResponse.statusCode == 200 {
-                    //use MatchData to populate a match and add it to the matches array
-                    DispatchQueue.main.async{
-                        print("Accepted request")
-                        if let requestToReject = self.inRequests[request.recieverFlightId]{
-                            for reject in requestToReject{
-                                if reject.id == request.id{
-                                    continue
+                    if let data = data {
+                        do {
+                            let decoder = JSONDecoder()
+                            let match = try decoder.decode(Match.self, from: data)
+                            DispatchQueue.main.async{
+                                print("Accepted request")
+                                if let requestToReject = self.inRequests[request.recieverFlightId]{
+                                    for reject in requestToReject{
+                                        if reject.id == request.id{
+                                            continue
+                                        }
+                                        self.rejectRequest(request: reject, userId: currentUser.id)
+                                    }
                                 }
-                                self.rejectRequest(request: reject, userId: currentUser.id)
+                                if let existingCounter = UserDefaults.standard.value(forKey: "matches") as? Int{
+                                    let incrementedCounter = existingCounter + 1
+                                    UserDefaults.standard.set(incrementedCounter, forKey: "matches")
+                                } else{
+                                    UserDefaults.standard.set(1, forKey: "matches")
+                                }
+                                completion(.success(match))
                             }
+                        } catch {
+                            print("Error decoding match object: \(error.localizedDescription)")
+                            completion(.failure)
                         }
-                        if let existingCounter = UserDefaults.standard.value(forKey: "matches") as? Int{
-                            let incrementedCounter = existingCounter + 1
-                            UserDefaults.standard.set(incrementedCounter, forKey: "matches")
-                        } else{
-                            UserDefaults.standard.set(1, forKey: "matches")
-                        }
-                        completion(.success)
                     }
                 } else{
-                    print("Could not add flight!")
+                    print("Could not accept request!")
+                    completion(.failure)
                 }
             }
         }
@@ -138,7 +147,7 @@ class RequestModel: ObservableObject{
                 return
             }
             
-            if response.statusCode == 200{
+            if response.statusCode == 200{	
                 DispatchQueue.main.async{
                     if var inRequestsArray = self.inRequests[request.recieverFlightId] {
                         if let indexToDelete = inRequestsArray.firstIndex(where: {$0 == request}){

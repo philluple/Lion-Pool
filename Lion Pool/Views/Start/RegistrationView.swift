@@ -20,7 +20,6 @@ struct RegistrationView: View {
     @State private var school = ""
     @State private var phone = ""
     @State private var showImagePicker = false
-    // UI prefix means that it comes from kit
     @State private var selectedImage: UIImage?
     @State private var profileImage: Image?
     @State private var fileRef: String = ""
@@ -93,6 +92,7 @@ struct RegistrationView: View {
                 if let profileImage = profileImage {
                     profileImage
                         .resizable()
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                         .padding(.top)

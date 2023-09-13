@@ -62,13 +62,13 @@ struct FlightListView: View {
     
     private func calculateHeight(for count: Int) -> CGFloat {
         let maxItemCount: Int = 5
-        let itemHeight: CGFloat = 45
+        let itemHeight: CGFloat = 55
         
         if count == 0 {
             return CGFloat(50)
         }
         else if count < maxItemCount {
-            return CGFloat(count) * itemHeight + 50
+            return CGFloat(count) * itemHeight + 40
         } else {
             return CGFloat(4) * itemHeight
         }

@@ -17,15 +17,16 @@ struct ConfirmedMatchesListView: View {
                 Text("Confirmed Matches")
                     .font(.system(size:20,weight: .medium))
                 Spacer()
-            }.position(x:200, y: 35)
+            }.position(x:220, y:30)
             
             ScrollView(.horizontal, showsIndicators: true){
                 HStack{
-                    ForEach(Array(matchModel.matchesConfirmed.values), id: \.self) { matches in
-                        ForEach(matches) { match in
-                            ConfirmedMatchView(match: match)
-                            Divider().frame(height: 100)
-                        }
+                    ForEach(Array(matchModel.matchesConfirmed.values), id: \.self) { match in
+                        ConfirmedMatchView (match: match)
+//                        ForEach(matches) { match in
+//                            ConfirmedMatchView(match: match)
+//                            Divider().frame(height: 100)
+//                        }
                         
                     }
                 }
@@ -33,12 +34,6 @@ struct ConfirmedMatchesListView: View {
         }.frame(width:UIScreen.main.bounds.width-20,height: 240)
         .background(Color.white)
         .cornerRadius(10)
-        
-//        .onAppear{
-//            if let user = userModel.currentUser{
-//                matchModel.fetchMatches(userId: user.id)
-//            }
-//        }
     }
 }
 

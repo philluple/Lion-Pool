@@ -80,7 +80,6 @@ struct AddFlightView: View {
                 }
                 .sheet(isPresented: $confirmDetailsBool){
                     ConfirmFlight(dateToConfirm: $date, airportToConfirm: $departAirport, flightAddedSuccessfully: $flightAddedSuccessfully)
-                    
                         .onChange(of: flightAddedSuccessfully){
                             success in
                             if success{

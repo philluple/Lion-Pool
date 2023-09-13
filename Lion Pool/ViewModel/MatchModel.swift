@@ -15,7 +15,7 @@ enum MatchResult {
 
 class MatchModel: ObservableObject{
     @Published var matchesFound: [UUID: [Match]] = [:]
-    @Published var matchesConfirmed: [UUID: [Match]] = [:]
+    @Published var matchesConfirmed: [UUID: Match] = [:]
     
     
     init(){
@@ -61,14 +61,16 @@ class MatchModel: ObservableObject{
                     let decodedMatches = try self.jsonDecoder.decode([Match].self, from: data)
                     DispatchQueue.main.async {
                         for match in decodedMatches {
-                            if var existingMatches = self.matchesConfirmed[match.flightId] {
-                                // If there are existing requests for this recieverFlightId, append the new request to the array
-                                existingMatches.append(match)
-                                self.matchesConfirmed[match.flightId] = existingMatches
-                            } else {
-                                // If there are no existing requests for this recieverFlightId, create a new array and add the request
-                                self.matchesConfirmed[match.flightId] = [match]
-                            }
+                            print(match)
+                            self.matchesConfirmed[match.flightId] = match
+//                            if var existingMatches = self.matchesConfirmed[match.flightId] {
+//                                // If there are existing requests for this recieverFlightId, append the new request to the array
+//                                existingMatches.append(match)
+//                                self.matchesConfirmed[match.flightId] = existingMatches
+//                            } else {
+//                                // If there are no existing requests for this recieverFlightId, create a new array and add the request
+//                                self.matchesConfirmed[match.flightId] = [match]
+//                            }
                         }
                         let count = self.matchesConfirmed.count
                         UserDefaults.standard.set(count, forKey: "matches")

@@ -51,12 +51,15 @@ struct CardView: View {
                 
                 VStack{
                     if flight.foundMatch{
-                        //this will basically always evaluate to true
-                        if let confirmedMatchArray = matchModel.matchesConfirmed[flight.id]{
-                            ForEach(confirmedMatchArray, id: \.id) { match in
-                                ConfirmedMatchView(match: match)
-                            }
+                        if let match = matchModel.matchesConfirmed[flight.id]{
+                            ConfirmedMatchView(match: match)
                         }
+                        //this will basically always evaluate to true
+//                        if let confirmedMatchArray = matchModel.matchesConfirmed[flight.id]{
+//                            ForEach(confirmedMatchArray, id: \.id) { match in
+//                                ConfirmedMatchView(match: match)
+//                            }
+//                        }
                     }else{
                         Text("Hello there")
 //                        if let inRequestArray = requestModel.inRequests[flight.id]{

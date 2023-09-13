@@ -21,7 +21,6 @@
 		751C34EF2A6CF08200F6783C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751C34EE2A6CF08200F6783C /* GoogleService-Info.plist */; };
 		751C34F22A6CF11E00F6783C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F12A6CF11E00F6783C /* GoogleSignIn */; };
 		751C34F42A6CF11E00F6783C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 751C34F32A6CF11E00F6783C /* GoogleSignInSwift */; };
-		751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751C34F72A6DEDE800F6783C /* FlightDetailView.swift */; };
 		752B07362A96B6DD005208BB /* InstagramModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752B07352A96B6DD005208BB /* InstagramModel.swift */; };
 		752DC02C2A8497840054F7AD /* NewFlightDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752DC02B2A8497840054F7AD /* NewFlightDetailView.swift */; };
 		752F99702A57B4580036ECEE /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752F996F2A57B4580036ECEE /* InputView.swift */; };
@@ -110,6 +109,7 @@
 		75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */; };
 		75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */; };
 		75EE9C722A94369B000F6896 /* HalfScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE9C712A94369B000F6896 /* HalfScreenView.swift */; };
+		75F00E992AB14B8200BB8B9F /* AddFlightNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +200,7 @@
 		75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListView.swift; sourceTree = "<group>"; };
 		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
 		75EE9C712A94369B000F6896 /* HalfScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfScreenView.swift; sourceTree = "<group>"; };
+		75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlightNew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +248,7 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
+				75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */,
 				757B5ED32A99A9D600199194 /* WaitingView.swift */,
 				751110122A95AB36000EDC4D /* SettingsView.swift */,
 				751110102A95AB0E000EDC4D /* SettingView.swift */,
@@ -631,7 +633,6 @@
 				758DF9022A8F35440002BFF2 /* InstagramWebView.swift in Sources */,
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
 				758DF9042A8F367D0002BFF2 /* FakeView.swift in Sources */,
-				751C34F82A6DEDE800F6783C /* FlightDetailView.swift in Sources */,
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
 				751110132A95AB36000EDC4D /* SettingsView.swift in Sources */,
@@ -658,6 +659,7 @@
 				75366130285BBBF40077C02F /* FlightView.swift in Sources */,
 				752F997A2A57CDBE0036ECEE /* User.swift in Sources */,
 				755A28AF2A7A33E900B4C9B7 /* FlightModel.swift in Sources */,
+				75F00E992AB14B8200BB8B9F /* AddFlightNew.swift in Sources */,
 				75731D3B2A75C7940001B01E /* ConfirmedMatchView.swift in Sources */,
 				75A05E7A2A5896D0002ABE9C /* ProfileView.swift in Sources */,
 				75731D3D2A75CD130001B01E /* ConfirmedMatchesListView.swift in Sources */,

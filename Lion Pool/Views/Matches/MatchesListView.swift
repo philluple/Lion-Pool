@@ -49,12 +49,9 @@ struct MatchesListView: View {
                 NavigationLink(destination: HomeView(), isActive: $dismiss) {
                     EmptyView()
                 }.navigationBarBackButtonHidden()
-                
             }
             .overlay(Color.white.opacity(dismiss ? 1.0 : 0.0)) // Fix the overlay and opacity here
-//            .partialSheet(isPresented: $confirmation){
-//                ChoiceView(isPresented: $confirmation, firstAction: firstAction, firstOption: "Sign out", secondOption: "Cancel", title: "Would you like to sign out")
-//            }
+
         }
         .navigationBarBackButtonHidden()
     }
