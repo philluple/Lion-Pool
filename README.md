@@ -1,8 +1,8 @@
 # Lion Pool
 
-This is a project that I started working on during the summer out of boredom and wanting to try exploring front-end design, Swift, and FireBase API. Lion Pool is an idea that I had because as a student that lives out of state, when I do go home, the trip to and from the airport feels longer and takes more logistics than the actual flight. It is really difficult to navigate public transportation to the airport but it is also super expensive to use ride share services. My inspiration came from the solution to all this, doing all of this with someone else. However, another problem: my friends never travelled at the same time as me or the same airport! 
+This is a personal project. One that I did not expect would take so much time, be so hard, but still learn so much from. Lion Pool is an idea that I had because as a student who lives out of state, when I do go home, the trip to and from the airport feels longer and takes more logistics than the actual flight. It isn't easy to navigate public transportation to the airport but it is also super expensive to use ride-share services. Now, my solution is to do all of this with someone else. 
 
-**This is LionPool**, an app that allows you to match with other Columbia students who are going to the same airport at the same time, therefore, allowing coordination between both parties to travel to the airport together. However, with expanded use this idea can be used for travelling all over the city. 
+**This is LionPool**, an app that allows you to match with other Columbia students who are going to the same airport at the same time, therefore, allowing coordination between both parties to travel to the airport together. However, with expanded use, this idea can be used for traveling all over the city. 
 
 ## Beginning Stages (Figma) 
 
@@ -14,7 +14,7 @@ style="float: left; margin-right: 10px;" />
 
 ## Using XCode
 
-I did not have any prior experience with working with XCode or Swift so I had to learn a lot and also learn on the go. 
+I built a dynamic front end using Swift and SwiftUi. I used different View Models that help me seperate
 
 
 
