@@ -43,21 +43,3 @@ I learned the most about implementing this feature, and am really proud of mysel
 ## Conclusion
 
 I am anticipating the launch of Lion Pool by the end of October as I am preparing for submission to Apple for review and Beta testing with a small group of friends. In all, Lion Pool is a project I am very proud of and represents a culmination of my studies at Columbia as well as countless hours of my own research. I probably worked 200+ hours on this total with more to come. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
