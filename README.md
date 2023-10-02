@@ -25,7 +25,7 @@ Over time, seeing success with working with different platforms and enabling new
 
 This feature singlehandedly took me hours and hours and 100s of rabbit-holes from never-ending embedded Apple Developer support links to figure out. 
 
-1. Instagram requires a callback URI (basically a destination for their user data upon linking accounts) to be an actual domain and not just an IP address. Throughout the app, my app was sending HTTP requests to my GCP VM's IP address and the port that the server was listening on. So I had to buy, [lion-pool.com](lion-pool.com). 
+1. Instagram requires a callback URI (basically a destination for their user data upon linking accounts) to be an actual domain and not just an IP address. Throughout the app, my app was sending HTTP requests to my GCP VM's IP address and the port that the server was listening on. So I had to buy, [lion-pool.com](https://lion-pool.com). 
 
 https://github.com/philluple/Lion-Pool/assets/101436499/7010947b-a575-4e6c-8f5a-12891f67272b
 
