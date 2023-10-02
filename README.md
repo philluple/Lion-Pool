@@ -1,6 +1,8 @@
 # Lion Pool
 
-Hi! I am Phillip Le. I am a senior at Columbia University studying Computer Science. **This is LionPool**, an app that allows you to match with other Columbia students who are going to the same airport at the same time, therefore, allowing coordination between both parties to travel to the airport together. However, with expanded use, this idea can be used for traveling all over the city. 
+Hi! I am Phillip Le. I am a senior at Columbia University studying Computer Science and Political Science.
+
+**This is LionPool**, an app that allows you to match with other Columbia students who are going to the same airport at the same time, therefore, allowing coordination between both parties to travel to the airport together. However, with expanded use, this idea can be used for traveling all over the city. 
 
 ## Beginning Stages
 
