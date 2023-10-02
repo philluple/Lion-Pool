@@ -47,7 +47,7 @@ class InstagramAPI: ObservableObject{
     func fetchFeed(userId: String) {
         print("Fetching feed")
         self.feed = []
-        let fullURL = "http://34.125.37.144:3000/api/fetchFeed?userId=\(userId)"
+        let fullURL = "https://lion-pool.com/api/fetchFeed?userId=\(userId)"
         guard let url = URL(string: fullURL) else {fatalError("Missing URL")}
         let urlRequest = URLRequest(url: url)
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -154,7 +154,7 @@ class InstagramAPI: ObservableObject{
         if let userId = UserDefaults.standard.string(forKey: "userId") {
             if let queryItems = URLComponents(url: url, resolvingAgainstBaseURL: true)?.queryItems,
                let code = queryItems.first(where: { $0.name == "code" })?.value {
-                let fullURL = "http://34.125.37.144:3000/api/instagram-auth"
+                let fullURL = "https://lion-pool.com/api/instagram-auth"
                 
                 guard let url = URL(string: fullURL) else {
                     fatalError("Missing URL")

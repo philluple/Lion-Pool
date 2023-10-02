@@ -13,7 +13,7 @@ class RequestModel: ObservableObject{
     @Published var inRequests: [UUID: [Request]] = [:]
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://34.125.37.144:3000/api/request"
+    let baseURL = "https://lion-pool.com/api/request"
     
     init(){
         if let userId = UserDefaults.standard.string(forKey: "userId"){

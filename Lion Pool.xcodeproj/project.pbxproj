@@ -10,10 +10,6 @@
 		75109A4E285BB7CE00CAC400 /* Lion_PoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A4D285BB7CE00CAC400 /* Lion_PoolApp.swift */; };
 		75109A52285BB7D100CAC400 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75109A51285BB7D100CAC400 /* Assets.xcassets */; };
 		75109A55285BB7D100CAC400 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75109A54285BB7D100CAC400 /* Preview Assets.xcassets */; };
-		75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */; };
-		75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */; };
-		75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */; };
-		751110112A95AB0E000EDC4D /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751110102A95AB0E000EDC4D /* SettingView.swift */; };
 		751110132A95AB36000EDC4D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751110122A95AB36000EDC4D /* SettingsView.swift */; };
 		75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75111D882A761C1F0064F990 /* TimeUtils.swift */; };
 		751507692A84B01900B0031B /* Lion-Pool-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 751507682A84B01900B0031B /* Lion-Pool-Info.plist */; };
@@ -63,6 +59,7 @@
 		75731D392A75BC4A0001B01E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D382A75BC4A0001B01E /* Request.swift */; };
 		75731D3B2A75C7940001B01E /* ConfirmedMatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */; };
 		75731D3D2A75CD130001B01E /* ConfirmedMatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75731D3C2A75CD130001B01E /* ConfirmedMatchesListView.swift */; };
+		757595BD2ACA5F270041C707 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757595BC2ACA5F260041C707 /* SettingView.swift */; };
 		757B5ED42A99A9D600199194 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B5ED32A99A9D600199194 /* WaitingView.swift */; };
 		758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137862A69DD8C00577409 /* CustomNavBarView.swift */; };
 		758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758137882A69E12D00577409 /* CustomNavBarContainerView.swift */; };
@@ -85,7 +82,6 @@
 		758DF8F42A8F0B400002BFF2 /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 758DF8F32A8F0B400002BFF2 /* FacebookShare */; };
 		758DF8FA2A8F1EB00002BFF2 /* InstagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */; };
 		758DF9022A8F35440002BFF2 /* InstagramWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF9012A8F35440002BFF2 /* InstagramWebView.swift */; };
-		758DF9042A8F367D0002BFF2 /* FakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DF9032A8F367D0002BFF2 /* FakeView.swift */; };
 		7595576B2A58DD8900571AD0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576A2A58DD8900571AD0 /* FirebaseAuth */; };
 		7595576D2A58DD8900571AD0 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576C2A58DD8900571AD0 /* FirebaseAuthCombine-Community */; };
 		7595576F2A58DD8900571AD0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 7595576E2A58DD8900571AD0 /* FirebaseDatabase */; };
@@ -108,7 +104,6 @@
 		75D7FDCB2A704BBC00779DA5 /* Matches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCA2A704BBC00779DA5 /* Matches.swift */; };
 		75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */; };
 		75D7FDD22A70CE7C00779DA5 /* FlightMatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */; };
-		75EE9C722A94369B000F6896 /* HalfScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EE9C712A94369B000F6896 /* HalfScreenView.swift */; };
 		75F00E992AB14B8200BB8B9F /* AddFlightNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */; };
 /* End PBXBuildFile section */
 
@@ -135,17 +130,13 @@
 		75109A51285BB7D100CAC400 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75109A54285BB7D100CAC400 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		75109A5A285BB7D100CAC400 /* Lion PoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lion PoolTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolTests.swift; sourceTree = "<group>"; };
 		75109A64285BB7D100CAC400 /* Lion PoolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Lion PoolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITests.swift; sourceTree = "<group>"; };
-		75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lion_PoolUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		75109A81285BB85900CAC400 /* FlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightView.swift; sourceTree = "<group>"; };
 		75109A82285BB85900CAC400 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		75109A85285BB85900CAC400 /* StartScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenView.swift; sourceTree = "<group>"; };
 		75109A96285BB85A00CAC400 /* AddFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlightView.swift; sourceTree = "<group>"; };
 		75109A97285BB85A00CAC400 /* ScheduledRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledRidesView.swift; sourceTree = "<group>"; };
 		75109A98285BB85A00CAC400 /* FlightListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightListView.swift; sourceTree = "<group>"; };
-		751110102A95AB0E000EDC4D /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = "../../Library/Developer/Xcode/DerivedData/Lion_Pool-dsflartghyhrhfdmedrcixagnynx/SourcePackages/checkouts/swift-protobuf/SettingView.swift"; sourceTree = "<group>"; };
 		751110122A95AB36000EDC4D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		75111D882A761C1F0064F990 /* TimeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUtils.swift; sourceTree = "<group>"; };
 		751507682A84B01900B0031B /* Lion-Pool-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lion-Pool-Info.plist"; sourceTree = "<group>"; };
@@ -173,6 +164,7 @@
 		75731D382A75BC4A0001B01E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		75731D3A2A75C7940001B01E /* ConfirmedMatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedMatchView.swift; sourceTree = "<group>"; };
 		75731D3C2A75CD130001B01E /* ConfirmedMatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedMatchesListView.swift; sourceTree = "<group>"; };
+		757595BC2ACA5F260041C707 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		757B5ED32A99A9D600199194 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		758137862A69DD8C00577409 /* CustomNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		758137882A69E12D00577409 /* CustomNavBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBarContainerView.swift; sourceTree = "<group>"; };
@@ -187,7 +179,6 @@
 		758B6CCF2A94447E0065B67B /* ChooseImageMedium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseImageMedium.swift; sourceTree = "<group>"; };
 		758DF8F92A8F1EB00002BFF2 /* InstagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramView.swift; sourceTree = "<group>"; };
 		758DF9012A8F35440002BFF2 /* InstagramWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramWebView.swift; sourceTree = "<group>"; };
-		758DF9032A8F367D0002BFF2 /* FakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeView.swift; sourceTree = "<group>"; };
 		75985C562A8D9EB400103AA1 /* ChicagoFLF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChicagoFLF.ttf; sourceTree = "<group>"; };
 		75985C582A8DB65A00103AA1 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
 		75985C5A2A8DD39D00103AA1 /* ConfirmChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfirmChoiceView.swift; path = "Lion Pool/ViewModel/ConfirmChoiceView.swift"; sourceTree = SOURCE_ROOT; };
@@ -199,7 +190,6 @@
 		75D7FDCA2A704BBC00779DA5 /* Matches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matches.swift; sourceTree = "<group>"; };
 		75D7FDCF2A70CB5700779DA5 /* MatchesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesListView.swift; sourceTree = "<group>"; };
 		75D7FDD12A70CE7C00779DA5 /* FlightMatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightMatch.swift; sourceTree = "<group>"; };
-		75EE9C712A94369B000F6896 /* HalfScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfScreenView.swift; sourceTree = "<group>"; };
 		75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFlightNew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,18 +238,8 @@
 		75109A41285BB7CE00CAC400 = {
 			isa = PBXGroup;
 			children = (
-				75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */,
-				757B5ED32A99A9D600199194 /* WaitingView.swift */,
-				751110122A95AB36000EDC4D /* SettingsView.swift */,
-				751110102A95AB0E000EDC4D /* SettingView.swift */,
-				751A4AED2A954781001CAE22 /* ChoiceView.swift */,
-				758DF9012A8F35440002BFF2 /* InstagramWebView.swift */,
-				75EE9C712A94369B000F6896 /* HalfScreenView.swift */,
-				758DF9032A8F367D0002BFF2 /* FakeView.swift */,
 				751507682A84B01900B0031B /* Lion-Pool-Info.plist */,
 				75109A4C285BB7CE00CAC400 /* Lion Pool */,
-				75109A5D285BB7D100CAC400 /* Lion PoolTests */,
-				75109A67285BB7D100CAC400 /* Lion PoolUITests */,
 				75109A4B285BB7CE00CAC400 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -307,23 +287,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		75109A5D285BB7D100CAC400 /* Lion PoolTests */ = {
-			isa = PBXGroup;
-			children = (
-				75109A5E285BB7D100CAC400 /* Lion_PoolTests.swift */,
-			);
-			path = "Lion PoolTests";
-			sourceTree = "<group>";
-		};
-		75109A67285BB7D100CAC400 /* Lion PoolUITests */ = {
-			isa = PBXGroup;
-			children = (
-				75109A68285BB7D100CAC400 /* Lion_PoolUITests.swift */,
-				75109A6A285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift */,
-			);
-			path = "Lion PoolUITests";
-			sourceTree = "<group>";
-		};
 		75109A79285BB85900CAC400 /* Reusable Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -349,6 +312,12 @@
 		75109A95285BB85A00CAC400 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				75F00E982AB14B8200BB8B9F /* AddFlightNew.swift */,
+				757B5ED32A99A9D600199194 /* WaitingView.swift */,
+				751110122A95AB36000EDC4D /* SettingsView.swift */,
+				757595BC2ACA5F260041C707 /* SettingView.swift */,
+				751A4AED2A954781001CAE22 /* ChoiceView.swift */,
+				758DF9012A8F35440002BFF2 /* InstagramWebView.swift */,
 				75985C5A2A8DD39D00103AA1 /* ConfirmChoiceView.swift */,
 				759A00852A7B1C5C002BE671 /* CardView.swift */,
 				75881F722A7D99BE0067AFA5 /* Individual View */,
@@ -632,7 +601,6 @@
 				752DC02C2A8497840054F7AD /* NewFlightDetailView.swift in Sources */,
 				758DF9022A8F35440002BFF2 /* InstagramWebView.swift in Sources */,
 				752F99782A57C8100036ECEE /* RegistrationView.swift in Sources */,
-				758DF9042A8F367D0002BFF2 /* FakeView.swift in Sources */,
 				75731D392A75BC4A0001B01E /* Request.swift in Sources */,
 				75596AC32A79694600C6C819 /* ConfirmFlight.swift in Sources */,
 				751110132A95AB36000EDC4D /* SettingsView.swift in Sources */,
@@ -648,7 +616,6 @@
 				7537511E2A57E43700B02528 /* HomeView.swift in Sources */,
 				75881F6E2A7C4E900067AFA5 /* RequestView.swift in Sources */,
 				752B07362A96B6DD005208BB /* InstagramModel.swift in Sources */,
-				751110112A95AB0E000EDC4D /* SettingView.swift in Sources */,
 				759A00862A7B1C5C002BE671 /* CardView.swift in Sources */,
 				758137872A69DD8C00577409 /* CustomNavBarView.swift in Sources */,
 				75D7FDD02A70CB5700779DA5 /* MatchesListView.swift in Sources */,
@@ -672,13 +639,13 @@
 				759B43D02A7230CA0050D2C4 /* FindingMatchView.swift in Sources */,
 				757B5ED42A99A9D600199194 /* WaitingView.swift in Sources */,
 				75881F702A7C8E990067AFA5 /* ExpandedMatchView.swift in Sources */,
+				757595BD2ACA5F270041C707 /* SettingView.swift in Sources */,
 				754AD3FD2A59363100F78013 /* Flight.swift in Sources */,
 				758DF8FA2A8F1EB00002BFF2 /* InstagramView.swift in Sources */,
 				75366145285BBBFC0077C02F /* StartScreenView.swift in Sources */,
 				75881F6C2A7C204E0067AFA5 /* imageUtils.swift in Sources */,
 				75111D892A761C1F0064F990 /* TimeUtils.swift in Sources */,
 				7581379A2A6A2BA300577409 /* UserDataView.swift in Sources */,
-				75EE9C722A94369B000F6896 /* HalfScreenView.swift in Sources */,
 				758137892A69E12D00577409 /* CustomNavBarContainerView.swift in Sources */,
 				7581378F2A69E73F00577409 /* CustomNavLink.swift in Sources */,
 				752F99742A57B76E0036ECEE /* LoginView.swift in Sources */,
@@ -697,7 +664,6 @@
 				75B46D1D2A84ABD4002EE5D2 /* ProfileView.swift in Sources */,
 				75366152285BBC090077C02F /* FlightListView.swift in Sources */,
 				75366139285BBBF50077C02F /* ImagePicker.swift in Sources */,
-				75109A5F285BB7D100CAC400 /* Lion_PoolTests.swift in Sources */,
 				7537511C2A57DE1F00B02528 /* LoginView.swift in Sources */,
 				75366138285BBBF50077C02F /* FlightView.swift in Sources */,
 				75366148285BBBFC0077C02F /* StartScreenView.swift in Sources */,
@@ -708,9 +674,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75109A6B285BB7D100CAC400 /* Lion_PoolUITestsLaunchTests.swift in Sources */,
 				75B46D1E2A84ABD4002EE5D2 /* ProfileView.swift in Sources */,
-				75109A69285BB7D100CAC400 /* Lion_PoolUITests.swift in Sources */,
 				7537511A2A57DE1F00B02528 /* RegistrationView.swift in Sources */,
 				75366157285BBC090077C02F /* FlightListView.swift in Sources */,
 				75881F742A7D99C50067AFA5 /* FlightDetailView.swift in Sources */,
@@ -870,9 +834,10 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Lion-Pool-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to pick images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -907,9 +872,10 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Lion-Pool-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to pick images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

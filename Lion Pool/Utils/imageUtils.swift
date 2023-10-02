@@ -59,7 +59,7 @@ class ImageUtils {
     }
     
     func fetchImage(userId: String, completion: @escaping (ImageResult) -> Void) {
-        let fullURL = "http://34.125.37.144:3000/api/fetchImage?userId=\(userId)"
+        let fullURL = "https://lion-pool.com/api/fetchImage?userId=\(userId)"
         guard let url = URL(string: fullURL) else {
             fatalError("Missing URL")
         }

@@ -25,7 +25,7 @@ class MatchModel: ObservableObject{
     }
     
     let jsonDecoder = JSONDecoder()
-    let baseURL = "http://34.125.37.144:3000/api/match"
+    let baseURL = "https://lion-pool.com/api/match"
     
     func signIn(){
         let userId = UserDefaults.standard.string(forKey: "userId")
